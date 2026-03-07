@@ -158,13 +158,12 @@
       }
     }
   },
-  "49": {
+  "50": {
     "group": "basic",
-    "key": "KC_BACKSLASH",
-    "label": "\\",
-    "shiftedLabel": "|",
+    "key": "KC_NONUS_HASH",
+    "label": "NONUS_HASH",
     "aliases": [
-      "KC_BSLS"
+      "KC_NUHS"
     ],
     "language": {
       "japanese": {
@@ -172,14 +171,6 @@
         "shiftedLabel": "}"
       }
     }
-  },
-  "50": {
-    "group": "basic",
-    "key": "KC_NONUS_HASH",
-    "label": "NONUS_HASH",
-    "aliases": [
-      "KC_NUHS"
-    ]
   },
   "51": {
     "group": "basic",
@@ -266,7 +257,7 @@
     ],
     "language": {
       "japanese": {
-        "label": "￥"
+        "label": "\\"
       }
     }
   },
@@ -280,6 +271,19 @@
     "language": {
       "japanese": {
         "label": "カナ"
+      }
+    }
+  },
+  "137": {
+    "group": "basic",
+    "key": "KC_INTERNATIONAL_3",
+    "label": "INT 3",
+    "aliases": [
+      "KC_INT3"
+    ],
+    "language": {
+      "japanese": {
+        "label": "￥"
       }
     }
   },
