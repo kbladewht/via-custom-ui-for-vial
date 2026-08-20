@@ -129,6 +129,27 @@ textarea {
   box-shadow: 0 20px 40px rgba(15, 23, 42, 0.25);
 }
 
+.MuiTabs-root {
+  background: rgba(30, 41, 59, 0.72);
+  border-bottom: 1px solid rgba(148, 163, 184, 0.24);
+  border-radius: 10px;
+}
+
+.MuiTab-root {
+  color: #b8c7dc !important;
+  font-weight: 600 !important;
+  text-transform: none !important;
+}
+
+.MuiTab-root.Mui-selected {
+  color: #f8fafc !important;
+}
+
+.MuiTabs-indicator {
+  background-color: #60a5fa !important;
+  height: 3px !important;
+}
+
 .MuiLink-root {
   color: #93c5fd !important;
   text-decoration: none !important;
