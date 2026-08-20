@@ -53,7 +53,18 @@ export function QuantumSettingsEditor(props: {
         scrollButtons="auto"
       >
         {QuantumSettingDefinition.map((menu) => (
-          <Tab key={menu.label} label={menu.label}></Tab>
+          <Tab
+            key={menu.label}
+            label={menu.label}
+            sx={{
+              color: "#b8c7dc",
+              fontWeight: 600,
+              textTransform: "none",
+              "&.Mui-selected": {
+                color: "#f8fafc",
+              },
+            }}
+          />
         ))}
       </Tabs>
 
