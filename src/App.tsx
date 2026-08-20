@@ -374,7 +374,6 @@ function App() {
             display: menuOpen ? "block" : "none",
             position: "relative",
             zIndex: 1,
-            backgroundColor: "white",
             height: "auto",
             width: "100%",
             boxShadow: "none",
@@ -412,7 +411,9 @@ function App() {
             )}
           </Box>
           <Divider />
-          <ListSubheader>{kbName}</ListSubheader>
+          <ListSubheader sx={{ color: "#e5eefb", backgroundColor: "transparent" }}>
+            {kbName}
+          </ListSubheader>
           <Box hidden={!connected}>
             <Grid container rowSpacing={1} columnSpacing={2}>
               <Grid item xs={12} sm={6}>
