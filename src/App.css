@@ -187,6 +187,36 @@ textarea {
   color: #e5eefb !important;
 }
 
+.MuiSelect-root {
+  border: 1px solid rgba(148, 163, 184, 0.7);
+  border-radius: 8px;
+}
+
+.MuiSelect-root::before,
+.MuiSelect-root::after {
+  display: none;
+}
+
+.MuiSelect-root:hover {
+  border-color: #93c5fd;
+}
+
+.MuiSelect-root.Mui-focused {
+  border: 2px solid #60a5fa;
+}
+
+.MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline {
+  border-color: rgba(148, 163, 184, 0.7);
+}
+
+.MuiOutlinedInput-root:hover .MuiOutlinedInput-notchedOutline {
+  border-color: #93c5fd;
+}
+
+.MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline {
+  border-color: #60a5fa;
+}
+
 .quantum-multiple-select .MuiOutlinedInput-notchedOutline {
   border: 1px solid rgba(148, 163, 184, 0.7) !important;
 }
