@@ -84,7 +84,8 @@ export interface KeymapKeyProperties {
   onClick?: (target: HTMLElement) => void;
 }
 
-export const WIDTH_1U = 60;
+export const KEY_GAP = 6;
+export const WIDTH_1U = 50;
 
 export function EditableKey(props: {
   keycode: QmkKeycode;
@@ -139,19 +140,19 @@ export function KeymapKey(props: KeymapKeyProperties & { isFocused?: boolean }) 
         props.r != 0
           ? {
               position: "absolute",
-              top: (props.ry + props.offsety) * WIDTH_1U,
-              left: (props.rx + props.offsetx) * WIDTH_1U,
-              width: props.w * WIDTH_1U - 3,
-              height: props.h * WIDTH_1U - 3,
+              top: (props.ry + props.offsety) * (WIDTH_1U + KEY_GAP),
+              left: (props.rx + props.offsetx) * (WIDTH_1U + KEY_GAP),
+              width: props.w * WIDTH_1U - 4,
+              height: props.h * WIDTH_1U - 4,
               transform: `rotate(${props.r}deg)`,
-              transformOrigin: `${-props.offsetx * WIDTH_1U}px ${-props.offsety * WIDTH_1U}px`,
+              transformOrigin: `${-props.offsetx * (WIDTH_1U + KEY_GAP)}px ${-props.offsety * (WIDTH_1U + KEY_GAP)}px`,
             }
           : {
               position: "absolute",
-              top: props.y * WIDTH_1U,
-              left: props.x * WIDTH_1U,
-              width: props.w * WIDTH_1U - 3,
-              height: props.h * WIDTH_1U - 3,
+              top: props.y * (WIDTH_1U + KEY_GAP),
+              left: props.x * (WIDTH_1U + KEY_GAP),
+              width: props.w * WIDTH_1U - 4,
+              height: props.h * WIDTH_1U - 4,
             }
       }
       onDragOver={(event) => {
@@ -583,7 +584,8 @@ function KeymapLayer(props: {
   );
 
   // Calculate the rightmost position to determine needed width
-  const rightmostPos = Math.max(...keymapkeys.map((key) => key.x + key.w)) * WIDTH_1U + WIDTH_1U; // Add extra space
+  const rightmostPos =
+    Math.max(...keymapkeys.map((key) => key.x + key.w)) * (WIDTH_1U + KEY_GAP) + WIDTH_1U;
 
   // Update context when local focused key changes
   useEffect(() => {
@@ -603,7 +605,7 @@ function KeymapLayer(props: {
         sx={{
           position: "relative",
           mt: 1,
-          height: `${(Math.max(...keymapkeys.map((k) => k.y)) + 1) * WIDTH_1U}px`,
+          height: `${(Math.max(...keymapkeys.map((k) => k.y)) + 1) * (WIDTH_1U + KEY_GAP)}px`,
           width: `${rightmostPos}px`, // Set explicit width based on rightmost key plus padding
           minWidth: "100%", // Ensure it's at least as wide as the container
         }}
