@@ -341,11 +341,14 @@ textarea {
 
 .MuiSelect-select {
   white-space: normal !important;
+  color: #e5eefb !important;
+  opacity: 1 !important;
 }
 
 .quantum-select-value {
   display: block;
   color: #e5eefb !important;
+  opacity: 1 !important;
   white-space: normal;
   overflow-wrap: anywhere;
 }
