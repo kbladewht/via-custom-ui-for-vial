@@ -343,6 +343,13 @@ textarea {
   white-space: normal !important;
 }
 
+.quantum-select-value {
+  display: block;
+  color: #e5eefb !important;
+  white-space: normal;
+  overflow-wrap: anywhere;
+}
+
 /* For the side menu */
 .menu-container {
   max-width: 100%;

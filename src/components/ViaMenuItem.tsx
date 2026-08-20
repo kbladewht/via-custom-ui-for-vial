@@ -292,7 +292,9 @@ function ViaMultipleCheckbox(props: MultipleCheckboxElement) {
             multiple
             value={valueToArray(props.value)}
             onChange={handleChange}
-            renderValue={(v) => valueToLabel(v)}
+            renderValue={(v) => (
+              <span className="quantum-select-value">{valueToLabel(v)}</span>
+            )}
           >
             {labels.map((o) => {
               return (
