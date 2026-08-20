@@ -84,7 +84,7 @@ export interface KeymapKeyProperties {
   onClick?: (target: HTMLElement) => void;
 }
 
-export const KEY_GAP = 5;
+export const KEY_GAP = 3;
 export const WIDTH_1U = 54;
 
 export function EditableKey(props: {
