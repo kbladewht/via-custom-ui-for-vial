@@ -847,7 +847,10 @@ export function KeymapEditor(props: {
           overflowX: "auto",
           pl: 1,
           pr: 1,
-          boxShadow: "0px -2px 10px rgba(0,0,0,0.1)",
+          backgroundColor: "#f8fafc",
+          borderRadius: "14px",
+          border: "1px solid rgba(148, 163, 184, 0.3)",
+          boxShadow: "0px -2px 10px rgba(0,0,0,0.08)",
         }}
       >
         <Box hidden={menuType !== "layer"}>
@@ -905,8 +908,10 @@ export function KeymapEditor(props: {
       <Box
         sx={{
           position: "relative",
-          backgroundColor: "white",
-          boxShadow: "0px -2px 10px rgba(0,0,0,0.1)",
+          backgroundColor: "#f8fafc",
+          borderRadius: "14px",
+          border: "1px solid rgba(148, 163, 184, 0.3)",
+          boxShadow: "0px -2px 10px rgba(0,0,0,0.08)",
           width: "100%",
           maxWidth: "100%",
           overflowX: "auto",
