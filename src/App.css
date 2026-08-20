@@ -339,22 +339,6 @@ textarea {
   color: #e5eefb !important;
 }
 
-.quantum-checkbox-list {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 4px 16px;
-  padding: 4px 0;
-}
-
-.quantum-checkbox-list .MuiFormControlLabel-root {
-  margin: 0;
-  color: #e5eefb;
-}
-
-.quantum-checkbox-list .MuiFormControlLabel-label {
-  color: #e5eefb !important;
-}
-
 .MuiSelect-select {
   white-space: normal !important;
 }
