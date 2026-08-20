@@ -360,6 +360,7 @@ function App() {
         container
         spacing={2}
         id="menu"
+        className="app-shell"
         sx={{ pl: 1 }}
         style={{ position: "relative", minWidth: "100vw" }}
       >
@@ -368,6 +369,7 @@ function App() {
           xs={12}
           md={3}
           pl={1}
+          className="app-sidebar"
           sx={{
             display: menuOpen ? "block" : "none",
             position: { xs: "absolute", md: "relative" },
@@ -382,6 +384,7 @@ function App() {
           }}
         >
           <Box
+            className="menu-header"
             sx={{
               display: "flex",
               justifyContent: "space-between",
@@ -449,8 +452,8 @@ function App() {
             />
           </Box>
           <Divider />
-          <List>
-            <div style={{ display: connected ? "block" : "none" }}>
+          <List className="menu-list">
+            <div className="nav-section" style={{ display: connected ? "block" : "none" }}>
               <ListSubheader>Keymap</ListSubheader>
               <List disablePadding>
                 <ListItemButton
@@ -463,7 +466,7 @@ function App() {
               </List>
             </div>
             <Divider />
-            <div style={{ display: connected ? "block" : "none" }}>
+            <div className="nav-section" style={{ display: connected ? "block" : "none" }}>
               <ListSubheader>Quantum settings</ListSubheader>
               <List disablePadding>
                 <ListItemButton
@@ -508,10 +511,10 @@ function App() {
               </List>
             </div>
             <Divider />
-            <Box hidden={customMenus.length == 0}>
+            <Box hidden={customMenus.length == 0} className="nav-section">
               <ListSubheader>Custom settings</ListSubheader>
             </Box>
-            <Box sx={{ pl: 2 }}>
+            <Box sx={{ pl: 2 }} className="custom-menu-group">
               {customMenus.map((top) => (
                 <Box key={top.label}>
                   <ListSubheader> {top.label}</ListSubheader>
@@ -542,8 +545,8 @@ function App() {
               ))}
             </Box>
           </List>
-          <Box hidden={customMenus.length == 0}>
-            <Grid container rowSpacing={1} columnSpacing={2}>
+          <Box hidden={customMenus.length == 0} className="action-panel">
+            <Grid container rowSpacing={1} columnSpacing={2} className="action-grid">
               <Grid item xs={12} sm={6}>
                 <Button
                   sx={{
@@ -580,7 +583,8 @@ function App() {
         <Grid
           item
           xs={12}
-          md={ 9}
+          md={9}
+          className="app-main-panel"
           sx={{ pl: { xs: menuOpen ? "80%" : 5, md: 0 } }}
         >
           {match(activeMenu)
