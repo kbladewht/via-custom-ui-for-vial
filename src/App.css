@@ -55,14 +55,18 @@ textarea {
 }
 
 .nav-section .MuiListSubheader-root {
-  color: #9fb3d9;
-  font-size: 0.72rem;
-  letter-spacing: 0.12em;
+  color: #bfdbfe;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
-  background: transparent;
+  background: rgba(96, 165, 250, 0.08);
+  border-left: 3px solid #60a5fa;
+  border-radius: 4px;
   line-height: 1.6;
-  padding-left: 10px;
+  padding-left: 9px;
   padding-right: 10px;
+  margin: 4px 0 6px;
 }
 
 .MuiList-root .MuiListItemButton-root {
