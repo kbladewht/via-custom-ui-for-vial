@@ -58,7 +58,16 @@ export function QuantumSettingsEditor(props: {
       </Tabs>
 
       {QuantumSettingDefinition.map((_menu, idx) => (
-        <Box key={idx} hidden={tabValue !== idx}>
+        <Box
+          key={idx}
+          sx={{
+            display: "block",
+            opacity: tabValue === idx ? 1 : 0.38,
+            pointerEvents: tabValue === idx ? "auto" : "none",
+            transition: "opacity 0.18s ease",
+            minHeight: 220,
+          }}
+        >
           <ViaMenuItem
             {...(QuantumSettingDefinition[idx] as MenuSectionProperties)}
             customValues={quantumValue}
