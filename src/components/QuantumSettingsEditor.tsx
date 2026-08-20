@@ -45,36 +45,12 @@ export function QuantumSettingsEditor(props: {
   }, [props.via, tabValue]);
 
   return (
-    <Box
-      sx={{
-        backgroundColor: "#111827",
-        border: "1px solid rgba(148, 163, 184, 0.18)",
-        borderRadius: "14px",
-        overflow: "hidden",
-      }}
-    >
+    <>
       <Tabs
         value={tabValue}
         onChange={(_event, value) => setTabValue(value)}
         variant="scrollable"
         scrollButtons="auto"
-        sx={{
-          backgroundColor: "#0f172a",
-          borderBottom: "1px solid rgba(148, 163, 184, 0.18)",
-          minHeight: "48px",
-          ".MuiTabs-indicator": {
-            backgroundColor: "#60a5fa",
-          },
-          ".MuiTab-root": {
-            color: "#cbd5e1",
-            fontWeight: 600,
-            textTransform: "none",
-            minHeight: "48px",
-          },
-          ".Mui-selected": {
-            color: "#f8fafc !important",
-          },
-        }}
       >
         {QuantumSettingDefinition.map((menu) => (
           <Tab key={menu.label} label={menu.label}></Tab>
@@ -82,14 +58,7 @@ export function QuantumSettingsEditor(props: {
       </Tabs>
 
       {QuantumSettingDefinition.map((_menu, idx) => (
-        <Box
-          key={idx}
-          hidden={tabValue !== idx}
-          sx={{
-            backgroundColor: "#111827",
-            p: 2,
-          }}
-        >
+        <Box key={idx} hidden={tabValue !== idx}>
           <ViaMenuItem
             {...(QuantumSettingDefinition[idx] as MenuSectionProperties)}
             customValues={quantumValue}
@@ -102,6 +71,6 @@ export function QuantumSettingsEditor(props: {
           />
         </Box>
       ))}
-    </Box>
+    </>
   );
 }
