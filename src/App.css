@@ -170,9 +170,9 @@ textarea {
   }
 
   .app-sidebar {
-    width: 82% !important;
-    min-height: 100vh;
-    border-radius: 0 18px 18px 0;
+    width: 100% !important;
+    min-height: auto;
+    border-radius: 18px;
   }
 
   .menu-button {

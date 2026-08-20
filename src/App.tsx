@@ -372,12 +372,12 @@ function App() {
           className="app-sidebar"
           sx={{
             display: menuOpen ? "block" : "none",
-            position: { xs: "absolute", md: "relative" },
-            zIndex: { xs: 999, md: "auto" },
+            position: "relative",
+            zIndex: 1,
             backgroundColor: "white",
-            height: { xs: "100%", md: "auto" },
-            width: { xs: "80%", md: "auto" },
-            boxShadow: { xs: "0 0 10px rgba(0,0,0,0.2)", md: "none" },
+            height: "auto",
+            width: "100%",
+            boxShadow: "none",
             "@media (max-width: 899px)": {
               "& button": { fontSize: "smaller" },
             },
@@ -585,7 +585,7 @@ function App() {
           xs={12}
           md={9}
           className="app-main-panel"
-          sx={{ pl: { xs: menuOpen ? "80%" : 5, md: 0 } }}
+          sx={{ pl: 0 }}
         >
           {match(activeMenu)
             .with(undefined, () => <></>)
