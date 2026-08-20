@@ -187,6 +187,18 @@ textarea {
   color: #e5eefb !important;
 }
 
+.quantum-multiple-select .MuiOutlinedInput-notchedOutline {
+  border: 1px solid rgba(148, 163, 184, 0.7) !important;
+}
+
+.quantum-multiple-select:hover .MuiOutlinedInput-notchedOutline {
+  border-color: #93c5fd !important;
+}
+
+.quantum-multiple-select.Mui-focused .MuiOutlinedInput-notchedOutline {
+  border: 2px solid #60a5fa !important;
+}
+
 .MuiDivider-root {
   border-color: rgba(148, 163, 184, 0.15) !important;
 }

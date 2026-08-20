@@ -289,6 +289,7 @@ function ViaMultipleCheckbox(props: MultipleCheckboxElement) {
       <Grid item xs={9}>
         <FormControl fullWidth>
           <Select<string[]>
+            className="quantum-multiple-select"
             multiple
             value={valueToArray(props.value)}
             onChange={handleChange}
