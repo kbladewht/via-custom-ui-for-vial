@@ -195,8 +195,14 @@ function MacroEntry(props: {
           <Stack key={idx} direction={"row"} mt={1}>
             <IconButton
               sx={{
-                color: "#f87171",
-                "&:hover": { backgroundColor: "rgba(248, 113, 113, 0.14)" },
+                color: "#fecaca",
+                backgroundColor: "rgba(220, 38, 38, 0.22)",
+                border: "1px solid rgba(248, 113, 113, 0.7)",
+                "&:hover": {
+                  color: "#fff1f2",
+                  backgroundColor: "rgba(220, 38, 38, 0.42)",
+                  borderColor: "#fca5a5",
+                },
               }}
               onClick={() => setActions(actions.filter((_, id) => id !== idx))}
             >
