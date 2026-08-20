@@ -193,10 +193,20 @@ function MacroEntry(props: {
       {actions.map((action, idx) => {
         return (
           <Stack key={idx} direction={"row"} mt={1}>
-            <IconButton onClick={() => setActions(actions.filter((_, id) => id !== idx))}>
+            <IconButton
+              sx={{
+                color: "#f87171",
+                "&:hover": { backgroundColor: "rgba(248, 113, 113, 0.14)" },
+              }}
+              onClick={() => setActions(actions.filter((_, id) => id !== idx))}
+            >
               <Delete></Delete>
             </IconButton>
             <IconButton
+              sx={{
+                color: "#bfdbfe",
+                "&:hover": { backgroundColor: "rgba(96, 165, 250, 0.14)" },
+              }}
               onClick={() => {
                 if (idx > 0) {
                   setActions(
@@ -210,6 +220,10 @@ function MacroEntry(props: {
               <ArrowUpward></ArrowUpward>
             </IconButton>
             <IconButton
+              sx={{
+                color: "#bfdbfe",
+                "&:hover": { backgroundColor: "rgba(96, 165, 250, 0.14)" },
+              }}
               onClick={() => {
                 if (idx < actions.length - 1) {
                   setActions(
