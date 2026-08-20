@@ -45,44 +45,12 @@ export function QuantumSettingsEditor(props: {
   }, [props.via, tabValue]);
 
   return (
-    <Box
-      sx={{
-        backgroundColor: "#111827",
-        border: "1px solid rgba(148, 163, 184, 0.22)",
-        borderRadius: "14px",
-        overflow: "hidden",
-      }}
-    >
+    <>
       <Tabs
         value={tabValue}
         onChange={(_event, value) => setTabValue(value)}
         variant="scrollable"
         scrollButtons="auto"
-        sx={{
-          backgroundColor: "#0f172a",
-          borderBottom: "1px solid rgba(148, 163, 184, 0.2)",
-          minHeight: "48px",
-          ".MuiTabs-indicator": {
-            backgroundColor: "#60a5fa",
-            height: 3,
-          },
-          ".MuiTab-root": {
-            color: "#cbd5e1",
-            fontWeight: 600,
-            textTransform: "none",
-            backgroundColor: "transparent",
-            minHeight: "48px",
-            borderRadius: "10px 10px 0 0",
-            transition: "all 0.2s ease",
-          },
-          ".Mui-selected": {
-            color: "#f8fafc !important",
-            backgroundColor: "rgba(96, 165, 250, 0.12)",
-          },
-          ".MuiTab-root:hover": {
-            backgroundColor: "rgba(148, 163, 184, 0.08)",
-          },
-        }}
       >
         {QuantumSettingDefinition.map((menu) => (
           <Tab key={menu.label} label={menu.label}></Tab>
@@ -90,15 +58,7 @@ export function QuantumSettingsEditor(props: {
       </Tabs>
 
       {QuantumSettingDefinition.map((_menu, idx) => (
-        <Box
-          key={idx}
-          hidden={tabValue !== idx}
-          sx={{
-            backgroundColor: "#111827",
-            p: 2,
-            borderTop: "1px solid rgba(148, 163, 184, 0.12)",
-          }}
-        >
+        <Box key={idx} hidden={tabValue !== idx}>
           <ViaMenuItem
             {...(QuantumSettingDefinition[idx] as MenuSectionProperties)}
             customValues={quantumValue}
@@ -111,6 +71,6 @@ export function QuantumSettingsEditor(props: {
           />
         </Box>
       ))}
-    </Box>
+    </>
   );
 }
