@@ -215,7 +215,7 @@
   "42": {
     "group": "basic",
     "key": "KC_BACKSPACE",
-    "label": "BSPC",
+    "label": "BS",
     "aliases": [
       "KC_BSPC"
     ]
