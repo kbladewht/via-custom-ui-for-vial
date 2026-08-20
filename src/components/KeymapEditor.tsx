@@ -84,8 +84,8 @@ export interface KeymapKeyProperties {
   onClick?: (target: HTMLElement) => void;
 }
 
-export const KEY_GAP = 6;
-export const WIDTH_1U = 50;
+export const KEY_GAP = 5;
+export const WIDTH_1U = 54;
 
 export function EditableKey(props: {
   keycode: QmkKeycode;
