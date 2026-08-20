@@ -129,6 +129,12 @@ textarea {
   box-shadow: 0 20px 40px rgba(15, 23, 42, 0.25);
 }
 
+.app-main-panel h4 {
+  color: #e5eefb;
+  font-weight: 600;
+  margin: 0;
+}
+
 .MuiTabs-root {
   background: rgba(30, 41, 59, 0.72);
   border-bottom: 1px solid rgba(148, 163, 184, 0.24);
