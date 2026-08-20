@@ -135,6 +135,10 @@ textarea {
   margin: 0;
 }
 
+.app-main-panel .MuiGrid-item > h4 {
+  color: #e5eefb !important;
+}
+
 .MuiTabs-root {
   background: rgba(30, 41, 59, 0.72);
   border-bottom: 1px solid rgba(148, 163, 184, 0.24);
@@ -183,6 +187,7 @@ textarea {
 
 .MuiInputBase-input,
 .MuiInputLabel-root,
+.MuiFormLabel-root,
 .MuiFormControlLabel-label {
   color: #e5eefb !important;
 }
@@ -385,6 +390,10 @@ textarea {
   white-space: normal !important;
   color: #e5eefb !important;
   opacity: 1 !important;
+}
+
+.MuiSelect-icon {
+  color: #cbd5e1 !important;
 }
 
 .quantum-select-value {
