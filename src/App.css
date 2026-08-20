@@ -336,6 +336,7 @@ textarea {
 .MuiListItemText-primary {
   text-overflow: ellipsis;
   overflow: hidden;
+  color: #e5eefb !important;
 }
 
 .MuiSelect-select {
