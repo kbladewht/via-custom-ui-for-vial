@@ -362,6 +362,8 @@ textarea {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  border-radius: 8px;
+  overflow: hidden;
   background: linear-gradient(180deg, #1e293b 0%, #0f172a 100%);
   color: #f8fafc;
 
