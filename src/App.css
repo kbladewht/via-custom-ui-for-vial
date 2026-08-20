@@ -358,6 +358,10 @@ textarea {
   user-select: none;
   font-size: 12px;
   text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   background: linear-gradient(180deg, #1e293b 0%, #0f172a 100%);
   color: #f8fafc;
 
