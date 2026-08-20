@@ -576,9 +576,6 @@ function App() {
             </Grid>
           </Box>
           <Divider />
-          <Link href="https://github.com/sekigon-gonnoc/via-custom-ui-for-vial" target="_blank">
-            Usage
-          </Link>
         </Grid>
         <Grid
           item
