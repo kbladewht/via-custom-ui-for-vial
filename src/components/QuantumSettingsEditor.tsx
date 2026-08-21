@@ -60,12 +60,13 @@ export function QuantumSettingsEditor(props: {
               color: "#b8c7dc",
               fontWeight: 600,
               textTransform: "none",
-              border: "1px solid transparent",
+              border: "1px solid #334155",
               borderRadius: "8px 8px 0 0",
+              backgroundColor: "rgba(30, 41, 59, 0.7)",
               "&.Mui-selected": {
                 color: "#c3d0e0",
-                borderColor: "#60a5fa",
-                backgroundColor: "rgba(96, 165, 250, 0.14)",
+                borderColor: "#475569",
+                backgroundColor: "#334155",
               },
             }}
           />
