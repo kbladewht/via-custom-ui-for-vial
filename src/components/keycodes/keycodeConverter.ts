@@ -137,7 +137,6 @@ export class KeycodeConverter {
     const keycodeLocale: KeycodeLocaleDefinition = await (
       await fetch(`keycodes/${version}/keycode_locale.json`)
     ).json();
-    const languageKey = language.trim().toLocaleLowerCase();
     const customKeycodeTranslations = Object.fromEntries(
       Object.entries(keycodeLocale).map(([key, translations]) => [
         key,
@@ -170,6 +169,7 @@ export class KeycodeConverter {
     this.customKeycodes = customKeycodes;
     this.layer = layer;
     this.keycode_range = keycode_range;
+    const languageKey = language.trim().toLocaleLowerCase();
 
     this.tapKeycodeList = Object.entries(keycodes)
       .filter(
