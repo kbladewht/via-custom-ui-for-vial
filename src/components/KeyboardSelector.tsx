@@ -27,6 +27,13 @@ export function KeyboardSelector(props: {
           padding: "2px 10px",
           boxShadow: "inset 0 1px 0 rgba(255,255,255,0.04)",
         },
+        ".MuiInput-root::before": {
+          borderBottom: "1px solid rgba(148, 163, 184, 0.35)",
+        },
+        ".MuiInput-root::after": {
+          height: "1px",
+          borderBottom: "1px solid #475569",
+        },
         ".MuiInputLabel-root": {
           color: "#cbd5e1",
         },
