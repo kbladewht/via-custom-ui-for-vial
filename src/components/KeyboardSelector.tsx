@@ -31,7 +31,7 @@ export function KeyboardSelector(props: {
           color: "#cbd5e1",
         },
         ".MuiInputLabel-root.Mui-focused": {
-          color: "#93c5fd",
+          color: "#94a3b8",
         },
         ".MuiSelect-select": {
           color: "#f8fafc",
@@ -78,9 +78,9 @@ export function KeyboardSelector(props: {
             sx={{
               whiteSpace: "normal",
               wordBreak: "break-word",
-              color: "#f8fafc",
+              color: "#c3d0e0",
               backgroundColor: "#0f172a",
-              "&:hover": { backgroundColor: "rgba(96, 165, 250, 0.12)" },
+              "&:hover": { backgroundColor: "#334155" },
             }}
           >
             <Typography noWrap sx={{ overflow: "hidden", textOverflow: "ellipsis", width: "100%" }}>
@@ -96,9 +96,9 @@ export function KeyboardSelector(props: {
             value={-1}
             sx={{
               display: isTauri ? "none" : "block",
-              color: "#f8fafc",
+              color: "#c3d0e0",
               backgroundColor: "#0f172a",
-              "&:hover": { backgroundColor: "rgba(96, 165, 250, 0.12)" },
+              "&:hover": { backgroundColor: "#334155" },
             }}
           >
             Add New Keyboard(USB)
@@ -112,9 +112,9 @@ export function KeyboardSelector(props: {
             value={-2}
             sx={{
               display: isTauri ? "none" : "block",
-              color: "#f8fafc",
+              color: "#c3d0e0",
               backgroundColor: "#0f172a",
-              "&:hover": { backgroundColor: "rgba(96, 165, 250, 0.12)" },
+              "&:hover": { backgroundColor: "#334155" },
             }}
           >
             Connect by BLE
