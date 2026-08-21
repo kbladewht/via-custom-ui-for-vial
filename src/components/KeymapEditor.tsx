@@ -923,7 +923,7 @@ export function KeymapEditor(props: {
       >
         <Box sx={{ pl: 1 }}>
           <LanguageSelector
-            languageList={["US", "Japanese"]}
+            languageList={["US", "Japanese","Chinese"]}
             lang={lang}
             onChange={(lang) => setLang(lang)}
           ></LanguageSelector>

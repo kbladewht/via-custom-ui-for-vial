@@ -228,7 +228,7 @@
   "44": {
     "group": "basic",
     "key": "KC_SPACE",
-    "label": "Spacebar",
+    "label": "Space",
     "aliases": [
       "KC_SPC"
     ]
