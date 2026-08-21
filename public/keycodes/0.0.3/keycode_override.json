@@ -390,5 +390,213 @@
         "label": "鼠标左移"
       }
     }
+  },
+  "208": {
+    "group": "mouse",
+    "key": "KC_MS_RIGHT",
+    "label": "Move cursor right",
+    "aliases": [
+      "KC_MS_R"
+    ],
+    "language": {
+      "chinese": {
+        "label": "鼠标右移"
+      }
+    }
+  },
+  "209": {
+    "group": "mouse",
+    "key": "KC_MS_BTN1",
+    "label": "Press button 1",
+    "aliases": [
+      "KC_BTN1"
+    ],
+    "language": {
+      "chinese": {
+        "label": "鼠标按键1"
+      }
+    }
+  },
+  "210": {
+    "group": "mouse",
+    "key": "KC_MS_BTN2",
+    "label": "Press button 2",
+    "aliases": [
+      "KC_BTN2"
+    ],
+    "language": {
+      "chinese": {
+        "label": "鼠标按键2"
+      }
+    }
+  },
+  "211": {
+    "group": "mouse",
+    "key": "KC_MS_BTN3",
+    "label": "Press button 3",
+    "aliases": [
+      "KC_BTN3"
+    ],
+    "language": {
+      "chinese": {
+        "label": "鼠标按键3"
+      }
+    }
+  },
+  "212": {
+    "group": "mouse",
+    "key": "KC_MS_BTN4",
+    "label": "Press button 4",
+    "aliases": [
+      "KC_BTN4"
+    ],
+    "language": {
+      "chinese": {
+        "label": "鼠标按键4"
+      }
+    }
+  },
+  "213": {
+    "group": "mouse",
+    "key": "KC_MS_BTN5",
+    "label": "Press button 5",
+    "aliases": [
+      "KC_BTN5"
+    ],
+    "language": {
+      "chinese": {
+        "label": "鼠标按键5"
+      }
+    }
+  },
+  "214": {
+    "group": "mouse",
+    "key": "KC_MS_BTN6",
+    "label": "Press button 6",
+    "aliases": [
+      "KC_BTN6"
+    ],
+    "language": {
+      "chinese": {
+        "label": "鼠标按键6"
+      }
+    }
+  },
+  "215": {
+    "group": "mouse",
+    "key": "KC_MS_BTN7",
+    "label": "Press button 7",
+    "aliases": [
+      "KC_BTN7"
+    ],
+    "language": {
+      "chinese": {
+        "label": "鼠标按键7"
+      }
+    }
+  },
+  "216": {
+    "group": "mouse",
+    "key": "KC_MS_BTN8",
+    "label": "Press button 8",
+    "aliases": [
+      "KC_BTN8"
+    ],
+    "language": {
+      "chinese": {
+        "label": "鼠标按键8"
+      }
+    }
+  },
+  "217": {
+    "group": "mouse",
+    "key": "KC_MS_WH_UP",
+    "label": "Move wheel up",
+    "aliases": [
+      "KC_WH_U"
+    ],
+    "language": {
+      "chinese": {
+        "label": "滚轮上移"
+      }
+    }
+  },
+  "218": {
+    "group": "mouse",
+    "key": "KC_MS_WH_DOWN",
+    "label": "Move wheel down",
+    "aliases": [
+      "KC_WH_D"
+    ],
+    "language": {
+      "chinese": {
+        "label": "滚轮下移"
+      }
+    }
+  },
+  "219": {
+    "group": "mouse",
+    "key": "KC_MS_WH_LEFT",
+    "label": "Move wheel left",
+    "aliases": [
+      "KC_WH_L"
+    ],
+    "language": {
+      "chinese": {
+        "label": "滚轮左移"
+      }
+    }
+  },
+  "220": {
+    "group": "mouse",
+    "key": "KC_MS_WH_RIGHT",
+    "label": "Move wheel right",
+    "aliases": [
+      "KC_WH_R"
+    ],
+    "language": {
+      "chinese": {
+        "label": "滚轮右移"
+      }
+    }
+  },
+  "221": {
+    "group": "mouse",
+    "key": "KC_MS_ACCEL0",
+    "label": "Set speed to 0",
+    "aliases": [
+      "KC_ACL0"
+    ],
+    "language": {
+      "chinese": {
+        "label": "鼠标速度0"
+      }
+    }
+  },
+  "222": {
+    "group": "mouse",
+    "key": "KC_MS_ACCEL1",
+    "label": "Set speed to 1",
+    "aliases": [
+      "KC_ACL1"
+    ],
+    "language": {
+      "chinese": {
+        "label": "鼠标速度1"
+      }
+    }
+  },
+  "223": {
+    "group": "mouse",
+    "key": "KC_MS_ACCEL2",
+    "label": "Set speed to 2",
+    "aliases": [
+      "KC_ACL2"
+    ],
+    "language": {
+      "chinese": {
+        "label": "鼠标速度2"
+      }
+    }
   }
 }
