@@ -626,6 +626,7 @@ function App() {
                   keymap={vialJson!}
                   via={via}
                   language={uiLanguage}
+                  onLanguageChange={setUiLanguage}
                   dynamicEntryCount={dynamicEntryCount}
                 ></KeymapEditor>
               </div>
