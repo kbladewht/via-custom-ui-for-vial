@@ -5,15 +5,14 @@ import { ViaKeyboard } from "../services/vialKeyboad";
 import { MenuSectionProperties, ViaMenuItem } from "./ViaMenuItem";
 import quantumTranslations from "../locales/quantum.json";
 
-type QuantumLanguage = "zh" | "en";
-
 export function QuantumSettingsEditor(props: {
   via: ViaKeyboard;
   onChange: (value: { [id: string]: number }) => void;
+  language: "zh" | "en";
+  onLanguageChange: (language: "zh" | "en") => void;
 }) {
   const [tabValue, setTabValue] = useState(0);
   const [quantumValue, setQuantumValue] = useState<{ [id: string]: number }>({});
-  const [language, setLanguage] = useState<QuantumLanguage>("zh");
 
   useEffect(() => {
     console.log("read quantum values");
@@ -54,7 +53,7 @@ export function QuantumSettingsEditor(props: {
         <Button
           size="small"
           variant="outlined"
-          onClick={() => setLanguage(language === "zh" ? "en" : "zh")}
+          onClick={() => props.onLanguageChange(props.language === "zh" ? "en" : "zh")}
           sx={{
             color: "#c3d0e0",
             borderColor: "#475569",
@@ -65,7 +64,7 @@ export function QuantumSettingsEditor(props: {
             },
           }}
         >
-          {quantumTranslations[language].switchLabel}
+          {quantumTranslations[props.language].switchLabel}
         </Button>
       </Box>
       <Tabs
@@ -78,7 +77,7 @@ export function QuantumSettingsEditor(props: {
           <Tab
             key={menu.label}
             label={
-              (quantumTranslations[language].tabs as Record<string, string>)[menu.label] ??
+              (quantumTranslations[props.language].tabs as Record<string, string>)[menu.label] ??
               menu.label
             }
             sx={{

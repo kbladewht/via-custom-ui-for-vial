@@ -86,6 +86,7 @@ function App() {
   const [deviceIndex, setDeviceIndex] = useState<number | undefined>(undefined);
   const loadingTimerRef = useRef<number | null>(null);
   const [menuOpen, setMenuOpen] = useState(true);
+  const [uiLanguage, setUiLanguage] = useState<"zh" | "en">("zh");
   const theme = useTheme();
   const isWideScreen = useMediaQuery(theme.breakpoints.up("md"));
 
@@ -604,6 +605,8 @@ function App() {
               return (
                 <QuantumSettingsEditor
                   via={via}
+                  language={uiLanguage}
+                  onLanguageChange={setUiLanguage}
                   onChange={(value) => {
                     setQuantumValues(value);
                   }}
@@ -622,6 +625,7 @@ function App() {
                 <KeymapEditor
                   keymap={vialJson!}
                   via={via}
+                  language={uiLanguage}
                   dynamicEntryCount={dynamicEntryCount}
                 ></KeymapEditor>
               </div>

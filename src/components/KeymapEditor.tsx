@@ -19,6 +19,7 @@ import { matchSorter } from "match-sorter";
 import { createContext, useContext, useEffect, useRef, useState } from "react";
 import { match, P } from "ts-pattern";
 import "../App.css";
+import quantumTranslations from "../locales/quantum.json";
 import { ViaKeyboard } from "../services/vialKeyboad";
 import { ComboEditor } from "./ComboEditor";
 import { KeycodeCatalog } from "./KeycodeCatalog";
@@ -806,6 +807,7 @@ function LanguageSelector(props: {
 export function KeymapEditor(props: {
   keymap: KeymapProperties;
   via: ViaKeyboard;
+  language: "zh" | "en";
   dynamicEntryCount: {
     layer: number;
     macro: number;
@@ -931,15 +933,24 @@ export function KeymapEditor(props: {
         <KeycodeCatalog
           keycodeConverter={keycodeConverter}
           tab={[
-            { label: "Basic", keygroup: ["internal", "basic", "modifiers"] },
-            { label: "Mouse", keygroup: ["mouse"] },
-            { label: "User/Wireless", keygroup: ["custom", "kb", "user"] },
-            { label: "Media", keygroup: ["media"] },
-            { label: "Quantum", keygroup: ["quantum"] },
-            { label: "Layer", keygroup: ["layer"] },
-            { label: "Macro", keygroup: ["macro"] },
-            { label: "TapDance", keygroup: ["tapdance"] },
-            { label: "Combo/Override", keygroup: ["combo", "keyoverride"] },
+            {
+              label: quantumTranslations[props.language].keycodeTabs.Basic,
+              keygroup: ["internal", "basic", "modifiers"],
+            },
+            { label: quantumTranslations[props.language].keycodeTabs.Mouse, keygroup: ["mouse"] },
+            {
+              label: quantumTranslations[props.language].keycodeTabs["User/Wireless"],
+              keygroup: ["custom", "kb", "user"],
+            },
+            { label: quantumTranslations[props.language].keycodeTabs.Media, keygroup: ["media"] },
+            { label: quantumTranslations[props.language].keycodeTabs.Quantum, keygroup: ["quantum"] },
+            { label: quantumTranslations[props.language].keycodeTabs.Layer, keygroup: ["layer"] },
+            { label: quantumTranslations[props.language].keycodeTabs.Macro, keygroup: ["macro"] },
+            { label: quantumTranslations[props.language].keycodeTabs.TapDance, keygroup: ["tapdance"] },
+            {
+              label: quantumTranslations[props.language].keycodeTabs["Combo/Override"],
+              keygroup: ["combo", "keyoverride"],
+            },
           ]}
           comboCount={props.dynamicEntryCount.combo}
           overrideCount={props.dynamicEntryCount.override}

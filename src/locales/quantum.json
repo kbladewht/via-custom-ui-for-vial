@@ -1,6 +1,17 @@
 {
   "zh": {
     "switchLabel": "English",
+    "keycodeTabs": {
+      "Basic": "基础",
+      "Mouse": "鼠标",
+      "User/Wireless": "用户/无线",
+      "Media": "媒体",
+      "Quantum": "量子",
+      "Layer": "层",
+      "Macro": "宏",
+      "TapDance": "点按舞",
+      "Combo/Override": "组合/覆盖"
+    },
     "tabs": {
       "Magic": "魔法设置",
       "Grave Escape": "波浪号转义",
@@ -13,6 +24,17 @@
   },
   "en": {
     "switchLabel": "中文",
+    "keycodeTabs": {
+      "Basic": "Basic",
+      "Mouse": "Mouse",
+      "User/Wireless": "User/Wireless",
+      "Media": "Media",
+      "Quantum": "Quantum",
+      "Layer": "Layer",
+      "Macro": "Macro",
+      "TapDance": "TapDance",
+      "Combo/Override": "Combo/Override"
+    },
     "tabs": {
       "Magic": "Magic",
       "Grave Escape": "Grave Escape",
