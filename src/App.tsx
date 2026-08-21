@@ -480,6 +480,7 @@ function App() {
                 <Grid container rowSpacing={1} columnSpacing={2}>
                   <Grid item xs={12} sm={6}>
                     <Button
+                      className="quantum-action-button quantum-save-button"
                       sx={{
                         width: "100%",
                         mb: 1,
@@ -495,6 +496,7 @@ function App() {
                   </Grid>
                   <Grid item xs={12} sm={6}>
                     <Button
+                      className="quantum-action-button quantum-erase-button"
                       sx={{
                         width: "100%",
                       }}

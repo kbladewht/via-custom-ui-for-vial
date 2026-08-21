@@ -120,6 +120,24 @@ textarea {
   background: linear-gradient(135deg, #f87171 0%, #dc2626 100%) !important;
 }
 
+.quantum-action-button.quantum-save-button {
+  background: #334155 !important;
+  color: #c3d0e0 !important;
+}
+
+.quantum-action-button.quantum-save-button:hover {
+  background: #475569 !important;
+}
+
+.quantum-action-button.quantum-erase-button {
+  background: #4a3035 !important;
+  color: #d8bfc3 !important;
+}
+
+.quantum-action-button.quantum-erase-button:hover {
+  background: #604047 !important;
+}
+
 .app-main-panel {
   padding-top: 8px !important;
   min-height: 100%;
