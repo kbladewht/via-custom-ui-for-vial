@@ -369,7 +369,7 @@ textarea {
   border-radius: 8px;
   overflow: hidden;
   background: linear-gradient(180deg, #1e293b 0%, #0f172a 100%);
-  color: #f8fafc;
+  color: #c3d0e0;
 
   :hover {
     background: linear-gradient(180deg, #243244 0%, #111827 100%);
