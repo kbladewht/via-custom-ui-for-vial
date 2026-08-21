@@ -652,62 +652,62 @@
     ]
   },
   "104": {
-    "group": "basic",
+    "group": "media",
     "key": "KC_F13",
     "label": "F13"
   },
   "105": {
-    "group": "basic",
+    "group": "media",
     "key": "KC_F14",
     "label": "F14"
   },
   "106": {
-    "group": "basic",
+    "group": "media",
     "key": "KC_F15",
     "label": "F15"
   },
   "107": {
-    "group": "basic",
+    "group": "media",
     "key": "KC_F16",
     "label": "F16"
   },
   "108": {
-    "group": "basic",
+    "group": "media",
     "key": "KC_F17",
     "label": "F17"
   },
   "109": {
-    "group": "basic",
+    "group": "media",
     "key": "KC_F18",
     "label": "F18"
   },
   "110": {
-    "group": "basic",
+    "group": "media",
     "key": "KC_F19",
     "label": "F19"
   },
   "111": {
-    "group": "basic",
+    "group": "media",
     "key": "KC_F20",
     "label": "F20"
   },
   "112": {
-    "group": "basic",
+    "group": "media",
     "key": "KC_F21",
     "label": "F21"
   },
   "113": {
-    "group": "basic",
+    "group": "media",
     "key": "KC_F22",
     "label": "F22"
   },
   "114": {
-    "group": "basic",
+    "group": "media",
     "key": "KC_F23",
     "label": "F23"
   },
   "115": {
-    "group": "basic",
+    "group": "media",
     "key": "KC_F24",
     "label": "F24"
   },
