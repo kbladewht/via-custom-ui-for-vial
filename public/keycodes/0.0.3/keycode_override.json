@@ -338,5 +338,57 @@
         "label": "IME OFF"
       }
     }
+  },
+  "194": {
+    "group": "media",
+    "key": "KC_LAUNCHPAD",
+    "label": "Open Launchpad",
+    "aliases": [
+      "KC_LPAD"
+    ],
+    "language": {
+      "chinese": {
+        "label": "打开启动台"
+      }
+    }
+  },
+  "205": {
+    "group": "mouse",
+    "key": "KC_MS_UP",
+    "label": "Move cursor up",
+    "aliases": [
+      "KC_MS_U"
+    ],
+    "language": {
+      "chinese": {
+        "label": "鼠标上移"
+      }
+    }
+  },
+  "206": {
+    "group": "mouse",
+    "key": "KC_MS_DOWN",
+    "label": "Move cursor down",
+    "aliases": [
+      "KC_MS_D"
+    ],
+    "language": {
+      "chinese": {
+        "label": "鼠标下移"
+      }
+    }
+  },
+  "207": {
+    "group": "mouse",
+    "key": "KC_MS_LEFT",
+    "label": "Move cursor left",
+    "aliases": [
+      "KC_MS_L"
+    ],
+    "language": {
+      "chinese": {
+        "label": "鼠标左移"
+      }
+    }
   }
 }
