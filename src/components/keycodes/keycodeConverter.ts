@@ -95,6 +95,16 @@ type KeycodeDefinition = {
 type KeycodeRangeDefinition = { [range: string]: { start: number; end: number } };
 type KeycodeLocaleDefinition = { [key: string]: { [language: string]: string } };
 
+function getCustomKeycodeTranslation(
+  translations: { [key: string]: string },
+  key: string,
+): string | undefined {
+  const normalizedKey = key.trim().toLocaleLowerCase();
+  return Object.entries(translations).find(
+    ([translationKey]) => translationKey.trim().toLocaleLowerCase() === normalizedKey,
+  )?.[1];
+}
+
 export class KeycodeConverter {
   private customKeycodes;
   private layer: number;
@@ -168,11 +178,14 @@ export class KeycodeConverter {
           value - keycode_range.QK_KB.start < this.customKeycodes.length
         ) {
           const customKey = this.customKeycodes[value - keycode_range.QK_KB.start];
+          const translatedLabel = [customKey.name, customKey.title, customKey.shortName]
+            .map((key) => getCustomKeycodeTranslation(customKeycodeTranslations, key))
+            .find((label) => label !== undefined);
           return {
             group: "custom",
             value: value,
             key: customKey.name,
-            label: customKeycodeTranslations[customKey.name] ?? customKey.shortName,
+            label: translatedLabel ?? customKey.shortName,
           };
         } else {
           let langLabel: string | undefined = undefined;
