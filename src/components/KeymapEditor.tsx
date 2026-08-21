@@ -824,7 +824,7 @@ export function KeymapEditor(props: {
   const [macroIndex, setMacroIndex] = useState(-1);
   const [comboIndex, setComboIndex] = useState(-1);
   const [overrideIndex, setOverrideIndex] = useState(-1);
-  const [lang, setLang] = useState("US");
+  const [lang, setLang] = useState("Chinese");
   const [keycodeConverter, setKeycodeConverter] = useState<KeycodeConverter>();
 
   // State for the focused key context

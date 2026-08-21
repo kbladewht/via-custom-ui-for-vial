@@ -2,5 +2,49 @@
   "BLE1": {
     "zh": "蓝牙1",
     "en": "BLE1"
+  },
+  "BLE2": {
+    "zh": "蓝牙2",
+    "en": "BLE2"
+  },
+  "BLE3": {
+    "zh": "蓝牙3",
+    "en": "BLE3"
+  },
+  "BLE2.4G": {
+    "zh": "2.4G",
+    "en": "2.4G"
+  },
+  "USB": {
+    "zh": "USB",
+    "en": "USB"
+  },
+  "DelBonds": {
+    "zh": "删除配对",
+    "en": "Del Bonds"
+  },
+  "KB_LOCK": {
+    "zh": "键盘锁",
+    "en": "KB Lock"
+  },
+  "RESET_KB": {
+    "zh": "重置键盘",
+    "en": "Reset KB"
+  },
+  "ADC_DISPLAY": {
+    "zh": "显示电量",
+    "en": "ADC Display"
+  },
+  "RADIO_DFU": {
+    "zh": "接收器DFU",
+    "en": "Radio DFU"
+  },
+  "UNDER_GLOW": {
+    "zh": "底灯",
+    "en": "Underglow"
+  },
+  "RGB_KEY": {
+    "zh": "轴灯",
+    "en": "RGB Key"
   }
 }
