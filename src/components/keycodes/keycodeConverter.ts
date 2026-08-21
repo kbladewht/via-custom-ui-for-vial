@@ -124,8 +124,12 @@ export class KeycodeConverter {
     uiLanguage: string = "en",
   ) {
     const keycodes: KeycodeDefinition = {
-      ...(await (await fetch(`keycodes/${version}/keycodes.json`)).json()),
-      ...(await (await fetch(`keycodes/${version}/keycode_override.json`)).json()),
+      ...(await (
+        await fetch(`keycodes/${version}/keycodes.json`, { cache: "no-store" })
+      ).json()),
+      ...(await (
+        await fetch(`keycodes/${version}/keycode_override.json`, { cache: "no-store" })
+      ).json()),
     };
     const keycode_range: KeycodeRangeDefinition = await (
       await fetch(`keycodes/${version}/quantum_keycode_range.json`)
@@ -133,6 +137,7 @@ export class KeycodeConverter {
     const keycodeLocale: KeycodeLocaleDefinition = await (
       await fetch(`keycodes/${version}/keycode_locale.json`)
     ).json();
+    const languageKey = language.trim().toLocaleLowerCase();
     const customKeycodeTranslations = Object.fromEntries(
       Object.entries(keycodeLocale).map(([key, translations]) => [
         key,
@@ -190,9 +195,9 @@ export class KeycodeConverter {
         } else {
           let langLabel: string | undefined = undefined;
           let shiftedLabel: string | undefined = k[1].shiftedLabel;
-          if (k[1].language && k[1].language[language.toLocaleLowerCase()]) {
-            langLabel = k[1].language[language.toLocaleLowerCase()].label;
-            shiftedLabel = k[1].language[language.toLocaleLowerCase()].shiftedLabel;
+          if (k[1].language && k[1].language[languageKey]) {
+            langLabel = k[1].language[languageKey].label;
+            shiftedLabel = k[1].language[languageKey].shiftedLabel;
           }
 
           return {
