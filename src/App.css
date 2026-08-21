@@ -284,7 +284,7 @@ textarea {
     font-size: 11px;
     text-align: center;
     height: 100%;
-    color: #dbeafe;
+    color: #a8bad1;
   }
 
   .main-legend {
@@ -292,14 +292,14 @@ textarea {
     text-align: center;
     align-items: center;
     height: 100%;
-    color: #f8fafc;
+    color: #c3d0e0;
   }
 
   .hold-legend {
     font-size: 11px;
     text-align: center;
     height: 100%;
-    color: #dbeafe;
+    color: #a8bad1;
   }
 }
 
