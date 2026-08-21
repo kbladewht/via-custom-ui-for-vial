@@ -27,9 +27,6 @@ export function KeyboardSelector(props: {
           padding: "2px 10px",
           boxShadow: "inset 0 1px 0 rgba(255,255,255,0.04)",
         },
-        ".MuiInput-root::before, .MuiInput-root::after": {
-          display: "none",
-        },
         ".MuiInputLabel-root": {
           color: "#cbd5e1",
         },
