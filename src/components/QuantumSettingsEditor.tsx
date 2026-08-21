@@ -64,7 +64,7 @@ export function QuantumSettingsEditor(props: {
               borderRadius: "8px 8px 0 0",
               backgroundColor: "rgba(30, 41, 59, 0.7)",
               "&.Mui-selected": {
-                color: "#c3d0e0",
+                color: "#f8fafc",
                 borderColor: "#475569",
                 backgroundColor: "#334155",
               },
