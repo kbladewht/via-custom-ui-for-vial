@@ -93,6 +93,7 @@ type KeycodeDefinition = {
 };
 
 type KeycodeRangeDefinition = { [range: string]: { start: number; end: number } };
+type KeycodeLocaleDefinition = { [key: string]: { [language: string]: string } };
 
 export class KeycodeConverter {
   private customKeycodes;
@@ -110,6 +111,7 @@ export class KeycodeConverter {
     tapDanceCount: number = 0,
     language: string = "US",
     version: string = "0.0.3",
+    uiLanguage: string = "en",
   ) {
     const keycodes: KeycodeDefinition = {
       ...(await (await fetch(`keycodes/${version}/keycodes.json`)).json()),
@@ -118,6 +120,15 @@ export class KeycodeConverter {
     const keycode_range: KeycodeRangeDefinition = await (
       await fetch(`keycodes/${version}/quantum_keycode_range.json`)
     ).json();
+    const keycodeLocale: KeycodeLocaleDefinition = await (
+      await fetch(`keycodes/${version}/keycode_locale.json`)
+    ).json();
+    const customKeycodeTranslations = Object.fromEntries(
+      Object.entries(keycodeLocale).map(([key, translations]) => [
+        key,
+        translations[uiLanguage] ?? translations.en,
+      ]),
+    );
 
     return new KeycodeConverter(
       keycodes,
@@ -127,6 +138,7 @@ export class KeycodeConverter {
       macroCount,
       tapDanceCount,
       language,
+      customKeycodeTranslations,
     );
   }
 
@@ -138,6 +150,7 @@ export class KeycodeConverter {
     macroCount: number = 0,
     tapDanceCount: number = 0,
     language: string = "US",
+    customKeycodeTranslations: { [key: string]: string } = {},
   ) {
     this.customKeycodes = customKeycodes;
     this.layer = layer;
@@ -155,7 +168,12 @@ export class KeycodeConverter {
           value - keycode_range.QK_KB.start < this.customKeycodes.length
         ) {
           const customKey = this.customKeycodes[value - keycode_range.QK_KB.start];
-          return { group: "custom", value: value, key: customKey.name, label: customKey.shortName };
+          return {
+            group: "custom",
+            value: value,
+            key: customKey.name,
+            label: customKeycodeTranslations[customKey.name] ?? customKey.shortName,
+          };
         } else {
           let langLabel: string | undefined = undefined;
           let shiftedLabel: string | undefined = k[1].shiftedLabel;

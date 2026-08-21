@@ -837,8 +837,10 @@ export function KeymapEditor(props: {
       props.dynamicEntryCount.macro,
       props.dynamicEntryCount.tapdance,
       lang,
+      "0.0.3",
+      props.language,
     ).then((k) => setKeycodeConverter(k));
-  }, [props.dynamicEntryCount.layer, props.keymap.customKeycodes, props.dynamicEntryCount, lang]);
+  }, [props.dynamicEntryCount.layer, props.keymap.customKeycodes, props.dynamicEntryCount, lang, props.language]);
 
   return keycodeConverter === undefined ? (
     <></>
@@ -934,26 +936,13 @@ export function KeymapEditor(props: {
           }}
         >
           <LanguageSelector
-            languageList={["US", "Japanese","Chinese"]}
+            languageList={["US", "Japanese", "Chinese"]}
             lang={lang}
-            onChange={(lang) => setLang(lang)}
-          ></LanguageSelector>
-          <Button
-            size="small"
-            variant="outlined"
-            onClick={() => props.onLanguageChange(props.language === "zh" ? "en" : "zh")}
-            sx={{
-              color: "#c3d0e0",
-              borderColor: "#475569",
-              backgroundColor: "#1e293b",
-              "&:hover": {
-                borderColor: "#64748b",
-                backgroundColor: "#334155",
-              },
+            onChange={(selectedLanguage) => {
+              setLang(selectedLanguage);
+              props.onLanguageChange(selectedLanguage === "Chinese" ? "zh" : "en");
             }}
-          >
-            {quantumTranslations[props.language].switchLabel}
-          </Button>
+          ></LanguageSelector>
         </Box>
         <KeycodeCatalog
           keycodeConverter={keycodeConverter}
