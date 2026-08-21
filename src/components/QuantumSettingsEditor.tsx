@@ -1,8 +1,11 @@
-import { Box, Tab, Tabs } from "@mui/material";
+import { Box, Button, Tab, Tabs } from "@mui/material";
 import { useEffect, useState } from "react";
 import { QuantumSettingDefinition } from "../services/quantumSettings";
 import { ViaKeyboard } from "../services/vialKeyboad";
 import { MenuSectionProperties, ViaMenuItem } from "./ViaMenuItem";
+import quantumTranslations from "../locales/quantum.json";
+
+type QuantumLanguage = "zh" | "en";
 
 export function QuantumSettingsEditor(props: {
   via: ViaKeyboard;
@@ -10,6 +13,7 @@ export function QuantumSettingsEditor(props: {
 }) {
   const [tabValue, setTabValue] = useState(0);
   const [quantumValue, setQuantumValue] = useState<{ [id: string]: number }>({});
+  const [language, setLanguage] = useState<QuantumLanguage>("zh");
 
   useEffect(() => {
     console.log("read quantum values");
@@ -46,6 +50,24 @@ export function QuantumSettingsEditor(props: {
 
   return (
     <>
+      <Box sx={{ display: "flex", justifyContent: "flex-end", mb: 1 }}>
+        <Button
+          size="small"
+          variant="outlined"
+          onClick={() => setLanguage(language === "zh" ? "en" : "zh")}
+          sx={{
+            color: "#c3d0e0",
+            borderColor: "#475569",
+            backgroundColor: "#1e293b",
+            "&:hover": {
+              borderColor: "#64748b",
+              backgroundColor: "#334155",
+            },
+          }}
+        >
+          {quantumTranslations[language].switchLabel}
+        </Button>
+      </Box>
       <Tabs
         value={tabValue}
         onChange={(_event, value) => setTabValue(value)}
@@ -55,7 +77,10 @@ export function QuantumSettingsEditor(props: {
         {QuantumSettingDefinition.map((menu) => (
           <Tab
             key={menu.label}
-            label={menu.label}
+            label={
+              (quantumTranslations[language].tabs as Record<string, string>)[menu.label] ??
+              menu.label
+            }
             sx={{
               color: "#b8c7dc",
               fontWeight: 600,

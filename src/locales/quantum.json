@@ -1,0 +1,26 @@
+{
+  "zh": {
+    "switchLabel": "English",
+    "tabs": {
+      "Magic": "魔法设置",
+      "Grave Escape": "波浪号转义",
+      "Tap-Hold": "点按-保持",
+      "Auto Shift": "自动 Shift",
+      "Combo": "组合键",
+      "One Shot Keys": "单次按键",
+      "Mouse Keys": "鼠标按键"
+    }
+  },
+  "en": {
+    "switchLabel": "中文",
+    "tabs": {
+      "Magic": "Magic",
+      "Grave Escape": "Grave Escape",
+      "Tap-Hold": "Tap-Hold",
+      "Auto Shift": "Auto Shift",
+      "Combo": "Combo",
+      "One Shot Keys": "One Shot Keys",
+      "Mouse Keys": "Mouse Keys"
+    }
+  }
+}
