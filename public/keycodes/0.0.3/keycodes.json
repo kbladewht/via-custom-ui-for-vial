@@ -633,7 +633,7 @@
   "101": {
     "group": "basic",
     "key": "KC_APPLICATION",
-    "label": "Application",
+    "label": "App",
     "aliases": [
       "KC_APP"
     ]
@@ -641,7 +641,7 @@
   "102": {
     "group": "basic",
     "key": "KC_KB_POWER",
-    "label": "Application"
+    "label": "KB Power"
   },
   "103": {
     "group": "basic",
@@ -786,12 +786,12 @@
   "128": {
     "group": "basic",
     "key": "KC_KB_VOLUME_UP",
-    "label": "Volume Up"
+    "label": "Vol Up"
   },
   "129": {
     "group": "basic",
     "key": "KC_KB_VOLUME_DOWN",
-    "label": "Volume Down"
+    "label": "Vol Down"
   },
   "130": {
     "group": "basic",
@@ -1099,7 +1099,7 @@
   "169": {
     "group": "media",
     "key": "KC_AUDIO_VOL_UP",
-    "label": "Volume Up",
+    "label": "Vol Up",
     "aliases": [
       "KC_VOLU"
     ]
@@ -1107,7 +1107,7 @@
   "170": {
     "group": "media",
     "key": "KC_AUDIO_VOL_DOWN",
-    "label": "Volume Down",
+    "label": "Vol Down",
     "aliases": [
       "KC_VOLD"
     ]
@@ -1176,7 +1176,7 @@
   "179": {
     "group": "media",
     "key": "KC_MY_COMPUTER",
-    "label": "Launch My Computer",
+    "label": "Computer",
     "aliases": [
       "KC_MYCM"
     ]
@@ -1456,7 +1456,7 @@
   "224": {
     "group": "modifiers",
     "key": "KC_LEFT_CTRL",
-    "label": "Left Control",
+    "label": "L-Control",
     "aliases": [
       "KC_LCTL"
     ]
@@ -1491,7 +1491,7 @@
   "228": {
     "group": "modifiers",
     "key": "KC_RIGHT_CTRL",
-    "label": "Right Control",
+    "label": "R-Control",
     "aliases": [
       "KC_RCTL"
     ]

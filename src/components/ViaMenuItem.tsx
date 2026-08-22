@@ -175,9 +175,15 @@ function getDropDownLabels(elem: DropdownElement | MultipleCheckboxElement): [st
 }
 
 function ViaDropDown(props: DropdownElement) {
+  const labels = getDropDownLabels(props);
+
   const handleChange = (event: SelectChangeEvent) => {
-    props.onChange(getDropDownLabels(props).find((f) => f[0] === event.target.value)?.[1] ?? 0);
+    const selectedValue = String(event.target.value);
+    props.onChange(labels.find((f) => f[0] === selectedValue)?.[1] ?? 0);
   };
+
+  const selectedValue = labels.find((f) => f[1] === props.value)?.[0] ?? "";
+
   return (
     <>
       <Grid item xs={3}>
@@ -185,13 +191,10 @@ function ViaDropDown(props: DropdownElement) {
       </Grid>
       <Grid item xs={9}>
         <FormControl fullWidth>
-          <Select
-            value={getDropDownLabels(props).find((f) => f[1] === props.value)?.[0] ?? ""}
-            onChange={handleChange}
-          >
-            {getDropDownLabels(props).map((o) => {
+          <Select value={String(selectedValue)} onChange={handleChange}>
+            {labels.map((o) => {
               return (
-                <MenuItem key={`${props.label}-${o[0]}`} value={o[0]}>
+                <MenuItem key={`${props.label}-${o[0]}`} value={String(o[0])}>
                   {o[0]}
                 </MenuItem>
               );
@@ -321,13 +324,13 @@ function ViaMultipleCheckbox(props: MultipleCheckboxElement) {
   );
 }
 
-function MenuElement(props: MenuSectionProperties, elem: MenuElementProperties) {
+function MenuElement(props: MenuSectionProperties, elem: MenuElementProperties, key: string) {
   if ("type" in elem) {
     switch (elem.type) {
       case "toggle":
         return (
           <ViaToggle
-            key={`${props.label}-${elem.label}`}
+            key={key}
             {...elem}
             value={props.customValues[elem.content[0]] ?? 0}
             onChange={(value) => props.onChange(elem.content, value)}
@@ -336,7 +339,7 @@ function MenuElement(props: MenuSectionProperties, elem: MenuElementProperties) 
       case "range":
         return (
           <ViaRange
-            key={`${props.label}-${elem.label}`}
+            key={key}
             {...elem}
             value={props.customValues[elem.content[0]] ?? 0}
             onChange={(value) => props.onChange(elem.content, value)}
@@ -345,7 +348,7 @@ function MenuElement(props: MenuSectionProperties, elem: MenuElementProperties) 
       case "dropdown":
         return (
           <ViaDropDown
-            key={`${props.label}-${elem.label}`}
+            key={key}
             {...elem}
             value={props.customValues[elem.content[0]] ?? 0}
             onChange={(value) => props.onChange(elem.content, value)}
@@ -354,7 +357,7 @@ function MenuElement(props: MenuSectionProperties, elem: MenuElementProperties) 
       case "color":
         return (
           <ViaColor
-            key={`${props.label}-${elem.label}`}
+            key={key}
             {...elem}
             value={props.customValues[elem.content[0]] ?? 0}
             onChange={(value) => props.onChange(elem.content, value)}
@@ -363,7 +366,7 @@ function MenuElement(props: MenuSectionProperties, elem: MenuElementProperties) 
       case "button":
         return (
           <ViaButton
-            key={`${props.label}-${elem.label}`}
+            key={key}
             {...elem}
             value={props.customValues[elem.content[0]] ?? 0}
             onChange={(value) => props.onChange(elem.content, value)}
@@ -372,34 +375,50 @@ function MenuElement(props: MenuSectionProperties, elem: MenuElementProperties) 
       case "multiple-checkbox":
         return (
           <ViaMultipleCheckbox
-            key={`${props.label}-${elem.label}`}
+            key={key}
             {...elem}
             value={props.customValues[elem.content[0]] ?? 0}
             onChange={(value) => props.onChange(elem.content, value)}
           />
         );
       default:
-        return <></>;
+        return null;
     }
   }
+
+  return null;
 }
 
 function ViaMenuItem(props: MenuSectionProperties) {
+  const renderedContent = props.content.flatMap((elem, index) => {
+    if ("showIf" in elem) {
+      const show = evaluate(props.customValues, elem.showIf.replace(/({|})/g, ""));
+      if (!show) {
+        return [];
+      }
+
+      if ("label" in elem) {
+        return [MenuElement(props, elem, `${props.label}-${index}-${elem.label}`)];
+      }
+
+      return elem.content.flatMap((nestedElem, nestedIndex) => {
+        const nestedKey = `${props.label}-${index}-${nestedIndex}-${nestedElem.label}`;
+        const rendered = MenuElement(props, nestedElem, nestedKey);
+        return rendered ? [rendered] : [];
+      });
+    }
+
+    if ("type" in elem) {
+      return [MenuElement(props, elem, `${props.label}-${index}-${elem.label}`)];
+    }
+
+    return [];
+  });
+
   return (
     <Grid container alignItems="center" spacing={2}>
       <Grid item xs={12}></Grid>
-      {props.content.flatMap((elem) => {
-        if ("showIf" in elem) {
-          const show = evaluate(props.customValues, elem.showIf.replace(/({|})/g, ""));
-          if (show) {
-            return "label" in elem
-              ? MenuElement(props, elem)
-              : elem.content.flatMap((elem) => MenuElement(props, elem));
-          }
-        } else if ("type" in elem) {
-          return MenuElement(props, elem);
-        }
-      })}
+      {renderedContent}
     </Grid>
   );
 }
