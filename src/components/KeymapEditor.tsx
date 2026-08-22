@@ -8,7 +8,6 @@ import {
   FormControlLabel,
   FormGroup,
   Grid,
-  InputLabel,
   MenuItem,
   Popper,
   Select,
@@ -493,34 +492,6 @@ function convertToKeymapKeys(
   return keys;
 }
 
-function LayoutSelector(props: {
-  via: ViaKeyboard;
-  layouts: {
-    labels?: string[][];
-  };
-  option: { [layout: number]: number };
-  onChange: (option: { [layout: number]: number }) => void;
-}) {
-  return (
-    <FormControl variant="standard" sx={{ mt: 1 }}>
-      <InputLabel>Layout</InputLabel>
-      <Select
-        value={props.option[0]}
-        label="layout"
-        onChange={(event) =>
-          props.onChange({ 0: event.target.value } as { [layout: number]: number })
-        }
-      >
-        {props.layouts.labels?.[0]?.slice(1).map((label, index) => (
-          <MenuItem key={label} value={index}>
-            {label}
-          </MenuItem>
-        ))}
-      </Select>
-    </FormControl>
-  );
-}
-
 function LayerSelector(props: {
   layerCount: number;
   currentLayer?: number;
@@ -538,15 +509,37 @@ function LayerSelector(props: {
         overflowX: "never",
       }}
     >
+      <Box
+        sx={{
+          display: "flex",
+          alignItems: "center",
+          flexShrink: 0,
+          color: "#b8c7dc",
+          fontSize: "0.8rem",
+          fontWeight: 600,
+        }}
+      >
+        Layer
+      </Box>
       {[...Array(props.layerCount)].map((_, idx) => {
         const isActive = props.currentLayer === idx;
         return (
           <Button
             key={idx}
             value={idx}
-            variant={isActive ? "contained" : "outlined"}
+            variant="outlined"
             size="small"
-            sx={{ minWidth: "36px", flexShrink: 0 }}
+            sx={{
+              minWidth: "36px",
+              flexShrink: 0,
+              color: isActive ? "#e5eefb" : "#8fa4bd",
+              borderColor: isActive ? "#596777" : "#294b70",
+              backgroundColor: isActive ? "#3f4b5a" : "#111d2d",
+              "&:hover": {
+                borderColor: "#596777",
+                backgroundColor: "#2d3d4f",
+              },
+            }}
             onClick={() => {
               props.onChange(idx);
             }}
@@ -700,21 +693,8 @@ function LayerEditor(props: {
     await props.via.SetEncoder([{ layer, index, direction, keycode }]);
   };
 
-  const sendLayout = async (layout: number) => {
-    await props.via.SetLayoutOption(layout);
-  };
-
   return (
     <>
-      <LayoutSelector
-        via={props.via}
-        layouts={props.keymap.layouts}
-        option={layoutOption}
-        onChange={(option) => {
-          setLayoutOption(option);
-          sendLayout(option[0]);
-        }}
-      />
       <LayerSelector
         layerCount={props.layerCount}
         currentLayer={layer}
