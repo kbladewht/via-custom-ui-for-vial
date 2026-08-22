@@ -23,7 +23,7 @@
     "zh": "删除配对",
     "en": "Del Bonds"
   },
-  "KB_LOCK": {
+  "LOCK": {
     "zh": "键盘锁",
     "en": "KB Lock"
   },
@@ -31,9 +31,17 @@
     "zh": "重置键盘",
     "en": "Reset KB"
   },
-  "ADC_DISPLAY": {
+  "ADC": {
     "zh": "显示电量",
     "en": "ADC Display"
+  },
+  "BLEBL": {
+    "zh": "空中升级",
+    "en": "BLE OTA"
+  },
+  "BLEDel": {
+    "zh": "删除配对",
+    "en": "Del Bonds"
   },
   "RADIO_DFU": {
     "zh": "接收器DFU",
