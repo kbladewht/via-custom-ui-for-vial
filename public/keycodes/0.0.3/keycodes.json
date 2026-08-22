@@ -1320,7 +1320,7 @@
   "225": {
     "group": "modifiers",
     "key": "KC_LEFT_SHIFT",
-    "label": "Left Shift",
+    "label": "LShift",
     "aliases": [
       "KC_LSFT"
     ]
@@ -1328,7 +1328,7 @@
   "226": {
     "group": "modifiers",
     "key": "KC_LEFT_ALT",
-    "label": "Left Alt",
+    "label": "LAlt",
     "aliases": [
       "KC_LALT",
       "KC_LOPT"
@@ -1337,7 +1337,7 @@
   "227": {
     "group": "modifiers",
     "key": "KC_LEFT_GUI",
-    "label": "Left GUI",
+    "label": "LGUI",
     "aliases": [
       "KC_LGUI",
       "KC_LCMD",
@@ -1347,7 +1347,7 @@
   "228": {
     "group": "modifiers",
     "key": "KC_RIGHT_CTRL",
-    "label": "R-Control",
+    "label": "RCtrl",
     "aliases": [
       "KC_RCTL"
     ]
@@ -1355,7 +1355,7 @@
   "229": {
     "group": "modifiers",
     "key": "KC_RIGHT_SHIFT",
-    "label": "Right Shift",
+    "label": "RShift",
     "aliases": [
       "KC_RSFT"
     ]
@@ -1363,7 +1363,7 @@
   "230": {
     "group": "modifiers",
     "key": "KC_RIGHT_ALT",
-    "label": "Right Alt",
+    "label": "RAlt",
     "aliases": [
       "KC_RALT",
       "KC_ROPT",
@@ -1373,7 +1373,7 @@
   "231": {
     "group": "modifiers",
     "key": "KC_RIGHT_GUI",
-    "label": "Right GUI",
+    "label": "RGUI",
     "aliases": [
       "KC_RGUI",
       "KC_RCMD",
