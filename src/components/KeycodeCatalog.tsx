@@ -301,7 +301,7 @@ function CustomTabPanel(props: TabPanelProps) {
 
   return (
     <div role="tabpanel" hidden={value !== index} {...other}>
-      {value === index && <Box sx={{ p: 3, pt: 0 }}>{children}</Box>}
+      {value === index && <Box sx={{ p: 0 }}>{children}</Box>}
     </div>
   );
 }
@@ -327,14 +327,11 @@ export function KeycodeCatalog(props: {
             console.log("tab");
           }}
           variant="scrollable"
-          scrollButtons={true}
+          scrollButtons={false}
           sx={{
             width: "100%",
             maxWidth: "100%",
-            py: 1,
-            background: "rgba(30, 41, 59, 0.72)",
-            borderBottom: "1px solid rgba(148, 163, 184, 0.24)",
-            borderRadius: "10px",
+            py: 0,
           }}
         >
           {props.tab.map((tab) => (

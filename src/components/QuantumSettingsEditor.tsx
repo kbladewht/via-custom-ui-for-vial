@@ -1,4 +1,4 @@
-import { Box, Button, Tab, Tabs } from "@mui/material";
+import { Box, Tab, Tabs } from "@mui/material";
 import { useEffect, useState } from "react";
 import { QuantumSettingDefinition } from "../services/quantumSettings";
 import { ViaKeyboard } from "../services/vialKeyboad";
@@ -49,31 +49,13 @@ export function QuantumSettingsEditor(props: {
 
   return (
     <>
-      <Box sx={{ display: "flex", justifyContent: "flex-end", mb: 1 }}>
-        <Button
-          size="small"
-          variant="outlined"
-          onClick={() => props.onLanguageChange(props.language === "zh" ? "en" : "zh")}
-          sx={{
-            color: "#c3d0e0",
-            borderColor: "#475569",
-            backgroundColor: "#1e293b",
-            "&:hover": {
-              borderColor: "#64748b",
-              backgroundColor: "#334155",
-            },
-          }}
-        >
-          {quantumTranslations[props.language].switchLabel}
-        </Button>
-      </Box>
       <Tabs
         value={tabValue}
         onChange={(_event, value) => setTabValue(value)}
         variant="scrollable"
         scrollButtons="auto"
         sx={{
-          py: 1,
+          py: 0,
         }}
       >
         {QuantumSettingDefinition.map((menu) => (

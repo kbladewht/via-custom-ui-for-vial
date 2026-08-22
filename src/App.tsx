@@ -367,7 +367,7 @@ function App() {
         <Grid
           item
           xs={12}
-          md={3}
+          md={2}
           pl={1}
           className="app-sidebar"
           sx={{
@@ -587,7 +587,7 @@ function App() {
         <Grid
           item
           xs={12}
-          md={9}
+          md={10}
           className="app-main-panel"
           sx={{ pl: 0 }}
         >

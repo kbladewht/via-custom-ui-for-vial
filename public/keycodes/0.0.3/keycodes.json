@@ -712,7 +712,7 @@
     "label": "F24"
   },
   "116": {
-    "group": "basic",
+    "group": "media",
     "key": "KC_EXECUTE",
     "label": "Execute",
     "aliases": [
@@ -720,7 +720,7 @@
     ]
   },
   "117": {
-    "group": "basic",
+    "group": "media",
     "key": "KC_HELP",
     "label": "Help"
   },
@@ -730,7 +730,7 @@
     "label": "Menu"
   },
   "119": {
-    "group": "basic",
+    "group": "media",
     "key": "KC_SELECT",
     "label": "Select",
     "aliases": [
@@ -738,12 +738,12 @@
     ]
   },
   "120": {
-    "group": "basic",
+    "group": "media",
     "key": "KC_STOP",
     "label": "Stop"
   },
   "121": {
-    "group": "basic",
+    "group": "media",
     "key": "KC_AGAIN",
     "label": "Again",
     "aliases": [
@@ -751,22 +751,22 @@
     ]
   },
   "122": {
-    "group": "basic",
+    "group": "media",
     "key": "KC_UNDO",
     "label": "Undo"
   },
   "123": {
-    "group": "basic",
+    "group": "media",
     "key": "KC_CUT",
     "label": "Cut"
   },
   "124": {
-    "group": "basic",
+    "group": "media",
     "key": "KC_COPY",
     "label": "Copy"
   },
   "125": {
-    "group": "basic",
+    "group": "media",
     "key": "KC_PASTE",
     "label": "Paste",
     "aliases": [
@@ -829,150 +829,6 @@
     "group": "basic",
     "key": "KC_KP_EQUAL_AS400",
     "label": "="
-  },
-  "135": {
-    "group": "basic",
-    "key": "KC_INTERNATIONAL_1",
-    "label": "INT 1",
-    "aliases": [
-      "KC_INT1"
-    ]
-  },
-  "136": {
-    "group": "basic",
-    "key": "KC_INTERNATIONAL_2",
-    "label": "INT 2",
-    "aliases": [
-      "KC_INT2"
-    ]
-  },
-  "137": {
-    "group": "basic",
-    "key": "KC_INTERNATIONAL_3",
-    "label": "INT 3",
-    "aliases": [
-      "KC_INT3"
-    ]
-  },
-  "138": {
-    "group": "basic",
-    "key": "KC_INTERNATIONAL_4",
-    "label": "INT 4",
-    "aliases": [
-      "KC_INT4"
-    ]
-  },
-  "139": {
-    "group": "basic",
-    "key": "KC_INTERNATIONAL_5",
-    "label": "INT 5",
-    "aliases": [
-      "KC_INT5"
-    ]
-  },
-  "140": {
-    "group": "basic",
-    "key": "KC_INTERNATIONAL_6",
-    "label": "INT 6",
-    "aliases": [
-      "KC_INT6"
-    ]
-  },
-  "141": {
-    "group": "basic",
-    "key": "KC_INTERNATIONAL_7",
-    "label": "INT 7",
-    "aliases": [
-      "KC_INT7"
-    ]
-  },
-  "142": {
-    "group": "basic",
-    "key": "KC_INTERNATIONAL_8",
-    "label": "INT 8",
-    "aliases": [
-      "KC_INT8"
-    ]
-  },
-  "143": {
-    "group": "basic",
-    "key": "KC_INTERNATIONAL_9",
-    "label": "INT 9",
-    "aliases": [
-      "KC_INT9"
-    ]
-  },
-  "144": {
-    "group": "basic",
-    "key": "KC_LANGUAGE_1",
-    "label": "LANG 1",
-    "aliases": [
-      "KC_LNG1"
-    ]
-  },
-  "145": {
-    "group": "basic",
-    "key": "KC_LANGUAGE_2",
-    "label": "LANG 2",
-    "aliases": [
-      "KC_LNG2"
-    ]
-  },
-  "146": {
-    "group": "basic",
-    "key": "KC_LANGUAGE_3",
-    "label": "LANG 3",
-    "aliases": [
-      "KC_LNG3"
-    ]
-  },
-  "147": {
-    "group": "basic",
-    "key": "KC_LANGUAGE_4",
-    "label": "LANG 4",
-    "aliases": [
-      "KC_LNG4"
-    ]
-  },
-  "148": {
-    "group": "basic",
-    "key": "KC_LANGUAGE_5",
-    "label": "LANG 5",
-    "aliases": [
-      "KC_LNG5"
-    ]
-  },
-  "149": {
-    "group": "basic",
-    "key": "KC_LANGUAGE_6",
-    "label": "LANG 6",
-    "aliases": [
-      "KC_LNG6"
-    ]
-  },
-  "150": {
-    "group": "basic",
-    "key": "KC_LANGUAGE_7",
-    "label": "LANG 7",
-    "aliases": [
-      "KC_LNG7"
-    ]
-  },
-  "151": {
-    "group": "basic",
-    "key": "KC_LANGUAGE_8",
-    "label": "LANG 8",
-    "aliases": [
-      "KC_LNG8"
-    ]
-  },
-  "152": {
-    "group": "basic",
-    "key": "KC_LANGUAGE_9",
-    "label": "LANG 9",
-    "aliases": [
-      "KC_LNG9"
-    ]
   },
   "153": {
     "group": "basic",
@@ -1041,7 +897,7 @@
     "label": "Oper"
   },
   "162": {
-    "group": "basic",
+    "group": "NOGROUP",
     "key": "KC_CLEAR_AGAIN",
     "label": "Clear/Again",
     "aliases": [
@@ -1049,7 +905,7 @@
     ]
   },
   "163": {
-    "group": "basic",
+    "group": "NOGROUP",
     "key": "KC_CRSEL",
     "label": "CrSel/Props",
     "aliases": [
@@ -1057,7 +913,7 @@
     ]
   },
   "164": {
-    "group": "basic",
+    "group": "NOGROUP",
     "key": "KC_EXSEL",
     "label": "ExSel",
     "aliases": [
@@ -1456,7 +1312,7 @@
   "224": {
     "group": "modifiers",
     "key": "KC_LEFT_CTRL",
-    "label": "L-Control",
+    "label": "LCtrl",
     "aliases": [
       "KC_LCTL"
     ]
