@@ -106,8 +106,8 @@ const NAVIGATION_ROWS: (string | null)[][] = [
   ["KC_INSERT", "KC_HOME", "KC_PAGE_UP"],
   ["KC_DELETE", "KC_END", "KC_PAGE_DOWN"],
   [null, null, null],
-  [null, null, null],
-  [null, null, null],
+  [null, "KC_UP", null],
+  ["KC_LEFT", "KC_DOWN", "KC_RIGHT"],
 ];
 const BASIC_KEY_WIDTHS: Record<string, number> = {
   KC_BACKSPACE: 2,
@@ -117,8 +117,10 @@ const BASIC_KEY_WIDTHS: Record<string, number> = {
   KC_LEFT_SHIFT: 2.25,
   KC_RIGHT_SHIFT: 2.75,
   KC_LEFT_CTRL: 1.25,
-  KC_SPACE: 6.25,
+  KC_SPACE: 7,
   KC_RIGHT_CTRL: 1.25,
+  KC_LEFT_GUI: 1.25,
+  KC_LEFT_ALT: 1.25,
   KC_KP_0: 2,
 };
 const BASIC_KEY_MARGIN_RIGHT: Record<string, number> = {
@@ -335,9 +337,13 @@ export function KeycodeCatalog(props: {
                   <BasicKeyboardLayout
                     keycodes={props.keycodeConverter
                       .getTapKeycodeList()
-                      .filter((keycode) => keycode.group === keygroup)}
+                      .filter((keycode) =>
+                        keycode.group === "basic" || keycode.group === "modifiers",
+                      )}
                   />
                 </>
+              ) : keygroup === "modifiers" ? (
+                <></>
               ) : props.keycodeConverter.getTapKeycodeList().some((k) => k.group === keygroup) ? (
                 <>
                   <Box sx={{ mt: 1 }}>{keygroup}</Box>

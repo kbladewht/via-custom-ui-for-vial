@@ -529,7 +529,7 @@
   "88": {
     "group": "basic",
     "key": "KC_KP_ENTER",
-    "label": "Enter",
+    "label": "Num\nEnter",
     "aliases": [
       "KC_PENT"
     ]
