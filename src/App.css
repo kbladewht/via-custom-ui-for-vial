@@ -54,7 +54,8 @@ textarea {
   padding: 6px 0;
 }
 
-.nav-section .MuiListSubheader-root {
+.nav-section .MuiListSubheader-root,
+.custom-menu-subheader {
   color: #bfdbfe;
   font-size: 0.78rem;
   font-weight: 700;
@@ -88,6 +89,10 @@ textarea {
 
 .custom-menu-group {
   padding-left: 10px !important;
+}
+
+.custom-menu-section {
+  padding: 6px 0;
 }
 
 .action-panel {

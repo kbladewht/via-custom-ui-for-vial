@@ -246,7 +246,7 @@ function ViaButton(props: ButtonElement) {
             props.onChange(props.options?.[0] ?? 0);
           }}
         >
-          Click
+          {props.label}
         </Button>
       </Grid>
     </>
