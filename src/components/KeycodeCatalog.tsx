@@ -112,6 +112,7 @@ const NAVIGATION_ROWS: (string | null)[][] = [
 const BASIC_KEY_WIDTHS: Record<string, number> = {
   KC_BACKSPACE: 2,
   KC_TAB: 1.5,
+  KC_BACKSLASH: 1.5,
   KC_CAPS_LOCK: 1.75,
   KC_ENTER: 2.25,
   KC_LEFT_SHIFT: 2.25,
@@ -251,7 +252,14 @@ function BasicKeyboardLayout(props: { keycodes: QmkKeycode[] }) {
             </Box>
           ))}
         </Box>
-        <Box sx={{ display: "flex", flexDirection: "column", gap: "8px" }}>
+        <Box
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            gap: "8px",
+            mt: `${WIDTH_1U + 5}px`,
+          }}
+        >
           {NUMPAD_ROWS.map((row, rowIndex) => (
             <Box key={rowIndex} sx={{ display: "flex", gap: "5px" }}>
               {row.map(renderKey)}
