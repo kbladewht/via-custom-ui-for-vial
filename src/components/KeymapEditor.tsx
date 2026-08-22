@@ -953,7 +953,7 @@ export function KeymapEditor(props: {
           tab={[
             {
               label: quantumTranslations[props.language].keycodeTabs.Basic,
-              keygroup: ["internal", "basic"],
+              keygroup: ["basic", "internal","modifiers"],
             },
             { label: quantumTranslations[props.language].keycodeTabs.Mouse, keygroup: ["mouse"] },
             {

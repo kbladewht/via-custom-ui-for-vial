@@ -1,6 +1,6 @@
 {
   "0": {
-    "group": "internal",
+    "group": "basic",
     "key": "KC_NO",
     "label": "",
     "aliases": [
@@ -8,7 +8,7 @@
     ]
   },
   "1": {
-    "group": "internal",
+    "group": "basic",
     "key": "KC_TRANSPARENT",
     "label": "",
     "aliases": [

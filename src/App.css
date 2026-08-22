@@ -263,8 +263,17 @@ textarea {
   border-color: #93c5fd !important;
 }
 
-.quantum-multiple-select.Mui-focused .MuiOutlinedInput-notchedOutline {
-  border: 2px solid #60a5fa !important;
+/* Checkboxes: bright enough to stay visible on the dark theme */
+.MuiCheckbox-root {
+  color: #b8c7dc !important;
+}
+
+.MuiCheckbox-root.Mui-checked {
+  color: #60a5fa !important;
+}
+
+.MuiCheckbox-root:hover {
+  background-color: rgba(96, 165, 250, 0.15) !important;
 }
 
 .MuiDivider-root {
