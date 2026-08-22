@@ -328,20 +328,48 @@ export function KeycodeCatalog(props: {
           }}
           variant="scrollable"
           scrollButtons={true}
-          sx={{ width: "100%", maxWidth: "100%" }}
+          sx={{
+            width: "100%",
+            maxWidth: "100%",
+            py: 1,
+            background: "rgba(30, 41, 59, 0.72)",
+            borderBottom: "1px solid rgba(148, 163, 184, 0.24)",
+            borderRadius: "10px",
+          }}
         >
           {props.tab.map((tab) => (
-            <Tab key={tab.label} label={tab.label} className="keycode-catalog-tab"></Tab>
+            <Tab
+              key={tab.label}
+              label={tab.label}
+              className="keycode-catalog-tab"
+              sx={{
+                color: "#b8c7dc",
+                fontWeight: 600,
+                textTransform: "none",
+                border: "1px solid #334155",
+                borderRadius: "8px 8px 0 0",
+                backgroundColor: "rgba(30, 41, 59, 0.7)",
+                "&.Mui-selected": {
+                  color: "#f8fafc",
+                  borderColor: "#475569",
+                  backgroundColor: "#334155",
+                },
+              }}
+            />
           ))}
         </Tabs>
       </Box>
       {props.tab.map((tab, index) => (
         <CustomTabPanel key={index} value={tabValue} index={index}>
           {tab.keygroup.map((keygroup) => (
-            <Box key={keygroup} sx={{ maxWidth: "100%", overflowX: "auto" }}>
+            <Box
+              key={keygroup}
+              className="keycode-group"
+              sx={{ maxWidth: "100%", overflowX: "auto" }}
+            >
               {keygroup === "basic" ? (
                 <>
-                  <Box sx={{ mt: 1 }}>basic</Box>
+                  <Box className="keycode-group-title">basic</Box>
                   <BasicKeyboardLayout
                     keycodes={props.keycodeConverter
                       .getTapKeycodeList()
@@ -354,7 +382,7 @@ export function KeycodeCatalog(props: {
                 <></>
               ) : props.keycodeConverter.getTapKeycodeList().some((k) => k.group === keygroup) ? (
                 <>
-                  <Box sx={{ mt: 1 }}>{keygroup}</Box>
+                  <Box className="keycode-group-title">{keygroup}</Box>
                   <Box
                     sx={{
                       display: "grid",
@@ -403,7 +431,7 @@ export function KeycodeCatalog(props: {
                 </>
               ) : keygroup === "combo" ? (
                 <>
-                  <Box sx={{ mt: 1 }}>{keygroup}</Box>
+                  <Box className="keycode-group-title">{keygroup}</Box>
                   <Box
                     sx={{
                       display: "grid",
@@ -430,7 +458,7 @@ export function KeycodeCatalog(props: {
                 </>
               ) : keygroup === "keyoverride" ? (
                 <>
-                  <Box sx={{ mt: 1 }}>{keygroup}</Box>
+                  <Box className="keycode-group-title">{keygroup}</Box>
                   <Box
                     sx={{
                       display: "grid",

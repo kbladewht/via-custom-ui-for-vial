@@ -910,6 +910,28 @@ export function KeymapEditor(props: {
             }}
           ></OverrideEditor>
         </Box>
+        <Box
+          sx={{
+            position: "fixed",
+            left: 16,
+            bottom: 16,
+            zIndex: 1200,
+            px: 1,
+            py: 0.5,
+            borderRadius: 1,
+            backgroundColor: "#0f172a",
+            border: "1px solid rgba(148, 163, 184, 0.35)",
+          }}
+        >
+          <LanguageSelector
+            languageList={["US", "Japanese", "Chinese"]}
+            lang={lang}
+            onChange={(selectedLanguage) => {
+              setLang(selectedLanguage);
+              props.onLanguageChange(selectedLanguage === "Chinese" ? "zh" : "en");
+            }}
+          ></LanguageSelector>
+        </Box>
       </Box>
 
       <Box
@@ -923,33 +945,15 @@ export function KeymapEditor(props: {
           maxWidth: "100%",
           overflowX: "auto",
           pb: 3,
-          pt: 3,
+          pt: 0,
         }}
       >
-        <Box
-          sx={{
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "space-between",
-            pl: 1,
-            pr: 1,
-          }}
-        >
-          <LanguageSelector
-            languageList={["US", "Japanese", "Chinese"]}
-            lang={lang}
-            onChange={(selectedLanguage) => {
-              setLang(selectedLanguage);
-              props.onLanguageChange(selectedLanguage === "Chinese" ? "zh" : "en");
-            }}
-          ></LanguageSelector>
-        </Box>
         <KeycodeCatalog
           keycodeConverter={keycodeConverter}
           tab={[
             {
               label: quantumTranslations[props.language].keycodeTabs.Basic,
-              keygroup: ["internal", "basic", "modifiers"],
+              keygroup: ["internal", "basic"],
             },
             { label: quantumTranslations[props.language].keycodeTabs.Mouse, keygroup: ["mouse"] },
             {

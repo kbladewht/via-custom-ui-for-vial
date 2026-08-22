@@ -72,6 +72,9 @@ export function QuantumSettingsEditor(props: {
         onChange={(_event, value) => setTabValue(value)}
         variant="scrollable"
         scrollButtons="auto"
+        sx={{
+          py: 1,
+        }}
       >
         {QuantumSettingDefinition.map((menu) => (
           <Tab
