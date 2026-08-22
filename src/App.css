@@ -55,7 +55,7 @@ textarea {
 }
 
 .nav-section .MuiListSubheader-root,
-.custom-menu-subheader {
+.custom-menu-group .custom-menu-subheader {
   color: #bfdbfe;
   font-size: 0.78rem;
   font-weight: 700;
