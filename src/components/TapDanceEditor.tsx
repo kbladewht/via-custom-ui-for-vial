@@ -120,7 +120,7 @@ function TapDanceEntry(props: {
           return (
             <Fragment key={idx}>
               <Grid item xs={5}>
-                <Box alignContent={"center"} textAlign={"right"} height={"100%"}>
+                <Box className="editor-field-label" alignContent={"center"} textAlign={"right"} height={"100%"}>
                   {k.label}
                 </Box>
               </Grid>
@@ -140,7 +140,7 @@ function TapDanceEntry(props: {
           );
         })}
         <Grid item xs={5}>
-          <Box alignContent={"center"} textAlign={"right"} height={"100%"}>
+          <Box className="editor-field-label" alignContent={"center"} textAlign={"right"} height={"100%"}>
             Tapping term [ms]
           </Box>
         </Grid>

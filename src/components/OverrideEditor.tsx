@@ -113,7 +113,7 @@ function OverrideEntry(props: {
       <Box mt={2}></Box>
       <Grid container spacing={1}>
         <Grid item xs={5}>
-          <Box alignContent={"center"} textAlign={"right"} height={"100%"}>
+          <Box className="editor-field-label" alignContent={"center"} textAlign={"right"} height={"100%"}>
             Enable
           </Box>
         </Grid>
@@ -132,7 +132,7 @@ function OverrideEntry(props: {
         </Grid>
 
         <Grid item xs={5}>
-          <Box alignContent={"center"} textAlign={"right"} height={"100%"}>
+          <Box className="editor-field-label" alignContent={"center"} textAlign={"right"} height={"100%"}>
             Trigger mods
           </Box>
         </Grid>
@@ -147,7 +147,7 @@ function OverrideEntry(props: {
           return (
             <Fragment key={idx}>
               <Grid item xs={5}>
-                <Box alignContent={"center"} textAlign={"right"} height={"100%"}>
+                <Box className="editor-field-label" alignContent={"center"} textAlign={"right"} height={"100%"}>
                   {["Trigger", "Override"][idx]}
                 </Box>
               </Grid>
@@ -174,7 +174,7 @@ function OverrideEntry(props: {
         })}
 
         <Grid item xs={5}>
-          <Box alignContent={"center"} textAlign={"right"} height={"100%"}>
+          <Box className="editor-field-label" alignContent={"center"} textAlign={"right"} height={"100%"}>
             Negative mods
           </Box>
         </Grid>
@@ -188,7 +188,7 @@ function OverrideEntry(props: {
         </Grid>
 
         <Grid item xs={5}>
-          <Box alignContent={"center"} textAlign={"right"} height={"100%"}>
+          <Box className="editor-field-label" alignContent={"center"} textAlign={"right"} height={"100%"}>
             Suppressed mods
           </Box>
         </Grid>
@@ -202,7 +202,7 @@ function OverrideEntry(props: {
         </Grid>
 
         <Grid item xs={5}>
-          <Box alignContent={"center"} textAlign={"right"} height={"100%"}>
+          <Box className="editor-field-label" alignContent={"center"} textAlign={"right"} height={"100%"}>
             Enable on layers
           </Box>
         </Grid>
@@ -244,7 +244,7 @@ function OverrideEntry(props: {
         </Grid>
 
         <Grid item xs={5}>
-          <Box alignContent={"center"} textAlign={"right"} height={"100%"}>
+          <Box className="editor-field-label" alignContent={"center"} textAlign={"right"} height={"100%"}>
             Options
           </Box>
         </Grid>

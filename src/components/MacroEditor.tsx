@@ -124,7 +124,7 @@ export function MacroEditor(props: {
 
   return (
     <Box ref={boundaryRef}>
-      <Box>{`Edit macro${props.macroIndex}`}</Box>
+      <Box className="editor-title">{`Edit macro${props.macroIndex}`}</Box>
       <MacroEntry
         buffer={macroData[props.macroIndex] ?? []}
         keycodeConverter={props.keycodeConverter}
@@ -192,8 +192,9 @@ function MacroEntry(props: {
     <>
       {actions.map((action, idx) => {
         return (
-          <Stack key={idx} direction={"row"} mt={1}>
+          <Stack key={idx} className="macro-entry-row" direction={"row"} mt={0.5}>
             <IconButton
+              className="macro-action-button macro-delete-button"
               sx={{
                 color: "#fecaca",
                 backgroundColor: "rgba(220, 38, 38, 0.22)",
@@ -208,7 +209,7 @@ function MacroEntry(props: {
             >
               <Delete></Delete>
             </IconButton>
-            <IconButton
+            <IconButton className="macro-action-button"
               sx={{
                 color: "#bfdbfe",
                 "&:hover": { backgroundColor: "rgba(96, 165, 250, 0.14)" },
@@ -225,7 +226,7 @@ function MacroEntry(props: {
             >
               <ArrowUpward></ArrowUpward>
             </IconButton>
-            <IconButton
+            <IconButton className="macro-action-button"
               sx={{
                 color: "#bfdbfe",
                 "&:hover": { backgroundColor: "rgba(96, 165, 250, 0.14)" },

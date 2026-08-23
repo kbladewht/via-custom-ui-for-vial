@@ -106,7 +106,12 @@ function ComboEntry(props: {
           return (
             <Fragment key={idx}>
               <Grid item xs={5}>
-                <Box alignContent={"center"} textAlign={"right"} height={"100%"}>
+                <Box
+                  alignContent={"center"}
+                  textAlign={"right"}
+                  height={"100%"}
+                  sx={{ color: "#e5eefb", fontWeight: 500 }}
+                >
                   {["key 1", "key 2", "key 3", "key 4", "output key"][idx]}
                 </Box>
               </Grid>
