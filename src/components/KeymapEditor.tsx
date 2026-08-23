@@ -928,7 +928,7 @@ export function KeymapEditor(props: {
           tab={[
             {
               label: quantumTranslations[props.language].keycodeTabs.Basic,
-              keygroup: ["basic", "internal","modifiers"],
+              keygroup: ["basic"],
             },
             { label: quantumTranslations[props.language].keycodeTabs.Mouse, keygroup: ["mouse"] },
             {
@@ -937,6 +937,7 @@ export function KeymapEditor(props: {
             },
             { label: quantumTranslations[props.language].keycodeTabs.Media, keygroup: ["media"] },
             { label: quantumTranslations[props.language].keycodeTabs.Quantum, keygroup: ["quantum"] },
+            { label: "RGB", keygroup: ["rgb"] },
             { label: quantumTranslations[props.language].keycodeTabs.Layer, keygroup: ["layer"] },
             { label: quantumTranslations[props.language].keycodeTabs.Macro, keygroup: ["macro"] },
             { label: quantumTranslations[props.language].keycodeTabs.TapDance, keygroup: ["tapdance"] },

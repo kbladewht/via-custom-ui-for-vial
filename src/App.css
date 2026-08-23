@@ -456,6 +456,23 @@ textarea {
   margin-top: 10px;
 }
 
+.keycode-group:first-child {
+  border-top: 1px solid rgba(148, 163, 184, 0.28);
+  border-radius: 0;
+}
+
+.keycode-catalog-tab.Mui-selected {
+  position: relative;
+  z-index: 1;
+  bottom: -1px;
+  border-bottom-color: transparent !important;
+  box-shadow: none;
+}
+
+.keycode-catalog-tab + .keycode-catalog-tab {
+  border-left: 0 !important;
+}
+
 .keycode-group-title {
   visibility: hidden;
   height: 12px;

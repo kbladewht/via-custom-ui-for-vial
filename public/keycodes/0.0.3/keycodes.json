@@ -622,14 +622,6 @@
       "KC_PDOT"
     ]
   },
-  "100": {
-    "group": "basic",
-    "key": "KC_NONUS_BACKSLASH",
-    "label": "\\",
-    "aliases": [
-      "KC_NUBS"
-    ]
-  },
   "101": {
     "group": "basic",
     "key": "KC_APPLICATION",
@@ -1032,7 +1024,7 @@
   "179": {
     "group": "media",
     "key": "KC_MY_COMPUTER",
-    "label": "Computer",
+    "label": "My PC",
     "aliases": [
       "KC_MYCM"
     ]
