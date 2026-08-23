@@ -87,6 +87,31 @@ export interface KeymapKeyProperties {
 export const KEY_GAP = 2;
 export const WIDTH_1U = 50;
 
+function KeyLegend(props: { keycode: QmkKeycode }) {
+  const { keycode } = props;
+  if (!keycode.modLabel && !keycode.holdLabel) {
+    return (
+      <div className={`key-legend-centered ${keycode.label === "▽" ? "key-legend-symbol" : ""}`}>
+        {keycode.label}
+      </div>
+    );
+  }
+
+  return (
+    <Grid container direction="column" className="legend-container">
+      <Grid item xs={3.5}>
+        <div className="mod-legend">{keycode.modLabel ?? ""}</div>
+      </Grid>
+      <Grid item xs={5}>
+        <div className="main-legend">{keycode.label}</div>
+      </Grid>
+      <Grid item xs={3.5}>
+        <div className="hold-legend">{keycode.holdLabel ?? ""}</div>
+      </Grid>
+    </Grid>
+  );
+}
+
 export function EditableKey(props: {
   keycode: QmkKeycode;
   onKeycodeChange?: (newKeycode: QmkKeycode) => void;
@@ -115,17 +140,7 @@ export function EditableKey(props: {
       }}
       onClick={(event) => props.onClick?.(event.currentTarget)}
     >
-      <Grid container direction={"column"} className="legend-container">
-        <Grid item xs={3.5}>
-          <div className="mod-legend">{props.keycode.modLabel ?? ""}</div>
-        </Grid>
-        <Grid item xs={5}>
-          <div className="main-legend">{props.keycode.label}</div>
-        </Grid>
-        <Grid item xs={3.5}>
-          <div className="hold-legend">{props.keycode.holdLabel ?? ""}</div>
-        </Grid>
-      </Grid>
+      <KeyLegend keycode={props.keycode} />
     </div>
   );
 }
@@ -170,17 +185,7 @@ export function KeymapKey(props: KeymapKeyProperties & { isFocused?: boolean }) 
       }}
       onClick={(event) => props.onClick?.(event.currentTarget)}
     >
-      <Grid container direction={"column"} className="legend-container">
-        <Grid item xs={3.5}>
-          <div className="mod-legend">{props.keycode.modLabel ?? ""}</div>
-        </Grid>
-        <Grid item xs={5}>
-          <div className="main-legend">{props.keycode.label}</div>
-        </Grid>
-        <Grid item xs={3.5}>
-          <div className="hold-legend">{props.keycode.holdLabel ?? ""}</div>
-        </Grid>
-      </Grid>
+      <KeyLegend keycode={props.keycode} />
     </div>
   );
 }
@@ -933,7 +938,7 @@ export function KeymapEditor(props: {
             { label: quantumTranslations[props.language].keycodeTabs.Mouse, keygroup: ["mouse"] },
             {
               label: quantumTranslations[props.language].keycodeTabs["User/Wireless"],
-              keygroup: ["custom", "kb", "user"],
+              keygroup: ["custom"],
             },
             { label: quantumTranslations[props.language].keycodeTabs.Media, keygroup: ["media"] },
             { label: quantumTranslations[props.language].keycodeTabs.Quantum, keygroup: ["quantum"] },
