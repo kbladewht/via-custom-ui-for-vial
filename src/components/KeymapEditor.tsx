@@ -157,7 +157,7 @@ export function KeymapKey(props: KeymapKeyProperties & { isFocused?: boolean }) 
               position: "absolute",
               top: (props.ry + props.offsety) * (WIDTH_1U + KEY_GAP),
               left: (props.rx + props.offsetx) * (WIDTH_1U + KEY_GAP),
-              width: props.w * WIDTH_1U - 4,
+              width: props.w * WIDTH_1U - 4 + (props.w - 1) * KEY_GAP,
               height: props.h * WIDTH_1U - 4,
               transform: `rotate(${props.r}deg)`,
               transformOrigin: `${-props.offsetx * (WIDTH_1U + KEY_GAP)}px ${-props.offsety * (WIDTH_1U + KEY_GAP)}px`,
@@ -166,7 +166,7 @@ export function KeymapKey(props: KeymapKeyProperties & { isFocused?: boolean }) 
               position: "absolute",
               top: props.y * (WIDTH_1U + KEY_GAP),
               left: props.x * (WIDTH_1U + KEY_GAP),
-              width: props.w * WIDTH_1U - 4,
+              width: props.w * WIDTH_1U - 4 + (props.w - 1) * KEY_GAP,
               height: props.h * WIDTH_1U - 4,
             }
       }
