@@ -90,7 +90,7 @@ const BASIC_KEYBOARD_ROWS: (string | null)[][] = [
     "KC_SPACE",
     "KC_RIGHT_ALT",
     "KC_RIGHT_GUI",
-    "KC_APPLICATION",
+    "KC_MENU",
     "KC_RIGHT_CTRL",
   ],
 ];
@@ -269,7 +269,7 @@ function BasicKeyboardLayout(props: { keycodes: QmkKeycode[] }) {
       </Box>
       {remainingKeys.length > 0 && (
         <>
-          <Box sx={{ mt: 1 }}>Other</Box>
+          <Box sx={{ mt: 1 }}>&nbsp;</Box>
           <Box
             sx={{
               display: "grid",
