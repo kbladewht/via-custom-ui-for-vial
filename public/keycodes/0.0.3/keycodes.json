@@ -274,9 +274,9 @@
     ]
   },
   "50": {
-    "group": "basic",
+    "group": "NOGROUP",
     "key": "KC_NONUS_HASH",
-    "label": "#",
+    "label": "|",
     "aliases": [
       "KC_NUHS"
     ]
@@ -786,7 +786,7 @@
     "label": "Vol Down"
   },
   "130": {
-    "group": "basic",
+    "group": "NOGROUP",
     "key": "KC_LOCKING_CAPS_LOCK",
     "label": "Caps Lock",
     "aliases": [
@@ -823,7 +823,7 @@
     "label": "="
   },
   "153": {
-    "group": "basic",
+    "group": "NOGROUP",
     "key": "KC_ALTERNATE_ERASE",
     "label": "Alternate Erase",
     "aliases": [
@@ -831,7 +831,7 @@
     ]
   },
   "154": {
-    "group": "basic",
+    "group": "NOGROUP",
     "key": "KC_SYSTEM_REQUEST",
     "label": "SysReq/Attention",
     "aliases": [
@@ -847,7 +847,7 @@
     ]
   },
   "156": {
-    "group": "basic",
+    "group": "NOGROUP",
     "key": "KC_CLEAR",
     "label": "Clear",
     "aliases": [
@@ -855,7 +855,7 @@
     ]
   },
   "157": {
-    "group": "basic",
+    "group": "NOGROUP",
     "key": "KC_PRIOR",
     "label": "Prior",
     "aliases": [
@@ -863,7 +863,7 @@
     ]
   },
   "158": {
-    "group": "basic",
+    "group": "NOGROUP",
     "key": "KC_RETURN",
     "label": "Return",
     "aliases": [
@@ -871,7 +871,7 @@
     ]
   },
   "159": {
-    "group": "basic",
+    "group": "NOGROUP",
     "key": "KC_SEPARATOR",
     "label": "Separator",
     "aliases": [
@@ -879,12 +879,12 @@
     ]
   },
   "160": {
-    "group": "basic",
+    "group": "NOGROUP",
     "key": "KC_OUT",
     "label": "Out"
   },
   "161": {
-    "group": "basic",
+    "group": "NOGROUP",
     "key": "KC_OPER",
     "label": "Oper"
   },

@@ -158,20 +158,6 @@
       }
     }
   },
-  "50": {
-    "group": "basic",
-    "key": "KC_NONUS_HASH",
-    "label": "NONUS_HASH",
-    "aliases": [
-      "KC_NUHS"
-    ],
-    "language": {
-      "japanese": {
-        "label": "]",
-        "shiftedLabel": "}"
-      }
-    }
-  },
   "51": {
     "group": "basic",
     "key": "KC_SEMICOLON",
