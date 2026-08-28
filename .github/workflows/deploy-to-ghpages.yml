@@ -40,33 +40,33 @@ jobs:
         run: npm run build
       - name: Setup Pages
         uses: actions/configure-pages@v6
-      - name: Upload artifact
-        uses: actions/upload-pages-artifact@v5
-        with:
-          path: './dist'
+      # - name: Upload artifact
+      #   uses: actions/upload-pages-artifact@v5
+      #   with:
+      #     path: './dist'
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v5
 
-  build-windows:
-    runs-on: windows-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v5
-      - name: Set up Node
-        uses: actions/setup-node@v5
-        with:
-          node-version: 24
-          cache: 'npm'
-      - name: Set up Rust
-        uses: dtolnay/rust-toolchain@stable
-      - name: Install dependencies
-        run: npm install
-      - name: Build executable
-        run: npx tauri build --no-bundle
-      - name: Upload executable
-        uses: actions/upload-artifact@v4
-        with:
-          name: via-custom-ui-for-vial-exe
-          path: src-tauri/target/release/via-custom-ui-for-vial.exe
-          if-no-files-found: error
+  # build-windows:
+  #   runs-on: windows-latest
+  #   steps:
+  #     - name: Checkout
+  #       uses: actions/checkout@v5
+  #     - name: Set up Node
+  #       uses: actions/setup-node@v5
+  #       with:
+  #         node-version: 24
+  #         cache: 'npm'
+  #     - name: Set up Rust
+  #       uses: dtolnay/rust-toolchain@stable
+  #     - name: Install dependencies
+  #       run: npm install
+  #     - name: Build executable
+  #       run: npx tauri build --no-bundle
+  #     - name: Upload executable
+  #       uses: actions/upload-artifact@v4
+  #       with:
+  #         name: via-custom-ui-for-vial-exe
+  #         path: src-tauri/target/release/via-custom-ui-for-vial.exe
+  #         if-no-files-found: error
