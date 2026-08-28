@@ -10,7 +10,12 @@ export default tseslint.config(
   },
   js.configs.recommended,
   ...tseslint.configs.recommended,
-  reactHooks.configs['recommended-latest'],
+  {
+    plugins: {
+      'react-hooks': reactHooks,
+    },
+    rules: reactHooks.configs['recommended-latest'].rules,
+  },
   {
     files: ['**/*.{ts,tsx}'],
     languageOptions: {
