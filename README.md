@@ -17,3 +17,46 @@ void raw_hid_receive_kb(uint8_t *data, uint8_t length) {
     }
 }
 ```
+example for add menus in vial.json
+
+{
+  "name": "n40_vial",
+  "vendorId": "0x05AC",
+  "productId": "0x0220",
+  "lighting": "qmk_rgblight",
+  "menus": [
+    {
+      "label": "Extra-Setting",
+      "content": [
+        {
+          "label": "Sub-Setting",
+          "content": [
+            {
+              "label": "DFU",
+              "type": "button",
+              "options": [
+                1
+              ],
+              "content": [
+                "id_dfu_button",
+                0,
+                3
+              ]
+            },
+            {
+              "label": "ADC Display",
+              "type": "dropdown",
+              "content": [
+                "id_qmk_rgblight_effect",
+                2,
+                2
+              ],
+              "options": [
+                2
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
