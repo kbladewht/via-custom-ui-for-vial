@@ -1,11 +1,10 @@
 use std::{
     collections::HashMap,
     ffi::CString,
-    io::Write,
     sync::{atomic::AtomicBool, Arc, Mutex},
 };
 
-use hidapi::{DeviceInfo, HidApi, HidDevice};
+use hidapi::{HidApi, HidDevice};
 use serde::{Deserialize, Serialize};
 use tauri::{AppHandle, Emitter};
 use tauri_plugin_log::{Target, TargetKind};
@@ -26,14 +25,6 @@ struct HidDeviceListItem {
     usage: [u16; 1],
     #[serde(rename = "usagePage")]
     usage_page: [u16; 1],
-}
-
-#[derive(Serialize, Deserialize)]
-struct HidDeviceFilter {
-    vendor_id: Option<u16>,
-    product_id: Option<u16>,
-    usage_page: Option<u16>,
-    usage: Option<u16>,
 }
 
 #[derive(Serialize, Deserialize, Clone)]
@@ -133,9 +124,9 @@ fn hid_open_device(
         .unwrap()
         .get_key_value(&path.to_str().unwrap().to_string())
     {
-        if (active_hid
+        if active_hid
             .read_loop_running
-            .load(std::sync::atomic::Ordering::SeqCst))
+            .load(std::sync::atomic::Ordering::SeqCst)
         {
             println!("{} is already opened", path);
             let report_id = get_report_id(&active_hid.device);
@@ -203,7 +194,7 @@ fn hid_open_device(
                         };
 
                         if !flag.load(std::sync::atomic::Ordering::SeqCst) {
-                            app.emit(
+                            let _ = app.emit(
                                 "onclose",
                                 InputReport {
                                     path: path.to_str().unwrap().to_string(),
