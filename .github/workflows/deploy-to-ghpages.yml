@@ -62,11 +62,11 @@ jobs:
         uses: dtolnay/rust-toolchain@stable
       - name: Install dependencies
         run: npm install
-      - name: Build MSI
-        run: npx tauri build --bundles msi
-      - name: Upload MSI
+      - name: Build executable
+        run: npx tauri build --no-bundle
+      - name: Upload executable
         uses: actions/upload-artifact@v4
         with:
-          name: via-custom-ui-for-vial-msi
-          path: src-tauri/target/release/bundle/msi/*.msi
+          name: via-custom-ui-for-vial-exe
+          path: src-tauri/target/release/via-custom-ui-for-vial.exe
           if-no-files-found: error
