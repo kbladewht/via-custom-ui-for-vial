@@ -29,7 +29,6 @@ import {
   ModifierBits,
   QmkKeycode,
 } from "./keycodes/keycodeConverter";
-import { MacroEditor } from "./MacroEditor";
 import { OverrideEditor } from "./OverrideEditor";
 import { TapDanceEditor } from "./TapDanceEditor";
 
@@ -802,11 +801,10 @@ export function KeymapEditor(props: {
     override: number;
   };
 }) {
-  const [menuType, setMenuType] = useState<"layer" | "tapdance" | "macro" | "combo" | "override">(
+  const [menuType, setMenuType] = useState<"layer" | "tapdance" | "combo" | "override">(
     "layer",
   );
   const [tdIndex, setTdIndex] = useState(-1);
-  const [macroIndex, setMacroIndex] = useState(-1);
   const [comboIndex, setComboIndex] = useState(-1);
   const [overrideIndex, setOverrideIndex] = useState(-1);
   const [lang, setLang] = useState("Chinese");
@@ -858,17 +856,6 @@ export function KeymapEditor(props: {
               setMenuType("layer");
             }}
           ></TapDanceEditor>
-        </Box>
-        <Box hidden={menuType !== "macro"}>
-          <MacroEditor
-            via={props.via}
-            keycodeConverter={keycodeConverter}
-            macroIndex={macroIndex}
-            macroCount={props.dynamicEntryCount.macro}
-            onBack={() => {
-              setMenuType("layer");
-            }}
-          ></MacroEditor>
         </Box>
         <Box hidden={menuType !== "combo"}>
           <ComboEditor
@@ -944,7 +931,6 @@ export function KeymapEditor(props: {
             { label: quantumTranslations[props.language].keycodeTabs.Quantum, keygroup: ["quantum"] },
             { label: "RGB", keygroup: ["rgb"] },
             { label: quantumTranslations[props.language].keycodeTabs.Layer, keygroup: ["layer"] },
-            { label: quantumTranslations[props.language].keycodeTabs.Macro, keygroup: ["macro"] },
             { label: quantumTranslations[props.language].keycodeTabs.TapDance, keygroup: ["tapdance"] },
             {
               label: quantumTranslations[props.language].keycodeTabs["Combo/Override"],
@@ -956,10 +942,6 @@ export function KeymapEditor(props: {
           onTapdanceSelect={(index) => {
             setMenuType("tapdance");
             setTdIndex(index);
-          }}
-          onMacroSelect={(index) => {
-            setMenuType("macro");
-            setMacroIndex(index);
           }}
           onComoboSelect={(index) => {
             setMenuType("combo");

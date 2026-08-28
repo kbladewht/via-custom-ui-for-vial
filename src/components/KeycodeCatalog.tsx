@@ -405,16 +405,6 @@ export function KeycodeCatalog(props: {
                               }}
                             ></KeyListKey>
                           ))
-                          .with("macro", () => (
-                            <KeyListKey
-                              key={keycode.value}
-                              keycode={{ ...keycode, label: keycode.label + " 🖊" }}
-                              draggable={true}
-                              onClick={() => {
-                                props.onMacroSelect?.(keycode.value & 0x1f);
-                              }}
-                            ></KeyListKey>
-                          ))
                           .with(P._, () => (
                             <KeyListKey
                               key={keycode.value}

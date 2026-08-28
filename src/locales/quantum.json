@@ -19,7 +19,8 @@
       "Auto Shift": "自动 Shift",
       "Combo": "组合键",
       "One Shot Keys": "单次按键",
-      "Mouse Keys": "鼠标按键"
+      "Mouse Keys": "鼠标按键",
+      "Macro": "宏"
     }
   },
   "en": {
@@ -42,7 +43,8 @@
       "Auto Shift": "Auto Shift",
       "Combo": "Combo",
       "One Shot Keys": "One Shot Keys",
-      "Mouse Keys": "Mouse Keys"
+      "Mouse Keys": "Mouse Keys",
+      "Macro": "Macro"
     }
   }
 }

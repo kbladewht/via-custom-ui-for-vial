@@ -1,23 +1,49 @@
-import { Box, Tab, Tabs } from "@mui/material";
+import { Box, Button, Tab, Tabs } from "@mui/material";
 import { useEffect, useState } from "react";
 import { QuantumSettingDefinition } from "../services/quantumSettings";
 import { ViaKeyboard } from "../services/vialKeyboad";
 import { MenuSectionProperties, ViaMenuItem } from "./ViaMenuItem";
 import quantumTranslations from "../locales/quantum.json";
+import { KeycodeConverter } from "./keycodes/keycodeConverter";
+import { MacroEditor } from "./MacroEditor";
 
 export function QuantumSettingsEditor(props: {
   via: ViaKeyboard;
   onChange: (value: { [id: string]: number }) => void;
   language: "zh" | "en";
   onLanguageChange: (language: "zh" | "en") => void;
+  macroCount?: number;
+  customKeycodes?: { name: string; title: string; shortName: string }[];
 }) {
   const [tabValue, setTabValue] = useState(0);
   const [quantumValue, setQuantumValue] = useState<{ [id: string]: number }>({});
+  const [selectedMacroIndex, setSelectedMacroIndex] = useState(0);
+  const [keycodeConverter, setKeycodeConverter] = useState<KeycodeConverter>();
+
+  const tabs = [
+    ...QuantumSettingDefinition,
+    { label: "Macro", content: [] } as { label: string; content: never[] },
+  ];
+
+  useEffect(() => {
+    if (props.macroCount === undefined) return;
+
+    KeycodeConverter.Create(
+      0,
+      props.customKeycodes,
+      props.macroCount,
+      0,
+      "Chinese",
+      "0.0.3",
+      props.language,
+    ).then((k) => setKeycodeConverter(k));
+  }, [props.customKeycodes, props.language, props.macroCount]);
 
   useEffect(() => {
     console.log("read quantum values");
 
-    const undefinedIds = QuantumSettingDefinition[tabValue].content
+    const currentTab = tabs[tabValue] ?? QuantumSettingDefinition[0];
+    const undefinedIds = currentTab.content
       .filter((v) => quantumValue[v.content[0]] === undefined)
       .map((v) => v.content[1] as number);
     const newValue = { ...quantumValue };
@@ -27,11 +53,13 @@ export function QuantumSettingsEditor(props: {
     props.onChange(newValue);
     setQuantumValue(newValue);
 
+    if (undefinedIds.length === 0) return;
+
     navigator.locks.request("load-quantum-settings", async () => {
       const value = await props.via.GetQuantumSettingsValue(undefinedIds);
       const newValue = Object.entries(value).reduce(
         (acc, v) => {
-          const id = QuantumSettingDefinition[tabValue].content.find((c) => {
+          const id = currentTab.content.find((c) => {
             return c.content[1].toString() === v[0];
           });
           return {
@@ -58,7 +86,7 @@ export function QuantumSettingsEditor(props: {
           py: 0,
         }}
       >
-        {QuantumSettingDefinition.map((menu) => (
+        {tabs.map((menu) => (
           <Tab
             key={menu.label}
             label={
@@ -82,23 +110,67 @@ export function QuantumSettingsEditor(props: {
         ))}
       </Tabs>
 
-      {QuantumSettingDefinition.map((_menu, idx) => (
+      {tabs.map((menu, idx) => (
         <Box
           key={idx}
           sx={{
             display: tabValue === idx ? "block" : "none",
           }}
         >
-          <ViaMenuItem
-            {...(QuantumSettingDefinition[idx] as MenuSectionProperties)}
-            customValues={quantumValue}
-            onChange={(id, value) => {
-              console.log(`update ${id} to ${value}`);
-              const newValues = { ...quantumValue, [id[0]]: value };
-              setQuantumValue(newValues);
-              props.onChange(newValues);
-            }}
-          />
+          {menu.label === "Macro" ? (
+            <Box sx={{ p: 2 }}>
+              {keycodeConverter && (props.macroCount ?? 0) > 0 ? (
+                <>
+                  <Box
+                    sx={{
+                      display: "grid",
+                      gridTemplateColumns: "repeat(auto-fit, minmax(110px, 1fr))",
+                      gap: 1,
+                      mb: 2,
+                    }}
+                  >
+                    {Array.from({ length: props.macroCount ?? 0 }, (_, index) => (
+                      <Button
+                        key={index}
+                        variant={selectedMacroIndex === index ? "contained" : "outlined"}
+                        color={selectedMacroIndex === index ? "primary" : "inherit"}
+                        onClick={() => setSelectedMacroIndex(index)}
+                        sx={{
+                          minHeight: 44,
+                          color: selectedMacroIndex === index ? "#f8fafc" : "#cbd5e1",
+                          borderColor: "rgba(148, 163, 184, 0.5)",
+                          backgroundColor:
+                            selectedMacroIndex === index ? "rgba(59, 130, 246, 0.32)" : "transparent",
+                        }}
+                      >
+                        Macro {index}
+                      </Button>
+                    ))}
+                  </Box>
+                  <MacroEditor
+                    via={props.via}
+                    keycodeConverter={keycodeConverter}
+                    macroIndex={selectedMacroIndex}
+                    macroCount={props.macroCount ?? 0}
+                    onBack={() => {}}
+                  />
+                </>
+              ) : (
+                <Box sx={{ color: "#cbd5e1" }}>No macros available.</Box>
+              )}
+            </Box>
+          ) : (
+            <ViaMenuItem
+              {...(menu as MenuSectionProperties)}
+              customValues={quantumValue}
+              onChange={(id, value) => {
+                console.log(`update ${id} to ${value}`);
+                const newValues = { ...quantumValue, [id[0]]: value };
+                setQuantumValue(newValues);
+                props.onChange(newValues);
+              }}
+            />
+          )}
         </Box>
       ))}
     </>

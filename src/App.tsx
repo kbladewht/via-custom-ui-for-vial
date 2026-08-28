@@ -609,6 +609,8 @@ function App() {
                   via={via}
                   language={uiLanguage}
                   onLanguageChange={setUiLanguage}
+                  macroCount={dynamicEntryCount.macro}
+                  customKeycodes={vialJson?.customKeycodes}
                   onChange={(value) => {
                     setQuantumValues(value);
                   }}
