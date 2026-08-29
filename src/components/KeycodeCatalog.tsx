@@ -360,7 +360,7 @@ export function KeycodeCatalog(props: {
         <CustomTabPanel key={index} value={tabValue} index={index}>
           <Box
             sx={{
-              height: 380,
+              height: 340,
               overflowY: "auto",
               overflowX: "hidden",
               scrollbarColor: "#64748b transparent",
