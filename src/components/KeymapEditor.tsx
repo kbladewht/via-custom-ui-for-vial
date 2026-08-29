@@ -931,6 +931,7 @@ export function KeymapEditor(props: {
             { label: quantumTranslations[props.language].keycodeTabs.Quantum, keygroup: ["quantum"] },
             { label: "RGB", keygroup: ["rgb"] },
             { label: quantumTranslations[props.language].keycodeTabs.Layer, keygroup: ["layer"] },
+            { label: quantumTranslations[props.language].keycodeTabs.Macro, keygroup: ["macro"] },
             { label: quantumTranslations[props.language].keycodeTabs.TapDance, keygroup: ["tapdance"] },
             {
               label: quantumTranslations[props.language].keycodeTabs["Combo/Override"],
