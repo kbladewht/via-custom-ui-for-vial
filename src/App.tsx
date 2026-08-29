@@ -369,6 +369,7 @@ function App() {
           xs={12}
           md={2}
           pl={1}
+          mt={1}
           className="app-sidebar"
           sx={{
             display: menuOpen ? "block" : "none",

@@ -318,7 +318,7 @@ export function KeycodeCatalog(props: {
 }) {
   const [tabValue, setTabValue] = useState(0);
   return (
-    <>
+    <Box sx={{ width: "100%" }}>
       <Box>
         <Tabs
           value={tabValue}
@@ -358,12 +358,35 @@ export function KeycodeCatalog(props: {
       </Box>
       {props.tab.map((tab, index) => (
         <CustomTabPanel key={index} value={tabValue} index={index}>
-          {tab.keygroup.map((keygroup) => (
-            <Box
-              key={keygroup}
-              className="keycode-group"
-              sx={{ maxWidth: "100%", overflowX: "auto" }}
-            >
+          <Box
+            sx={{
+              height: 380,
+              overflowY: "auto",
+              overflowX: "hidden",
+              scrollbarColor: "#64748b transparent",
+              "&::-webkit-scrollbar": {
+                width: 10,
+              },
+              "&::-webkit-scrollbar-track": {
+                background: "rgba(15, 23, 42, 0.5)",
+                borderRadius: 8,
+              },
+              "&::-webkit-scrollbar-thumb": {
+                background: "#64748b",
+                borderRadius: 8,
+                border: "2px solid rgba(15, 23, 42, 0.5)",
+              },
+              "&::-webkit-scrollbar-thumb:hover": {
+                background: "#94a3b8",
+              },
+            }}
+          >
+            {tab.keygroup.map((keygroup) => (
+              <Box
+                key={keygroup}
+                className="keycode-group"
+                sx={{ maxWidth: "100%", overflowX: "auto" }}
+              >
               {keygroup === "basic" ? (
                 <>
                   <Box className="keycode-group-title">basic</Box>
@@ -473,10 +496,11 @@ export function KeycodeCatalog(props: {
               ) : (
                 <></>
               )}
-            </Box>
-          ))}
+              </Box>
+            ))}
+          </Box>
         </CustomTabPanel>
       ))}
-    </>
+    </Box>
   );
 }

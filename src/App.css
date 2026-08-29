@@ -37,6 +37,7 @@ textarea {
   padding: 16px 14px 18px !important;
   box-shadow: 0 20px 40px rgba(15, 23, 42, 0.35);
   backdrop-filter: blur(12px);
+  margin-top: 8px;
 }
 
 .menu-header {
