@@ -108,7 +108,7 @@ export function KeyboardSelector(props: {
               "&:hover": { backgroundColor: "#334155" },
             }}
           >
-            Add New Keyboard(USB)
+            Add New Keyboard
           </MenuItem>
         )}
         {isTauri || navigator.bluetooth === undefined ? (

@@ -42,8 +42,15 @@ class WebRawHID implements WebUsbComInterface {
   > {
     const devices = await navigator.hid.getDevices();
     return devices.map((d) => {
+          const isFF60 = d.collections.some(
+            (c) => c.usagePage === 0xFF60
+          );
       return {
-        name: d.productName,
+          name:
+      d.productName ||
+      (isFF60
+        ? `FAL BLE VIAL`
+        : `HID ${d.vendorId.toString(16)}:${d.productId.toString(16)}`),
         vid: d.vendorId,
         pid: d.productId,
         opened: d.opened,
@@ -89,7 +96,7 @@ class WebRawHID implements WebUsbComInterface {
   }
 
   getName() {
-    return this.port?.productName ?? "";
+    return this.port?.productName ?? "FAL BLE";
   }
 
   async writeString(msg: string) {
