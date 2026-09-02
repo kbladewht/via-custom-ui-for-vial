@@ -1,0 +1,197 @@
+client:495 [vite] connecting...
+client:618 [vite] connected.
+chunk-GKJBSOWT.js?v=9e58bbad:21551 Download the React DevTools for a better development experience: https://reactjs.org/link/react-devtools
+hjson.js?v=9e58bbad:11 Module "os" has been externalized for browser compatibility. Cannot access "os.EOL" in client code. See https://vite.dev/guide/troubleshooting.html#module-externalized-for-browser-compatibility for more details.
+get @ hjson.js?v=9e58bbad:11
+node_modules/hjson/lib/hjson-common.js @ hjson.js?v=9e58bbad:103
+__require @ chunk-V4OQ3NZ2.js?v=9e58bbad:11
+node_modules/hjson/lib/hjson.js @ hjson.js?v=9e58bbad:1152
+__require @ chunk-V4OQ3NZ2.js?v=9e58bbad:11
+(anonymous) @ hjson.js?v=9e58bbad:1184
+KeyboardSelector.tsx:58 -2
+webRawHID.ts:136 Raw HID port closed
+webBtNus.ts:151 BLE NUS endpoints: {write: '6e400002-b5a3-f393-e0a9-e50e24dcca9e', notify: '6e400003-b5a3-f393-e0a9-e50e24dcca9e'}
+webBtNus.ts:173 BLE NUS connection opened
+webBtNus.ts:244 BLE NUS send: 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+webBtNus.ts:26 BLE NUS receive (32): 1 0 9 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+vialKeyboad.ts:137 receiveCallback: 1,0,9,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+webBtNus.ts:26 BLE NUS receive (32): 1 0 9 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+vialKeyboad.ts:137 receiveCallback: 1,0,9,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+vialKeyboad.ts:207 received: 1,0,9,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+webBtNus.ts:244 BLE NUS send: fe 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+webBtNus.ts:26 BLE NUS receive (32): 6 0 0 0 cd 9 3 2 20 f5 28 33 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+vialKeyboad.ts:137 receiveCallback: 6,0,0,0,205,9,3,2,32,245,40,51,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+webBtNus.ts:26 BLE NUS receive (32): 6 0 0 0 cd 9 3 2 20 f5 28 33 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+vialKeyboad.ts:137 receiveCallback: 6,0,0,0,205,9,3,2,32,245,40,51,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+vialKeyboad.ts:207 received: 6,0,0,0,205,9,3,2,32,245,40,51,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+App.tsx:175 via protocol version:9
+webBtNus.ts:244 BLE NUS send: fe 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+webBtNus.ts:26 BLE NUS receive (32): f0 2 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+vialKeyboad.ts:137 receiveCallback: 240,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+webBtNus.ts:26 BLE NUS receive (32): f0 2 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+vialKeyboad.ts:137 receiveCallback: 240,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+vialKeyboad.ts:207 received: 240,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+webBtNus.ts:244 BLE NUS send: fe 2 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+webBtNus.ts:26 BLE NUS receive (32): fd 37 7a 58 5a 0 0 4 e6 d6 b4 46 2 0 21 1 16 0 0 0 74 2f e5 a3 e0 7 74 2 af 5d 0 3d
+webBtNus.ts:26 BLE NUS receive (32): fd 37 7a 58 5a 0 0 4 e6 d6 b4 46 2 0 21 1 16 0 0 0 74 2f e5 a3 e0 7 74 2 af 5d 0 3d
+webBtNus.ts:244 BLE NUS send: fe 2 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+webBtNus.ts:26 BLE NUS receive (32): 88 89 c6 54 36 c3 17 50 c5 cd 73 4d 9a a5 f9 2c 3a 77 14 6a f b5 26 32 29 21 78 49 1e f7 bc eb
+webBtNus.ts:26 BLE NUS receive (32): 88 89 c6 54 36 c3 17 50 c5 cd 73 4d 9a a5 f9 2c 3a 77 14 6a f b5 26 32 29 21 78 49 1e f7 bc eb
+webBtNus.ts:244 BLE NUS send: fe 2 2 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+webBtNus.ts:26 BLE NUS receive (32): f1 51 be 84 3a 4b d3 54 ee 88 9a b8 93 45 f3 59 b0 35 c6 c1 e8 2d 73 46 e6 4b a4 47 62 b4 21 ce
+webBtNus.ts:26 BLE NUS receive (32): f1 51 be 84 3a 4b d3 54 ee 88 9a b8 93 45 f3 59 b0 35 c6 c1 e8 2d 73 46 e6 4b a4 47 62 b4 21 ce
+webBtNus.ts:244 BLE NUS send: fe 2 3 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+webBtNus.ts:26 BLE NUS receive (32): 7f dd 6d 7 5 b8 3e d7 ba 31 a1 ee 2a 9c f6 da d4 ec a0 22 75 a5 36 94 6a f8 81 29 b8 a4 f1 7c
+webBtNus.ts:26 BLE NUS receive (32): 7f dd 6d 7 5 b8 3e d7 ba 31 a1 ee 2a 9c f6 da d4 ec a0 22 75 a5 36 94 6a f8 81 29 b8 a4 f1 7c
+webBtNus.ts:244 BLE NUS send: fe 2 4 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+webBtNus.ts:26 BLE NUS receive (32): 13 48 47 32 6b eb 5f 7c e 55 bd be e 53 b8 be bb dc 89 e3 f0 22 37 25 55 b8 48 29 70 e8 bc 90
+webBtNus.ts:26 BLE NUS receive (32): 13 48 47 32 6b eb 5f 7c e 55 bd be e 53 b8 be bb dc 89 e3 f0 22 37 25 55 b8 48 29 70 e8 bc 90
+webBtNus.ts:244 BLE NUS send: fe 2 5 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+webBtNus.ts:244 BLE NUS send: fe 2 6 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+webBtNus.ts:26 BLE NUS receive (32): 53 60 4e 58 ab 19 ea 81 2f c5 f0 a8 e6 a 2 fa c7 6 b0 3d 84 b7 72 e1 20 7e 91 5d 3f 18 f3 c0
+webBtNus.ts:26 BLE NUS receive (32): 53 60 4e 58 ab 19 ea 81 2f c5 f0 a8 e6 a 2 fa c7 6 b0 3d 84 b7 72 e1 20 7e 91 5d 3f 18 f3 c0
+webBtNus.ts:244 BLE NUS send: fe 2 7 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+webBtNus.ts:26 BLE NUS receive (32): bc 44 5d 81 df a5 f9 95 17 3d a2 2c e0 85 b6 13 36 72 ea b5 80 9c 4e bb 64 7f f5 73 9f 9f 55 6d
+webBtNus.ts:26 BLE NUS receive (32): bc 44 5d 81 df a5 f9 95 17 3d a2 2c e0 85 b6 13 36 72 ea b5 80 9c 4e bb 64 7f f5 73 9f 9f 55 6d
+webBtNus.ts:244 BLE NUS send: fe 2 8 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+webBtNus.ts:26 BLE NUS receive (32): 52 69 43 d0 cb 19 62 c5 22 6 b6 d0 2e 3 9e 59 2 82 b8 49 41 7f f8 87 0 af 97 fa d5 b6 83 77
+webBtNus.ts:26 BLE NUS receive (32): 52 69 43 d0 cb 19 62 c5 22 6 b6 d0 2e 3 9e 59 2 82 b8 49 41 7f f8 87 0 af 97 fa d5 b6 83 77
+webBtNus.ts:244 BLE NUS send: fe 2 9 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+webBtNus.ts:26 BLE NUS receive (32): 34 c9 ea d4 a c9 3 18 7f d0 c2 f1 7b 5d 29 e2 1e 35 b6 c8 25 1f ac 2d 1e 9 a4 b5 71 2c 7c c7
+webBtNus.ts:26 BLE NUS receive (32): 34 c9 ea d4 a c9 3 18 7f d0 c2 f1 7b 5d 29 e2 1e 35 b6 c8 25 1f ac 2d 1e 9 a4 b5 71 2c 7c c7
+webBtNus.ts:244 BLE NUS send: fe 2 a 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+webBtNus.ts:26 BLE NUS receive (32): 9 e7 df b3 32 68 cd 51 39 f6 9c 71 8d 15 78 7a 7d ca c0 c7 61 e4 c6 26 dd bb aa d2 39 f6 51 d2
+webBtNus.ts:26 BLE NUS receive (32): 9 e7 df b3 32 68 cd 51 39 f6 9c 71 8d 15 78 7a 7d ca c0 c7 61 e4 c6 26 dd bb aa d2 39 f6 51 d2
+webBtNus.ts:244 BLE NUS send: fe 2 b 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+webBtNus.ts:26 BLE NUS receive (32): 45 5c a8 b3 91 5a b7 47 98 bd 11 a4 33 2c cc 96 5 fe 25 df 7e b8 7f b6 9 79 6 da d7 b2 d9 2
+webBtNus.ts:26 BLE NUS receive (32): 45 5c a8 b3 91 5a b7 47 98 bd 11 a4 33 2c cc 96 5 fe 25 df 7e b8 7f b6 9 79 6 da d7 b2 d9 2
+webBtNus.ts:244 BLE NUS send: fe 2 c 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+webBtNus.ts:26 BLE NUS receive (32): b0 4c 5f d0 3c d3 bf f2 b cc fc 90 54 c3 b5 49 91 ae 5b a8 ef 7e be 7 4b 63 14 1e 4 fe de 99
+webBtNus.ts:26 BLE NUS receive (32): b0 4c 5f d0 3c d3 bf f2 b cc fc 90 54 c3 b5 49 91 ae 5b a8 ef 7e be 7 4b 63 14 1e 4 fe de 99
+webBtNus.ts:26 BLE NUS receive (32): d8 42 f2 43 af f c3 ef c5 c ee 7d 33 27 e6 ae a8 54 4c 28 49 0 c 41 a4 55 58 6c 70 d7 c1 4a
+webBtNus.ts:26 BLE NUS receive (32): d8 42 f2 43 af f c3 ef c5 c ee 7d 33 27 e6 ae a8 54 4c 28 49 0 c 41 a4 55 58 6c 70 d7 c1 4a
+webBtNus.ts:244 BLE NUS send: fe 2 d 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+webBtNus.ts:26 BLE NUS receive (32): ee 4f a0 96 18 6 74 ba cf b0 95 7d ec c9 e1 69 10 a8 6c 27 d 42 1f 8e 43 9 10 b2 59 15 a3 15
+webBtNus.ts:26 BLE NUS receive (32): ee 4f a0 96 18 6 74 ba cf b0 95 7d ec c9 e1 69 10 a8 6c 27 d 42 1f 8e 43 9 10 b2 59 15 a3 15
+webBtNus.ts:244 BLE NUS send: fe 2 e 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+webBtNus.ts:26 BLE NUS receive (32): da 7c e5 74 b0 e8 87 91 5f 16 8b e 48 19 e3 d5 14 bf 37 1a f7 39 b4 86 bc 4f fd ad 87 b6 47 fa
+webBtNus.ts:26 BLE NUS receive (32): da 7c e5 74 b0 e8 87 91 5f 16 8b e 48 19 e3 d5 14 bf 37 1a f7 39 b4 86 bc 4f fd ad 87 b6 47 fa
+webBtNus.ts:244 BLE NUS send: fe 2 f 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+webBtNus.ts:26 BLE NUS receive (32): d b7 c 9d 65 a4 4c 38 66 3e a5 81 e1 71 9d 15 9a f7 46 0 d9 3f 26 bb 97 d8 a 3b 9d 85 e7 1d
+webBtNus.ts:26 BLE NUS receive (32): d 16 65 9d 65 a4 4c 38 66 3e a5 81 e1 71 9d 15 9a f7 46 0 d9 3f 26 bb 97 d8 a 3b 9d 85 e7 1d
+webBtNus.ts:244 BLE NUS send: fe 2 10 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+webBtNus.ts:26 BLE NUS receive (32): d1 ce df ad cb ab cd 87 f4 9d 73 91 70 a1 f6 d3 cc 51 95 ac fa c9 dc a5 86 90 88 98 e0 38 f2 e6
+webBtNus.ts:26 BLE NUS receive (32): d1 ce df ad cb ab cd 87 f4 9d 73 91 70 a1 f6 d3 cc 51 95 ac fa c9 dc a5 86 90 88 98 e0 38 f2 e6
+webBtNus.ts:244 BLE NUS send: fe 2 11 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+webBtNus.ts:26 BLE NUS receive (32): 7c 3c 49 59 ff 45 28 d4 52 d cd 6f f5 db bd 39 ba f9 82 1e c5 f7 e8 ca 6f 8a a1 92 91 83 1d 42
+webBtNus.ts:26 BLE NUS receive (32): 7c 3c 49 59 ff 45 28 d4 52 d cd 6f f5 db bd 39 ba f9 82 1e c5 f7 e8 ca 6f 8a a1 92 91 83 1d 42
+webBtNus.ts:244 BLE NUS send: fe 2 12 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+webBtNus.ts:26 BLE NUS receive (32): 6e b5 48 a5 c4 b6 df c1 bf ef c9 57 69 32 a4 b0 d9 49 3c b9 35 ce dc 4b ce c8 3b 73 4 80 64 a6
+webBtNus.ts:26 BLE NUS receive (32): 6e b5 48 a5 c4 b6 df c1 bf ef c9 57 69 32 a4 b0 d9 49 3c b9 35 ce dc 4b ce c8 3b 73 4 80 64 a6
+webBtNus.ts:244 BLE NUS send: fe 2 13 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+webBtNus.ts:26 BLE NUS receive (32): b3 17 38 fb f4 ea 3 2 e1 4d 57 60 11 12 76 70 25 76 fc 40 97 7e c6 15 80 a1 80 aa c1 de 27 1b
+webBtNus.ts:26 BLE NUS receive (32): b3 17 38 fb f4 ea 3 2 e1 4d 57 60 11 12 76 70 25 76 fc 40 97 7e c6 15 80 a1 80 aa c1 de 27 1b
+webBtNus.ts:244 BLE NUS send: fe 2 14 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+webBtNus.ts:26 BLE NUS receive (32): b0 db f5 29 22 ad 9f e1 c9 f6 66 f1 e1 ef 57 6a bf d4 80 82 95 7e 62 5a 65 cf 47 8b 1e 44 b4 ec
+webBtNus.ts:26 BLE NUS receive (32): b0 db f5 29 22 ad 9f e1 c9 f6 66 f1 e1 ef 57 6a bf d4 80 82 95 7e 62 5a 65 cf 47 8b 1e 44 b4 ec
+webBtNus.ts:244 BLE NUS send: fe 2 15 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+webBtNus.ts:26 BLE NUS receive (32): d6 db 4e d0 1a 97 84 9f 1a 7f e7 87 a4 31 7a 4f 2d 7a 42 49 57 7d 72 97 48 8a 98 0 e3 c1 fc 49
+webBtNus.ts:26 BLE NUS receive (32): d6 db 4e d0 1a 97 84 9f 1a 7f e7 87 a4 31 7a 4f 2d 7a 42 49 57 7d 72 97 48 8a 98 0 e3 c1 fc 49
+webBtNus.ts:244 BLE NUS send: fe 2 16 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+webBtNus.ts:26 BLE NUS receive (32): 82 3b 3d 7c 4b 92 f5 f0 a7 fd c2 11 56 33 0 0 c4 96 75 25 b 53 89 63 0 1 cb 5 f5 e 0 0
+webBtNus.ts:26 BLE NUS receive (32): 82 3b 3d 7c 4b 92 f5 f0 a7 fd c2 11 56 33 0 0 c4 96 75 25 b 53 89 63 0 1 cb 5 f5 e 0 0
+webBtNus.ts:244 BLE NUS send: fe 2 17 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+webBtNus.ts:26 BLE NUS receive (32): 45 7e bc cb b1 c4 67 fb 2 0 0 0 0 4 59 5a 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+webBtNus.ts:26 BLE NUS receive (32): 45 7e bc cb b1 c4 67 fb 2 0 0 0 0 4 59 5a 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+webBtNus.ts:244 BLE NUS send: fe 2 18 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+webBtNus.ts:26 BLE NUS receive (32): fe 2 18 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+webBtNus.ts:26 BLE NUS receive (32): fe 2 18 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+webBtNus.ts:244 BLE NUS send: fe 2 19 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+webBtNus.ts:26 BLE NUS receive (32): fe 2 19 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+webBtNus.ts:26 BLE NUS receive (32): fe 2 19 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+webBtNus.ts:244 BLE NUS send: fe 2 1a 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+webBtNus.ts:26 BLE NUS receive (32): fe 2 1a 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+webBtNus.ts:26 BLE NUS receive (32): fe 2 1a 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+webBtNus.ts:244 BLE NUS send: fe 2 1b 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+webBtNus.ts:26 BLE NUS receive (32): fe 2 1b 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+webBtNus.ts:26 BLE NUS receive (32): fe 2 1b 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+webBtNus.ts:244 BLE NUS send: fe 2 1c 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+webBtNus.ts:26 BLE NUS receive (32): fe 2 1c 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+webBtNus.ts:26 BLE NUS receive (32): fe 2 1c 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+webBtNus.ts:244 BLE NUS send: fe 2 1d 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+webBtNus.ts:26 BLE NUS receive (32): fe 2 1d 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+webBtNus.ts:26 BLE NUS receive (32): fe 2 1d 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+webBtNus.ts:244 BLE NUS send: fe 2 1e 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+webBtNus.ts:26 BLE NUS receive (32): fe 2 1e 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+webBtNus.ts:26 BLE NUS receive (32): fe 2 1e 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+webBtNus.ts:244 BLE NUS send: fe 2 1f 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+webBtNus.ts:26 BLE NUS receive (32): fe 2 1f 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+webBtNus.ts:26 BLE NUS receive (32): fe 2 1f 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+webBtNus.ts:244 BLE NUS send: fe 2 20 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+webBtNus.ts:26 BLE NUS receive (32): fe 2 20 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+webBtNus.ts:26 BLE NUS receive (32): fe 2 20 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+webBtNus.ts:244 BLE NUS send: fe 2 21 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+webBtNus.ts:26 BLE NUS receive (32): fe 2 21 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+webBtNus.ts:26 BLE NUS receive (32): fe 2 21 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+webBtNus.ts:244 BLE NUS send: fe 2 22 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+webBtNus.ts:26 BLE NUS receive (32): fe 2 22 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+webBtNus.ts:26 BLE NUS receive (32): fe 2 22 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+webBtNus.ts:244 BLE NUS send: fe 2 23 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+webBtNus.ts:26 BLE NUS receive (32): fe 2 23 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+webBtNus.ts:26 BLE NUS receive (32): fe 2 23 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+webBtNus.ts:244 BLE NUS send: fe 2 24 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+webBtNus.ts:26 BLE NUS receive (32): fe 2 24 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+webBtNus.ts:26 BLE NUS receive (32): fe 2 24 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+webBtNus.ts:244 BLE NUS send: fe 2 25 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+webBtNus.ts:26 BLE NUS receive (32): fe 2 25 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+webBtNus.ts:26 BLE NUS receive (32): fe 2 25 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+webBtNus.ts:244 BLE NUS send: fe 2 26 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+webBtNus.ts:26 BLE NUS receive (32): fe 2 26 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+webBtNus.ts:26 BLE NUS receive (32): fe 2 26 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+webBtNus.ts:244 BLE NUS send: fe 2 27 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+webBtNus.ts:26 BLE NUS receive (32): fe 2 27 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+webBtNus.ts:26 BLE NUS receive (32): fe 2 27 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+webBtNus.ts:244 BLE NUS send: fe 2 28 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+webBtNus.ts:26 BLE NUS receive (32): fe 2 28 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+webBtNus.ts:26 BLE NUS receive (32): fe 2 28 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+webBtNus.ts:244 BLE NUS send: fe 2 29 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+webBtNus.ts:26 BLE NUS receive (32): fe 2 29 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+webBtNus.ts:26 BLE NUS receive (32): fe 2 29 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+webBtNus.ts:244 BLE NUS send: fe 2 2a 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+webBtNus.ts:26 BLE NUS receive (32): fe 2 2a 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+webBtNus.ts:26 BLE NUS receive (32): fe 2 2a 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+webBtNus.ts:244 BLE NUS send: fe 2 2b 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+webBtNus.ts:26 BLE NUS receive (32): fe 2 2b 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+webBtNus.ts:26 BLE NUS receive (32): fe 2 2b 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+webBtNus.ts:244 BLE NUS send: fe 2 2c 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+webBtNus.ts:26 BLE NUS receive (32): fe 2 2c 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+webBtNus.ts:26 BLE NUS receive (32): fe 2 2c 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+webBtNus.ts:244 BLE NUS send: fe 2 2d 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+webBtNus.ts:26 BLE NUS receive (32): fe 2 2d 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+webBtNus.ts:26 BLE NUS receive (32): fe 2 2d 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+webBtNus.ts:244 BLE NUS send: fe 2 2e 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+webBtNus.ts:26 BLE NUS receive (32): fe 2 2e 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+webBtNus.ts:26 BLE NUS receive (32): fe 2 2e 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+App.tsx:189 lzma data error
+openKeyboard @ App.tsx:189
+await in openKeyboard
+onChange @ App.tsx:400
+onClose @ KeyboardSelector.tsx:64
+update @ chunk-SXNGI4QT.js?v=9e58bbad:14609
+(anonymous) @ chunk-SXNGI4QT.js?v=9e58bbad:14673
+callCallback2 @ chunk-GKJBSOWT.js?v=9e58bbad:3674
+invokeGuardedCallbackDev @ chunk-GKJBSOWT.js?v=9e58bbad:3699
+invokeGuardedCallback @ chunk-GKJBSOWT.js?v=9e58bbad:3733
+invokeGuardedCallbackAndCatchFirstError @ chunk-GKJBSOWT.js?v=9e58bbad:3736
+executeDispatch @ chunk-GKJBSOWT.js?v=9e58bbad:7014
+processDispatchQueueItemsInOrder @ chunk-GKJBSOWT.js?v=9e58bbad:7034
+processDispatchQueue @ chunk-GKJBSOWT.js?v=9e58bbad:7043
+dispatchEventsForPlugins @ chunk-GKJBSOWT.js?v=9e58bbad:7051
+(anonymous) @ chunk-GKJBSOWT.js?v=9e58bbad:7174
+batchedUpdates$1 @ chunk-GKJBSOWT.js?v=9e58bbad:18913
+batchedUpdates @ chunk-GKJBSOWT.js?v=9e58bbad:3579
+dispatchEventForPluginEventSystem @ chunk-GKJBSOWT.js?v=9e58bbad:7173
+dispatchEventWithEnableCapturePhaseSelectiveHydrationWithoutDiscreteEventReplay @ chunk-GKJBSOWT.js?v=9e58bbad:5478
+dispatchEvent @ chunk-GKJBSOWT.js?v=9e58bbad:5472
+dispatchDiscreteEvent @ chunk-GKJBSOWT.js?v=9e58bbad:5449
+webBtNus.ts:210 BLE NUS connection closed

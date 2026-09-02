@@ -2,8 +2,10 @@ import { WebUsbComInterface } from "../../webUsbComInterface";
 
 // Nordic UART Service UUIDs
 const NUS_SERVICE_UUID = '6e400001-b5a3-f393-e0a9-e50e24dcca9e';
-const NUS_TX_CHARACTERISTIC_UUID = '6e400002-b5a3-f393-e0a9-e50e24dcca9e'; // TX from central to peripheral
-const NUS_RX_CHARACTERISTIC_UUID = '6e400003-b5a3-f393-e0a9-e50e24dcca9e'; // RX from peripheral to central
+const NUS_NOTIFY_CHARACTERISTIC_UUID = '6e400002-b5a3-f393-e0a9-e50e24dcca9e';
+const NUS_WRITE_CHARACTERISTIC_UUID = '6e400003-b5a3-f393-e0a9-e50e24dcca9e';
+const VIAL_PACKET_SIZE = 32;
+const BLE_FRAME_SIZE = VIAL_PACKET_SIZE + 2;
 
 class WebBtNus implements WebUsbComInterface {
   private device: BluetoothDevice | null = null;
@@ -14,13 +16,38 @@ class WebBtNus implements WebUsbComInterface {
   private receiveCallback: ((msg: Uint8Array) => void) | null = null;
   private closeCallback: () => void = () => {};
   private rxListenerAdded: boolean = false;
+  private nextSequence = 0;
+  private expectedSequences: number[] = [];
   private disconnectListenerAdded: boolean = false;
   
   // Reference to event handlers for removal
   private onCharacteristicValueChanged = (event: Event) => {
     const value = (event.target as BluetoothRemoteGATTCharacteristic).value;
     if (value) {
-      this.receiveCallback?.(new Uint8Array(value.buffer));
+      const packet = new Uint8Array(value.buffer, value.byteOffset, value.byteLength);
+      console.log(
+        `BLE NUS receive (${packet.byteLength}): ${Array.from(packet)
+          .map((byte) => byte.toString(16))
+          .join(" ")}`,
+      );
+      if (packet.byteLength !== BLE_FRAME_SIZE) {
+        console.warn("BLE NUS ignored invalid frame length");
+        return;
+      }
+      const sequence = packet[0] | (packet[1] << 8);
+      const expectedIndex = this.expectedSequences.indexOf(sequence);
+      if (expectedIndex < 0) {
+        console.warn(`BLE NUS ignored sequence ${sequence}`);
+        return;
+      }
+      if (expectedIndex !== 0) {
+        console.warn(
+          `BLE NUS ignored out-of-order sequence ${sequence}, expected ${this.expectedSequences[0]}`,
+        );
+        return;
+      }
+      this.expectedSequences.shift();
+      this.receiveCallback?.(Uint8Array.from(packet.slice(2)));
     }
   };
   
@@ -43,16 +70,9 @@ class WebBtNus implements WebUsbComInterface {
       }
       
       if (recvHandler) {
-        // Start notifications and add listener
-        this.rxCharacteristic
-          .startNotifications()
-          .then(() => {
-            this.rxCharacteristic?.addEventListener("characteristicvaluechanged", this.onCharacteristicValueChanged);
-            this.rxListenerAdded = true;
-          })
-          .catch((error) => {
-            console.error("Error starting notifications:", error);
-          });
+        const characteristic = this.rxCharacteristic;
+        characteristic.addEventListener("characteristicvaluechanged", this.onCharacteristicValueChanged);
+        this.rxListenerAdded = true;
       } else {
         // Stop notifications if callback is removed
         this.rxCharacteristic.stopNotifications().catch((e) => console.error(e));
@@ -98,7 +118,7 @@ class WebBtNus implements WebUsbComInterface {
         (await navigator.bluetooth.requestDevice({
           filters: [
             {
-              namePrefix:"(BMP)"
+              namePrefix:"P42"
             },
           ],
           optionalServices: [NUS_SERVICE_UUID],
@@ -113,9 +133,31 @@ class WebBtNus implements WebUsbComInterface {
       // Get NUS service
       this.nusService = await this.server.getPrimaryService(NUS_SERVICE_UUID);
 
-      // Get TX and RX characteristics
-      this.txCharacteristic = await this.nusService.getCharacteristic(NUS_TX_CHARACTERISTIC_UUID);
-      this.rxCharacteristic = await this.nusService.getCharacteristic(NUS_RX_CHARACTERISTIC_UUID);
+      // Select endpoints by their advertised properties. This firmware uses
+      // the opposite UUID direction from the Nordic NUS naming convention.
+      const characteristics = await Promise.all([
+        this.nusService.getCharacteristic(NUS_NOTIFY_CHARACTERISTIC_UUID),
+        this.nusService.getCharacteristic(NUS_WRITE_CHARACTERISTIC_UUID),
+      ]);
+      this.txCharacteristic = characteristics.find(
+        (characteristic) =>
+          characteristic.properties.write ||
+          characteristic.properties.writeWithoutResponse,
+      ) ?? null;
+      this.rxCharacteristic = characteristics.find(
+        (characteristic) => characteristic.properties.notify,
+      ) ?? null;
+
+      if (!this.txCharacteristic || !this.rxCharacteristic) {
+        throw new Error("NUS characteristics do not expose write and notify properties");
+      }
+
+      console.log("BLE NUS endpoints:", {
+        write: this.txCharacteristic.uuid,
+        notify: this.rxCharacteristic.uuid,
+      });
+
+      await this.rxCharacteristic.startNotifications();
 
       // Set up disconnect listener
       if (this.disconnectListenerAdded) {
@@ -169,6 +211,7 @@ class WebBtNus implements WebUsbComInterface {
       this.nusService = null;
       this.txCharacteristic = null;
       this.rxCharacteristic = null;
+      this.expectedSequences = [];
 
       console.log("BLE NUS connection closed");
     } catch (error) {
@@ -197,35 +240,27 @@ class WebBtNus implements WebUsbComInterface {
     }
 
     try {
-      console.log(
-        `BLE NUS send: ${Array.from(msg)
-          .map((v) => v.toString(16))
-          .join(" ")}`,
-      );
-
-      // BLE standard MTU size
-      const MTU_SIZE = 20;
-
-      // Process the data in chunks of MTU_SIZE
-      for (let i = 0; i < msg.length; i += MTU_SIZE) {
-        // Create a chunk of data
-        const chunkSize = Math.min(MTU_SIZE, msg.length - i);
-        const chunk = new Uint8Array(MTU_SIZE); // Always create a 20-byte array
-
-        // Copy actual data
-        chunk.set(msg.slice(i, i + chunkSize));
-
-        // The rest will remain as zeros (padding)
-
-        // Write the 20-byte chunk
-        await this.txCharacteristic.writeValue(chunk);
+      if (msg.length > VIAL_PACKET_SIZE) {
+        throw new Error(`Vial packet is too large: ${msg.length} bytes`);
       }
 
-      // If the input message was empty or its length was exactly a multiple of MTU_SIZE,
-      // we still need to send at least one packet
-      if (msg.length === 0 || msg.length % MTU_SIZE === 0) {
-        const emptyChunk = new Uint8Array(MTU_SIZE); // 20 bytes of zeros
-        await this.txCharacteristic.writeValue(emptyChunk);
+      // The firmware accepts one complete 32-byte Vial packet per NUS write.
+      const sequence = this.nextSequence;
+      this.nextSequence = (this.nextSequence + 1) & 0xffff;
+      this.expectedSequences.push(sequence);
+      const packet = new Uint8Array(BLE_FRAME_SIZE);
+      packet[0] = sequence & 0xff;
+      packet[1] = sequence >> 8;
+      packet.set(msg, 2);
+      console.log(
+        `BLE NUS send: ${Array.from(packet)
+          .map((value) => value.toString(16))
+          .join(" ")}`,
+      );
+      if (this.txCharacteristic.properties.write) {
+        await this.txCharacteristic.writeValue(packet);
+      } else {
+        await this.txCharacteristic.writeValueWithoutResponse(packet);
       }
     } catch (error) {
       console.error("Error writing to BLE NUS:", error);
