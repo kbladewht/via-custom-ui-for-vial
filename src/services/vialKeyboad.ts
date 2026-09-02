@@ -175,7 +175,7 @@ class VialKeyboard {
       if (deviceIndex == -2 && this.webbt) {
         this.comm = this.webbt;
         this.queue_size = 1;
-        this.pageSize = 20 - 4;
+        this.pageSize = 32 - 4;
       } else if (this.hid) {
         this.comm = this.hid;
         this.queue_size = 2;

@@ -37,7 +37,7 @@ class WebBtNus implements WebUsbComInterface {
       const sequence = packet[0] | (packet[1] << 8);
       const expectedIndex = this.expectedSequences.indexOf(sequence);
       if (expectedIndex < 0) {
-        console.warn(`BLE NUS ignored sequence ${sequence}`);
+        // console.warn(`BLE NUS ignored sequence ${sequence}`);
         return;
       }
       if (expectedIndex !== 0) {
