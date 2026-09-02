@@ -6,6 +6,7 @@ const NUS_NOTIFY_CHARACTERISTIC_UUID = '6e400002-b5a3-f393-e0a9-e50e24dcca9e';
 const NUS_WRITE_CHARACTERISTIC_UUID = '6e400003-b5a3-f393-e0a9-e50e24dcca9e';
 const VIAL_PACKET_SIZE = 32;
 const BLE_FRAME_SIZE = VIAL_PACKET_SIZE + 2;
+const BLE_DEVICE_NAME_KEYWORDS = ["P42", "BLE", "P16"];
 
 class WebBtNus implements WebUsbComInterface {
   private device: BluetoothDevice | null = null;
@@ -116,13 +117,16 @@ class WebBtNus implements WebUsbComInterface {
       this.device =
         devices.at(deviceIndex) ?? 
         (await navigator.bluetooth.requestDevice({
-          filters: [
-            {
-              namePrefix:"BLE"
-            },
-          ],
+          filters: BLE_DEVICE_NAME_KEYWORDS.map((namePrefix) => ({ namePrefix })),
           optionalServices: [NUS_SERVICE_UUID],
         }));
+
+      const deviceName = this.device.name ?? "";
+      if (!BLE_DEVICE_NAME_KEYWORDS.some((keyword) =>
+        deviceName.toLowerCase().includes(keyword.toLowerCase()),
+      )) {
+        throw new Error(`Selected Bluetooth device is not supported: ${deviceName}`);
+      }
 
       // Connect to GATT server
       this.server = await this.device.gatt?.connect();
