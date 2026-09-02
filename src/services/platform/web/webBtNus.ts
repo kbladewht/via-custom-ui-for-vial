@@ -118,7 +118,7 @@ class WebBtNus implements WebUsbComInterface {
         (await navigator.bluetooth.requestDevice({
           filters: [
             {
-              namePrefix:"P42"
+              namePrefix:"BLE"
             },
           ],
           optionalServices: [NUS_SERVICE_UUID],
