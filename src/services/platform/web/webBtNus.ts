@@ -7,6 +7,8 @@ const NUS_WRITE_CHARACTERISTIC_UUID = '6e400003-b5a3-f393-e0a9-e50e24dcca9e';
 const VIAL_PACKET_SIZE = 32;
 const BLE_FRAME_SIZE = VIAL_PACKET_SIZE + 2;
 const BLE_DEVICE_NAME_KEYWORDS = ["P42", "BLE", "P16"];
+const GATT_OPERATION_TIMEOUT_MS = 5000;
+const GATT_SERVICE_DISCOVERY_RETRY_DELAY_MS = 300;
 
 class WebBtNus implements WebUsbComInterface {
   private device: BluetoothDevice | null = null;
@@ -20,6 +22,7 @@ class WebBtNus implements WebUsbComInterface {
   private nextSequence = 0;
   private expectedSequences: number[] = [];
   private disconnectListenerAdded: boolean = false;
+  private closePromise: Promise<void> | null = null;
   
   // Reference to event handlers for removal
   private onCharacteristicValueChanged = (event: Event) => {
@@ -52,9 +55,68 @@ class WebBtNus implements WebUsbComInterface {
     }
   };
   
-  private onGattServerDisconnected = () => {
-    this.closeCallback();
+  private onGattServerDisconnected = (event: Event) => {
+    if (event.target !== this.device) {
+      return;
+    }
+
+    void this.close().finally(() => {
+      this.closeCallback();
+    });
   };
+
+  private async withGattTimeout<T>(operation: Promise<T>, operationName: string): Promise<T> {
+    let timeoutId: number | undefined;
+    const timeout = new Promise<never>((_, reject) => {
+      timeoutId = window.setTimeout(() => {
+        reject(new Error(`BLE NUS ${operationName} timed out`));
+      }, GATT_OPERATION_TIMEOUT_MS);
+    });
+
+    try {
+      return await Promise.race([operation, timeout]);
+    } finally {
+      if (timeoutId !== undefined) {
+        window.clearTimeout(timeoutId);
+      }
+    }
+  }
+
+  private async wait(ms: number): Promise<void> {
+    await new Promise((resolve) => window.setTimeout(resolve, ms));
+  }
+
+  private prepareForDeviceChooser(): BluetoothDevice | null {
+    const previousDevice = this.device;
+
+    if (this.rxCharacteristic) {
+      if (this.rxListenerAdded) {
+        this.rxCharacteristic.removeEventListener("characteristicvaluechanged", this.onCharacteristicValueChanged);
+        this.rxListenerAdded = false;
+      }
+      void this.rxCharacteristic.stopNotifications().catch((error) => {
+        console.warn("BLE NUS could not stop notifications", error);
+      });
+    }
+
+    if (previousDevice && this.disconnectListenerAdded) {
+      previousDevice.removeEventListener("gattserverdisconnected", this.onGattServerDisconnected);
+      this.disconnectListenerAdded = false;
+    }
+
+    if (this.server?.connected) {
+      this.server.disconnect();
+    }
+
+    this.device = null;
+    this.server = undefined;
+    this.nusService = null;
+    this.txCharacteristic = null;
+    this.rxCharacteristic = null;
+    this.expectedSequences = [];
+
+    return previousDevice;
+  }
 
   get connected(): boolean {
     return this.device !== null && this.server?.connected === true;
@@ -113,6 +175,19 @@ class WebBtNus implements WebUsbComInterface {
   async open(deviceIndex: number, onConnect: (() => void) | null, _param: object): Promise<void> {
 
     try {
+    const previousDevice = this.prepareForDeviceChooser();
+
+    const forget = (previousDevice as BluetoothDevice & {
+      forget?: () => Promise<void>;
+    } | null)?.forget;
+    if (forget) {
+      void forget.call(previousDevice).catch((error) => {
+        console.warn("BLE NUS could not forget the previous device", error);
+      });
+    }
+
+    console.log("BLE NUS old session destroyed; opening device chooser");
+
     const devices = [undefined]
       this.device =
         devices.at(deviceIndex) ?? 
@@ -128,21 +203,44 @@ class WebBtNus implements WebUsbComInterface {
         throw new Error(`Selected Bluetooth device is not supported: ${deviceName}`);
       }
 
-      // Connect to GATT server
+      console.log("BLE NUS connecting:", deviceName);
       this.server = await this.device.gatt?.connect();
       if (!this.server) {
         throw new Error("Failed to connect to GATT server");
       }
+      console.log("BLE NUS GATT connected");
 
       // Get NUS service
-      this.nusService = await this.server.getPrimaryService(NUS_SERVICE_UUID);
+      console.log("BLE NUS looking up service");
+      try {
+        this.nusService = await this.withGattTimeout(
+          this.server.getPrimaryService(NUS_SERVICE_UUID),
+          "service lookup",
+        );
+      } catch (error) {
+        const selectedDevice = this.device;
+        console.warn("BLE NUS service lookup failed; reconnecting GATT once", error);
+        await this.close();
+        await this.wait(GATT_SERVICE_DISCOVERY_RETRY_DELAY_MS);
+        this.device = selectedDevice;
+        this.server = await this.device.gatt?.connect();
+        if (!this.server) {
+          throw new Error("Failed to reconnect to GATT server");
+        }
+        console.log("BLE NUS GATT reconnected");
+        this.nusService = await this.withGattTimeout(
+          this.server.getPrimaryService(NUS_SERVICE_UUID),
+          "service lookup retry",
+        );
+      }
+      console.log("BLE NUS service found");
 
       // Select endpoints by their advertised properties. This firmware uses
       // the opposite UUID direction from the Nordic NUS naming convention.
-      const characteristics = await Promise.all([
+      const characteristics = await this.withGattTimeout(Promise.all([
         this.nusService.getCharacteristic(NUS_NOTIFY_CHARACTERISTIC_UUID),
         this.nusService.getCharacteristic(NUS_WRITE_CHARACTERISTIC_UUID),
-      ]);
+      ]), "characteristic lookup");
       this.txCharacteristic = characteristics.find(
         (characteristic) =>
           characteristic.properties.write ||
@@ -162,6 +260,7 @@ class WebBtNus implements WebUsbComInterface {
       });
 
       await this.rxCharacteristic.startNotifications();
+      console.log("BLE NUS notifications started");
 
       // Set up disconnect listener
       if (this.disconnectListenerAdded) {
@@ -182,13 +281,26 @@ class WebBtNus implements WebUsbComInterface {
 
       console.log("BLE NUS connection opened");
     } catch (error) {
-      console.error("Error opening BLE NUS connection:", error);
+      const errorName = error instanceof DOMException ? error.name : "Error";
+      const errorMessage = error instanceof Error ? error.message : String(error);
+      console.error(`Error opening BLE NUS connection (${errorName}): ${errorMessage}`, error);
       await this.close();
-      throw error;
+      throw new Error(`BLE NUS connection failed (${errorName}): ${errorMessage || "unknown error"}`);
     }
   }
 
   async close(): Promise<void> {
+    if (this.closePromise) {
+      return this.closePromise;
+    }
+
+    this.closePromise = this.closeInternal().finally(() => {
+      this.closePromise = null;
+    });
+    return this.closePromise;
+  }
+
+  private async closeInternal(): Promise<void> {
     try {
       // Clean up notification listeners
       if (this.rxCharacteristic) {
@@ -215,6 +327,7 @@ class WebBtNus implements WebUsbComInterface {
       this.nusService = null;
       this.txCharacteristic = null;
       this.rxCharacteristic = null;
+      this.nextSequence = 0;
       this.expectedSequences = [];
 
       console.log("BLE NUS connection closed");

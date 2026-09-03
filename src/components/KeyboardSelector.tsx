@@ -1,5 +1,4 @@
 import { FormControl, InputLabel, MenuItem, Select, Typography } from "@mui/material";
-import { useRef } from "react";
 
 const isTauri = import.meta.env.TAURI_ENV_PLATFORM !== undefined;
 
@@ -9,8 +8,6 @@ export function KeyboardSelector(props: {
   onChange: (idx: number) => void;
   onOpen: () => void;
 }) {
-  const selectedValueRef = useRef<number | undefined>(props.deviceIndex);
-  
   return (
     <FormControl
       variant="standard"
@@ -56,13 +53,7 @@ export function KeyboardSelector(props: {
         label="select-keyboard"
         onChange={(e) => {
           console.log(e.target.value);
-          const newValue = e.target.value as number;
-          selectedValueRef.current = newValue;
-        }}
-        onClose={(_) => {
-          if (selectedValueRef.current !== undefined) {
-            props.onChange(selectedValueRef.current);
-          }
+          props.onChange(Number(e.target.value));
         }}
         onOpen={(_) => {
           props.onOpen();
@@ -91,7 +82,7 @@ export function KeyboardSelector(props: {
             }}
           >
             <Typography noWrap sx={{ overflow: "hidden", textOverflow: "ellipsis", width: "100%" }}>
-              {`${device.name} (${device.connection.toUpperCase()})`}
+              {device.name}
             </Typography>
           </MenuItem>
         ))}

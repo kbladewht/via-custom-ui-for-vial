@@ -171,9 +171,10 @@ class VialKeyboard {
     openCallback: () => void = () => {},
     closeCallback: () => void = () => {},
   ) {
-    if (!this.comm.connected) {
-      if (deviceIndex == -2 && this.webbt) {
-        this.comm = this.webbt;
+    const shouldOpenBle = deviceIndex === -2 && this.webbt;
+    if (shouldOpenBle || !this.comm.connected) {
+      if (shouldOpenBle) {
+        this.comm = this.webbt!;
         this.queue_size = 1;
         this.pageSize = 32 - 4;
       } else if (this.hid) {

@@ -112,6 +112,15 @@ function App() {
         isLoading ? 100 : 300,
       ); // Use a slightly shorter delay for true to feel more responsive
     });
+
+    const closeBluetoothOnPageHide = () => {
+      void via.Close();
+    };
+    window.addEventListener("pagehide", closeBluetoothOnPageHide);
+
+    return () => {
+      window.removeEventListener("pagehide", closeBluetoothOnPageHide);
+    };
   }, []);
 
   // Control menu visibility based on screen size and active menu state
@@ -122,7 +131,7 @@ function App() {
   const updateDeviceList = async () => {
     return (await via.GetDeviceList()).map((d) => {
       return {
-        name: `${d.name}(${("0000" + d.vid.toString(16)).slice(-4)}:${("0000" + d.pid.toString(16)).slice(-4)})`,
+        name: d.name,
         index: d.index,
         connection: d.connectionType,
         opened: d.opened,
@@ -140,7 +149,17 @@ function App() {
   };
 
   const openKeyboard = async (deviceIndex: number) => {
-    await via.Close();
+    const isBle = deviceIndex === -2;
+    setLoading(true);
+    setConnected(false);
+    setVialJson(undefined);
+    setCustomMenus([]);
+    setActiveMenu(undefined);
+    setCustomValues({});
+    setKbName("");
+    if (!isBle) {
+      await via.Close();
+    }
     try {
       await via.Open(
         deviceIndex ?? -1,
@@ -156,11 +175,20 @@ function App() {
           setConnected(false);
           setLoading(false);
           setKbName("");
+          if (deviceIndex === -2) {
+            window.location.reload();
+          }
         },
       );
     } catch (e) {
-      alert("Failed to open the keyboard");
+      console.error("Failed to open the keyboard:", e);
+      alert(`Failed to open the keyboard: ${e instanceof Error ? e.message : String(e)}`);
+      await via.Close();
       setDeviceIndex(undefined);
+      setLoading(false);
+      if (isBle) {
+        window.location.reload();
+      }
       return;
     }
 
@@ -175,9 +203,12 @@ function App() {
       console.log(`via protocol version:${version}`);
     } catch (e) {
       console.error(e);
-      via.Close();
+      await via.Close();
       alert("Failed to open the keyboard");
       setLoading(false);
+      if (isBle) {
+        window.location.reload();
+      }
       return;
     }
 
@@ -187,9 +218,12 @@ function App() {
       decompressed = xz_decompress(compressed);
     } catch (e) {
       console.error(e);
-      via.Close();
+      await via.Close();
       alert("Failed to open the keyboard");
       setLoading(false);
+      if (isBle) {
+        window.location.reload();
+      }
       return;
     }
 
