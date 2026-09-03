@@ -449,15 +449,16 @@ class VialKeyboard {
         vial_command_id.vial_dynamic_entry_op,
         dynamic_vial_id.dynamic_vial_get_number_of_entries,
       ],
-      [via_command_id.id_dynamic_keymap_get_layer_count],
       [via_command_id.id_dynamic_keymap_macro_get_count],
     ]);
+    const layerCount = await this.GetLayerCount();
+
     return {
       tapdance: res[0][0],
       combo: res[0][1],
       override: res[0][2],
-      layer: res[1][1],
-      macro: res[2][1],
+      layer: layerCount,
+      macro: res[1][1],
     };
   }
 

@@ -459,18 +459,21 @@ function convertToKeymapKeys(
               firstKey = false;
               current.y = 0;
             }
-            keys.push({
-              ...current,
-              matrix: keyPos,
-              layout: [],
-              keycode: keycodeconverter.convertIntToKeycode(
-                isEncoder
-                  ? (encodermap?.[keyPos[0]]?.[keyPos[1]] ?? 0)
-                  : keymap[keyPos[1] + keyPos[0] * props.matrix.cols],
-              ),
-              isEncoder: isEncoder,
-              reactKey: "",
-            });
+            const keycode = keycodeconverter.convertIntToKeycode(
+              isEncoder
+                ? (encodermap?.[keyPos[0]]?.[keyPos[1]] ?? 0)
+                : (keymap[keyPos[1] + keyPos[0] * props.matrix.cols] ?? 0),
+            );
+            if (keycode.value !== 0) {
+              keys.push({
+                ...current,
+                matrix: keyPos,
+                layout: [],
+                keycode,
+                isEncoder: isEncoder,
+                reactKey: "",
+              });
+            }
             current.x += current.w;
             current.w = 1;
             current.h = 1;
@@ -494,6 +497,56 @@ function convertToKeymapKeys(
     current.h = 1;
   }
   return keys;
+}
+
+function LayoutSelector(props: {
+  layouts: {
+    labels?: string[][];
+    keymap: (string | object)[][];
+  };
+  option: { [layout: number]: number };
+  onChange: (option: { [layout: number]: number }) => void;
+}) {
+  const labels = props.layouts.labels?.[0]?.slice(1) ?? [];
+  const layoutCount = props.layouts.keymap
+    .flatMap((row) => row)
+    .reduce((count, key) => {
+      if (typeof key !== "string") return count;
+      const layout = Number(key.split("\n")[3]?.split(",")[1]);
+      return Number.isInteger(layout) ? Math.max(count, layout + 1) : count;
+    }, 1);
+  const options = labels.length > 0
+    ? labels
+    : layoutCount === 2
+      ? ["P40", "HHKB"]
+      : [...Array(layoutCount)].map((_, index) => `Layout ${index}`);
+
+  if (options.length < 2) {
+    return null;
+  }
+
+  return (
+    <Box sx={{ display: "flex", alignItems: "center", gap: 1, mt: 1, mb: 1 }}>
+      <Typography sx={{ color: "#b8c7dc", fontSize: "0.8rem", fontWeight: 600 }}>
+        Layout
+      </Typography>
+      <Select
+        variant="standard"
+        value={props.option[0] ?? 0}
+        label="layout"
+        sx={{ minWidth: 150 }}
+        onChange={(event) => {
+          props.onChange({ 0: Number(event.target.value) });
+        }}
+      >
+        {options.map((label, index) => (
+          <MenuItem key={label} value={index}>
+            {label}
+          </MenuItem>
+        ))}
+      </Select>
+    </Box>
+  );
 }
 
 function LayerSelector(props: {
@@ -697,8 +750,20 @@ function LayerEditor(props: {
     await props.via.SetEncoder([{ layer, index, direction, keycode }]);
   };
 
+  const sendLayout = async (layout: number) => {
+    await props.via.SetLayoutOption(layout);
+  };
+
   return (
     <>
+      <LayoutSelector
+        layouts={props.keymap.layouts}
+        option={layoutOption}
+        onChange={(option) => {
+          setLayoutOption(option);
+          void sendLayout(option[0]);
+        }}
+      />
       <LayerSelector
         layerCount={props.layerCount}
         currentLayer={layer}
