@@ -6,6 +6,8 @@ import { MenuSectionProperties, ViaMenuItem } from "./ViaMenuItem";
 import quantumTranslations from "../locales/quantum.json";
 import { KeycodeConverter } from "./keycodes/keycodeConverter";
 import { MacroEditor } from "./MacroEditor";
+import { KeymapEditor, KeymapProperties } from "./KeymapEditor";
+import { DynamicEntryCount } from "../services/vialKeyboad";
 
 export function QuantumSettingsEditor(props: {
   via: ViaKeyboard;
@@ -14,6 +16,8 @@ export function QuantumSettingsEditor(props: {
   onLanguageChange: (language: "zh" | "en") => void;
   macroCount?: number;
   customKeycodes?: { name: string; title: string; shortName: string }[];
+  keymap?: KeymapProperties;
+  dynamicEntryCount?: DynamicEntryCount;
 }) {
   const [tabValue, setTabValue] = useState(0);
   const [quantumValue, setQuantumValue] = useState<{ [id: string]: number }>({});
@@ -21,6 +25,7 @@ export function QuantumSettingsEditor(props: {
   const [keycodeConverter, setKeycodeConverter] = useState<KeycodeConverter>();
 
   const tabs = [
+    { label: "Keymap", content: [] } as { label: string; content: never[] },
     ...QuantumSettingDefinition,
     { label: "Macro", content: [] } as { label: string; content: never[] },
   ];
@@ -117,7 +122,15 @@ export function QuantumSettingsEditor(props: {
             display: tabValue === idx ? "block" : "none",
           }}
         >
-          {menu.label === "Macro" ? (
+          {menu.label === "Keymap" && props.keymap && props.dynamicEntryCount ? (
+            <KeymapEditor
+              keymap={props.keymap}
+              via={props.via}
+              language={props.language}
+              onLanguageChange={props.onLanguageChange}
+              dynamicEntryCount={props.dynamicEntryCount}
+            />
+          ) : menu.label === "Macro" ? (
             <Box sx={{ p: 2 }}>
               {keycodeConverter && (props.macroCount ?? 0) > 0 ? (
                 <>

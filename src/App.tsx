@@ -20,7 +20,7 @@ import { useEffect, useRef, useState } from "react";
 import { match, P } from "ts-pattern";
 import "./App.css";
 import { KeyboardSelector } from "./components/KeyboardSelector";
-import { KeymapEditor, KeymapProperties } from "./components/KeymapEditor";
+import { KeymapProperties } from "./components/KeymapEditor";
 import { QuantumSettingsEditor } from "./components/QuantumSettingsEditor";
 import { MenuItemProperties, MenuSectionProperties, ViaMenuItem } from "./components/ViaMenuItem";
 import init, { xz_decompress } from "./pkg";
@@ -492,19 +492,6 @@ function App() {
           <Divider />
           <List className="menu-list">
             <div className="nav-section" style={{ display: connected ? "block" : "none" }}>
-              <ListSubheader>Keymap</ListSubheader>
-              <List disablePadding>
-                <ListItemButton
-                  onClick={() => {
-                    setActiveMenu({ menuType: "keymap", menu: vialJson! });
-                  }}
-                >
-                  <ListItemText primary="Keymap" />
-                </ListItemButton>
-              </List>
-            </div>
-            <Divider />
-            <div className="nav-section" style={{ display: connected ? "block" : "none" }}>
               <ListSubheader>Quantum settings</ListSubheader>
               <List disablePadding>
                 <ListItemButton
@@ -646,6 +633,8 @@ function App() {
                   onLanguageChange={setUiLanguage}
                   macroCount={dynamicEntryCount.macro}
                   customKeycodes={vialJson?.customKeycodes}
+                  keymap={vialJson}
+                  dynamicEntryCount={dynamicEntryCount}
                   onChange={(value) => {
                     setQuantumValues(value);
                   }}
@@ -654,23 +643,7 @@ function App() {
             })
             .with(P._, () => <></>)
             .exhaustive()}
-          {vialJson === undefined ? (
-            <>
-              <p>select keyboard</p>
-            </>
-          ) : (
-            <>
-              <div hidden={activeMenu?.menuType !== "keymap"}>
-                <KeymapEditor
-                  keymap={vialJson!}
-                  via={via}
-                  language={uiLanguage}
-                  onLanguageChange={setUiLanguage}
-                  dynamicEntryCount={dynamicEntryCount}
-                ></KeymapEditor>
-              </div>
-            </>
-          )}
+          {vialJson === undefined && <p>select keyboard</p>}
         </Grid>
         <Grid item xs={1}></Grid>
       </Grid>
