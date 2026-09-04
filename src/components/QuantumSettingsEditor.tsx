@@ -18,6 +18,8 @@ export function QuantumSettingsEditor(props: {
   customKeycodes?: { name: string; title: string; shortName: string }[];
   keymap?: KeymapProperties;
   dynamicEntryCount?: DynamicEntryCount;
+  onSave?: () => void;
+  onErase?: () => void;
 }) {
   const [tabValue, setTabValue] = useState(0);
   const [quantumValue, setQuantumValue] = useState<{ [id: string]: number }>({});
@@ -173,16 +175,26 @@ export function QuantumSettingsEditor(props: {
               )}
             </Box>
           ) : (
-            <ViaMenuItem
-              {...(menu as MenuSectionProperties)}
-              customValues={quantumValue}
-              onChange={(id, value) => {
-                console.log(`update ${id} to ${value}`);
-                const newValues = { ...quantumValue, [id[0]]: value };
-                setQuantumValue(newValues);
-                props.onChange(newValues);
-              }}
-            />
+            <>
+              <ViaMenuItem
+                {...(menu as MenuSectionProperties)}
+                customValues={quantumValue}
+                onChange={(id, value) => {
+                  console.log(`update ${id} to ${value}`);
+                  const newValues = { ...quantumValue, [id[0]]: value };
+                  setQuantumValue(newValues);
+                  props.onChange(newValues);
+                }}
+              />
+              <Box sx={{ display: "flex", gap: 1, p: 2 }}>
+                <Button variant="contained" onClick={props.onSave}>
+                  Save quantum
+                </Button>
+                <Button variant="contained" color="error" onClick={props.onErase}>
+                  Erase quantum
+                </Button>
+              </Box>
+            </>
           )}
         </Box>
       ))}

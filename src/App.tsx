@@ -1,4 +1,6 @@
 import MenuIcon from "@mui/icons-material/Menu";
+import DownloadIcon from "@mui/icons-material/Download";
+import UploadIcon from "@mui/icons-material/Upload";
 import {
   Box,
   Button,
@@ -9,6 +11,7 @@ import {
   Grid,
   IconButton,
   ListSubheader,
+  Tooltip,
   useMediaQuery,
   useTheme,
 } from "@mui/material";
@@ -447,73 +450,7 @@ function App() {
           <ListSubheader sx={{ color: "#e5eefb", backgroundColor: "transparent" }}>
             {kbName}
           </ListSubheader>
-          <Box hidden={!connected}>
-            <Grid container rowSpacing={1} columnSpacing={2}>
-              <Grid item xs={12} sm={6}>
-                <Button
-                  className="vial-action-button"
-                  sx={{
-                    width: "100%",
-                    mb: 1,
-                  }}
-                  variant="contained"
-                  color="primary"
-                  onClick={onVialSaveClick}
-                >
-                  DL SETTING
-                </Button>
-              </Grid>
-              <Grid item xs={12} sm={6}>
-                <Button
-                  className="vial-action-button"
-                  sx={{
-                    width: "100%",
-                  }}
-                  variant="contained"
-                  color="primary"
-                  onClick={onVialUploadJsonClick}
-                >
-                  UP SETTING
-                </Button>
-              </Grid>
-            </Grid>
-            <input
-              type="file"
-              accept=".json"
-              ref={vialFileInputRef}
-              style={{ display: "none" }}
-              onChange={(event) => {
-                handleFileChange(event, onVialJsonUploaded);
-              }}
-            />
-          </Box>
           <Divider />
-          <Box hidden={!connected} className="settings-actions">
-            <Grid container rowSpacing={1} columnSpacing={2}>
-              <Grid item xs={12} sm={6}>
-                <Button
-                  className="quantum-action-button quantum-save-button"
-                  sx={{ width: "100%", mb: 1 }}
-                  variant="contained"
-                  color="primary"
-                  onClick={onQuantumSaveClick}
-                >
-                  Save quantum
-                </Button>
-              </Grid>
-              <Grid item xs={12} sm={6}>
-                <Button
-                  className="quantum-action-button quantum-erase-button"
-                  sx={{ width: "100%" }}
-                  variant="contained"
-                  color="error"
-                  onClick={() => setQuantumEraseDialogOpen(true)}
-                >
-                  Erase quantum
-                </Button>
-              </Grid>
-            </Grid>
-          </Box>
           <Box hidden={customMenus.length == 0} className="action-panel">
             <Grid container rowSpacing={1} columnSpacing={2} className="action-grid">
               <Grid item xs={12} sm={6}>
@@ -555,6 +492,48 @@ function App() {
           className="app-main-panel"
           sx={{ pl: 0 }}
         >
+          <Box
+            hidden={!connected}
+            sx={{
+              display: "flex",
+              justifyContent: "flex-end",
+              gap: 1,
+              p: "0 8px 4px !important",
+              background: "transparent !important",
+              border: "0 !important",
+              boxShadow: "none !important",
+            }}
+          >
+            <Tooltip title="下载设置">
+              <IconButton
+                className="vial-action-button"
+                aria-label="下载设置"
+                color="primary"
+                onClick={onVialSaveClick}
+              >
+                <DownloadIcon />
+              </IconButton>
+            </Tooltip>
+            <Tooltip title="上传设置">
+              <IconButton
+                className="vial-action-button"
+                aria-label="上传设置"
+                color="primary"
+                onClick={onVialUploadJsonClick}
+              >
+                <UploadIcon />
+              </IconButton>
+            </Tooltip>
+            <input
+              type="file"
+              accept=".json"
+              ref={vialFileInputRef}
+              style={{ display: "none" }}
+              onChange={(event) => {
+                handleFileChange(event, onVialJsonUploaded);
+              }}
+            />
+          </Box>
           {match(activeMenu)
             .with(undefined, () => <></>)
             .with({ menuType: "customMenu" }, (menu) => (
@@ -577,6 +556,8 @@ function App() {
                   customKeycodes={vialJson?.customKeycodes}
                   keymap={vialJson}
                   dynamicEntryCount={dynamicEntryCount}
+                  onSave={onQuantumSaveClick}
+                  onErase={() => setQuantumEraseDialogOpen(true)}
                   onChange={(value) => {
                     setQuantumValues(value);
                   }}
