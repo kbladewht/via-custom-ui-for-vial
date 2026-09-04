@@ -237,7 +237,16 @@ function BasicKeyboardLayout(props: { keycodes: QmkKeycode[] }) {
 
   return (
     <>
-      <Box sx={{ display: "flex", gap: "18px", ml: 1, mb: 1, minWidth: "min-content" }}>
+      <Box
+        sx={{
+          display: "flex",
+          gap: "18px",
+          width: "max-content",
+          ml: "auto",
+          mr: "auto",
+          mb: 1,
+        }}
+      >
         <Box sx={{ display: "flex", flexDirection: "column", gap: "8px" }}>
           {BASIC_KEYBOARD_ROWS.map((row, rowIndex) => (
             <Box key={rowIndex} sx={{ display: "flex", gap: "5px" }}>
@@ -273,7 +282,8 @@ function BasicKeyboardLayout(props: { keycodes: QmkKeycode[] }) {
           <Box
             sx={{
               display: "grid",
-              gridTemplateColumns: `repeat(auto-fill, ${WIDTH_1U}px)`,
+              gridTemplateColumns: `repeat(auto-fit, ${WIDTH_1U}px)`,
+              justifyContent: "flex-start",
               gap: "8px 5px",
               ml: 1,
               mb: 1,
@@ -390,7 +400,7 @@ export function KeycodeCatalog(props: {
                   overflowX: "auto",
                   display: "flex",
                   flexDirection: "column",
-                  alignItems: "center",
+                  alignItems: "stretch",
                 }}
               >
               {keygroup === "basic" ? (
@@ -412,7 +422,8 @@ export function KeycodeCatalog(props: {
                   <Box
                     sx={{
                       display: "grid",
-                      gridTemplateColumns: `repeat(auto-fill, ${WIDTH_1U}px)`,
+                      gridTemplateColumns: `repeat(auto-fit, ${WIDTH_1U}px)`,
+                      justifyContent: "flex-start",
                       gap: "8px 5px",
                       ml: 1,
                       mb: 1,
@@ -452,6 +463,7 @@ export function KeycodeCatalog(props: {
                     sx={{
                       display: "grid",
                       gridTemplateColumns: `repeat(auto-fit, ${WIDTH_1U}px)`,
+                      justifyContent: "flex-start",
                       gap: "8px 5px",
                     }}
                   >
@@ -479,6 +491,7 @@ export function KeycodeCatalog(props: {
                     sx={{
                       display: "grid",
                       gridTemplateColumns: `repeat(auto-fit, ${WIDTH_1U}px)`,
+                      justifyContent: "flex-start",
                       gap: "8px 5px",
                     }}
                   >

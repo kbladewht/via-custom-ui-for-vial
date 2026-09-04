@@ -20,8 +20,8 @@ export function KeyboardSelector(props: {
           border: "1px solid rgba(148, 163, 184, 0.35)",
           borderRadius: "10px",
           color: "#f8fafc",
-          minHeight: "44px",
-          padding: "2px 10px",
+          minHeight: "36px",
+          padding: "0 8px",
           boxShadow: "inset 0 1px 0 rgba(255,255,255,0.04)",
         },
         ".MuiInput-root::before": {
@@ -40,7 +40,8 @@ export function KeyboardSelector(props: {
         ".MuiSelect-select": {
           color: "#f8fafc",
           backgroundColor: "transparent",
-          paddingRight: "32px",
+          minHeight: "unset",
+          padding: "6px 32px 6px 2px",
         },
         ".MuiSvgIcon-root": {
           color: "#cbd5e1",
