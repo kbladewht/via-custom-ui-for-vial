@@ -1,5 +1,6 @@
 import DownloadIcon from "@mui/icons-material/Download";
 import UploadIcon from "@mui/icons-material/Upload";
+import Battery80Icon from "@mui/icons-material/Battery80";
 import {
   Box,
   Button,
@@ -9,6 +10,7 @@ import {
   Grid,
   IconButton,
   Tooltip,
+  Typography,
 } from "@mui/material";
 import * as Hjson from "hjson";
 import { useEffect, useRef, useState } from "react";
@@ -425,7 +427,17 @@ function App() {
                 }}
               />
             </Box>
-            <Box sx={{ display: "flex", alignItems: "center", flexShrink: 0, gap: 1 }}>
+            <Box
+              sx={{
+                display: "flex",
+                flexDirection: "row",
+                flexWrap: "nowrap",
+                alignItems: "center",
+                flexShrink: 0,
+                gap: 1,
+                whiteSpace: "nowrap",
+              }}
+            >
               <Button
                 className="vial-action-button"
                 size="small"
@@ -434,6 +446,22 @@ function App() {
               >
                 DFU
               </Button>
+              <Tooltip title="电量">
+                <Box
+                  component="span"
+                  aria-label="电量 80%"
+                  sx={{
+                    display: "inline-flex",
+                    alignItems: "center",
+                    color: "#22c55e",
+                  }}
+                >
+                  <Battery80Icon sx={{ transform: "rotate(90deg)" }} />
+                  <Typography sx={{ ml: 0.25, fontSize: "10px", color: "inherit" }}>
+                    80%
+                  </Typography>
+                </Box>
+              </Tooltip>
               <LanguageSelector
                 languageList={["US", "Japanese", "Chinese"]}
                 lang={keymapLanguage}
@@ -442,15 +470,17 @@ function App() {
                   setUiLanguage(selectedLanguage === "Chinese" ? "zh" : "en");
                 }}
               />
-              <Box sx={{ display: "flex", gap: 1 }} hidden={!connected}>
+              <Box sx={{ display: "flex", flexDirection: "row", flexWrap: "nowrap", gap: 1 }} hidden={!connected}>
                 <Tooltip title="下载设置">
                   <IconButton
                     className="vial-action-button"
                     aria-label="下载设置"
                     color="primary"
+                    size="small"
                     onClick={onVialSaveClick}
+                    sx={{ p: 0.5 }}
                   >
-                    <DownloadIcon />
+                    <DownloadIcon sx={{ fontSize: 18 }} />
                   </IconButton>
                 </Tooltip>
                 <Tooltip title="上传设置">
@@ -458,9 +488,11 @@ function App() {
                     className="vial-action-button"
                     aria-label="上传设置"
                     color="primary"
+                    size="small"
                     onClick={onVialUploadJsonClick}
+                    sx={{ p: 0.5 }}
                   >
-                    <UploadIcon />
+                    <UploadIcon sx={{ fontSize: 18 }} />
                   </IconButton>
                 </Tooltip>
               </Box>
@@ -511,7 +543,7 @@ function App() {
             })
             .with(P._, () => <></>)
             .exhaustive()}
-          {vialJson === undefined && <p>select keyboard</p>}
+          {vialJson === undefined && <p></p>}
         </Grid>
       </Grid>
       <Dialog open={customEraseDialogOpen} onClose={onDialogClose}>
