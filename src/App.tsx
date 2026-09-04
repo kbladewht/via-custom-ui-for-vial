@@ -1,6 +1,7 @@
 import DownloadIcon from "@mui/icons-material/Download";
 import UploadIcon from "@mui/icons-material/Upload";
 import Battery80Icon from "@mui/icons-material/Battery80";
+import { invoke } from "@tauri-apps/api/core";
 import {
   Box,
   Button,
@@ -84,6 +85,8 @@ function App() {
   const loadingTimerRef = useRef<number | null>(null);
   const [keymapLanguage, setKeymapLanguage] = useState("Chinese");
   const [uiLanguage, setUiLanguage] = useState<"zh" | "en">("zh");
+  const [batteryLevel, setBatteryLevel] = useState<number | null>(isTauri ? null : 80);
+  const [batteryRefreshToken, setBatteryRefreshToken] = useState(0);
 
   useEffect(() => {
     // load wasm
@@ -117,6 +120,30 @@ function App() {
       window.removeEventListener("pagehide", closeBluetoothOnPageHide);
     };
   }, []);
+
+  useEffect(() => {
+    if (!isTauri || !connected) return;
+
+    let cancelled = false;
+
+    const readBattery = async () => {
+      try {
+        const deviceName = deviceList.find((device) => device.index === deviceIndex)?.name ?? "";
+        const level = await invoke<number | null>("battery_get_level", { deviceName });
+        if (!cancelled) setBatteryLevel(level);
+      } catch (error) {
+        console.warn("Could not read Bluetooth battery level", error);
+        if (!cancelled) setBatteryLevel(null);
+      }
+    };
+
+    void readBattery();
+    const timer = window.setInterval(readBattery, 30000);
+    return () => {
+      cancelled = true;
+      window.clearInterval(timer);
+    };
+  }, [connected, deviceIndex, deviceList, batteryRefreshToken]);
 
   const updateDeviceList = async () => {
     return (await via.GetDeviceList()).map((d) => {
@@ -446,21 +473,24 @@ function App() {
               >
                 DFU
               </Button>
-              <Tooltip title="电量">
-                <Box
-                  component="span"
-                  aria-label="电量 80%"
+              <Tooltip title="刷新电量">
+                <IconButton
+                  className="battery-status-button"
+                  size="small"
+                  aria-label={`电量 ${batteryLevel ?? "--"}%`}
+                  onClick={() => setBatteryRefreshToken((token) => token + 1)}
                   sx={{
                     display: "inline-flex",
                     alignItems: "center",
-                    color: "#22c55e",
+                    gap: 0.25,
+                    p: 0.5,
                   }}
                 >
                   <Battery80Icon sx={{ transform: "rotate(90deg)" }} />
                   <Typography sx={{ ml: 0.25, fontSize: "10px", color: "inherit" }}>
-                    80%
+                    {batteryLevel === null ? "--" : `${batteryLevel}%`}
                   </Typography>
-                </Box>
+                </IconButton>
               </Tooltip>
               <LanguageSelector
                 languageList={["US", "Japanese", "Chinese"]}

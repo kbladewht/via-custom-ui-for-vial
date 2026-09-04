@@ -24,6 +24,16 @@ tauri = { version = "2", features = [] }
 hidapi = { version = "2.6.3", features = ["macos-shared-device"] }
 tauri-plugin-log = "2"
 log = "0.4.22"
+btleplug = "0.11.7"
+uuid = "1"
+tokio = { version = "1", features = ["time"] }
+windows = { version = "0.61", features = [
+	"Devices_Bluetooth",
+	"Devices_Bluetooth_GenericAttributeProfile",
+	"Devices_Enumeration",
+	"Foundation",
+	"Storage_Streams",
+] }
 
 [features]
 # this feature is used for production builds or when `devPath` points to the filesystem and the built-in dev server is disabled.
