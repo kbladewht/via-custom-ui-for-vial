@@ -354,8 +354,14 @@ export function KeycodeCatalog(props: {
                 fontWeight: 600,
                 textTransform: "none",
                 border: "1px solid #334155",
-                borderRadius: "8px 8px 0 0",
+                borderRadius: 0,
                 backgroundColor: "rgba(30, 41, 59, 0.7)",
+                "&:first-of-type": {
+                  borderRadius: "8px 0 0 0",
+                },
+                "&:last-of-type": {
+                  borderRadius: "0 8px 0 0",
+                },
                 "&.Mui-selected": {
                   color: "#f8fafc",
                   borderColor: "#475569",
@@ -396,7 +402,14 @@ export function KeycodeCatalog(props: {
                 key={keygroup}
                 className="keycode-group"
                 sx={{
+                  width: "100%",
                   maxWidth: "100%",
+                  boxSizing: "border-box",
+                  ...(keygroup === "basic" && {
+                    border: "0",
+                    borderRadius: 0,
+                    backgroundColor: "rgba(30, 41, 59, 0.45)",
+                  }),
                   overflowX: "auto",
                   display: "flex",
                   flexDirection: "column",
