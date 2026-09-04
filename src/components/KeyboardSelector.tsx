@@ -12,10 +12,15 @@ export function KeyboardSelector(props: {
     <FormControl
       variant="standard"
       sx={{
-        width: "100%",
+        width: "fit-content",
+        minWidth: "180px",
+        maxWidth: "100%",
         mb: 1,
         mt: 1,
         ".MuiInputBase-root": {
+          width: "fit-content",
+          minWidth: "180px",
+          maxWidth: "100%",
           backgroundColor: "#0f172a",
           border: "1px solid rgba(148, 163, 184, 0.35)",
           borderRadius: "10px",
@@ -25,11 +30,10 @@ export function KeyboardSelector(props: {
           boxShadow: "inset 0 1px 0 rgba(255,255,255,0.04)",
         },
         ".MuiInput-root::before": {
-          borderBottom: "1px solid rgba(148, 163, 184, 0.35)",
+          display: "none",
         },
         ".MuiInput-root::after": {
-          height: "1px",
-          borderBottom: "1px solid #475569",
+          display: "none",
         },
         ".MuiInputLabel-root": {
           color: "#cbd5e1",
