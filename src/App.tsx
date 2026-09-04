@@ -86,7 +86,6 @@ function App() {
   const [keymapLanguage, setKeymapLanguage] = useState("Chinese");
   const [uiLanguage, setUiLanguage] = useState<"zh" | "en">("zh");
   const [batteryLevel, setBatteryLevel] = useState<number | null>(isTauri ? null : 80);
-  const [batteryRefreshToken, setBatteryRefreshToken] = useState(0);
 
   useEffect(() => {
     // load wasm
@@ -143,7 +142,7 @@ function App() {
       cancelled = true;
       window.clearInterval(timer);
     };
-  }, [connected, deviceIndex, deviceList, batteryRefreshToken]);
+  }, [connected, deviceIndex, deviceList]);
 
   const updateDeviceList = async () => {
     return (await via.GetDeviceList()).map((d) => {
@@ -478,7 +477,16 @@ function App() {
                   className="battery-status-button"
                   size="small"
                   aria-label={`电量 ${batteryLevel ?? "--"}%`}
-                  onClick={() => setBatteryRefreshToken((token) => token + 1)}
+                  onClick={() => {
+                    void via
+                      .GetBatteryLevel()
+                      .then((level) => {
+                        if (level !== null) setBatteryLevel(level);
+                      })
+                      .catch((error) => {
+                        console.warn("Could not read Bluetooth battery level", error);
+                      });
+                  }}
                   sx={{
                     display: "inline-flex",
                     alignItems: "center",
