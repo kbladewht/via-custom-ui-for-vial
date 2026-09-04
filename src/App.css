@@ -169,6 +169,21 @@ textarea {
   color: #86efac !important;
 }
 
+.battery-waiting-icon {
+  animation: battery-status-pulse 1.8s ease-in-out infinite;
+}
+
+@keyframes battery-status-pulse {
+  0%,
+  100% {
+    opacity: 0.55;
+  }
+
+  50% {
+    opacity: 1;
+  }
+}
+
 .app-main-panel {
   padding-top: 8px !important;
   min-height: 100%;

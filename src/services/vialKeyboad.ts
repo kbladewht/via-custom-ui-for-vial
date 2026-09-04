@@ -134,12 +134,12 @@ class VialKeyboard {
     return new Promise((resolve: any) => setTimeout(resolve, ms));
   }
 
+  private formatHex(data: ArrayLike<number>) {
+    return Array.from(data, (byte) => byte.toString(16).padStart(2, "0")).join(" ");
+  }
+
   private receiveCallback(msg: Uint8Array) {
-    console.log(
-      `receiveCallback: ${Array.from(msg)
-        .map((byte) => byte.toString(16).padStart(2, "0"))
-        .join(" ")}`,
-    );
+    console.log(`receiveCallback: ${this.formatHex(msg)}`);
     this.receive_flag = true;
     this.received = msg;
   }
@@ -210,11 +210,7 @@ class VialKeyboard {
         this.onLoading(true);
         await this.comm.write(Uint8Array.from(send));
         const res = await this.readResponse(500);
-        console.log(
-          `received: ${Array.from(res)
-            .map((byte) => byte.toString(16).padStart(2, "0"))
-            .join(" ")}`,
-        );
+        console.log(`received: ${this.formatHex(res)}`);
         this.onLoading(false);
 
         return res;
@@ -232,7 +228,10 @@ class VialKeyboard {
       try {
         const commandCount = messages.length;
         const res: Uint8Array[] = [];
-        this.comm.setReceiveCallback((msg) => res.push(msg));
+        this.comm.setReceiveCallback((msg) => {
+          console.log(`received batch: ${this.formatHex(msg)}`);
+          res.push(msg);
+        });
 
         const waitBufferFilled = async (length: number, timeoutMs: number) => {
           let timeout = timeoutMs;

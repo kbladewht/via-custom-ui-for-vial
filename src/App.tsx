@@ -85,7 +85,7 @@ function App() {
   const loadingTimerRef = useRef<number | null>(null);
   const [keymapLanguage, setKeymapLanguage] = useState("Chinese");
   const [uiLanguage, setUiLanguage] = useState<"zh" | "en">("zh");
-  const [batteryLevel, setBatteryLevel] = useState<number | null>(isTauri ? null : 80);
+  const [batteryLevel, setBatteryLevel] = useState<number | null>(null);
 
   useEffect(() => {
     // load wasm
@@ -476,7 +476,7 @@ function App() {
                 <IconButton
                   className="battery-status-button"
                   size="small"
-                  aria-label={`电量 ${batteryLevel ?? "--"}%`}
+                  aria-label={batteryLevel === null ? "正在获取电量" : `电量 ${batteryLevel}%`}
                   onClick={() => {
                     void via
                       .GetBatteryLevel()
@@ -494,9 +494,12 @@ function App() {
                     p: 0.5,
                   }}
                 >
-                  <Battery80Icon sx={{ transform: "rotate(90deg)" }} />
+                  <Battery80Icon
+                    className={batteryLevel === null ? "battery-waiting-icon" : undefined}
+                    sx={{ transform: "rotate(90deg)" }}
+                  />
                   <Typography sx={{ ml: 0.25, fontSize: "10px", color: "inherit" }}>
-                    {batteryLevel === null ? "--" : `${batteryLevel}%`}
+                    {batteryLevel === null ? "..." : `${batteryLevel}%`}
                   </Typography>
                 </IconButton>
               </Tooltip>
