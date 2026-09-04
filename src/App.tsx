@@ -10,7 +10,6 @@ import {
   Divider,
   Grid,
   IconButton,
-  ListSubheader,
   Tooltip,
   useMediaQuery,
   useTheme,
@@ -421,12 +420,41 @@ function App() {
           <Box
             className="menu-header"
             sx={{
-              display: "flex",
-              justifyContent: "space-between",
-              alignItems: "center",
+                display: "flex",
+                justifyContent: "flex-end",
+                alignItems: "center",
             }}
           >
-            <Box sx={{ width: "100%" }}>
+              {!isWideScreen && (
+                <IconButton onClick={() => setMenuOpen(false)}>
+                  <MenuIcon />
+                </IconButton>
+              )}
+          </Box>
+          <Divider />
+          <Divider />
+        </Grid>
+        <Grid
+          item
+          xs={12}
+          md={10}
+          className="app-main-panel"
+          sx={{ pl: 0 }}
+        >
+          <Box
+            sx={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "space-between",
+              gap: 1,
+              p: "0 8px 4px !important",
+              minWidth: 0,
+              background: "transparent !important",
+              border: "0 !important",
+              boxShadow: "none !important",
+            }}
+          >
+            <Box sx={{ flex: "1 1 auto", minWidth: 0, maxWidth: 420 }}>
               <KeyboardSelector
                 deviceIndex={deviceIndex}
                 deviceList={deviceList}
@@ -440,70 +468,7 @@ function App() {
                 }}
               />
             </Box>
-            {!isWideScreen && (
-              <IconButton onClick={() => setMenuOpen(false)}>
-                <MenuIcon />
-              </IconButton>
-            )}
-          </Box>
-          <Divider />
-          <ListSubheader sx={{ color: "#e5eefb", backgroundColor: "transparent" }}>
-            {kbName}
-          </ListSubheader>
-          <Divider />
-          <Box hidden={customMenus.length == 0} className="action-panel">
-            <Grid container rowSpacing={1} columnSpacing={2} className="action-grid">
-              <Grid item xs={12} sm={6}>
-                <Button
-                  className="quantum-action-button quantum-save-button"
-                  sx={{
-                    width: "100%",
-                    mb: 1,
-                  }}
-                  variant="contained"
-                  color="primary"
-                  onClick={onCustomSaveClick}
-                >
-                  Save custom
-                </Button>
-              </Grid>
-              <Grid item xs={12} sm={6}>
-                <Button
-                  className="quantum-action-button quantum-erase-button"
-                  sx={{
-                    width: "100%",
-                    mb: 1,
-                  }}
-                  variant="contained"
-                  color="error"
-                  onClick={onCustomEraseClick}
-                >
-                  Erase custom
-                </Button>
-              </Grid>
-            </Grid>
-          </Box>
-          <Divider />
-        </Grid>
-        <Grid
-          item
-          xs={12}
-          md={10}
-          className="app-main-panel"
-          sx={{ pl: 0 }}
-        >
-          <Box
-            hidden={!connected}
-            sx={{
-              display: "flex",
-              justifyContent: "flex-end",
-              gap: 1,
-              p: "0 8px 4px !important",
-              background: "transparent !important",
-              border: "0 !important",
-              boxShadow: "none !important",
-            }}
-          >
+            <Box sx={{ display: "flex", flexShrink: 0, gap: 1 }} hidden={!connected}>
             <Tooltip title="下载设置">
               <IconButton
                 className="vial-action-button"
@@ -524,6 +489,7 @@ function App() {
                 <UploadIcon />
               </IconButton>
             </Tooltip>
+            </Box>
             <input
               type="file"
               accept=".json"
@@ -558,6 +524,9 @@ function App() {
                   dynamicEntryCount={dynamicEntryCount}
                   onSave={onQuantumSaveClick}
                   onErase={() => setQuantumEraseDialogOpen(true)}
+                  customMenus={customMenus}
+                  onCustomSave={onCustomSaveClick}
+                  onCustomErase={onCustomEraseClick}
                   onChange={(value) => {
                     setQuantumValues(value);
                   }}

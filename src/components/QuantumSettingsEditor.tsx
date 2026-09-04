@@ -2,7 +2,7 @@ import { Box, Button, Tab, Tabs } from "@mui/material";
 import { useEffect, useState } from "react";
 import { QuantumSettingDefinition } from "../services/quantumSettings";
 import { ViaKeyboard } from "../services/vialKeyboad";
-import { MenuSectionProperties, ViaMenuItem } from "./ViaMenuItem";
+import { MenuItemProperties, MenuSectionProperties, ViaMenuItem } from "./ViaMenuItem";
 import quantumTranslations from "../locales/quantum.json";
 import { KeycodeConverter } from "./keycodes/keycodeConverter";
 import { MacroEditor } from "./MacroEditor";
@@ -20,6 +20,9 @@ export function QuantumSettingsEditor(props: {
   dynamicEntryCount?: DynamicEntryCount;
   onSave?: () => void;
   onErase?: () => void;
+  customMenus?: MenuItemProperties[];
+  onCustomSave?: () => void;
+  onCustomErase?: () => void;
 }) {
   const [tabValue, setTabValue] = useState(0);
   const [quantumValue, setQuantumValue] = useState<{ [id: string]: number }>({});
@@ -30,6 +33,9 @@ export function QuantumSettingsEditor(props: {
     { label: "Keymap", content: [] } as { label: string; content: never[] },
     ...QuantumSettingDefinition,
     { label: "Macro", content: [] } as { label: string; content: never[] },
+    ...(props.customMenus?.length
+      ? [{ label: "Custom", content: [] } as { label: string; content: never[] }]
+      : []),
   ];
 
   useEffect(() => {
@@ -173,6 +179,32 @@ export function QuantumSettingsEditor(props: {
               ) : (
                 <Box sx={{ color: "#cbd5e1" }}>No macros available.</Box>
               )}
+            </Box>
+          ) : menu.label === "Custom" ? (
+            <Box sx={{ p: 2 }}>
+              {props.customMenus?.map((customMenu) => (
+                <Box key={customMenu.label} sx={{ mb: 2 }}>
+                  {customMenu.content.map((section) => (
+                    <ViaMenuItem
+                      key={section.label}
+                      {...section}
+                      customValues={quantumValue}
+                      onChange={async (id, value) => {
+                        setQuantumValue({ ...quantumValue, [id[0]]: value });
+                        await props.via.SetCustomValue(id.slice(1) as number[], value);
+                      }}
+                    />
+                  ))}
+                </Box>
+              ))}
+              <Box sx={{ display: "flex", gap: 1 }}>
+                <Button variant="contained" onClick={props.onCustomSave}>
+                  Save custom
+                </Button>
+                <Button variant="contained" color="error" onClick={props.onCustomErase}>
+                  Erase custom
+                </Button>
+              </Box>
             </Box>
           ) : (
             <>

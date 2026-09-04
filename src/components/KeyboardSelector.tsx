@@ -1,4 +1,4 @@
-import { FormControl, InputLabel, MenuItem, Select, Typography } from "@mui/material";
+import { FormControl, MenuItem, Select, Typography } from "@mui/material";
 
 const isTauri = import.meta.env.TAURI_ENV_PLATFORM !== undefined;
 
@@ -47,7 +47,7 @@ export function KeyboardSelector(props: {
         },
       }}
     >
-      <InputLabel>Select Keyboard</InputLabel>
+      {/* <InputLabel>Select Keyboard</InputLabel> */}
       <Select
         value={props.deviceIndex || ""}
         label="select-keyboard"
