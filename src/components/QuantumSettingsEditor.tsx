@@ -18,6 +18,7 @@ export function QuantumSettingsEditor(props: {
   customKeycodes?: { name: string; title: string; shortName: string }[];
   keymap?: KeymapProperties;
   dynamicEntryCount?: DynamicEntryCount;
+  keymapLanguage: string;
   onSave?: () => void;
   onErase?: () => void;
   customMenus?: MenuItemProperties[];
@@ -136,6 +137,7 @@ export function QuantumSettingsEditor(props: {
               via={props.via}
               language={props.language}
               onLanguageChange={props.onLanguageChange}
+              keymapLanguage={props.keymapLanguage}
               dynamicEntryCount={props.dynamicEntryCount}
             />
           ) : menu.label === "Macro" ? (

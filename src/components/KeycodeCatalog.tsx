@@ -385,7 +385,13 @@ export function KeycodeCatalog(props: {
               <Box
                 key={keygroup}
                 className="keycode-group"
-                sx={{ maxWidth: "100%", overflowX: "auto" }}
+                sx={{
+                  maxWidth: "100%",
+                  overflowX: "auto",
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "center",
+                }}
               >
               {keygroup === "basic" ? (
                 <>

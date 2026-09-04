@@ -526,26 +526,21 @@ function LayoutSelector(props: {
   }
 
   return (
-    <Box sx={{ display: "flex", alignItems: "center", gap: 1, mt: 1, mb: 1 }}>
-      <Typography sx={{ color: "#b8c7dc", fontSize: "0.8rem", fontWeight: 600 }}>
-        Layout
-      </Typography>
-      <Select
-        variant="standard"
-        value={props.option[0] ?? 0}
-        label="layout"
-        sx={{ minWidth: 150 }}
-        onChange={(event) => {
-          props.onChange({ 0: Number(event.target.value) });
-        }}
-      >
-        {options.map((label, index) => (
-          <MenuItem key={label} value={index}>
-            {label}
-          </MenuItem>
-        ))}
-      </Select>
-    </Box>
+    <Select
+      variant="standard"
+      value={props.option[0] ?? 0}
+      label="layout"
+      sx={{ width: "max-content", minWidth: 0, mt: 1, mb: 1, fontSize: "10px" }}
+      onChange={(event) => {
+        props.onChange({ 0: Number(event.target.value) });
+      }}
+    >
+      {options.map((label, index) => (
+        <MenuItem key={label} value={index} sx={{ fontSize: "10px" }}>
+          {label}
+        </MenuItem>
+      ))}
+    </Select>
   );
 }
 
@@ -622,7 +617,6 @@ function KeymapLayer(props: {
   const boundaryEl = useRef<HTMLElement>(null);
   const [focusedKey, setFocusedKey] = useState<KeymapKeyProperties | undefined>(undefined);
   const [candidateKeycode, setCandidateKeycode] = useState<QmkKeycode>(DefaultQmkKeycode);
-
   // Access the global focus context
   const focusContext = useContext(FocusedKeyContext);
 
@@ -756,39 +750,59 @@ function LayerEditor(props: {
 
   return (
     <>
-      <LayoutSelector
-        layouts={props.keymap.layouts}
-        option={layoutOption}
-        onChange={(option) => {
-          setLayoutOption(option);
-          void sendLayout(option[0]);
+      <Box
+        sx={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "flex-start",
+          gap: 1,
+          width: "100%",
+          overflowX: "auto",
         }}
-      />
-      <LayerSelector
-        layerCount={props.layerCount}
-        currentLayer={layer}
-        onChange={async (layer) => {
-          if (!Object.keys(keymap).includes(layer.toString())) {
-            const layerKeys = await props.via.GetLayer(layer, {
-              rows: props.keymap.matrix.rows,
-              cols: props.keymap.matrix.cols,
-            });
-            const newKeymap = { ...keymap };
-            newKeymap[layer] = layerKeys;
-            setKeymap(newKeymap);
-            console.log(`load keymap ${layer}`);
-            console.log(layerKeys);
+      >
+        <LayoutSelector
+          layouts={props.keymap.layouts}
+          option={layoutOption}
+          onChange={(option) => {
+            setLayoutOption(option);
+            void sendLayout(option[0]);
+          }}
+        />
+        <LayerSelector
+          layerCount={props.layerCount}
+          currentLayer={layer}
+          onChange={async (layer) => {
+            if (!Object.keys(keymap).includes(layer.toString())) {
+              const layerKeys = await props.via.GetLayer(layer, {
+                rows: props.keymap.matrix.rows,
+                cols: props.keymap.matrix.cols,
+              });
+              const newKeymap = { ...keymap };
+              newKeymap[layer] = layerKeys;
+              setKeymap(newKeymap);
+              console.log(`load keymap ${layer}`);
+              console.log(layerKeys);
 
-            setEncodermap({
-              ...encodermap,
-              [layer]: await props.via.GetEncoder(layer, encoderCount),
-            });
-          }
-          setLayer(layer);
+              setEncodermap({
+                ...encodermap,
+                [layer]: await props.via.GetEncoder(layer, encoderCount),
+              });
+            }
+            setLayer(layer);
+          }}
+        ></LayerSelector>
+      </Box>
+
+      <Box
+        sx={{
+          width: "100%",
+          overflowX: "auto",
+          pl: 1,
+          pr: 5,
+          display: "flex",
+          justifyContent: "center",
         }}
-      ></LayerSelector>
-
-      <Box sx={{ width: "100%", overflowX: "auto", pl: 1, pr: 5 }}>
+      >
         {Object.keys(keymap).includes(layer.toString()) ? (
           <KeymapLayer
             keymapProps={props.keymap}
@@ -831,7 +845,7 @@ function LayerEditor(props: {
   );
 }
 
-function LanguageSelector(props: {
+export function LanguageSelector(props: {
   languageList: string[];
   lang: string;
   onChange: (lang: string) => void;
@@ -858,6 +872,7 @@ export function KeymapEditor(props: {
   via: ViaKeyboard;
   language: "zh" | "en";
   onLanguageChange: (language: "zh" | "en") => void;
+  keymapLanguage: string;
   dynamicEntryCount: {
     layer: number;
     macro: number;
@@ -872,7 +887,6 @@ export function KeymapEditor(props: {
   const [tdIndex, setTdIndex] = useState(-1);
   const [comboIndex, setComboIndex] = useState(-1);
   const [overrideIndex, setOverrideIndex] = useState(-1);
-  const [lang, setLang] = useState("Chinese");
   const [keycodeConverter, setKeycodeConverter] = useState<KeycodeConverter>();
 
   // State for the focused key context
@@ -884,11 +898,11 @@ export function KeymapEditor(props: {
       props.keymap.customKeycodes,
       props.dynamicEntryCount.macro,
       props.dynamicEntryCount.tapdance,
-      lang,
+      props.keymapLanguage,
       "0.0.3",
       props.language,
     ).then((k) => setKeycodeConverter(k));
-  }, [props.dynamicEntryCount.layer, props.keymap.customKeycodes, props.dynamicEntryCount, lang, props.language]);
+  }, [props.dynamicEntryCount.layer, props.keymap.customKeycodes, props.dynamicEntryCount, props.keymapLanguage, props.language]);
 
   return keycodeConverter === undefined ? (
     <></>
@@ -943,28 +957,6 @@ export function KeymapEditor(props: {
               setMenuType("layer");
             }}
           ></OverrideEditor>
-        </Box>
-        <Box
-          sx={{
-            position: "fixed",
-            left: 16,
-            bottom: 16,
-            zIndex: 1200,
-            px: 1,
-            py: 0.5,
-            borderRadius: 1,
-            backgroundColor: "#0f172a",
-            border: "1px solid rgba(148, 163, 184, 0.35)",
-          }}
-        >
-          <LanguageSelector
-            languageList={["US", "Japanese", "Chinese"]}
-            lang={lang}
-            onChange={(selectedLanguage) => {
-              setLang(selectedLanguage);
-              props.onLanguageChange(selectedLanguage === "Chinese" ? "zh" : "en");
-            }}
-          ></LanguageSelector>
         </Box>
       </Box>
 

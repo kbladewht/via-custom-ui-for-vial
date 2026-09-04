@@ -1,4 +1,3 @@
-import MenuIcon from "@mui/icons-material/Menu";
 import DownloadIcon from "@mui/icons-material/Download";
 import UploadIcon from "@mui/icons-material/Upload";
 import {
@@ -7,19 +6,16 @@ import {
   Dialog,
   DialogActions,
   DialogContent,
-  Divider,
   Grid,
   IconButton,
   Tooltip,
-  useMediaQuery,
-  useTheme,
 } from "@mui/material";
 import * as Hjson from "hjson";
 import { useEffect, useRef, useState } from "react";
 import { match, P } from "ts-pattern";
 import "./App.css";
 import { KeyboardSelector } from "./components/KeyboardSelector";
-import { KeymapProperties } from "./components/KeymapEditor";
+import { KeymapProperties, LanguageSelector } from "./components/KeymapEditor";
 import { QuantumSettingsEditor } from "./components/QuantumSettingsEditor";
 import { MenuItemProperties, MenuSectionProperties, ViaMenuItem } from "./components/ViaMenuItem";
 import init, { xz_decompress } from "./pkg";
@@ -84,10 +80,8 @@ function App() {
   >([]);
   const [deviceIndex, setDeviceIndex] = useState<number | undefined>(undefined);
   const loadingTimerRef = useRef<number | null>(null);
-  const [menuOpen, setMenuOpen] = useState(true);
+  const [keymapLanguage, setKeymapLanguage] = useState("Chinese");
   const [uiLanguage, setUiLanguage] = useState<"zh" | "en">("zh");
-  const theme = useTheme();
-  const isWideScreen = useMediaQuery(theme.breakpoints.up("md"));
 
   useEffect(() => {
     // load wasm
@@ -121,11 +115,6 @@ function App() {
       window.removeEventListener("pagehide", closeBluetoothOnPageHide);
     };
   }, []);
-
-  // Control menu visibility based on screen size and active menu state
-  useEffect(() => {
-    setMenuOpen(isWideScreen || !activeMenu);
-  }, [isWideScreen, activeMenu]);
 
   const updateDeviceList = async () => {
     return (await via.GetDeviceList()).map((d) => {
@@ -385,11 +374,6 @@ function App() {
       <Dialog open={loading}>
         <DialogContent>Loading...</DialogContent>
       </Dialog>
-      {!menuOpen && (
-        <IconButton onClick={() => setMenuOpen(true)} className="menu-button">
-          <MenuIcon />
-        </IconButton>
-      )}
       <Grid
         container
         spacing={2}
@@ -401,43 +385,7 @@ function App() {
         <Grid
           item
           xs={12}
-          md={2}
-          pl={1}
-          mt={1}
-          className="app-sidebar"
-          sx={{
-            display: menuOpen ? "block" : "none",
-            position: "relative",
-            zIndex: 1,
-            height: "auto",
-            width: "100%",
-            boxShadow: "none",
-            "@media (max-width: 899px)": {
-              "& button": { fontSize: "smaller" },
-            },
-          }}
-        >
-          <Box
-            className="menu-header"
-            sx={{
-                display: "flex",
-                justifyContent: "flex-end",
-                alignItems: "center",
-            }}
-          >
-              {!isWideScreen && (
-                <IconButton onClick={() => setMenuOpen(false)}>
-                  <MenuIcon />
-                </IconButton>
-              )}
-          </Box>
-          <Divider />
-          <Divider />
-        </Grid>
-        <Grid
-          item
-          xs={12}
-          md={10}
+          md={12}
           className="app-main-panel"
           sx={{ pl: 0 }}
         >
@@ -468,27 +416,37 @@ function App() {
                 }}
               />
             </Box>
-            <Box sx={{ display: "flex", flexShrink: 0, gap: 1 }} hidden={!connected}>
-            <Tooltip title="下载设置">
-              <IconButton
-                className="vial-action-button"
-                aria-label="下载设置"
-                color="primary"
-                onClick={onVialSaveClick}
-              >
-                <DownloadIcon />
-              </IconButton>
-            </Tooltip>
-            <Tooltip title="上传设置">
-              <IconButton
-                className="vial-action-button"
-                aria-label="上传设置"
-                color="primary"
-                onClick={onVialUploadJsonClick}
-              >
-                <UploadIcon />
-              </IconButton>
-            </Tooltip>
+            <Box sx={{ display: "flex", alignItems: "center", flexShrink: 0, gap: 1 }}>
+              <LanguageSelector
+                languageList={["US", "Japanese", "Chinese"]}
+                lang={keymapLanguage}
+                onChange={(selectedLanguage) => {
+                  setKeymapLanguage(selectedLanguage);
+                  setUiLanguage(selectedLanguage === "Chinese" ? "zh" : "en");
+                }}
+              />
+              <Box sx={{ display: "flex", gap: 1 }} hidden={!connected}>
+                <Tooltip title="下载设置">
+                  <IconButton
+                    className="vial-action-button"
+                    aria-label="下载设置"
+                    color="primary"
+                    onClick={onVialSaveClick}
+                  >
+                    <DownloadIcon />
+                  </IconButton>
+                </Tooltip>
+                <Tooltip title="上传设置">
+                  <IconButton
+                    className="vial-action-button"
+                    aria-label="上传设置"
+                    color="primary"
+                    onClick={onVialUploadJsonClick}
+                  >
+                    <UploadIcon />
+                  </IconButton>
+                </Tooltip>
+              </Box>
             </Box>
             <input
               type="file"
@@ -522,6 +480,7 @@ function App() {
                   customKeycodes={vialJson?.customKeycodes}
                   keymap={vialJson}
                   dynamicEntryCount={dynamicEntryCount}
+                  keymapLanguage={keymapLanguage}
                   onSave={onQuantumSaveClick}
                   onErase={() => setQuantumEraseDialogOpen(true)}
                   customMenus={customMenus}
@@ -537,7 +496,6 @@ function App() {
             .exhaustive()}
           {vialJson === undefined && <p>select keyboard</p>}
         </Grid>
-        <Grid item xs={1}></Grid>
       </Grid>
       <Dialog open={customEraseDialogOpen} onClose={onDialogClose}>
         <DialogContent>Erase all custom settings?</DialogContent>
