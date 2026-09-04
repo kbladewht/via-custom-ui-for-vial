@@ -200,11 +200,11 @@ export function QuantumSettingsEditor(props: {
                 </Box>
               ))}
               <Box sx={{ display: "flex", gap: 1 }}>
-                <Button variant="contained" onClick={props.onCustomSave}>
-                  Save custom
+                <Button className="quantum-setting-save" variant="contained" onClick={props.onCustomSave}>
+                  Save
                 </Button>
-                <Button variant="contained" color="error" onClick={props.onCustomErase}>
-                  Erase custom
+                <Button className="quantum-setting-erase" variant="contained" color="error" onClick={props.onCustomErase}>
+                  Erase
                 </Button>
               </Box>
             </Box>
@@ -221,11 +221,11 @@ export function QuantumSettingsEditor(props: {
                 }}
               />
               <Box sx={{ display: "flex", gap: 1, p: 2 }}>
-                <Button variant="contained" onClick={props.onSave}>
-                  Save quantum
+                <Button className="quantum-setting-save" variant="contained" onClick={props.onSave}>
+                  Save
                 </Button>
-                <Button variant="contained" color="error" onClick={props.onErase}>
-                  Erase quantum
+                <Button className="quantum-setting-erase" variant="contained" color="error" onClick={props.onErase}>
+                  Erase
                 </Button>
               </Box>
             </>
