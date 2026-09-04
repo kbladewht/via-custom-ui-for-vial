@@ -272,6 +272,15 @@ function App() {
     vialFileInputRef.current?.click();
   };
 
+  const onDfuClick = async () => {
+    try {
+      setLoading(true);
+      await via.GoToBootloader();
+    } finally {
+      setLoading(false);
+    }
+  };
+
   const onVialJsonUploaded = async (json: string) => {
     try {
       if (vialJson === undefined) return;
@@ -417,6 +426,14 @@ function App() {
               />
             </Box>
             <Box sx={{ display: "flex", alignItems: "center", flexShrink: 0, gap: 1 }}>
+              <Button
+                className="vial-action-button"
+                size="small"
+                variant="contained"
+                onClick={onDfuClick}
+              >
+                DFU
+              </Button>
               <LanguageSelector
                 languageList={["US", "Japanese", "Chinese"]}
                 lang={keymapLanguage}

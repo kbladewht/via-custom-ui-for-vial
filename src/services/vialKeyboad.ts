@@ -758,6 +758,10 @@ class VialKeyboard {
     await this.Command([via_command_id.id_unhandled, via_command_id.id_eeprom_reset]);
   }
 
+  async GoToBootloader(): Promise<void> {
+    await this.Command([via_command_id.id_bootloader_jump]);
+  }
+
   GetHidName() {
     return this.comm.getName();
   }
