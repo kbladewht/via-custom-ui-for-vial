@@ -8,9 +8,6 @@ import {
   Divider,
   Grid,
   IconButton,
-  List,
-  ListItemButton,
-  ListItemText,
   ListSubheader,
   useMediaQuery,
   useTheme,
@@ -235,6 +232,7 @@ function App() {
     setVialJson(parsed);
     setCustomMenus(parsed?.menus ?? []);
     setKbName(parsed?.name ?? via.GetHidName());
+    setActiveMenu({ menuType: "quantum" });
 
     const dynamicEntryCount = await via.GetDynamicEntryCountAll();
     setDynamicEntryCount(dynamicEntryCount);
@@ -490,88 +488,32 @@ function App() {
             />
           </Box>
           <Divider />
-          <List className="menu-list">
-            <div className="nav-section" style={{ display: connected ? "block" : "none" }}>
-              <ListSubheader>Quantum settings</ListSubheader>
-              <List disablePadding>
-                <ListItemButton
-                  onClick={() => {
-                    setActiveMenu({ menuType: "quantum" });
-                  }}
+          <Box hidden={!connected} className="settings-actions">
+            <Grid container rowSpacing={1} columnSpacing={2}>
+              <Grid item xs={12} sm={6}>
+                <Button
+                  className="quantum-action-button quantum-save-button"
+                  sx={{ width: "100%", mb: 1 }}
+                  variant="contained"
+                  color="primary"
+                  onClick={onQuantumSaveClick}
                 >
-                  <ListItemText primary="Quantum" />
-                </ListItemButton>
-
-                <Grid container rowSpacing={1} columnSpacing={2}>
-                  <Grid item xs={12} sm={6}>
-                    <Button
-                      className="quantum-action-button quantum-save-button"
-                      sx={{
-                        width: "100%",
-                        mb: 1,
-                      }}
-                      variant="contained"
-                      color="primary"
-                      onClick={() => {
-                        onQuantumSaveClick();
-                      }}
-                    >
-                      Save quantum
-                    </Button>
-                  </Grid>
-                  <Grid item xs={12} sm={6}>
-                    <Button
-                      className="quantum-action-button quantum-erase-button"
-                      sx={{
-                        width: "100%",
-                      }}
-                      variant="contained"
-                      color="error"
-                      onClick={() => {
-                        setQuantumEraseDialogOpen(true);
-                      }}
-                    >
-                      Erase quantum
-                    </Button>
-                  </Grid>
-                </Grid>
-              </List>
-            </div>
-            <Divider />
-            <Box hidden={customMenus.length == 0} className="nav-section">
-              <ListSubheader>Custom settings</ListSubheader>
-            </Box>
-            <Box sx={{ pl: 2 }} className="custom-menu-group">
-              {customMenus.map((top) => (
-                <Box key={top.label} className="custom-menu-section">
-                  <ListSubheader className="custom-menu-subheader">{top.label}</ListSubheader>
-                  <List disablePadding>
-                    {top.content.map((menu) => (
-                      <ListItemButton
-                        key={menu.label}
-                        onClick={() => {
-                          setActiveMenu({ menuType: "customMenu", menu: menu });
-                        }}
-                      >
-                        <ListItemText
-                          primary={menu.label}
-                          primaryTypographyProps={{
-                            noWrap: true,
-                            style: {
-                              overflow: "hidden",
-                              textOverflow: "ellipsis",
-                              whiteSpace: "nowrap",
-                            },
-                          }}
-                        />
-                      </ListItemButton>
-                    ))}
-                  </List>
-                  <Divider />
-                </Box>
-              ))}
-            </Box>
-          </List>
+                  Save quantum
+                </Button>
+              </Grid>
+              <Grid item xs={12} sm={6}>
+                <Button
+                  className="quantum-action-button quantum-erase-button"
+                  sx={{ width: "100%" }}
+                  variant="contained"
+                  color="error"
+                  onClick={() => setQuantumEraseDialogOpen(true)}
+                >
+                  Erase quantum
+                </Button>
+              </Grid>
+            </Grid>
+          </Box>
           <Box hidden={customMenus.length == 0} className="action-panel">
             <Grid container rowSpacing={1} columnSpacing={2} className="action-grid">
               <Grid item xs={12} sm={6}>
