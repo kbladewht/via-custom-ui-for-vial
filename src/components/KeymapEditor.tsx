@@ -77,6 +77,7 @@ export interface KeymapKeyProperties {
   h: number;
   layout: number[];
   keycode: QmkKeycode;
+  shortcut?: string;
   reactKey: string;
   isEncoder?: boolean;
   onKeycodeChange?: (target: KeymapKeyProperties, newKeycode: QmkKeycode) => void;
@@ -183,6 +184,7 @@ export function KeymapKey(props: KeymapKeyProperties & { isFocused?: boolean }) 
         setIsDragOver(false);
       }}
       onClick={(event) => props.onClick?.(event.currentTarget)}
+      title={props.shortcut}
     >
       <KeyLegend keycode={props.keycode} />
     </div>
@@ -422,6 +424,7 @@ function convertToKeymapKeys(
   keymap: number[],
   encodermap: number[][],
   keycodeconverter: KeycodeConverter,
+  shortcutByKeycode: { [keycode: number]: string },
 ): KeymapKeyProperties[] {
   let current = {
     x: 0,
@@ -464,16 +467,15 @@ function convertToKeymapKeys(
                 ? (encodermap?.[keyPos[0]]?.[keyPos[1]] ?? 0)
                 : (keymap[keyPos[1] + keyPos[0] * props.matrix.cols] ?? 0),
             );
-            if (keycode.value !== 0) {
-              keys.push({
-                ...current,
-                matrix: keyPos,
-                layout: [],
-                keycode,
-                isEncoder: isEncoder,
-                reactKey: "",
-              });
-            }
+            keys.push({
+              ...current,
+              matrix: keyPos,
+              layout: [],
+              keycode,
+              shortcut: shortcutByKeycode[keycode.value],
+              isEncoder: isEncoder,
+              reactKey: "",
+            });
             current.x += current.w;
             current.w = 1;
             current.h = 1;
@@ -610,6 +612,7 @@ function KeymapLayer(props: {
   keymap: number[];
   encodermap: number[][];
   keycodeconverter: KeycodeConverter;
+  shortcutByKeycode: { [keycode: number]: string };
   onKeycodeChange?: (target: KeymapKeyProperties, newKeycode: QmkKeycode) => void;
 }) {
   const [popupOpen, setpopupOpen] = useState(false);
@@ -626,6 +629,7 @@ function KeymapLayer(props: {
     props.keymap,
     props.encodermap,
     props.keycodeconverter,
+    props.shortcutByKeycode,
   );
 
   // Calculate the rightmost position to determine needed width
@@ -696,6 +700,100 @@ function KeymapLayer(props: {
   );
 }
 
+function buildBluetoothShortcuts(
+  keymaps: { [layer: number]: number[] },
+  customKeycodes: { name: string; title: string; shortName: string }[] | undefined,
+  keycodeconverter: KeycodeConverter,
+  matrixCols: number,
+) {
+  const shortcuts: { [keycode: number]: string } = {};
+  const entries: { name: string; label: string; shortcut: string }[] = [];
+  console.groupCollapsed("[BLE shortcut] scan");
+  console.log("layers:", Object.keys(keymaps));
+  console.log("keymap sizes:", Object.fromEntries(Object.entries(keymaps).map(([layer, values]) => [layer, values.length])));
+  const bluetoothKeycodes = keycodeconverter
+    .getTapKeycodeList()
+    .filter((keycode) =>
+      customKeycodes?.some((custom) => {
+        const name = custom.name.trim();
+        return custom.name === keycode.key &&
+          (name.startsWith("BLE_") || name.includes("2.4G"));
+      }),
+    );
+  console.log(
+    "candidates:",
+    bluetoothKeycodes.map((keycode) => ({ key: keycode.key, value: `0x${keycode.value.toString(16)}`, label: keycode.label })),
+  );
+  for (const bluetoothKeycode of bluetoothKeycodes) {
+    let targetLayer = -1;
+    let targetIndex = -1;
+    for (let layer = 2; layer >= 0; layer--) {
+      const index = keymaps[layer]?.indexOf(bluetoothKeycode.value) ?? -1;
+      if (index >= 0) {
+        targetLayer = layer;
+        targetIndex = index;
+        break;
+      }
+    }
+
+    if (targetLayer < 0) {
+      console.warn(`[BLE shortcut] ${bluetoothKeycode.key} not found in loaded layers`);
+      continue;
+    }
+
+    console.log(
+      `[BLE shortcut] ${bluetoothKeycode.key} target: layer ${targetLayer}, ` +
+        `R${Math.floor(targetIndex / matrixCols)} C${targetIndex % matrixCols}`,
+    );
+    const parts: string[] = [];
+    for (let layer = targetLayer; layer > 0; layer--) {
+      const previousKeymap = keymaps[layer - 1] ?? [];
+      const transitionIndex = previousKeymap?.findIndex((value) => {
+        const keycode = keycodeconverter.convertIntToKeycode(value);
+        return keycode.hold === layer || keycode.label === `MO${layer}`;
+      }) ?? -1;
+      const transition = transitionIndex >= 0
+        ? keycodeconverter.convertIntToKeycode(previousKeymap![transitionIndex])
+        : undefined;
+      const baseTransitionKeycode = layer > 1 && transitionIndex >= 0
+        ? keymaps[0]?.[transitionIndex]
+        : undefined;
+      const baseTransitionLabel = baseTransitionKeycode === undefined
+        ? undefined
+        : keycodeconverter.convertIntToKeycode(baseTransitionKeycode).label;
+
+      const transitionText = layer > 1 && baseTransitionLabel
+        ? baseTransitionLabel
+        : transition?.hold === layer
+          ? `${transition.label || transition.key} (MO${layer})`
+          : `MO(${layer})`;
+      console.log(
+        `[BLE shortcut] enter layer ${layer}:`,
+        transition ?? "not found, fallback",
+        transitionText,
+      );
+      parts.unshift(transitionText);
+    }
+
+    const baseKeycode = keymaps[0]?.[targetIndex];
+    const baseKeyLabel = baseKeycode === undefined
+      ? undefined
+      : keycodeconverter.convertIntToKeycode(baseKeycode).label;
+    parts.push(baseKeyLabel || bluetoothKeycode.label || bluetoothKeycode.key);
+    const shortcut = parts.join(" + ");
+    shortcuts[bluetoothKeycode.value] = shortcut;
+    console.log(`[BLE shortcut] result ${bluetoothKeycode.key}: ${shortcut}`);
+    const custom = customKeycodes?.find((item) => item.name === bluetoothKeycode.key);
+    if (custom) {
+      entries.push({ name: custom.name.trim(), label: custom.shortName, shortcut });
+    }
+  }
+  console.log("entries:", entries);
+  console.groupEnd();
+
+  return { byKeycode: shortcuts, entries };
+}
+
 function LayerEditor(props: {
   keymap: KeymapProperties;
   via: ViaKeyboard;
@@ -712,6 +810,17 @@ function LayerEditor(props: {
   const [keymap, setKeymap] = useState<{ [layer: number]: number[] }>({});
   const [encoderCount, setEncoderCount] = useState(0);
   const [encodermap, setEncodermap] = useState<{ [layer: number]: number[][] }>({});
+  const shortcutInfo = buildBluetoothShortcuts(
+    keymap,
+    props.keymap.customKeycodes,
+    props.keycodeConverter,
+    props.keymap.matrix.cols,
+  );
+  const shortcutByKeycode = shortcutInfo.byKeycode;
+
+  useEffect(() => {
+    window.dispatchEvent(new CustomEvent("vial-shortcut-help", { detail: shortcutInfo.entries }));
+  }, [shortcutInfo.entries.map((entry) => `${entry.name}:${entry.shortcut}`).join("|")]);
 
   useEffect(() => {
     navigator.locks.request("load-layout", async () => {
@@ -719,11 +828,19 @@ function LayerEditor(props: {
       setLayoutOption({ 0: layout });
       setLayer(0);
 
-      const layerKeys = await props.via.GetLayer(0, {
+      const layersToLoad = Math.min(3, props.layerCount);
+      const matrixDefinition = {
         rows: props.keymap.matrix.rows,
         cols: props.keymap.matrix.cols,
-      });
-      setKeymap({ 0: layerKeys });
+      };
+      const layerZero = await props.via.GetLayer(0, matrixDefinition);
+      const loadedLayers: { [layer: number]: number[] } = { 0: layerZero };
+      setKeymap(loadedLayers);
+
+      for (let layer = 1; layer < layersToLoad; layer++) {
+        loadedLayers[layer] = await props.via.GetLayer(layer, matrixDefinition);
+        setKeymap({ ...loadedLayers });
+      }
 
       const encoderCount = props.keymap.layouts.keymap
         .flatMap((row) => row.flatMap((col) => col.toString()))
@@ -732,7 +849,11 @@ function LayerEditor(props: {
           0,
         );
       setEncoderCount(encoderCount);
-      setEncodermap({ 0: await props.via.GetEncoder(0, encoderCount) });
+      const loadedEncoders: { [layer: number]: number[][] } = {};
+      for (let layer = 0; layer < layersToLoad; layer++) {
+        loadedEncoders[layer] = await props.via.GetEncoder(layer, encoderCount);
+        setEncodermap({ ...loadedEncoders });
+      }
     });
   }, [props.keymap, props.via]);
 
@@ -826,6 +947,7 @@ function LayerEditor(props: {
             keymap={keymap[layer]}
             encodermap={encodermap[layer] ?? [[]]}
             keycodeconverter={props.keycodeConverter}
+            shortcutByKeycode={shortcutByKeycode}
             onKeycodeChange={(target, newKeycode) => {
               if (target.isEncoder) {
                 const newencoder = { ...encodermap };

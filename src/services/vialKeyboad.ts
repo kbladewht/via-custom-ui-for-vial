@@ -350,14 +350,27 @@ class VialKeyboard {
 
     const pageSize = this.pageSize;
     const pageCount = Math.ceil(matrix_len / pageSize);
-    const keymap_buffer = await this.BatchCommand(
-      [...Array(pageCount)].map((_, idx) => [
+    const keymap_buffer: Uint8Array[] = [];
+    for (let idx = 0; idx < pageCount; idx++) {
+      const offset = start + idx * pageSize;
+      const response = await this.Command([
         via_command_id.id_dynamic_keymap_get_buffer,
-        (start + idx * pageSize) >> 8,
-        (start + idx * pageSize) & 0xff,
+        (offset >> 8) & 0xff,
+        offset & 0xff,
         pageSize,
-      ]),
-    );
+      ]);
+      const responseOffset = (response[1] << 8) | response[2];
+      if (
+        response[0] !== via_command_id.id_dynamic_keymap_get_buffer ||
+        responseOffset !== offset
+      ) {
+        console.warn(
+          `keymap page mismatch: requested 0x${offset.toString(16)}, received ${this.formatHex(response)}`,
+        );
+        continue;
+      }
+      keymap_buffer.push(response);
+    }
 
     return keymap_buffer
       .map((b) => Array.from(b.slice(4)))

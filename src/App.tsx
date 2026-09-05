@@ -1,4 +1,5 @@
 import DownloadIcon from "@mui/icons-material/Download";
+import HelpOutlineIcon from "@mui/icons-material/HelpOutline";
 import UploadIcon from "@mui/icons-material/Upload";
 import { invoke } from "@tauri-apps/api/core";
 import {
@@ -9,6 +10,7 @@ import {
   DialogContent,
   Grid,
   IconButton,
+  Popover,
   Tooltip,
   Typography,
 } from "@mui/material";
@@ -86,6 +88,18 @@ function App() {
   const [uiLanguage, setUiLanguage] = useState<"zh" | "en">("zh");
   const [batteryLevel, setBatteryLevel] = useState<number | null>(null);
   const [currentLayer, setCurrentLayer] = useState<number | null>(null);
+  const [shortcutHelpAnchor, setShortcutHelpAnchor] = useState<HTMLElement | null>(null);
+  const [shortcutHelp, setShortcutHelp] = useState<
+    { name: string; label: string; shortcut: string }[]
+  >([]);
+
+  useEffect(() => {
+    const updateShortcutHelp = (event: Event) => {
+      setShortcutHelp((event as CustomEvent<{ name: string; label: string; shortcut: string }[]>).detail);
+    };
+    window.addEventListener("vial-shortcut-help", updateShortcutHelp);
+    return () => window.removeEventListener("vial-shortcut-help", updateShortcutHelp);
+  }, []);
 
   useEffect(() => {
     // load wasm
@@ -513,6 +527,17 @@ function App() {
                 whiteSpace: "nowrap",
               }}
             >
+              <Tooltip title="BLE 快捷键">
+                <IconButton
+                  className="vial-action-button"
+                  size="small"
+                  aria-label="BLE 快捷键"
+                  onClick={(event) => setShortcutHelpAnchor(event.currentTarget)}
+                  sx={{ p: 0.5 }}
+                >
+                  <HelpOutlineIcon sx={{ fontSize: 18 }} />
+                </IconButton>
+              </Tooltip>
               <Button
                 className="vial-action-button"
                 size="small"
@@ -522,6 +547,30 @@ function App() {
               >
                 DFU
               </Button>
+              <Popover
+                open={shortcutHelpAnchor !== null}
+                anchorEl={shortcutHelpAnchor}
+                onClose={() => setShortcutHelpAnchor(null)}
+                anchorOrigin={{ vertical: "bottom", horizontal: "left" }}
+                transformOrigin={{ vertical: "top", horizontal: "left" }}
+              >
+                <Box sx={{ p: 1.5, minWidth: 230, background: "#0f172a" }}>
+                  <Typography sx={{ mb: 0.75, fontSize: "12px", fontWeight: 700 }}>
+                    BLE 快捷键
+                  </Typography>
+                  {shortcutHelp.length === 0 ? (
+                    <Typography sx={{ fontSize: "11px", color: "#94a3b8" }}>
+                      暂未找到快捷键
+                    </Typography>
+                  ) : (
+                    shortcutHelp.map((item) => (
+                      <Typography key={item.name} sx={{ fontSize: "11px", color: "#cbd5e1" }}>
+                        {item.label}: {item.shortcut}
+                      </Typography>
+                    ))
+                  )}
+                </Box>
+              </Popover>
               <Tooltip title="刷新电量">
                 <IconButton
                   className="battery-status-button"
