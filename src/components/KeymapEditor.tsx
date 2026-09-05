@@ -838,8 +838,8 @@ function LayerEditor(props: {
       const loadedKeymap = { ...keymap };
       const loadedEncodermap = { ...encodermap };
       for (const missingLayer of missingLayers) {
-        loadedKeymap[missingLayer] = await props.via.GetLayer(missingLayer, matrixDefinition);
-        loadedEncodermap[missingLayer] = await props.via.GetEncoder(missingLayer, encoderCount);
+        loadedKeymap[missingLayer] = await props.via.GetLayer(missingLayer, matrixDefinition, true);
+        loadedEncodermap[missingLayer] = await props.via.GetEncoder(missingLayer, encoderCount, true);
         setKeymap({ ...loadedKeymap });
         setEncodermap({ ...loadedEncodermap });
       }

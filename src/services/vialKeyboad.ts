@@ -203,29 +203,33 @@ class VialKeyboard {
     return this.comm.connected;
   }
 
-  async Command(msg: ArrayLike<number>): Promise<Uint8Array> {
+  async Command(msg: ArrayLike<number>, silent: boolean = false): Promise<Uint8Array> {
     return await navigator.locks.request("vial-keyboard", async () => {
       if (!this.comm.connected) await this.Open(-1);
       const send = Uint8Array.from(msg);
       try {
-        this.onLoading(true);
+        if (!silent) this.onLoading(true);
         await this.comm.write(Uint8Array.from(send));
         const res = await this.readResponse(500);
         console.log(`received: ${this.formatHex(res)}`);
-        this.onLoading(false);
+        if (!silent) this.onLoading(false);
 
         return res;
       } catch (error) {
-        this.onLoading(false);
+        if (!silent) this.onLoading(false);
         await this.comm.close();
         throw error;
       }
     });
   }
 
-  async BatchCommand(messages: number[][], timeoutMs: number = 3000): Promise<Uint8Array[]> {
+  async BatchCommand(
+    messages: number[][],
+    timeoutMs: number = 3000,
+    silent: boolean = false,
+  ): Promise<Uint8Array[]> {
     return await navigator.locks.request("vial-keyboard", async () => {
-      this.onLoading(true);
+      if (!silent) this.onLoading(true);
       try {
         const commandCount = messages.length;
         const res: Uint8Array[] = [];
@@ -270,11 +274,11 @@ class VialKeyboard {
         await waitBufferFilled(commandCount, timeoutMs);
 
         this.comm.setReceiveCallback(this.receiveCallback.bind(this));
-        this.onLoading(false);
+        if (!silent) this.onLoading(false);
 
         return res;
       } catch (error) {
-        this.onLoading(false);
+        if (!silent) this.onLoading(false);
         console.error(error);
         throw error;
       }
@@ -344,6 +348,7 @@ class VialKeyboard {
   async GetLayer(
     layer: number,
     matrix_definition: { rows: number; cols: number },
+    silent: boolean = false,
   ): Promise<number[]> {
     const matrix_len = matrix_definition.rows * matrix_definition.cols * 2; // 2byte per key
     const start = layer * matrix_len;
@@ -358,7 +363,7 @@ class VialKeyboard {
         (offset >> 8) & 0xff,
         offset & 0xff,
         pageSize,
-      ]);
+      ], silent);
       const responseOffset = (response[1] << 8) | response[2];
       if (
         response[0] !== via_command_id.id_dynamic_keymap_get_buffer ||
@@ -424,7 +429,7 @@ class VialKeyboard {
     ]);
   }
 
-  async GetEncoder(layer: number, count: number): Promise<number[][]> {
+  async GetEncoder(layer: number, count: number, silent: boolean = false): Promise<number[][]> {
     const res = await this.BatchCommand(
       [...Array(count)].map((_, idx) => [
         via_command_id.id_vial,
@@ -432,6 +437,8 @@ class VialKeyboard {
         layer,
         idx,
       ]),
+      3000,
+      silent,
     );
 
     return res.map((res) => [(res[0] << 8) | res[1], (res[2] << 8) | res[3]]);
