@@ -61,6 +61,7 @@ enum via_command_id {
   id_dynamic_keymap_set_buffer = 0x13,
   id_dynamic_keymap_get_encoder = 0x14,
   id_dynamic_keymap_set_encoder = 0x15,
+  id_battery = 0xbb,
   id_vial = 0xfe,
   id_unhandled = 0xff,
 }
@@ -88,7 +89,6 @@ enum vial_command_id {
   vial_qmk_settings_set = 0x0b,
   vial_qmk_settings_reset = 0x0c,
   vial_dynamic_entry_op = 0x0d,
-  vial_get_battery = 0xbb,
 }
 
 enum dynamic_vial_id {
@@ -776,14 +776,12 @@ class VialKeyboard {
 
   async GetBatteryLevel(): Promise<number | null> {
     const packet = new Uint8Array(32);
-    packet[0] = via_command_id.id_vial;
-    packet[1] = vial_command_id.vial_get_battery;
+    packet[0] = via_command_id.id_battery;
     const res = await this.Command(packet);
     return res.length > 3 &&
-        res[0] === via_command_id.id_vial &&
-        res[1] === vial_command_id.vial_get_battery &&
-        res[2] === 0xaa
-      ? res[3]
+      res[0] === via_command_id.id_battery &&
+        res[1] === 0xaa
+      ? res[2]
       : null;
   }
 }

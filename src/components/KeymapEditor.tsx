@@ -781,7 +781,7 @@ function LayerEditor(props: {
               newKeymap[layer] = layerKeys;
               setKeymap(newKeymap);
               console.log(`load keymap ${layer}`);
-              console.log(layerKeys);
+              console.log(layerKeys.map((keycode) => keycode.toString(16)).join(" "));
 
               setEncodermap({
                 ...encodermap,

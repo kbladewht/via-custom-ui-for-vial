@@ -4,3 +4,5 @@ set -e
 
 cd "$(dirname "$0")"
 npx tauri build --no-bundle
+
+# npx tauri dev
