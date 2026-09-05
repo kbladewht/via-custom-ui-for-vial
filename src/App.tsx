@@ -1,6 +1,5 @@
 import DownloadIcon from "@mui/icons-material/Download";
 import UploadIcon from "@mui/icons-material/Upload";
-import Battery80Icon from "@mui/icons-material/Battery80";
 import { invoke } from "@tauri-apps/api/core";
 import {
   Box,
@@ -494,10 +493,15 @@ function App() {
                     p: 0.5,
                   }}
                 >
-                  <Battery80Icon
-                    className={batteryLevel === null ? "battery-waiting-icon" : undefined}
-                    sx={{ transform: "rotate(90deg)" }}
-                  />
+                  <Box
+                    className={batteryLevel === null ? "battery-meter battery-waiting-icon" : "battery-meter"}
+                    aria-hidden="true"
+                  >
+                    <Box
+                      className="battery-meter-fill"
+                      sx={{ width: `${batteryLevel === null ? 35 : Math.max(0, Math.min(100, batteryLevel))}%` }}
+                    />
+                  </Box>
                   <Typography sx={{ ml: 0.25, fontSize: "10px", color: "inherit" }}>
                     {batteryLevel === null ? "..." : `${batteryLevel}%`}
                   </Typography>
