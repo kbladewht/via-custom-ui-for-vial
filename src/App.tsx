@@ -532,7 +532,10 @@ function App() {
                   className="vial-action-button"
                   size="small"
                   aria-label="BLE 快捷键"
-                  onClick={(event) => setShortcutHelpAnchor(event.currentTarget)}
+                  onClick={(event) => {
+                    window.dispatchEvent(new Event("vial-shortcut-help-request"));
+                    setShortcutHelpAnchor(event.currentTarget);
+                  }}
                   sx={{ p: 0.5 }}
                 >
                   <HelpOutlineIcon sx={{ fontSize: 18 }} />

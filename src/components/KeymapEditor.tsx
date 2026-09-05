@@ -823,6 +823,36 @@ function LayerEditor(props: {
   }, [shortcutInfo.entries.map((entry) => `${entry.name}:${entry.shortcut}`).join("|")]);
 
   useEffect(() => {
+    const loadMissingShortcutLayers = async () => {
+      const layersToLoad = Math.min(3, props.layerCount);
+      const missingLayers = [...Array(layersToLoad)]
+        .map((_, index) => index)
+        .filter((index) => keymap[index] === undefined);
+
+      if (missingLayers.length === 0) return;
+
+      const matrixDefinition = {
+        rows: props.keymap.matrix.rows,
+        cols: props.keymap.matrix.cols,
+      };
+      const loadedKeymap = { ...keymap };
+      const loadedEncodermap = { ...encodermap };
+      for (const missingLayer of missingLayers) {
+        loadedKeymap[missingLayer] = await props.via.GetLayer(missingLayer, matrixDefinition);
+        loadedEncodermap[missingLayer] = await props.via.GetEncoder(missingLayer, encoderCount);
+        setKeymap({ ...loadedKeymap });
+        setEncodermap({ ...loadedEncodermap });
+      }
+    };
+
+    const handleShortcutHelpRequest = () => {
+      void loadMissingShortcutLayers();
+    };
+    window.addEventListener("vial-shortcut-help-request", handleShortcutHelpRequest);
+    return () => window.removeEventListener("vial-shortcut-help-request", handleShortcutHelpRequest);
+  }, [keymap, encodermap, encoderCount, props.layerCount, props.keymap, props.via]);
+
+  useEffect(() => {
     navigator.locks.request("load-layout", async () => {
       const layout = await props.via.GetLayoutOption();
       setLayoutOption({ 0: layout });
