@@ -62,6 +62,7 @@ enum via_command_id {
   id_dynamic_keymap_get_encoder = 0x14,
   id_dynamic_keymap_set_encoder = 0x15,
   id_battery = 0xbb,
+  id_current_layer = 0xbc,
   id_vial = 0xfe,
   id_unhandled = 0xff,
 }
@@ -780,6 +781,17 @@ class VialKeyboard {
     const res = await this.Command(packet);
     return res.length > 3 &&
       res[0] === via_command_id.id_battery &&
+        res[1] === 0xaa
+      ? res[2]
+      : null;
+  }
+
+  async GetCurrentLayer(): Promise<number | null> {
+    const packet = new Uint8Array(32);
+    packet[0] = via_command_id.id_current_layer;
+    const res = await this.Command(packet);
+    return res.length > 2 &&
+        res[0] === via_command_id.id_current_layer &&
         res[1] === 0xaa
       ? res[2]
       : null;
