@@ -458,6 +458,7 @@ function convertToKeymapKeys(
 
           const isEncoder = col.split("\n")[9] === "e";
 
+          
           if (
             hasMatrixPosition &&
             ((layout?.length ?? 0) < 2 || layoutOptions[layout[0]] == layout[1])
