@@ -84,6 +84,7 @@ function App() {
   >([]);
   const [deviceIndex, setDeviceIndex] = useState<number | undefined>(undefined);
   const loadingTimerRef = useRef<number | null>(null);
+  const keyboardLoadedRef = useRef(false);
   const [keymapLanguage, setKeymapLanguage] = useState("Chinese");
   const [uiLanguage, setUiLanguage] = useState<"zh" | "en">("zh");
   const [batteryLevel, setBatteryLevel] = useState<number | null>(null);
@@ -108,6 +109,8 @@ function App() {
       setDeviceList(await updateDeviceList());
     })();
     via.setOnLoading((isLoading: boolean) => {
+      if (keyboardLoadedRef.current) return;
+
       // Clear any existing timer regardless of new state
       if (loadingTimerRef.current !== null) {
         clearTimeout(loadingTimerRef.current);
@@ -188,6 +191,7 @@ function App() {
 
   const openKeyboard = async (deviceIndex: number) => {
     const isBle = deviceIndex === -2;
+    keyboardLoadedRef.current = false;
     setLoading(true);
     setConnected(false);
     setVialJson(undefined);
@@ -297,6 +301,7 @@ function App() {
     setCustomValueId(customValueId);
     await getCustomValues(customValueId);
 
+    keyboardLoadedRef.current = true;
     setConnected(true);
     setLoading(false);
   };
