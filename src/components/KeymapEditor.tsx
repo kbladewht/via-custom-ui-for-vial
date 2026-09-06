@@ -454,10 +454,14 @@ function convertToKeymapKeys(
             .split(",")
             .map((v) => parseInt(v))
             .slice(0, 2);
+          const hasMatrixPosition = keyPos.length === 2 && keyPos.every(Number.isInteger);
 
           const isEncoder = col.split("\n")[9] === "e";
 
-          if ((layout?.length ?? 0) < 2 || layoutOptions[layout[0]] == layout[1]) {
+          if (
+            hasMatrixPosition &&
+            ((layout?.length ?? 0) < 2 || layoutOptions[layout[0]] == layout[1])
+          ) {
             if (firstKey) {
               firstKey = false;
               current.y = 0;
@@ -476,6 +480,9 @@ function convertToKeymapKeys(
               isEncoder: isEncoder,
               reactKey: "",
             });
+          }
+
+          if ((layout?.length ?? 0) < 2 || layoutOptions[layout[0]] == layout[1]) {
             current.x += current.w;
             current.w = 1;
             current.h = 1;
