@@ -143,15 +143,23 @@ function App() {
     let cancelled = false;
 
     const refreshDeviceStatus = async () => {
-      if (isTauri) {
+      let level: number | null = null;
+      try {
+        level = await via.GetBatteryLevel();
+      } catch (error) {
+        console.warn("Could not read keyboard battery level", error);
+      }
+
+      if (level === null && isTauri) {
         try {
           const deviceName = deviceList.find((device) => device.index === deviceIndex)?.name ?? "";
-          const level = await invoke<number | null>("battery_get_level", { deviceName });
-          if (!cancelled && level !== null) setBatteryLevel(level);
+          level = await invoke<number | null>("battery_get_level", { deviceName });
         } catch (error) {
-          console.warn("Could not read Bluetooth battery level", error);
+          console.warn("Could not read Tauri battery level", error);
         }
       }
+
+      if (!cancelled && level !== null) setBatteryLevel(level);
 
       try {
         const layer = await via.GetCurrentLayer();
