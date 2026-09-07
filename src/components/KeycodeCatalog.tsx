@@ -135,6 +135,7 @@ function KeyListKey(props: {
   draggable: boolean;
   widthMultiplier?: number;
   marginRight?: number;
+  animationDelay?: number;
 }) {
   const [isDragging, setIsDragging] = useState(false);
   const [showToolTip, setShowToolTip] = useState(false);
@@ -161,6 +162,7 @@ function KeyListKey(props: {
             5 * ((props.widthMultiplier ?? 1) - 1),
           height: WIDTH_1U - 3,
           marginRight: props.marginRight,
+          animationDelay: props.animationDelay !== undefined ? `${props.animationDelay}ms` : undefined,
         }}
         draggable={props.draggable}
         onDragStart={(event) => {
@@ -211,6 +213,9 @@ function KeyListKey(props: {
   );
 }
 
+const ROW_ANIMATION_DELAY_MS = 55;
+const MAX_ANIMATION_DELAY_MS = 420;
+
 function BasicKeyboardLayout(props: { keycodes: QmkKeycode[] }) {
   const keycodeMap = new Map(props.keycodes.map((keycode) => [keycode.key, keycode]));
   const layoutKeys = new Set(
@@ -218,7 +223,8 @@ function BasicKeyboardLayout(props: { keycodes: QmkKeycode[] }) {
       .flat()
       .filter((key): key is string => key !== null),
   );
-  const renderKey = (key: string | null, index: number) => {
+  const rowDelay = (rowIndex: number) => Math.min(MAX_ANIMATION_DELAY_MS, rowIndex * ROW_ANIMATION_DELAY_MS);
+  const renderKey = (key: string | null, index: number, rowIndex: number) => {
     const keycode = key === null ? undefined : keycodeMap.get(key);
     return keycode ? (
       <KeyListKey
@@ -227,6 +233,7 @@ function BasicKeyboardLayout(props: { keycodes: QmkKeycode[] }) {
         draggable={true}
         widthMultiplier={key ? BASIC_KEY_WIDTHS[key] : undefined}
         marginRight={key ? BASIC_KEY_MARGIN_RIGHT[key] : undefined}
+        animationDelay={rowDelay(rowIndex)}
       />
     ) : (
       <Box key={`empty-${index}`} sx={{ width: WIDTH_1U - 3, height: WIDTH_1U - 3 }} />
@@ -250,14 +257,14 @@ function BasicKeyboardLayout(props: { keycodes: QmkKeycode[] }) {
         <Box sx={{ display: "flex", flexDirection: "column", gap: "8px" }}>
           {BASIC_KEYBOARD_ROWS.map((row, rowIndex) => (
             <Box key={rowIndex} sx={{ display: "flex", gap: "5px" }}>
-              {row.map(renderKey)}
+              {row.map((key, colIndex) => renderKey(key, colIndex, rowIndex))}
             </Box>
           ))}
         </Box>
         <Box sx={{ display: "flex", flexDirection: "column", gap: "8px" }}>
           {NAVIGATION_ROWS.map((row, rowIndex) => (
             <Box key={rowIndex} sx={{ display: "flex", gap: "5px" }}>
-              {row.map(renderKey)}
+              {row.map((key, colIndex) => renderKey(key, colIndex, rowIndex))}
             </Box>
           ))}
         </Box>
@@ -271,7 +278,7 @@ function BasicKeyboardLayout(props: { keycodes: QmkKeycode[] }) {
         >
           {NUMPAD_ROWS.map((row, rowIndex) => (
             <Box key={rowIndex} sx={{ display: "flex", gap: "5px" }}>
-              {row.map(renderKey)}
+              {row.map((key, colIndex) => renderKey(key, colIndex, rowIndex))}
             </Box>
           ))}
         </Box>
@@ -290,8 +297,13 @@ function BasicKeyboardLayout(props: { keycodes: QmkKeycode[] }) {
               minWidth: "min-content",
             }}
           >
-            {remainingKeys.map((keycode) => (
-              <KeyListKey key={keycode.value} keycode={keycode} draggable={true} />
+            {remainingKeys.map((keycode, index) => (
+              <KeyListKey
+                key={keycode.value}
+                keycode={keycode}
+                draggable={true}
+                animationDelay={rowDelay(BASIC_KEYBOARD_ROWS.length + index)}
+              />
             ))}
           </Box>
         </>
@@ -444,13 +456,15 @@ export function KeycodeCatalog(props: {
                     {props.keycodeConverter
                       .getTapKeycodeList()
                       .filter((k) => k.group === keygroup)
-                      .map((keycode) => {
+                      .map((keycode, index) => {
+                        const animationDelay = Math.min(MAX_ANIMATION_DELAY_MS, index * 12);
                         return match(keycode.group)
                           .with("tapdance", () => (
                             <KeyListKey
                               key={keycode.value}
                               keycode={{ ...keycode, label: keycode.label + " 🖊" }}
                               draggable={true}
+                              animationDelay={animationDelay}
                               onClick={() => {
                                 props.onTapdanceSelect?.(keycode.value & 0x1f);
                               }}
@@ -461,6 +475,7 @@ export function KeycodeCatalog(props: {
                               key={keycode.value}
                               keycode={keycode}
                               draggable={true}
+                              animationDelay={animationDelay}
                             ></KeyListKey>
                           ))
                           .exhaustive();
@@ -488,6 +503,7 @@ export function KeycodeCatalog(props: {
                           value: idx,
                         }}
                         draggable={false}
+                        animationDelay={Math.min(MAX_ANIMATION_DELAY_MS, idx * 12)}
                         onClick={() => {
                           props.onComoboSelect?.(idx);
                         }}
@@ -516,6 +532,7 @@ export function KeycodeCatalog(props: {
                           value: idx,
                         }}
                         draggable={false}
+                        animationDelay={Math.min(MAX_ANIMATION_DELAY_MS, idx * 12)}
                         onClick={() => {
                           props.onOverrideSelect?.(idx);
                         }}

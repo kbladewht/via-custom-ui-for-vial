@@ -1255,6 +1255,20 @@ export function KeymapEditor(props: {
     return () => document.removeEventListener("click", clearSelectionOnBlankClick);
   }, [focusedKey]);
 
+  const candidateAreaWasOpen = useRef(false);
+  useEffect(() => {
+    const isOpening = !!focusedKey && !candidateAreaWasOpen.current;
+    candidateAreaWasOpen.current = !!focusedKey;
+    if (!isOpening) return;
+
+    prepareKeycapAudio();
+    const delays = [0, 90, 180, 270];
+    const timers = delays.map((delay, index) =>
+      window.setTimeout(() => playKeycapLandingSound(index), delay),
+    );
+    return () => timers.forEach((timer) => window.clearTimeout(timer));
+  }, [focusedKey]);
+
   return keycodeConverter === undefined ? (
     <></>
   ) : (
@@ -1313,6 +1327,7 @@ export function KeymapEditor(props: {
 
       <Box
         aria-hidden={!focusedKey}
+        className={focusedKey ? "keycatalog-surface-loaded" : ""}
         sx={{
           position: "relative",
           mt: focusedKey ? 2 : 0,
