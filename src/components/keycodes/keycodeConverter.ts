@@ -483,10 +483,12 @@ export class KeycodeConverter {
         },
       )
       .with(P.number, () => {
+        // Match Vial's display of unrecognized keycodes as a raw hex value.
+        const hexLabel = `0x${value.toString(16).toUpperCase().padStart(4, "0")}`;
         return {
           group: "unknown",
-          key: `Any(${value.toString()})`,
-          label: `Any(${value.toString()})`,
+          key: hexLabel,
+          label: hexLabel,
           value: value,
         };
       })
