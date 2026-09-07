@@ -81,7 +81,7 @@ export interface KeymapKeyProperties {
   reactKey: string;
   isEncoder?: boolean;
   onKeycodeChange?: (target: KeymapKeyProperties, newKeycode: QmkKeycode) => void;
-  onClick?: (target: HTMLElement) => void;
+  onClick?: (target: HTMLElement, ctrlKey: boolean) => void;
 }
 
 export const KEY_GAP = 2;
@@ -115,7 +115,7 @@ function KeyLegend(props: { keycode: QmkKeycode }) {
 export function EditableKey(props: {
   keycode: QmkKeycode;
   onKeycodeChange?: (newKeycode: QmkKeycode) => void;
-  onClick?: (target: HTMLElement) => void;
+  onClick?: (target: HTMLElement, ctrlKey: boolean) => void;
 }) {
   const [isDragOver, setIsDragOver] = useState(false);
   return (
@@ -138,7 +138,7 @@ export function EditableKey(props: {
       onDragLeave={() => {
         setIsDragOver(false);
       }}
-      onClick={(event) => props.onClick?.(event.currentTarget)}
+      onClick={(event) => props.onClick?.(event.currentTarget, event.ctrlKey)}
     >
       <KeyLegend keycode={props.keycode} />
     </div>
@@ -183,7 +183,7 @@ export function KeymapKey(props: KeymapKeyProperties & { isFocused?: boolean }) 
       onDragLeave={() => {
         setIsDragOver(false);
       }}
-      onClick={(event) => props.onClick?.(event.currentTarget)}
+      onClick={(event) => props.onClick?.(event.currentTarget, event.ctrlKey)}
       title={props.shortcut}
     >
       <KeyLegend keycode={props.keycode} />
@@ -639,17 +639,35 @@ function KeymapLayer(props: {
     props.keycodeconverter,
     props.shortcutByKeycode,
   );
+  // Keep a live reference so callbacks created in past renders still see the latest keys.
+  const keymapkeysRef = useRef(keymapkeys);
+  keymapkeysRef.current = keymapkeys;
 
   // Calculate the rightmost position to determine needed width
   const rightmostPos =
     Math.max(...keymapkeys.map((key) => key.x + key.w)) * (WIDTH_1U + KEY_GAP) + WIDTH_1U;
+
+  // Move focus to the next key in tab order after a keycode is assigned from the catalog.
+  const focusNextKeyAfter = (current: KeymapKeyProperties) => {
+    const nextIdx = parseInt(current.reactKey, 10) + 1;
+    const next = keymapkeysRef.current[nextIdx];
+    if (next) {
+      setFocusedKey({ ...next, reactKey: nextIdx.toString() });
+      setCandidateKeycode(next.keycode);
+    } else {
+      setFocusedKey(undefined);
+    }
+  };
 
   // Update context when local focused key changes
   useEffect(() => {
     if (focusedKey) {
       focusContext.setFocusedKey({
         ...focusedKey,
-        onKeycodeChange: props.onKeycodeChange,
+        onKeycodeChange: (target, newKeycode) => {
+          props.onKeycodeChange?.(target, newKeycode);
+          focusNextKeyAfter(target);
+        },
       });
     } else {
       focusContext.setFocusedKey(null);
@@ -673,11 +691,14 @@ function KeymapLayer(props: {
             {...p}
             isFocused={focusedKey?.reactKey === idx.toString()}
             onKeycodeChange={props.onKeycodeChange}
-            onClick={(target) => {
+            onClick={(target, ctrlKey) => {
               setCandidateKeycode(p.keycode);
               setFocusedKey({ ...p, reactKey: idx.toString() });
-              setpopupOpen(true);
               setAnchorEl(target);
+              // Only pop up the tap/hold editor when Ctrl is held; a plain click just focuses the key.
+              if (ctrlKey) {
+                setpopupOpen(true);
+              }
             }}
             reactKey={idx.toString()}
           />
