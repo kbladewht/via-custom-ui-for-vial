@@ -674,6 +674,16 @@ function KeymapLayer(props: {
     }
   }, [focusedKey, props.onKeycodeChange, focusContext]);
 
+  useEffect(() => {
+    const clearFocusedKey = () => {
+      setFocusedKey(undefined);
+      setpopupOpen(false);
+      setAnchorEl(undefined);
+    };
+    window.addEventListener("vial-clear-focused-key", clearFocusedKey);
+    return () => window.removeEventListener("vial-clear-focused-key", clearFocusedKey);
+  }, []);
+
   return (
     <Box ref={boundaryEl}>
       <Box
@@ -683,6 +693,12 @@ function KeymapLayer(props: {
           height: `${(Math.max(...keymapkeys.map((k) => k.y)) + 1) * (WIDTH_1U + KEY_GAP)}px`,
           width: `${rightmostPos}px`, // Set explicit width based on rightmost key plus padding
           minWidth: "100%", // Ensure it's at least as wide as the container
+        }}
+        onClick={(event) => {
+          if (event.target !== event.currentTarget) return;
+          setpopupOpen(false);
+          setAnchorEl(undefined);
+          setFocusedKey(undefined);
         }}
       >
         {keymapkeys.map((p, idx) => (
@@ -1113,6 +1129,28 @@ export function KeymapEditor(props: {
     ).then((k) => setKeycodeConverter(k));
   }, [props.dynamicEntryCount.layer, props.keymap.customKeycodes, props.dynamicEntryCount, props.keymapLanguage, props.language]);
 
+  useEffect(() => {
+    if (!focusedKey) return;
+
+    const clearSelectionOnBlankClick = (event: MouseEvent) => {
+      const target = event.target;
+      if (!(target instanceof Element)) return;
+      if (
+        target.closest(
+          ".keymap-key, .keycatalog-key, .keycode-catalog-tab, .key-select-popup, " +
+            "button, input, textarea, select, [role='button'], [role='tab'], [role='option']",
+        )
+      ) {
+        return;
+      }
+      setFocusedKey(null);
+      window.dispatchEvent(new CustomEvent("vial-clear-focused-key"));
+    };
+
+    document.addEventListener("click", clearSelectionOnBlankClick);
+    return () => document.removeEventListener("click", clearSelectionOnBlankClick);
+  }, [focusedKey]);
+
   return keycodeConverter === undefined ? (
     <></>
   ) : (
@@ -1169,19 +1207,26 @@ export function KeymapEditor(props: {
         </Box>
       </Box>
 
-      {focusedKey && (
-        <Box
-          sx={{
-            position: "relative",
-            mt: 2,
-            backgroundColor: "#0f172a",
-            width: "100%",
-            maxWidth: "100%",
-            overflowX: "auto",
-            pb: 3,
-            pt: 0,
-          }}
-        >
+      <Box
+        aria-hidden={!focusedKey}
+        sx={{
+          position: "relative",
+          mt: focusedKey ? 2 : 0,
+          maxHeight: focusedKey ? 620 : 0,
+          opacity: focusedKey ? 1 : 0,
+          transform: focusedKey ? "translateY(0)" : "translateY(-8px)",
+          visibility: focusedKey ? "visible" : "hidden",
+          pointerEvents: focusedKey ? "auto" : "none",
+          backgroundColor: "#0f172a",
+          width: "100%",
+          maxWidth: "100%",
+          overflowX: "auto",
+          overflowY: focusedKey ? "auto" : "hidden",
+          pb: focusedKey ? 3 : 0,
+          pt: 0,
+          transition: "max-height 220ms ease, margin-top 220ms ease, opacity 180ms ease, transform 220ms ease, visibility 220ms ease, padding-bottom 220ms ease",
+        }}
+      >
           <KeycodeCatalog
           keycodeConverter={keycodeConverter}
           tab={[
@@ -1220,8 +1265,7 @@ export function KeymapEditor(props: {
             setOverrideIndex(index);
           }}
           ></KeycodeCatalog>
-        </Box>
-      )}
+      </Box>
     </FocusedKeyContext.Provider>
   );
 }
