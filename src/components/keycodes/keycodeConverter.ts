@@ -95,6 +95,33 @@ type KeycodeDefinition = {
 type KeycodeRangeDefinition = { [range: string]: { start: number; end: number } };
 type KeycodeLocaleDefinition = { [key: string]: { [language: string]: string } };
 
+type StaticKeycodeData = {
+  keycodes: KeycodeDefinition;
+  keycodeRange: KeycodeRangeDefinition;
+  keycodeLocale: KeycodeLocaleDefinition;
+};
+
+const staticKeycodeDataCache = new Map<string, Promise<StaticKeycodeData>>();
+
+function loadStaticKeycodeData(version: string): Promise<StaticKeycodeData> {
+  const cached = staticKeycodeDataCache.get(version);
+  if (cached) return cached;
+
+  const request = Promise.all([
+    fetch(`keycodes/${version}/keycodes.json`).then((response) => response.json()),
+    fetch(`keycodes/${version}/keycode_override.json`).then((response) => response.json()),
+    fetch(`keycodes/${version}/quantum_keycode_range.json`).then((response) => response.json()),
+    fetch(`keycodes/${version}/keycode_locale.json`).then((response) => response.json()),
+  ]).then(([keycodes, keycodeOverride, keycodeRange, keycodeLocale]) => ({
+    keycodes: { ...keycodes, ...keycodeOverride },
+    keycodeRange,
+    keycodeLocale,
+  }));
+
+  staticKeycodeDataCache.set(version, request);
+  return request;
+}
+
 function getCustomKeycodeTranslation(
   translations: { [key: string]: string },
   key: string,
@@ -123,20 +150,8 @@ export class KeycodeConverter {
     version: string = "0.0.3",
     uiLanguage: string = "en",
   ) {
-    const keycodes: KeycodeDefinition = {
-      ...(await (
-        await fetch(`keycodes/${version}/keycodes.json`, { cache: "no-store" })
-      ).json()),
-      ...(await (
-        await fetch(`keycodes/${version}/keycode_override.json`, { cache: "no-store" })
-      ).json()),
-    };
-    const keycode_range: KeycodeRangeDefinition = await (
-      await fetch(`keycodes/${version}/quantum_keycode_range.json`)
-    ).json();
-    const keycodeLocale: KeycodeLocaleDefinition = await (
-      await fetch(`keycodes/${version}/keycode_locale.json`)
-    ).json();
+    const { keycodes, keycodeRange: keycode_range, keycodeLocale } =
+      await loadStaticKeycodeData(version);
     const customKeycodeTranslations = Object.fromEntries(
       Object.entries(keycodeLocale).map(([key, translations]) => [
         key,

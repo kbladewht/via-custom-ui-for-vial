@@ -692,6 +692,13 @@ function KeymapLayer(props: {
             isFocused={focusedKey?.reactKey === idx.toString()}
             onKeycodeChange={props.onKeycodeChange}
             onClick={(target, ctrlKey) => {
+              if (focusedKey?.reactKey === idx.toString()) {
+                setpopupOpen(false);
+                setAnchorEl(undefined);
+                setFocusedKey(undefined);
+                return;
+              }
+
               setCandidateKeycode(p.keycode);
               setFocusedKey({ ...p, reactKey: idx.toString() });
               setAnchorEl(target);
@@ -956,20 +963,19 @@ function LayerEditor(props: {
           currentLayer={layer}
           onChange={async (layer) => {
             if (!Object.keys(keymap).includes(layer.toString())) {
-              const layerKeys = await props.via.GetLayer(layer, {
+              const matrixDefinition = {
                 rows: props.keymap.matrix.rows,
                 cols: props.keymap.matrix.cols,
-              });
+              };
+              const layerKeys = await props.via.GetLayer(layer, matrixDefinition);
               const newKeymap = { ...keymap };
               newKeymap[layer] = layerKeys;
               setKeymap(newKeymap);
               console.log(`load keymap ${layer}`);
               console.log(layerKeys.map((keycode) => keycode.toString(16)).join(" "));
 
-              setEncodermap({
-                ...encodermap,
-                [layer]: await props.via.GetEncoder(layer, encoderCount),
-              });
+              const layerEncoders = await props.via.GetEncoder(layer, encoderCount);
+              setEncodermap({ ...encodermap, [layer]: layerEncoders });
             }
             setLayer(layer);
           }}
@@ -1002,11 +1008,14 @@ function LayerEditor(props: {
           },
         }}
       >
-        {Object.keys(keymap).includes(layer.toString()) ? (
+        {props.layerCount > 0 ? (
           <KeymapLayer
             keymapProps={props.keymap}
             layoutOption={layoutOption}
-            keymap={keymap[layer]}
+            keymap={
+              keymap[layer] ??
+              Array(props.keymap.matrix.rows * props.keymap.matrix.cols).fill(0)
+            }
             encodermap={encodermap[layer] ?? []}
             keycodeconverter={props.keycodeConverter}
             shortcutByKeycode={shortcutByKeycode}
@@ -1160,19 +1169,20 @@ export function KeymapEditor(props: {
         </Box>
       </Box>
 
-      <Box
-        sx={{
-          position: "relative",
-          mt: 2,
-          backgroundColor: "#0f172a",
-          width: "100%",
-          maxWidth: "100%",
-          overflowX: "auto",
-          pb: 3,
-          pt: 0,
-        }}
-      >
-        <KeycodeCatalog
+      {focusedKey && (
+        <Box
+          sx={{
+            position: "relative",
+            mt: 2,
+            backgroundColor: "#0f172a",
+            width: "100%",
+            maxWidth: "100%",
+            overflowX: "auto",
+            pb: 3,
+            pt: 0,
+          }}
+        >
+          <KeycodeCatalog
           keycodeConverter={keycodeConverter}
           tab={[
             {
@@ -1209,8 +1219,9 @@ export function KeymapEditor(props: {
             setMenuType("override");
             setOverrideIndex(index);
           }}
-        ></KeycodeCatalog>
-      </Box>
+          ></KeycodeCatalog>
+        </Box>
+      )}
     </FocusedKeyContext.Provider>
   );
 }
