@@ -883,6 +883,12 @@ function buildBluetoothShortcuts(
         `R${Math.floor(targetIndex / matrixCols)} C${targetIndex % matrixCols}`,
     );
     const parts: string[] = [];
+    const hasDirectBaseTransition = targetLayer > 1 && (keymaps[0] ?? []).some((value) => {
+      const keycode = keycodeconverter.convertIntToKeycode(value);
+      return keycode.hold === targetLayer ||
+        keycode.label === `MO${targetLayer}` ||
+        keycode.key === `MO(${targetLayer})`;
+    });
     for (let layer = targetLayer; layer > 0; layer--) {
       const previousKeymap = keymaps[layer - 1] ?? [];
       const transitionIndex = previousKeymap?.findIndex((value) => {
@@ -909,6 +915,9 @@ function buildBluetoothShortcuts(
         transition ?? "not found, fallback",
         transitionText,
       );
+      if (hasDirectBaseTransition && layer < targetLayer) {
+        continue;
+      }
       parts.unshift(transitionText);
     }
 
