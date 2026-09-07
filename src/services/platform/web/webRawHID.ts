@@ -24,6 +24,7 @@ class WebRawHID implements WebUsbComInterface {
     console.log(this.port);
   }
 
+  
   setCloseCallback(handler: () => void | null) {
     navigator.hid.removeEventListener("disconnect", this.closeCallback.bind(this));
     this.closeCallback = handler;
