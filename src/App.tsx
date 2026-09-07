@@ -19,7 +19,12 @@ import { useEffect, useRef, useState } from "react";
 import { match, P } from "ts-pattern";
 import "./App.css";
 import { KeyboardSelector } from "./components/KeyboardSelector";
-import { KeymapProperties, LanguageSelector } from "./components/KeymapEditor";
+import {
+  discardPendingKeycapAudio,
+  KeymapProperties,
+  LanguageSelector,
+  prepareKeycapAudio,
+} from "./components/KeymapEditor";
 import { QuantumSettingsEditor } from "./components/QuantumSettingsEditor";
 import { MenuItemProperties, MenuSectionProperties, ViaMenuItem } from "./components/ViaMenuItem";
 import init, { xz_decompress } from "./pkg";
@@ -73,6 +78,7 @@ function App() {
   const [customValues, setCustomValues] = useState<{ [id: string]: number }>({});
   const [customValueId, setCustomValueId] = useState<[string, number, number, number?][]>([]);
   const [connected, setConnected] = useState(false);
+  const [loadedDeviceIndex, setLoadedDeviceIndex] = useState<number | undefined>(undefined);
   const [loading, setLoading] = useState(false);
   const [kbName, setKbName] = useState("");
   const [customEraseDialogOpen, setCustomEraseDialogOpen] = useState(false);
@@ -111,6 +117,7 @@ function App() {
       const firstDevice = devices[0];
       if (firstDevice) {
         setDeviceIndex(firstDevice.index);
+        prepareKeycapAudio();
         void openKeyboard(firstDevice.index);
       }
     })();
@@ -136,10 +143,24 @@ function App() {
     const closeBluetoothOnPageHide = () => {
       void via.Close();
     };
+    const unlockKeycapAudio = (event: PointerEvent | KeyboardEvent) => {
+      if (
+        event instanceof PointerEvent &&
+        event.target instanceof Element &&
+        event.target.closest("[data-keymap-load]")
+      ) {
+        discardPendingKeycapAudio();
+      }
+      prepareKeycapAudio();
+    };
     window.addEventListener("pagehide", closeBluetoothOnPageHide);
+    window.addEventListener("pointerdown", unlockKeycapAudio, { once: true, capture: true });
+    window.addEventListener("keydown", unlockKeycapAudio, { once: true, capture: true });
 
     return () => {
       window.removeEventListener("pagehide", closeBluetoothOnPageHide);
+      window.removeEventListener("pointerdown", unlockKeycapAudio, true);
+      window.removeEventListener("keydown", unlockKeycapAudio, true);
     };
   }, []);
 
@@ -208,6 +229,7 @@ function App() {
     keyboardLoadedRef.current = false;
     setLoading(true);
     setConnected(false);
+    setLoadedDeviceIndex(undefined);
     setVialJson(undefined);
     setCustomMenus([]);
     setActiveMenu(undefined);
@@ -229,6 +251,7 @@ function App() {
           setActiveMenu(undefined);
           setCustomValues({});
           setConnected(false);
+          setLoadedDeviceIndex(undefined);
           setLoading(false);
           setKbName("");
           if (deviceIndex === -2) {
@@ -317,6 +340,7 @@ function App() {
 
     keyboardLoadedRef.current = true;
     setConnected(true);
+    setLoadedDeviceIndex(deviceIndex);
     setLoading(false);
   };
 
@@ -449,9 +473,6 @@ function App() {
 
   return (
     <>
-      <Dialog open={loading}>
-        <DialogContent>Loading...</DialogContent>
-      </Dialog>
       <Grid
         container
         spacing={2}
@@ -506,11 +527,19 @@ function App() {
               />
               <Button
                 className="vial-action-button"
+                data-keymap-load="true"
                 variant="contained"
                 size="small"
                 disabled={deviceIndex === undefined || loading}
                 onClick={() => {
-                  if (deviceIndex !== undefined) void openKeyboard(deviceIndex);
+                  discardPendingKeycapAudio();
+                  prepareKeycapAudio();
+                  if (deviceIndex === undefined) return;
+                  if (connected && loadedDeviceIndex === deviceIndex) {
+                    window.dispatchEvent(new Event("vial-reload-keymap"));
+                  } else {
+                    void openKeyboard(deviceIndex);
+                  }
                 }}
                 sx={{
                   ml: 1,

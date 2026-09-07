@@ -452,6 +452,69 @@ textarea {
   }
 }
 
+.keymap-surface {
+  opacity: 0.72;
+  transform: translateY(4px);
+  perspective: 1000px;
+  transform-style: preserve-3d;
+  transition: opacity 180ms ease, transform 180ms ease;
+}
+
+.keymap-surface-loaded {
+  opacity: 1;
+  transform: translateY(0);
+  box-shadow:
+    0 10px 26px rgba(2, 6, 23, 0.24);
+  animation: keymap-frame-in 320ms ease-out both;
+}
+
+.keymap-surface-loaded .keymap-key {
+  transform-origin: center bottom;
+  transform-style: preserve-3d;
+  will-change: transform, opacity, filter;
+  animation: keycap-drop 480ms cubic-bezier(0.2, 0.85, 0.32, 1.12) both;
+}
+
+@keyframes keymap-frame-in {
+  from {
+    opacity: 0.72;
+    transform: translateY(4px);
+    box-shadow: none;
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+    box-shadow:
+      0 10px 26px rgba(2, 6, 23, 0.24);
+  }
+}
+
+@keyframes keycap-drop {
+  from {
+    opacity: 0.1;
+    transform: var(--keymap-rotation) translate3d(-72px, 0, 120px) rotateY(-38deg) scale(0.86);
+    filter: brightness(1.35) drop-shadow(22px 8px 16px rgba(2, 6, 23, 0.42));
+  }
+  78% {
+    opacity: 1;
+    transform: var(--keymap-rotation) translate3d(0, 0, 0) rotateY(0deg) scale(1);
+    filter: brightness(1.02) drop-shadow(0 5px 8px rgba(2, 6, 23, 0.3));
+  }
+  to {
+    opacity: 1;
+    transform: var(--keymap-rotation) translate3d(0, 0, 0) rotateX(0deg) scale(1);
+    filter: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .keymap-surface,
+  .keymap-surface-loaded {
+    animation: none;
+    transition: none;
+  }
+}
+
 .key-legend-centered {
   width: 100%;
   height: 100%;

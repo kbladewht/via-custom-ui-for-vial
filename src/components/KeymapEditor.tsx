@@ -79,6 +79,7 @@ export interface KeymapKeyProperties {
   keycode: QmkKeycode;
   shortcut?: string;
   reactKey: string;
+  animationDelay?: number;
   isEncoder?: boolean;
   onKeycodeChange?: (target: KeymapKeyProperties, newKeycode: QmkKeycode) => void;
   onClick?: (target: HTMLElement, ctrlKey: boolean) => void;
@@ -86,6 +87,66 @@ export interface KeymapKeyProperties {
 
 export const KEY_GAP = 2;
 export const WIDTH_1U = 50;
+
+let keycapAudioContext: AudioContext | undefined;
+const pendingKeycapNotes: number[] = [];
+
+export function discardPendingKeycapAudio() {
+  pendingKeycapNotes.length = 0;
+}
+
+function flushPendingKeycapNotes() {
+  const notes = pendingKeycapNotes.splice(0);
+  notes.forEach((noteIndex, index) => {
+    window.setTimeout(() => playKeycapLandingSound(noteIndex), index * 120);
+  });
+}
+
+export function prepareKeycapAudio() {
+  try {
+    keycapAudioContext ??= new AudioContext();
+    if (keycapAudioContext.state === "suspended") {
+      void keycapAudioContext.resume().then(flushPendingKeycapNotes);
+    } else {
+      flushPendingKeycapNotes();
+    }
+  } catch {
+    keycapAudioContext = undefined;
+  }
+}
+
+function playKeycapLandingSound(noteIndex: number) {
+  if (!keycapAudioContext || keycapAudioContext.state !== "running") {
+    if (!pendingKeycapNotes.includes(noteIndex)) pendingKeycapNotes.push(noteIndex);
+    return;
+  }
+
+  const start = keycapAudioContext.currentTime;
+  const notes = [261.63, 293.66, 329.63, 392, 440, 523.25];
+  const frequency = notes[noteIndex % notes.length];
+  const melody = keycapAudioContext.createOscillator();
+  const shimmer = keycapAudioContext.createOscillator();
+  const melodyGain = keycapAudioContext.createGain();
+  const shimmerGain = keycapAudioContext.createGain();
+  melody.type = "sine";
+  shimmer.type = "triangle";
+  melody.frequency.setValueAtTime(frequency, start);
+  shimmer.frequency.setValueAtTime(frequency * 2, start);
+  melodyGain.gain.setValueAtTime(0.0001, start);
+  melodyGain.gain.exponentialRampToValueAtTime(0.035, start + 0.012);
+  melodyGain.gain.exponentialRampToValueAtTime(0.0001, start + 0.16);
+  shimmerGain.gain.setValueAtTime(0.0001, start);
+  shimmerGain.gain.exponentialRampToValueAtTime(0.009, start + 0.012);
+  shimmerGain.gain.exponentialRampToValueAtTime(0.0001, start + 0.11);
+  melody.connect(melodyGain);
+  shimmer.connect(shimmerGain);
+  melodyGain.connect(keycapAudioContext.destination);
+  shimmerGain.connect(keycapAudioContext.destination);
+  melody.start(start);
+  shimmer.start(start);
+  melody.stop(start + 0.17);
+  shimmer.stop(start + 0.12);
+}
 
 function KeyLegend(props: { keycode: QmkKeycode }) {
   const { keycode } = props;
@@ -159,16 +220,21 @@ export function KeymapKey(props: KeymapKeyProperties & { isFocused?: boolean }) 
               left: (props.rx + props.offsetx) * (WIDTH_1U + KEY_GAP),
               width: props.w * WIDTH_1U - 4 + (props.w - 1) * KEY_GAP,
               height: props.h * WIDTH_1U - 4,
-              transform: `rotate(${props.r}deg)`,
+              transform: "var(--keymap-rotation)",
+              "--keymap-rotation": `rotate(${props.r}deg)`,
+              animationDelay: props.animationDelay !== undefined ? `${props.animationDelay}ms` : undefined,
               transformOrigin: `${-props.offsetx * (WIDTH_1U + KEY_GAP)}px ${-props.offsety * (WIDTH_1U + KEY_GAP)}px`,
-            }
+            } as React.CSSProperties
           : {
               position: "absolute",
               top: props.y * (WIDTH_1U + KEY_GAP),
               left: props.x * (WIDTH_1U + KEY_GAP),
               width: props.w * WIDTH_1U - 4 + (props.w - 1) * KEY_GAP,
               height: props.h * WIDTH_1U - 4,
-            }
+              transform: "var(--keymap-rotation)",
+              "--keymap-rotation": "rotate(0deg)",
+              animationDelay: props.animationDelay !== undefined ? `${props.animationDelay}ms` : undefined,
+            } as React.CSSProperties
       }
       onDragOver={(event) => {
         event.preventDefault();
@@ -615,6 +681,7 @@ function LayerSelector(props: {
 }
 
 function KeymapLayer(props: {
+  keymapReady: boolean;
   keymapProps: KeymapProperties;
   layoutOption: { [layout: number]: number };
   keymap: number[];
@@ -628,6 +695,7 @@ function KeymapLayer(props: {
   const boundaryEl = useRef<HTMLElement>(null);
   const [focusedKey, setFocusedKey] = useState<KeymapKeyProperties | undefined>(undefined);
   const [candidateKeycode, setCandidateKeycode] = useState<QmkKeycode>(DefaultQmkKeycode);
+  const keycapSoundPlayed = useRef(false);
   // Access the global focus context
   const focusContext = useContext(FocusedKeyContext);
 
@@ -639,6 +707,21 @@ function KeymapLayer(props: {
     props.keycodeconverter,
     props.shortcutByKeycode,
   );
+
+  useEffect(() => {
+    if (!props.keymapReady || keycapSoundPlayed.current) return;
+    keycapSoundPlayed.current = true;
+    const maxX = Math.max(...keymapkeys.map((key) => key.x), 1);
+    const delays = [...new Set(
+      keymapkeys.map((key) =>
+        Math.round(520 + Math.floor((Math.max(0, key.x) / maxX) * 5) * 120),
+      ),
+    )].sort((a, b) => a - b);
+    const timers = delays.map((delay, index) =>
+      window.setTimeout(() => playKeycapLandingSound(index), delay),
+    );
+    return () => timers.forEach((timer) => window.clearTimeout(timer));
+  }, [props.keymapReady]);
   // Keep a live reference so callbacks created in past renders still see the latest keys.
   const keymapkeysRef = useRef(keymapkeys);
   keymapkeysRef.current = keymapkeys;
@@ -687,6 +770,7 @@ function KeymapLayer(props: {
   return (
     <Box ref={boundaryEl}>
       <Box
+        className={`keymap-surface ${props.keymapReady ? "keymap-surface-loaded" : ""}`}
         sx={{
           position: "relative",
           mt: 1,
@@ -707,6 +791,7 @@ function KeymapLayer(props: {
             {...p}
             isFocused={focusedKey?.reactKey === idx.toString()}
             onKeycodeChange={props.onKeycodeChange}
+            animationDelay={Math.min(1000, Math.pow(Math.max(0, p.x), 1.35) * 27)}
             onClick={(target, ctrlKey) => {
               if (focusedKey?.reactKey === idx.toString()) {
                 setpopupOpen(false);
@@ -862,6 +947,8 @@ function LayerEditor(props: {
   const [keymap, setKeymap] = useState<{ [layer: number]: number[] }>({});
   const [encoderCount, setEncoderCount] = useState(0);
   const [encodermap, setEncodermap] = useState<{ [layer: number]: number[][] }>({});
+  const [keymapReloadToken, setKeymapReloadToken] = useState(0);
+  const [keymapAnimationToken, setKeymapAnimationToken] = useState(0);
   const shortcutInfo = buildBluetoothShortcuts(
     keymap,
     props.keymap.customKeycodes,
@@ -905,12 +992,21 @@ function LayerEditor(props: {
   }, [keymap, encodermap, encoderCount, props.layerCount, props.keymap, props.via]);
 
   useEffect(() => {
+    const reloadKeymap = () => setKeymapReloadToken((token) => token + 1);
+    window.addEventListener("vial-reload-keymap", reloadKeymap);
+    return () => window.removeEventListener("vial-reload-keymap", reloadKeymap);
+  }, []);
+
+  useEffect(() => {
     if (props.layerCount <= 0) return;
 
     navigator.locks.request("load-layout", async () => {
-      const layout = await props.via.GetLayoutOption();
-      setLayoutOption({ 0: layout });
-      setLayer(0);
+      const refreshOnly = keymapReloadToken > 0;
+      if (!refreshOnly) {
+        const layout = await props.via.GetLayoutOption();
+        setLayoutOption({ 0: layout });
+        setLayer(0);
+      }
 
       const layersToLoad = Math.min(3, props.layerCount);
       const matrixDefinition = {
@@ -919,12 +1015,11 @@ function LayerEditor(props: {
       };
       const layerZero = await props.via.GetLayer(0, matrixDefinition);
       const loadedLayers: { [layer: number]: number[] } = { 0: layerZero };
-      setKeymap(loadedLayers);
 
       for (let layer = 1; layer < layersToLoad; layer++) {
         loadedLayers[layer] = await props.via.GetLayer(layer, matrixDefinition);
-        setKeymap({ ...loadedLayers });
       }
+      setKeymap(loadedLayers);
 
       const encoderEntries = props.keymap.layouts.keymap
         .flatMap((row) => row)
@@ -937,10 +1032,11 @@ function LayerEditor(props: {
       const loadedEncoders: { [layer: number]: number[][] } = {};
       for (let layer = 0; layer < layersToLoad; layer++) {
         loadedEncoders[layer] = await props.via.GetEncoder(layer, encoderCount);
-        setEncodermap({ ...loadedEncoders });
       }
+      setEncodermap(loadedEncoders);
+      setKeymapAnimationToken((token) => token + 1);
     });
-  }, [props.keymap, props.layerCount, props.via]);
+  }, [props.keymap, props.layerCount, props.via, keymapReloadToken]);
 
   const sendKeycode = async (layer: number, row: number, col: number, keycode: number) => {
     await props.via.SetKeycode(layer, row, col, keycode);
@@ -1024,14 +1120,13 @@ function LayerEditor(props: {
           },
         }}
       >
-        {props.layerCount > 0 ? (
+        {props.layerCount > 0 && keymap[layer] !== undefined ? (
           <KeymapLayer
+            key={`keymap-${keymapAnimationToken}`}
+            keymapReady
             keymapProps={props.keymap}
             layoutOption={layoutOption}
-            keymap={
-              keymap[layer] ??
-              Array(props.keymap.matrix.rows * props.keymap.matrix.cols).fill(0)
-            }
+            keymap={keymap[layer]}
             encodermap={encodermap[layer] ?? []}
             keycodeconverter={props.keycodeConverter}
             shortcutByKeycode={shortcutByKeycode}
