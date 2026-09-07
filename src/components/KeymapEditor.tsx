@@ -456,7 +456,7 @@ function convertToKeymapKeys(
             .slice(0, 2);
           const hasMatrixPosition = keyPos.length === 2 && keyPos.every(Number.isInteger);
 
-          const isEncoder = col.split("\n")[9] === "e";
+          const isEncoder = col.split("\n").at(-1)?.trim() === "e";
 
           
           if (
@@ -882,6 +882,8 @@ function LayerEditor(props: {
   }, [keymap, encodermap, encoderCount, props.layerCount, props.keymap, props.via]);
 
   useEffect(() => {
+    if (props.layerCount <= 0) return;
+
     navigator.locks.request("load-layout", async () => {
       const layout = await props.via.GetLayoutOption();
       setLayoutOption({ 0: layout });
@@ -901,12 +903,13 @@ function LayerEditor(props: {
         setKeymap({ ...loadedLayers });
       }
 
-      const encoderCount = props.keymap.layouts.keymap
-        .flatMap((row) => row.flatMap((col) => col.toString()))
-        .reduce(
-          (acc, key) => Math.max(acc, key.endsWith("e") ? parseInt(key.split(",")[0]) + 1 : acc),
-          0,
-        );
+      const encoderEntries = props.keymap.layouts.keymap
+        .flatMap((row) => row)
+        .filter((col): col is string => typeof col === "string" && /(?:^|\n)e\s*$/.test(col));
+      const encoderCount = encoderEntries.reduce((count, encoder) => {
+        const encoderIndex = Number.parseInt(encoder.split(/\r?\n/)[0].split(",")[0], 10);
+        return Number.isInteger(encoderIndex) ? Math.max(count, encoderIndex + 1) : count;
+      }, 0);
       setEncoderCount(encoderCount);
       const loadedEncoders: { [layer: number]: number[][] } = {};
       for (let layer = 0; layer < layersToLoad; layer++) {
@@ -914,7 +917,7 @@ function LayerEditor(props: {
         setEncodermap({ ...loadedEncoders });
       }
     });
-  }, [props.keymap, props.via]);
+  }, [props.keymap, props.layerCount, props.via]);
 
   const sendKeycode = async (layer: number, row: number, col: number, keycode: number) => {
     await props.via.SetKeycode(layer, row, col, keycode);
@@ -1004,7 +1007,7 @@ function LayerEditor(props: {
             keymapProps={props.keymap}
             layoutOption={layoutOption}
             keymap={keymap[layer]}
-            encodermap={encodermap[layer] ?? [[]]}
+            encodermap={encodermap[layer] ?? []}
             keycodeconverter={props.keycodeConverter}
             shortcutByKeycode={shortcutByKeycode}
             onKeycodeChange={(target, newKeycode) => {

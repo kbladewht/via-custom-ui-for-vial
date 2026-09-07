@@ -54,7 +54,7 @@ export function KeyboardSelector(props: {
     >
       {/* <InputLabel>Select Keyboard</InputLabel> */}
       <Select
-        value={props.deviceIndex || ""}
+        value={props.deviceIndex ?? ""}
         label="select-keyboard"
         onChange={(e) => {
           console.log(e.target.value);
