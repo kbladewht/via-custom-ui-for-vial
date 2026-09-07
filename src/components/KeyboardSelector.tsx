@@ -107,22 +107,6 @@ export function KeyboardSelector(props: {
             Add New Keyboard
           </MenuItem>
         )}
-        {isTauri || navigator.bluetooth === undefined ? (
-          <></>
-        ) : (
-          <MenuItem
-            key="new-device-ble"
-            value={-2}
-            sx={{
-              display: isTauri ? "none" : "block",
-              color: "#c3d0e0",
-              backgroundColor: "#0f172a",
-              "&:hover": { backgroundColor: "#334155" },
-            }}
-          >
-            Connect by BLE
-          </MenuItem>
-        )}
       </Select>
     </FormControl>
   );

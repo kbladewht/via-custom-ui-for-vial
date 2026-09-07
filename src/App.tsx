@@ -106,7 +106,13 @@ function App() {
     // load wasm
     init();
     (async () => {
-      setDeviceList(await updateDeviceList());
+      const devices = await updateDeviceList();
+      setDeviceList(devices);
+      const firstDevice = devices[0];
+      if (firstDevice) {
+        setDeviceIndex(firstDevice.index);
+        void openKeyboard(firstDevice.index);
+      }
     })();
     via.setOnLoading((isLoading: boolean) => {
       if (keyboardLoadedRef.current) return;
@@ -475,19 +481,49 @@ function App() {
               position: "relative",
             }}
           >
-            <Box sx={{ flex: "1 1 auto", minWidth: 0, maxWidth: 420 }}>
+            <Box
+              sx={{
+                display: "flex",
+                alignItems: "center",
+                flex: "1 1 auto",
+                minWidth: 0,
+                maxWidth: 420,
+              }}
+            >
               <KeyboardSelector
                 deviceIndex={deviceIndex}
                 deviceList={deviceList}
                 onChange={(idx) => {
                   setDeviceIndex(idx);
-                  openKeyboard(idx);
                 }}
                 onOpen={async () => {
                   const deviceList = await updateDeviceList();
                   setDeviceList(deviceList);
+                  setDeviceIndex((currentIndex) =>
+                    currentIndex ?? deviceList[0]?.index,
+                  );
                 }}
               />
+              <Button
+                className="vial-action-button"
+                variant="contained"
+                size="small"
+                disabled={deviceIndex === undefined || loading}
+                onClick={() => {
+                  if (deviceIndex !== undefined) void openKeyboard(deviceIndex);
+                }}
+                sx={{
+                  ml: 1,
+                  my: 0,
+                  alignSelf: "center",
+                  minWidth: 46,
+                  px: 1,
+                  py: 0.35,
+                  fontSize: "11px",
+                }}
+              >
+                Load
+              </Button>
             </Box>
             <Typography
               sx={{
