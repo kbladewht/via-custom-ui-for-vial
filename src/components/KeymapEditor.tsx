@@ -1185,6 +1185,69 @@ export function LanguageSelector(props: {
   );
 }
 
+export function ComboOverrideEditor(props: {
+  via: ViaKeyboard;
+  language: "zh" | "en";
+  keymapLanguage: string;
+  dynamicEntryCount: { combo: number; override: number; layer: number; tapdance: number };
+}) {
+  const [keycodeConverter, setKeycodeConverter] = useState<KeycodeConverter>();
+  const [editor, setEditor] = useState<"combo" | "override">();
+  const [comboIndex, setComboIndex] = useState(-1);
+  const [overrideIndex, setOverrideIndex] = useState(-1);
+
+  useEffect(() => {
+    KeycodeConverter.Create(
+      props.dynamicEntryCount.layer,
+      undefined,
+      0,
+      props.dynamicEntryCount.tapdance,
+      props.keymapLanguage,
+      "0.0.3",
+      props.language,
+    ).then((converter) => setKeycodeConverter(converter));
+  }, [props.dynamicEntryCount, props.keymapLanguage, props.language]);
+
+  if (!keycodeConverter) return null;
+
+  return (
+    <Box sx={{ width: "100%", p: 1 }}>
+      {editor === "combo" ? (
+        <ComboEditor
+          via={props.via}
+          keycodeConverter={keycodeConverter}
+          comboIndex={comboIndex}
+          comboCount={props.dynamicEntryCount.combo}
+          onBack={() => setEditor(undefined)}
+        />
+      ) : editor === "override" ? (
+        <OverrideEditor
+          via={props.via}
+          keycodeConverter={keycodeConverter}
+          overrideIndex={overrideIndex}
+          overrideCount={props.dynamicEntryCount.override}
+          onBack={() => setEditor(undefined)}
+        />
+      ) : (
+        <KeycodeCatalog
+          keycodeConverter={keycodeConverter}
+          tab={[{ label: "Combo/Override", keygroup: ["combo", "keyoverride"] }]}
+          comboCount={props.dynamicEntryCount.combo}
+          overrideCount={props.dynamicEntryCount.override}
+          onComoboSelect={(index) => {
+            setComboIndex(index);
+            setEditor("combo");
+          }}
+          onOverrideSelect={(index) => {
+            setOverrideIndex(index);
+            setEditor("override");
+          }}
+        />
+      )}
+    </Box>
+  );
+}
+
 export function KeymapEditor(props: {
   keymap: KeymapProperties;
   via: ViaKeyboard;
@@ -1353,10 +1416,6 @@ export function KeymapEditor(props: {
             { label: quantumTranslations[props.language].keycodeTabs.Layer, keygroup: ["layer"] },
             { label: quantumTranslations[props.language].keycodeTabs.Macro, keygroup: ["macro"] },
             { label: quantumTranslations[props.language].keycodeTabs.TapDance, keygroup: ["tapdance"] },
-            {
-              label: quantumTranslations[props.language].keycodeTabs["Combo/Override"],
-              keygroup: ["combo", "keyoverride"],
-            },
           ]}
           comboCount={props.dynamicEntryCount.combo}
           overrideCount={props.dynamicEntryCount.override}
