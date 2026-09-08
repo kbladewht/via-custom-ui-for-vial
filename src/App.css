@@ -458,6 +458,7 @@ textarea {
   -webkit-outline: none !important;
   border-radius: 50% !important;
   overflow: hidden;
+  border: 2px solid rgba(148, 163, 184, 0.18); /* show circular border for encoders */
 }
 .keymap-key.keymap-encoder:hover {
   background: linear-gradient(180deg, #243244 0%, #111827 100%) !important;
