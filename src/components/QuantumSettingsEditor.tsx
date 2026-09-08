@@ -32,13 +32,13 @@ export function QuantumSettingsEditor(props: {
   const [keycodeConverter, setKeycodeConverter] = useState<KeycodeConverter>();
 
   const tabs = [
-    { label: "Keymap", content: [] } as { label: string; content: never[] },
-    { label: "Macro", content: [] } as { label: string; content: never[] },
-    { label: "TapDance", content: [] } as { label: string; content: never[] },
-    { label: "Combos", content: [] } as { label: string; content: never[] },
-    { label: "Quantum", content: [] } as { label: string; content: never[] },
+    { id: "Keymap", label: "Keymap" },
+    { id: "Macro", label: "Macro" },
+    { id: "TapDance", label: "TapDance" },
+    { id: "Combos", label: "Combos" },
+    { id: "Quantum", label: "QMK Settings" },
     ...(props.customMenus?.length
-      ? [{ label: "Custom", content: [] } as { label: string; content: never[] }]
+      ? [{ id: "Custom", label: "Custom" }]
       : []),
   ];
 
@@ -72,7 +72,7 @@ export function QuantumSettingsEditor(props: {
 
     if (undefinedIds.length === 0) return;
 
-    navigator.locks.request("load-quantum-settings", async () => {
+    const loadQuantumSettings = async () => {
       const value = await props.via.GetQuantumSettingsValue(undefinedIds);
       const newValue = Object.entries(value).reduce(
         (acc, v) => {
@@ -89,7 +89,13 @@ export function QuantumSettingsEditor(props: {
       );
       setQuantumValue(newValue);
       console.log(newValue);
-    });
+    };
+
+    if (navigator.locks?.request) {
+      void navigator.locks.request("load-quantum-settings", loadQuantumSettings);
+    } else {
+      void loadQuantumSettings();
+    }
   }, [props.via, quantumTabValue]);
 
   return (
@@ -105,10 +111,12 @@ export function QuantumSettingsEditor(props: {
       >
         {tabs.map((menu) => (
           <Tab
-            key={menu.label}
+            key={menu.id}
             label={
-              (quantumTranslations[props.language].tabs as Record<string, string>)[menu.label] ??
-              menu.label
+              menu.id === "Quantum"
+                ? "QMK Settings"
+                : (quantumTranslations[props.language].tabs as Record<string, string>)[menu.id] ??
+                  menu.label
             }
             sx={{
               color: "#b8c7dc",
@@ -134,7 +142,7 @@ export function QuantumSettingsEditor(props: {
             display: tabValue === idx ? "block" : "none",
           }}
         >
-          {menu.label === "Keymap" && props.keymap && props.dynamicEntryCount ? (
+          {menu.id === "Keymap" && props.keymap && props.dynamicEntryCount ? (
             <KeymapEditor
               keymap={props.keymap}
               via={props.via}
@@ -143,21 +151,21 @@ export function QuantumSettingsEditor(props: {
               keymapLanguage={props.keymapLanguage}
               dynamicEntryCount={props.dynamicEntryCount}
             />
-          ) : menu.label === "Combos" && props.dynamicEntryCount ? (
+          ) : menu.id === "Combos" && props.dynamicEntryCount ? (
             <ComboOverrideEditor
               via={props.via}
               language={props.language}
               keymapLanguage={props.keymapLanguage}
               dynamicEntryCount={props.dynamicEntryCount}
             />
-          ) : menu.label === "TapDance" && props.dynamicEntryCount ? (
+          ) : menu.id === "TapDance" && props.dynamicEntryCount ? (
             <TapDanceSelector
               via={props.via}
               language={props.language}
               keymapLanguage={props.keymapLanguage}
               dynamicEntryCount={props.dynamicEntryCount}
             />
-          ) : menu.label === "Quantum" ? (
+          ) : menu.id === "Quantum" ? (
             <Box>
               <Tabs
                 value={quantumTabValue}
@@ -210,7 +218,7 @@ export function QuantumSettingsEditor(props: {
                 </Box>
               </Box>
             </Box>
-          ) : menu.label === "Macro" ? (
+          ) : menu.id === "Macro" ? (
             <Box sx={{ p: 2 }}>
               {keycodeConverter && (props.macroCount ?? 0) > 0 ? (
                 <>
@@ -252,7 +260,7 @@ export function QuantumSettingsEditor(props: {
                 <Box sx={{ color: "#cbd5e1" }}>No macros available.</Box>
               )}
             </Box>
-          ) : menu.label === "Custom" ? (
+          ) : menu.id === "Custom" ? (
             <Box sx={{ p: 2 }}>
               {props.customMenus?.map((customMenu) => (
                 <Box key={customMenu.label} sx={{ mb: 2 }}>

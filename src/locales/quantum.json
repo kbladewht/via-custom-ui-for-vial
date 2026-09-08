@@ -20,7 +20,8 @@
       "Combo": "组合键",
       "One Shot Keys": "单次按键",
       "Mouse Keys": "鼠标按键",
-      "Macro": "宏"
+      "Macro": "宏",
+      "Quantum": "QMK Settings"
     }
   },
   "en": {
@@ -45,7 +46,8 @@
       "One Shot Keys": "One Shot Keys",
       "Mouse Keys": "Mouse Keys",
       "Macro": "Macro",
-      "Combos": "Combos"
+      "Combos": "Combos",
+      "Quantum": "QMK Settings"
     }
   }
 }
