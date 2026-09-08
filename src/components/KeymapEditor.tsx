@@ -965,17 +965,7 @@ function LayerEditor(props: {
   const [encodermap, setEncodermap] = useState<{ [layer: number]: number[][] }>({});
   const [keymapReloadToken, setKeymapReloadToken] = useState(0);
   const [keymapAnimationToken, setKeymapAnimationToken] = useState(0);
-  const shortcutInfo = buildBluetoothShortcuts(
-    keymap,
-    props.keymap.customKeycodes,
-    props.keycodeConverter,
-    props.keymap.matrix.cols,
-  );
-  const shortcutByKeycode = shortcutInfo.byKeycode;
-
-  useEffect(() => {
-    window.dispatchEvent(new CustomEvent("vial-shortcut-help", { detail: shortcutInfo.entries }));
-  }, [shortcutInfo.entries.map((entry) => `${entry.name}:${entry.shortcut}`).join("|")]);
+  const shortcutByKeycode: { [keycode: number]: string } = {};
 
   useEffect(() => {
     const loadMissingShortcutLayers = async () => {
@@ -1000,8 +990,16 @@ function LayerEditor(props: {
       }
     };
 
-    const handleShortcutHelpRequest = () => {
-      void loadMissingShortcutLayers();
+    const handleShortcutHelpRequest = async () => {
+      await loadMissingShortcutLayers();
+      // compute shortcuts only when user explicitly requests
+      const shortcutInfo = buildBluetoothShortcuts(
+        { ...keymap },
+        props.keymap.customKeycodes,
+        props.keycodeConverter,
+        props.keymap.matrix.cols,
+      );
+      window.dispatchEvent(new CustomEvent("vial-shortcut-help", { detail: shortcutInfo.entries }));
     };
     window.addEventListener("vial-shortcut-help-request", handleShortcutHelpRequest);
     return () => window.removeEventListener("vial-shortcut-help-request", handleShortcutHelpRequest);
