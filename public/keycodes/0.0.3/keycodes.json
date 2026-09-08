@@ -3750,70 +3750,70 @@
     ]
   },
   "0x782B": {
-    "group": "rgb",
+    "group": "rgb_na",
     "key": "RGB_MODE_PLAIN",
     "aliases": [
       "RGB_M_P"
     ]
   },
   "0x782C": {
-    "group": "rgb",
+    "group": "rgb_na",
     "key": "RGB_MODE_BREATHE",
     "aliases": [
       "RGB_M_B"
     ]
   },
   "0x782D": {
-    "group": "rgb",
+    "group": "rgb_na",
     "key": "RGB_MODE_RAINBOW",
     "aliases": [
       "RGB_M_R"
     ]
   },
   "0x782E": {
-    "group": "rgb",
+    "group": "rgb_na",
     "key": "RGB_MODE_SWIRL",
     "aliases": [
       "RGB_M_SW"
     ]
   },
   "0x782F": {
-    "group": "rgb",
+    "group": "rgb_na",
     "key": "RGB_MODE_SNAKE",
     "aliases": [
       "RGB_M_SN"
     ]
   },
   "0x7830": {
-    "group": "rgb",
+    "group": "rgb_na",
     "key": "RGB_MODE_KNIGHT",
     "aliases": [
       "RGB_M_K"
     ]
   },
   "0x7831": {
-    "group": "rgb",
+    "group": "rgb_na",
     "key": "RGB_MODE_XMAS",
     "aliases": [
       "RGB_M_X"
     ]
   },
   "0x7832": {
-    "group": "rgb",
+    "group": "rgb_na",
     "key": "RGB_MODE_GRADIENT",
     "aliases": [
       "RGB_M_G"
     ]
   },
   "0x7833": {
-    "group": "rgb",
+    "group": "rgb_na",
     "key": "RGB_MODE_RGBTEST",
     "aliases": [
       "RGB_M_T"
     ]
   },
   "0x7834": {
-    "group": "rgb",
+    "group": "rgb_na",
     "key": "RGB_MODE_TWINKLE",
     "aliases": [
       "RGB_M_TW"

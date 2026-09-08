@@ -1367,7 +1367,7 @@ export function KeymapEditor(props: {
             },
             { label: quantumTranslations[props.language].keycodeTabs.Media, keygroup: ["media"] },
             { label: quantumTranslations[props.language].keycodeTabs.Quantum, keygroup: ["quantum"] },
-            { label: "RGB", keygroup: ["rgb"] },
+            { label: "RGB", keygroup: ["backlight","rgb", "rgb_matrix"] },
             { label: quantumTranslations[props.language].keycodeTabs.Layer, keygroup: ["layer"] },
             { label: quantumTranslations[props.language].keycodeTabs.Macro, keygroup: ["macro"] },
             { label: quantumTranslations[props.language].keycodeTabs.TapDance, keygroup: ["tapdance"] },
