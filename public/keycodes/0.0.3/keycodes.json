@@ -947,7 +947,7 @@
   "0xA9": {
     "group": "media",
     "key": "KC_AUDIO_VOL_UP",
-    "label": "Vol Up",
+    "label": "Vol +",
     "aliases": [
       "KC_VOLU"
     ]
@@ -955,7 +955,7 @@
   "0xAA": {
     "group": "media",
     "key": "KC_AUDIO_VOL_DOWN",
-    "label": "Vol Down",
+    "label": "Vol -",
     "aliases": [
       "KC_VOLD"
     ]
