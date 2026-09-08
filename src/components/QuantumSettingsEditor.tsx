@@ -26,13 +26,14 @@ export function QuantumSettingsEditor(props: {
   onCustomErase?: () => void;
 }) {
   const [tabValue, setTabValue] = useState(0);
+  const [quantumTabValue, setQuantumTabValue] = useState(0);
   const [quantumValue, setQuantumValue] = useState<{ [id: string]: number }>({});
   const [selectedMacroIndex, setSelectedMacroIndex] = useState(0);
   const [keycodeConverter, setKeycodeConverter] = useState<KeycodeConverter>();
 
   const tabs = [
     { label: "Keymap", content: [] } as { label: string; content: never[] },
-    ...QuantumSettingDefinition,
+    { label: "Quantum", content: [] } as { label: string; content: never[] },
     { label: "Macro", content: [] } as { label: string; content: never[] },
     ...(props.customMenus?.length
       ? [{ label: "Custom", content: [] } as { label: string; content: never[] }]
@@ -56,7 +57,7 @@ export function QuantumSettingsEditor(props: {
   useEffect(() => {
     console.log("read quantum values");
 
-    const currentTab = tabs[tabValue] ?? QuantumSettingDefinition[0];
+    const currentTab = QuantumSettingDefinition[quantumTabValue] ?? QuantumSettingDefinition[0];
     const undefinedIds = currentTab.content
       .filter((v) => quantumValue[v.content[0]] === undefined)
       .map((v) => v.content[1] as number);
@@ -87,7 +88,7 @@ export function QuantumSettingsEditor(props: {
       setQuantumValue(newValue);
       console.log(newValue);
     });
-  }, [props.via, tabValue]);
+  }, [props.via, quantumTabValue]);
 
   return (
     <>
@@ -140,6 +141,59 @@ export function QuantumSettingsEditor(props: {
               keymapLanguage={props.keymapLanguage}
               dynamicEntryCount={props.dynamicEntryCount}
             />
+          ) : menu.label === "Quantum" ? (
+            <Box>
+              <Tabs
+                value={quantumTabValue}
+                onChange={(_event, value) => setQuantumTabValue(value)}
+                variant="scrollable"
+                scrollButtons="auto"
+                sx={{ py: 0 }}
+              >
+                {QuantumSettingDefinition.map((quantumTab) => (
+                  <Tab
+                    key={quantumTab.label}
+                    label={
+                      (quantumTranslations[props.language].tabs as Record<string, string>)[quantumTab.label] ??
+                      quantumTab.label
+                    }
+                    sx={{
+                      color: "#b8c7dc",
+                      fontWeight: 600,
+                      textTransform: "none",
+                      border: "1px solid #334155",
+                      borderRadius: "8px 8px 0 0",
+                      backgroundColor: "rgba(30, 41, 59, 0.7)",
+                      "&.Mui-selected": {
+                        color: "#f8fafc",
+                        borderColor: "#475569",
+                        backgroundColor: "#334155",
+                      },
+                    }}
+                  />
+                ))}
+              </Tabs>
+              <Box sx={{ p: 2 }}>
+                <ViaMenuItem
+                  {...(QuantumSettingDefinition[quantumTabValue] as MenuSectionProperties)}
+                  customValues={quantumValue}
+                  onChange={(id, value) => {
+                    console.log(`update ${id} to ${value}`);
+                    const newValues = { ...quantumValue, [id[0]]: value };
+                    setQuantumValue(newValues);
+                    props.onChange(newValues);
+                  }}
+                />
+                <Box sx={{ display: "flex", gap: 1, mt: 2 }}>
+                  <Button className="quantum-setting-save" variant="contained" onClick={props.onSave}>
+                    Save
+                  </Button>
+                  <Button className="quantum-setting-erase" variant="contained" color="error" onClick={props.onErase}>
+                    Erase
+                  </Button>
+                </Box>
+              </Box>
+            </Box>
           ) : menu.label === "Macro" ? (
             <Box sx={{ p: 2 }}>
               {keycodeConverter && (props.macroCount ?? 0) > 0 ? (
@@ -208,28 +262,7 @@ export function QuantumSettingsEditor(props: {
                 </Button>
               </Box>
             </Box>
-          ) : (
-            <>
-              <ViaMenuItem
-                {...(menu as MenuSectionProperties)}
-                customValues={quantumValue}
-                onChange={(id, value) => {
-                  console.log(`update ${id} to ${value}`);
-                  const newValues = { ...quantumValue, [id[0]]: value };
-                  setQuantumValue(newValues);
-                  props.onChange(newValues);
-                }}
-              />
-              <Box sx={{ display: "flex", gap: 1, p: 2 }}>
-                <Button className="quantum-setting-save" variant="contained" onClick={props.onSave}>
-                  Save
-                </Button>
-                <Button className="quantum-setting-erase" variant="contained" color="error" onClick={props.onErase}>
-                  Erase
-                </Button>
-              </Box>
-            </>
-          )}
+          ) : null}
         </Box>
       ))}
     </>
