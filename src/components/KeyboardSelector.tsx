@@ -10,7 +10,7 @@ export function KeyboardSelector(props: {
 }) {
   return (
     <FormControl
-      variant="standard"
+      variant="outlined"
       sx={{
         width: "fit-content",
         minWidth: "180px",
@@ -21,17 +21,31 @@ export function KeyboardSelector(props: {
           width: "fit-content",
           minWidth: "180px",
           maxWidth: "100%",
-          backgroundColor: "#0f172a",
+          height: "30px",
           borderRadius: "10px",
+          backgroundColor: "#111827",
           color: "#f8fafc",
-          maxHeight: "30px",
+          fontSize: "13px",
           padding: "0 8px",
+          boxSizing: "border-box",
         },
-        ".MuiInput-root::before": {
-          display: "none",
+        ".MuiOutlinedInput-root": {
+          borderRadius: "10px",
+          "&:hover": {
+            "& .MuiOutlinedInput-notchedOutline": {
+              borderColor: "#cbd5e1",
+            },
+          },
+          "&.Mui-focused": {
+            "& .MuiOutlinedInput-notchedOutline": {
+              borderColor: "#4f8588",
+              borderWidth: "1px",
+            },
+          },
         },
-        ".MuiInput-root::after": {
-          display: "none",
+        ".MuiOutlinedInput-notchedOutline": {
+          borderColor: "#64748b",
+          borderWidth: "1px",
         },
         ".MuiInputLabel-root": {
           color: "#cbd5e1",
@@ -43,6 +57,13 @@ export function KeyboardSelector(props: {
           color: "#f8fafc",
           backgroundColor: "transparent",
           minHeight: "unset",
+          fontSize: "13px !important",
+          lineHeight: "17px",
+          paddingTop: "4px !important",
+          paddingBottom: "4px !important",
+        },
+        ".MuiInputBase-input.MuiSelect-select": {
+          fontSize: "13px !important",
         },
         ".MuiSvgIcon-root": {
           color: "#cbd5e1",
@@ -51,8 +72,19 @@ export function KeyboardSelector(props: {
     >
       {/* <InputLabel>Select Keyboard</InputLabel> */}
       <Select
+        variant="outlined"
         value={props.deviceIndex ?? ""}
-        label="select-keyboard"
+        sx={{ fontSize: "13px !important" }}
+        renderValue={(selected) => {
+          const selectedDevice = props.deviceList.find(
+            (device) => device.index === Number(selected),
+          );
+          return (
+            <span style={{ fontSize: "13px", lineHeight: "17px" }}>
+              {selectedDevice?.name ?? ""}
+            </span>
+          );
+        }}
         onChange={(e) => {
           console.log(e.target.value);
           props.onChange(Number(e.target.value));
@@ -80,10 +112,20 @@ export function KeyboardSelector(props: {
               wordBreak: "break-word",
               color: "#c3d0e0",
               backgroundColor: "#0f172a",
+              fontSize: "13px",
               "&:hover": { backgroundColor: "#334155" },
             }}
           >
-            <Typography noWrap sx={{ overflow: "hidden", textOverflow: "ellipsis", width: "100%" }}>
+            <Typography
+              noWrap
+              sx={{
+                overflow: "hidden",
+                textOverflow: "ellipsis",
+                width: "100%",
+                fontSize: "13px",
+                lineHeight: "17px",
+              }}
+            >
               {device.name}
             </Typography>
           </MenuItem>
@@ -98,6 +140,7 @@ export function KeyboardSelector(props: {
               display: isTauri ? "none" : "block",
               color: "#c3d0e0",
               backgroundColor: "#0f172a",
+              fontSize: "13px",
               "&:hover": { backgroundColor: "#334155" },
             }}
           >

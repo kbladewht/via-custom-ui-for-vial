@@ -1023,7 +1023,6 @@ function LayerEditor(props: {
       }
 
       // only load the currently selected layer by default to avoid excessive requests
-      const layersToLoad = 1;
       const matrixDefinition = {
         rows: props.keymap.matrix.rows,
         cols: props.keymap.matrix.cols,
