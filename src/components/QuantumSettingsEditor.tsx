@@ -35,7 +35,7 @@ export function QuantumSettingsEditor(props: {
     { label: "Keymap", content: [] } as { label: string; content: never[] },
     { label: "Macro", content: [] } as { label: string; content: never[] },
     { label: "TapDance", content: [] } as { label: string; content: never[] },
-    { label: "Combo/Override", content: [] } as { label: string; content: never[] },
+    { label: "Combos", content: [] } as { label: string; content: never[] },
     { label: "Quantum", content: [] } as { label: string; content: never[] },
     ...(props.customMenus?.length
       ? [{ label: "Custom", content: [] } as { label: string; content: never[] }]
@@ -143,7 +143,7 @@ export function QuantumSettingsEditor(props: {
               keymapLanguage={props.keymapLanguage}
               dynamicEntryCount={props.dynamicEntryCount}
             />
-          ) : menu.label === "Combo/Override" && props.dynamicEntryCount ? (
+          ) : menu.label === "Combos" && props.dynamicEntryCount ? (
             <ComboOverrideEditor
               via={props.via}
               language={props.language}

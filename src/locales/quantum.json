@@ -10,7 +10,7 @@
       "Layer": "层",
       "Macro": "宏",
       "TapDance": "点按舞",
-      "Combo/Override": "组合/覆盖"
+      "Combos": "组合"
     },
     "tabs": {
       "Magic": "魔法设置",
@@ -34,7 +34,7 @@
       "Layer": "Layer",
       "Macro": "Macro",
       "TapDance": "TapDance",
-      "Combo/Override": "Combo/Override"
+      "Combos": "Combos"
     },
     "tabs": {
       "Magic": "Magic",
@@ -44,7 +44,8 @@
       "Combo": "Combo",
       "One Shot Keys": "One Shot Keys",
       "Mouse Keys": "Mouse Keys",
-      "Macro": "Macro"
+      "Macro": "Macro",
+      "Combos": "Combos"
     }
   }
 }
