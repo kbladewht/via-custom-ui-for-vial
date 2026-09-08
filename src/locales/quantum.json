@@ -2,20 +2,20 @@
   "zh": {
     "switchLabel": "English",
     "keycodeTabs": {
-      "Basic": "基础",
+      "Basic": "基础按键",
       "Mouse": "鼠标",
-      "User/Wireless": "用户/无线",
+      "User/Wireless": "用户",
       "Media": "媒体",
-      "Quantum": "量子",
+      "Quantum": "Quantum",
       "Layer": "层",
       "Macro": "宏",
-      "TapDance": "点按舞",
+      "TapDance": "TapDance",
       "Combos": "组合"
     },
     "tabs": {
-      "Magic": "魔法设置",
-      "Grave Escape": "波浪号转义",
-      "Tap-Hold": "点按-保持",
+      "Magic": "Magic",
+      "Grave Escape": "Grave Escape",
+      "Tap-Hold": "Tap-Hold",
       "Auto Shift": "自动 Shift",
       "Combo": "组合键",
       "One Shot Keys": "单次按键",
@@ -29,7 +29,7 @@
     "keycodeTabs": {
       "Basic": "Basic",
       "Mouse": "Mouse",
-      "User/Wireless": "User/Wireless",
+      "User/Wireless": "User",
       "Media": "Media",
       "Quantum": "Quantum",
       "Layer": "Layer",
