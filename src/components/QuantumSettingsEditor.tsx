@@ -33,10 +33,10 @@ export function QuantumSettingsEditor(props: {
 
   const tabs = [
     { label: "Keymap", content: [] } as { label: string; content: never[] },
-    { label: "Combo/Override", content: [] } as { label: string; content: never[] },
-    { label: "TapDance", content: [] } as { label: string; content: never[] },
-    { label: "Quantum", content: [] } as { label: string; content: never[] },
     { label: "Macro", content: [] } as { label: string; content: never[] },
+    { label: "TapDance", content: [] } as { label: string; content: never[] },
+    { label: "Combo/Override", content: [] } as { label: string; content: never[] },
+    { label: "Quantum", content: [] } as { label: string; content: never[] },
     ...(props.customMenus?.length
       ? [{ label: "Custom", content: [] } as { label: string; content: never[] }]
       : []),
