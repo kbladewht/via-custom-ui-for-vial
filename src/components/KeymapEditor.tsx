@@ -1111,21 +1111,10 @@ function LayerEditor(props: {
           pr: 5,
           display: "flex",
           justifyContent: "center",
-          scrollbarColor: "#64748b rgba(15, 23, 42, 0.5)",
+          /* hide scrollbars but allow scrolling */
+          scrollbarWidth: "none",
           "&::-webkit-scrollbar": {
-            height: 8,
-          },
-          "&::-webkit-scrollbar-track": {
-            background: "rgba(15, 23, 42, 0.5)",
-            borderRadius: 8,
-          },
-          "&::-webkit-scrollbar-thumb": {
-            background: "#64748b",
-            borderRadius: 8,
-            border: "2px solid rgba(15, 23, 42, 0.5)",
-          },
-          "&::-webkit-scrollbar-thumb:hover": {
-            background: "#94a3b8",
+            display: "none",
           },
         }}
       >
