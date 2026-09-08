@@ -532,6 +532,8 @@ function App() {
                 size="small"
                 disabled={deviceIndex === undefined || loading}
                 onClick={() => {
+                  // clear any focused/selected key before loading to avoid mixed logic
+                  window.dispatchEvent(new CustomEvent("vial-clear-focused-key"));
                   discardPendingKeycapAudio();
                   prepareKeycapAudio();
                   if (deviceIndex === undefined) return;

@@ -1022,18 +1022,16 @@ function LayerEditor(props: {
         setLayer(0);
       }
 
-      const layersToLoad = Math.min(3, props.layerCount);
+      // only load the currently selected layer by default to avoid excessive requests
+      const layersToLoad = 1;
       const matrixDefinition = {
         rows: props.keymap.matrix.rows,
         cols: props.keymap.matrix.cols,
       };
-      const layerZero = await props.via.GetLayer(0, matrixDefinition);
-      const loadedLayers: { [layer: number]: number[] } = { 0: layerZero };
-
-      for (let layer = 1; layer < layersToLoad; layer++) {
-        loadedLayers[layer] = await props.via.GetLayer(layer, matrixDefinition);
-      }
-      setKeymap(loadedLayers);
+      const targetLayerToLoad = layer; // current selected layer state
+      const loadedLayers: { [layer: number]: number[] } = {};
+      loadedLayers[targetLayerToLoad] = await props.via.GetLayer(targetLayerToLoad, matrixDefinition);
+      setKeymap((prev) => ({ ...prev, ...loadedLayers }));
 
       const encoderEntries = props.keymap.layouts.keymap
         .flatMap((row) => row)
@@ -1044,10 +1042,8 @@ function LayerEditor(props: {
       }, 0);
       setEncoderCount(encoderCount);
       const loadedEncoders: { [layer: number]: number[][] } = {};
-      for (let layer = 0; layer < layersToLoad; layer++) {
-        loadedEncoders[layer] = await props.via.GetEncoder(layer, encoderCount);
-      }
-      setEncodermap(loadedEncoders);
+      loadedEncoders[targetLayerToLoad] = await props.via.GetEncoder(targetLayerToLoad, encoderCount);
+      setEncodermap((prev) => ({ ...prev, ...loadedEncoders }));
       setKeymapAnimationToken((token) => token + 1);
     });
   }, [props.keymap, props.layerCount, props.via, keymapReloadToken]);

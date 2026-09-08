@@ -350,6 +350,10 @@ class VialKeyboard {
     matrix_definition: { rows: number; cols: number },
     silent: boolean = false,
   ): Promise<number[]> {
+    // trace callers to help debug excessive load requests
+    try {
+      console.trace(`GetLayer called for layer ${layer}`);
+    } catch {}
     const matrix_len = matrix_definition.rows * matrix_definition.cols * 2; // 2byte per key
     const start = layer * matrix_len;
 
