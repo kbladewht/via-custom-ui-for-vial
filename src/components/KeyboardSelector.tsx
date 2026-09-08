@@ -22,12 +22,10 @@ export function KeyboardSelector(props: {
           minWidth: "180px",
           maxWidth: "100%",
           backgroundColor: "#0f172a",
-          border: "1px solid rgba(148, 163, 184, 0.35)",
           borderRadius: "10px",
           color: "#f8fafc",
-          minHeight: "36px",
+          maxHeight: "30px",
           padding: "0 8px",
-          boxShadow: "inset 0 1px 0 rgba(255,255,255,0.04)",
         },
         ".MuiInput-root::before": {
           display: "none",
@@ -45,7 +43,6 @@ export function KeyboardSelector(props: {
           color: "#f8fafc",
           backgroundColor: "transparent",
           minHeight: "unset",
-          padding: "6px 32px 6px 2px",
         },
         ".MuiSvgIcon-root": {
           color: "#cbd5e1",
