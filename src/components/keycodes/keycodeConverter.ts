@@ -188,7 +188,14 @@ export class KeycodeConverter {
 
     this.tapKeycodeList = Object.entries(keycodes)
       .filter(
-        (k) => k[1].group !== "macro" || parseInt(k[0]) - keycode_range.QK_MACRO.start < macroCount,
+        (k) => {
+          if (k[1].group !== "macro") return true;
+
+          const value = parseInt(k[0]);
+          const isDynamicMacro =
+            value >= keycode_range.QK_MACRO.start && value <= keycode_range.QK_MACRO.end;
+          return !isDynamicMacro || value - keycode_range.QK_MACRO.start < macroCount;
+        },
       )
       .map((k) => {
         const value = parseInt(k[0]);

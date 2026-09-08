@@ -1416,7 +1416,7 @@ export function KeymapEditor(props: {
               keygroup: ["custom"],
             },
             { label: quantumTranslations[props.language].keycodeTabs.Media, keygroup: ["media"] },
-            { label: quantumTranslations[props.language].keycodeTabs.Quantum, keygroup: ["quantum"] },
+            { label: quantumTranslations[props.language].keycodeTabs.Quantum, keygroup: ["quantum","magic"] },
             { label: "RGB", keygroup: ["backlight","rgb", "rgb_matrix"] },
             { label: quantumTranslations[props.language].keycodeTabs.Layer, keygroup: ["layer"] },
             { label: quantumTranslations[props.language].keycodeTabs.Macro, keygroup: ["macro"] },

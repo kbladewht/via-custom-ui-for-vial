@@ -4125,84 +4125,84 @@
     ]
   },
   "0x7C40": {
-    "group": "quantum",
+    "group": "quantum_na",
     "key": "QK_HAPTIC_ON",
     "aliases": [
       "HF_ON"
     ]
   },
   "0x7C41": {
-    "group": "quantum",
+    "group": "quantum_na",
     "key": "QK_HAPTIC_OFF",
     "aliases": [
       "HF_OFF"
     ]
   },
   "0x7C42": {
-    "group": "quantum",
+    "group": "quantum_na",
     "key": "QK_HAPTIC_TOGGLE",
     "aliases": [
       "HF_TOGG"
     ]
   },
   "0x7C43": {
-    "group": "quantum",
+    "group": "quantum_na",
     "key": "QK_HAPTIC_RESET",
     "aliases": [
       "HF_RST"
     ]
   },
   "0x7C44": {
-    "group": "quantum",
+    "group": "quantum_na",
     "key": "QK_HAPTIC_FEEDBACK_TOGGLE",
     "aliases": [
       "HF_FDBK"
     ]
   },
   "0x7C45": {
-    "group": "quantum",
+    "group": "quantum_na",
     "key": "QK_HAPTIC_BUZZ_TOGGLE",
     "aliases": [
       "HF_BUZZ"
     ]
   },
   "0x7C46": {
-    "group": "quantum",
+    "group": "quantum_na",
     "key": "QK_HAPTIC_MODE_NEXT",
     "aliases": [
       "HF_NEXT"
     ]
   },
   "0x7C47": {
-    "group": "quantum",
+    "group": "quantum_na",
     "key": "QK_HAPTIC_MODE_PREVIOUS",
     "aliases": [
       "HF_PREV"
     ]
   },
   "0x7C48": {
-    "group": "quantum",
+    "group": "quantum_na",
     "key": "QK_HAPTIC_CONTINUOUS_TOGGLE",
     "aliases": [
       "HF_CONT"
     ]
   },
   "0x7C49": {
-    "group": "quantum",
+    "group": "quantum_na",
     "key": "QK_HAPTIC_CONTINUOUS_UP",
     "aliases": [
       "HF_CONU"
     ]
   },
   "0x7C4A": {
-    "group": "quantum",
+    "group": "quantum_na",
     "key": "QK_HAPTIC_CONTINUOUS_DOWN",
     "aliases": [
       "HF_COND"
     ]
   },
   "0x7C4B": {
-    "group": "quantum",
+    "group": "quantum_na",
     "key": "QK_HAPTIC_DWELL_UP",
     "aliases": [
       "HF_DWLU"
@@ -4237,35 +4237,35 @@
     ]
   },
   "0x7C53": {
-    "group": "quantum",
+    "group": "macro",
     "key": "QK_DYNAMIC_MACRO_RECORD_START_1",
     "aliases": [
       "DM_REC1"
     ]
   },
   "0x7C54": {
-    "group": "quantum",
+    "group": "macro",
     "key": "QK_DYNAMIC_MACRO_RECORD_START_2",
     "aliases": [
       "DM_REC2"
     ]
   },
   "0x7C55": {
-    "group": "quantum",
+    "group": "macro",
     "key": "QK_DYNAMIC_MACRO_RECORD_STOP",
     "aliases": [
       "DM_RSTP"
     ]
   },
   "0x7C56": {
-    "group": "quantum",
+    "group": "macro",
     "key": "QK_DYNAMIC_MACRO_PLAY_1",
     "aliases": [
       "DM_PLY1"
     ]
   },
   "0x7C57": {
-    "group": "quantum",
+    "group": "macro",
     "key": "QK_DYNAMIC_MACRO_PLAY_2",
     "aliases": [
       "DM_PLY2"
