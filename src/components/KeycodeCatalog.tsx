@@ -151,7 +151,7 @@ function KeyListKey(props: {
       onClose={() => {
         setShowToolTip(false);
       }}
-      title={`${props.keycode.key}(${props.keycode.value.toString()})`}
+      title={`${props.keycode.key}(${"0x" + props.keycode.value.toString(16).toUpperCase().padStart(2, "0")})`}
       placement="top"
     >
       <div

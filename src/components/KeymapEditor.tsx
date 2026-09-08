@@ -295,7 +295,7 @@ export function KeymapKeyPopUp(props: {
     setHoldValue(props.keycodeconverter.getHoldKeycode(props.keycode));
     setHoldInputValue(props.keycodeconverter.getHoldKeycode(props.keycode).label);
     setModsValue(props.keycodeconverter.getModifier(props.keycode));
-    setKeycodeValue((props.keycode.value ?? 0).toString());
+    setKeycodeValue("0x" + ((props.keycode.value ?? 0).toString(16).toUpperCase().padStart(2, "0")));
   }, [props.keycode]);
 
   return (
@@ -341,7 +341,7 @@ export function KeymapKeyPopUp(props: {
                   holdValue,
                   modsValue,
                 ) ?? DefaultQmkKeycode;
-              setKeycodeValue(newKeycode.value.toString());
+              setKeycodeValue("0x" + (newKeycode.value.toString(16).toUpperCase().padStart(2, "0")));
               props.onChange?.({
                 keymapkey: props.keymapKey,
                 keycode: newKeycode,
@@ -385,7 +385,7 @@ export function KeymapKeyPopUp(props: {
                   newValue ?? DefaultQmkKeycode,
                   modsValue,
                 ) ?? DefaultQmkKeycode;
-              setKeycodeValue(newKeycode.value.toString());
+              setKeycodeValue("0x" + (newKeycode.value.toString(16).toUpperCase().padStart(2, "0")));
               props.onChange?.({
                 keymapkey: props.keymapKey,
                 keycode: newKeycode,
@@ -443,7 +443,7 @@ export function KeymapKeyPopUp(props: {
                       const newKeycode =
                         props.keycodeconverter.combineKeycodes(tapValue, holdValue, newMods) ??
                         DefaultQmkKeycode;
-                      setKeycodeValue(newKeycode.value.toString());
+                      setKeycodeValue("0x" + (newKeycode.value.toString(16).toUpperCase().padStart(2, "0")));
                       props.onChange?.({
                         keymapkey: props.keymapKey,
                         keycode: newKeycode,
@@ -458,14 +458,21 @@ export function KeymapKeyPopUp(props: {
             ))}
           </FormGroup>
           <TextField
-            label="Keycode(decimal)"
+            label="Keycode(hex)"
             variant="outlined"
             value={keycodeValue.toString()}
             onChange={(event) => {
-              setKeycodeValue(event.target.value);
-              const keycodeValue = parseInt(event.target.value);
-              if (0 <= keycodeValue && keycodeValue <= 0xffff) {
-                const keycode = props.keycodeconverter.convertIntToKeycode(keycodeValue);
+              const v = event.target.value;
+              setKeycodeValue(v);
+              // allow 0x prefix or plain hex digits
+              let parsed = NaN;
+              try {
+                parsed = Number.parseInt(v.toString().replace(/^0x/i, ""), 16);
+              } catch {
+                parsed = NaN;
+              }
+              if (!Number.isNaN(parsed) && 0 <= parsed && parsed <= 0xffff) {
+                const keycode = props.keycodeconverter.convertIntToKeycode(parsed);
                 setTapValue(props.keycodeconverter.getTapKeycode(keycode));
                 setTapInputValue(props.keycodeconverter.getTapKeycode(keycode).label);
                 setHoldValue(props.keycodeconverter.getHoldKeycode(keycode));
@@ -473,7 +480,7 @@ export function KeymapKeyPopUp(props: {
                 setModsValue(props.keycodeconverter.getModifier(keycode));
                 props.onChange?.({
                   keymapkey: props.keymapKey,
-                  keycode: props.keycodeconverter.convertIntToKeycode(keycodeValue),
+                  keycode: props.keycodeconverter.convertIntToKeycode(parsed),
                 });
               }
             }}

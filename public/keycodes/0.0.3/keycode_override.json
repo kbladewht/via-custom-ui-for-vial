@@ -1,5 +1,5 @@
 {
-  "1": {
+  "0x01": {
     "group": "basic",
     "key": "KC_TRANSPARENT",
     "label": "▽",
@@ -8,13 +8,13 @@
       "KC_TRNS"
     ]
   },
-  "30": {
+  "0x1E": {
     "group": "basic",
     "key": "KC_1",
     "label": "1",
     "shiftedLabel": "!"
   },
-  "31": {
+  "0x1F": {
     "group": "basic",
     "key": "KC_2",
     "label": "2",
@@ -25,25 +25,25 @@
       }
     }
   },
-  "32": {
+  "0x20": {
     "group": "basic",
     "key": "KC_3",
     "label": "3",
     "shiftedLabel": "#"
   },
-  "33": {
+  "0x21": {
     "group": "basic",
     "key": "KC_4",
     "label": "4",
     "shiftedLabel": "$"
   },
-  "34": {
+  "0x22": {
     "group": "basic",
     "key": "KC_5",
     "label": "5",
     "shiftedLabel": "%"
   },
-  "35": {
+  "0x23": {
     "group": "basic",
     "key": "KC_6",
     "label": "6",
@@ -54,7 +54,7 @@
       }
     }
   },
-  "36": {
+  "0x24": {
     "group": "basic",
     "key": "KC_7",
     "label": "7",
@@ -65,7 +65,7 @@
       }
     }
   },
-  "37": {
+  "0x25": {
     "group": "basic",
     "key": "KC_8",
     "label": "8",
@@ -76,7 +76,7 @@
       }
     }
   },
-  "38": {
+  "0x26": {
     "group": "basic",
     "key": "KC_9",
     "label": "9",
@@ -87,7 +87,7 @@
       }
     }
   },
-  "39": {
+  "0x27": {
     "group": "basic",
     "key": "KC_0",
     "label": "0",
@@ -98,7 +98,7 @@
       }
     }
   },
-  "45": {
+  "0x2D": {
     "group": "basic",
     "key": "KC_MINUS",
     "label": "-",
@@ -113,7 +113,7 @@
       }
     }
   },
-  "46": {
+  "0x2E": {
     "group": "basic",
     "key": "KC_EQUAL",
     "label": "=",
@@ -128,7 +128,7 @@
       }
     }
   },
-  "47": {
+  "0x2F": {
     "group": "basic",
     "key": "KC_LEFT_BRACKET",
     "label": "[",
@@ -143,7 +143,7 @@
       }
     }
   },
-  "48": {
+  "0x30": {
     "group": "basic",
     "key": "KC_RIGHT_BRACKET",
     "label": "]",
@@ -158,7 +158,7 @@
       }
     }
   },
-  "51": {
+  "0x33": {
     "group": "basic",
     "key": "KC_SEMICOLON",
     "label": ";",
@@ -173,7 +173,7 @@
       }
     }
   },
-  "52": {
+  "0x34": {
     "group": "basic",
     "key": "KC_QUOTE",
     "label": "'",
@@ -188,7 +188,7 @@
       }
     }
   },
-  "53": {
+  "0x35": {
     "group": "basic",
     "key": "KC_GRAVE",
     "label": "`",
@@ -202,7 +202,7 @@
       }
     }
   },
-  "54": {
+  "0x36": {
     "group": "basic",
     "key": "KC_COMMA",
     "label": ",",
@@ -211,13 +211,13 @@
       "KC_COMM"
     ]
   },
-  "55": {
+  "0x37": {
     "group": "basic",
     "key": "KC_DOT",
     "label": ".",
     "shiftedLabel": ">"
   },
-  "56": {
+  "0x38": {
     "group": "basic",
     "key": "KC_SLASH",
     "label": "/",
@@ -226,7 +226,7 @@
       "KC_SLSH"
     ]
   },
-  "194": {
+  "0xC2": {
     "group": "media",
     "key": "KC_LAUNCHPAD",
     "label": "Open Launchpad",
@@ -239,7 +239,7 @@
       }
     }
   },
-  "205": {
+  "0xCD": {
     "group": "mouse",
     "key": "KC_MS_UP",
     "label": "Move cursor up",
@@ -252,7 +252,7 @@
       }
     }
   },
-  "206": {
+  "0xCE": {
     "group": "mouse",
     "key": "KC_MS_DOWN",
     "label": "Move cursor down",
@@ -265,7 +265,7 @@
       }
     }
   },
-  "207": {
+  "0xCF": {
     "group": "mouse",
     "key": "KC_MS_LEFT",
     "label": "Move cursor left",
@@ -278,7 +278,7 @@
       }
     }
   },
-  "208": {
+  "0xD0": {
     "group": "mouse",
     "key": "KC_MS_RIGHT",
     "label": "Move cursor right",
@@ -291,7 +291,7 @@
       }
     }
   },
-  "209": {
+  "0xD1": {
     "group": "mouse",
     "key": "KC_MS_BTN1",
     "label": "Press button 1",
@@ -304,7 +304,7 @@
       }
     }
   },
-  "210": {
+  "0xD2": {
     "group": "mouse",
     "key": "KC_MS_BTN2",
     "label": "Press button 2",
@@ -317,7 +317,7 @@
       }
     }
   },
-  "211": {
+  "0xD3": {
     "group": "mouse",
     "key": "KC_MS_BTN3",
     "label": "Press button 3",
@@ -330,7 +330,7 @@
       }
     }
   },
-  "212": {
+  "0xD4": {
     "group": "mouse",
     "key": "KC_MS_BTN4",
     "label": "Press button 4",
@@ -343,7 +343,7 @@
       }
     }
   },
-  "213": {
+  "0xD5": {
     "group": "mouse",
     "key": "KC_MS_BTN5",
     "label": "Press button 5",
@@ -356,7 +356,7 @@
       }
     }
   },
-  "214": {
+  "0xD6": {
     "group": "mouse",
     "key": "KC_MS_BTN6",
     "label": "Press button 6",
@@ -369,7 +369,7 @@
       }
     }
   },
-  "215": {
+  "0xD7": {
     "group": "mouse",
     "key": "KC_MS_BTN7",
     "label": "Press button 7",
@@ -382,7 +382,7 @@
       }
     }
   },
-  "216": {
+  "0xD8": {
     "group": "mouse",
     "key": "KC_MS_BTN8",
     "label": "Press button 8",
@@ -395,7 +395,7 @@
       }
     }
   },
-  "217": {
+  "0xD9": {
     "group": "mouse",
     "key": "KC_MS_WH_UP",
     "label": "Move wheel up",
@@ -408,7 +408,7 @@
       }
     }
   },
-  "218": {
+  "0xDA": {
     "group": "mouse",
     "key": "KC_MS_WH_DOWN",
     "label": "Move wheel down",
@@ -421,7 +421,7 @@
       }
     }
   },
-  "219": {
+  "0xDB": {
     "group": "mouse",
     "key": "KC_MS_WH_LEFT",
     "label": "Move wheel left",
@@ -434,7 +434,7 @@
       }
     }
   },
-  "220": {
+  "0xDC": {
     "group": "mouse",
     "key": "KC_MS_WH_RIGHT",
     "label": "Move wheel right",
@@ -447,7 +447,7 @@
       }
     }
   },
-  "221": {
+  "0xDD": {
     "group": "mouse",
     "key": "KC_MS_ACCEL0",
     "label": "Set speed to 0",
@@ -460,7 +460,7 @@
       }
     }
   },
-  "222": {
+  "0xDE": {
     "group": "mouse",
     "key": "KC_MS_ACCEL1",
     "label": "Set speed to 1",
@@ -473,7 +473,7 @@
       }
     }
   },
-  "223": {
+  "0xDF": {
     "group": "mouse",
     "key": "KC_MS_ACCEL2",
     "label": "Set speed to 2",

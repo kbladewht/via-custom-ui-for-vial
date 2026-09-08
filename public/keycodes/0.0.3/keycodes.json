@@ -1,5 +1,5 @@
 {
-  "0": {
+  "0x00": {
     "group": "basic",
     "key": "KC_NO",
     "label": "",
@@ -7,7 +7,7 @@
       "XXXXXXX"
     ]
   },
-  "1": {
+  "0x01": {
     "group": "basic",
     "key": "KC_TRANSPARENT",
     "label": "",
@@ -16,187 +16,187 @@
       "KC_TRNS"
     ]
   },
-  "4": {
+  "0x04": {
     "group": "basic",
     "key": "KC_A",
     "label": "A"
   },
-  "5": {
+  "0x05": {
     "group": "basic",
     "key": "KC_B",
     "label": "B"
   },
-  "6": {
+  "0x06": {
     "group": "basic",
     "key": "KC_C",
     "label": "C"
   },
-  "7": {
+  "0x07": {
     "group": "basic",
     "key": "KC_D",
     "label": "D"
   },
-  "8": {
+  "0x08": {
     "group": "basic",
     "key": "KC_E",
     "label": "E"
   },
-  "9": {
+  "0x09": {
     "group": "basic",
     "key": "KC_F",
     "label": "F"
   },
-  "10": {
+  "0x0A": {
     "group": "basic",
     "key": "KC_G",
     "label": "G"
   },
-  "11": {
+  "0x0B": {
     "group": "basic",
     "key": "KC_H",
     "label": "H"
   },
-  "12": {
+  "0x0C": {
     "group": "basic",
     "key": "KC_I",
     "label": "I"
   },
-  "13": {
+  "0x0D": {
     "group": "basic",
     "key": "KC_J",
     "label": "J"
   },
-  "14": {
+  "0x0E": {
     "group": "basic",
     "key": "KC_K",
     "label": "K"
   },
-  "15": {
+  "0x0F": {
     "group": "basic",
     "key": "KC_L",
     "label": "L"
   },
-  "16": {
+  "0x10": {
     "group": "basic",
     "key": "KC_M",
     "label": "M"
   },
-  "17": {
+  "0x11": {
     "group": "basic",
     "key": "KC_N",
     "label": "N"
   },
-  "18": {
+  "0x12": {
     "group": "basic",
     "key": "KC_O",
     "label": "O"
   },
-  "19": {
+  "0x13": {
     "group": "basic",
     "key": "KC_P",
     "label": "P"
   },
-  "20": {
+  "0x14": {
     "group": "basic",
     "key": "KC_Q",
     "label": "Q"
   },
-  "21": {
+  "0x15": {
     "group": "basic",
     "key": "KC_R",
     "label": "R"
   },
-  "22": {
+  "0x16": {
     "group": "basic",
     "key": "KC_S",
     "label": "S"
   },
-  "23": {
+  "0x17": {
     "group": "basic",
     "key": "KC_T",
     "label": "T"
   },
-  "24": {
+  "0x18": {
     "group": "basic",
     "key": "KC_U",
     "label": "U"
   },
-  "25": {
+  "0x19": {
     "group": "basic",
     "key": "KC_V",
     "label": "V"
   },
-  "26": {
+  "0x1A": {
     "group": "basic",
     "key": "KC_W",
     "label": "W"
   },
-  "27": {
+  "0x1B": {
     "group": "basic",
     "key": "KC_X",
     "label": "X"
   },
-  "28": {
+  "0x1C": {
     "group": "basic",
     "key": "KC_Y",
     "label": "Y"
   },
-  "29": {
+  "0x1D": {
     "group": "basic",
     "key": "KC_Z",
     "label": "Z"
   },
-  "30": {
+  "0x1E": {
     "group": "basic",
     "key": "KC_1",
     "label": "1"
   },
-  "31": {
+  "0x1F": {
     "group": "basic",
     "key": "KC_2",
     "label": "2"
   },
-  "32": {
+  "0x20": {
     "group": "basic",
     "key": "KC_3",
     "label": "3"
   },
-  "33": {
+  "0x21": {
     "group": "basic",
     "key": "KC_4",
     "label": "4"
   },
-  "34": {
+  "0x22": {
     "group": "basic",
     "key": "KC_5",
     "label": "5"
   },
-  "35": {
+  "0x23": {
     "group": "basic",
     "key": "KC_6",
     "label": "6"
   },
-  "36": {
+  "0x24": {
     "group": "basic",
     "key": "KC_7",
     "label": "7"
   },
-  "37": {
+  "0x25": {
     "group": "basic",
     "key": "KC_8",
     "label": "8"
   },
-  "38": {
+  "0x26": {
     "group": "basic",
     "key": "KC_9",
     "label": "9"
   },
-  "39": {
+  "0x27": {
     "group": "basic",
     "key": "KC_0",
     "label": "0"
   },
-  "40": {
+  "0x28": {
     "group": "basic",
     "key": "KC_ENTER",
     "label": "Enter",
@@ -204,7 +204,7 @@
       "KC_ENT"
     ]
   },
-  "41": {
+  "0x29": {
     "group": "basic",
     "key": "KC_ESCAPE",
     "label": "Esc",
@@ -212,7 +212,7 @@
       "KC_ESC"
     ]
   },
-  "42": {
+  "0x2A": {
     "group": "basic",
     "key": "KC_BACKSPACE",
     "label": "BSPC",
@@ -220,12 +220,12 @@
       "KC_BSPC"
     ]
   },
-  "43": {
+  "0x2B": {
     "group": "basic",
     "key": "KC_TAB",
     "label": "Tab"
   },
-  "44": {
+  "0x2C": {
     "group": "basic",
     "key": "KC_SPACE",
     "label": "Space",
@@ -233,7 +233,7 @@
       "KC_SPC"
     ]
   },
-  "45": {
+  "0x2D": {
     "group": "basic",
     "key": "KC_MINUS",
     "label": "-",
@@ -241,7 +241,7 @@
       "KC_MINS"
     ]
   },
-  "46": {
+  "0x2E": {
     "group": "basic",
     "key": "KC_EQUAL",
     "label": "=",
@@ -249,7 +249,7 @@
       "KC_EQL"
     ]
   },
-  "47": {
+  "0x2F": {
     "group": "basic",
     "key": "KC_LEFT_BRACKET",
     "label": "[",
@@ -257,7 +257,7 @@
       "KC_LBRC"
     ]
   },
-  "48": {
+  "0x30": {
     "group": "basic",
     "key": "KC_RIGHT_BRACKET",
     "label": "]",
@@ -265,7 +265,7 @@
       "KC_RBRC"
     ]
   },
-  "49": {
+  "0x31": {
     "group": "basic",
     "key": "KC_BACKSLASH",
     "label": "\\",
@@ -273,7 +273,7 @@
       "KC_BSLS"
     ]
   },
-  "50": {
+  "0x32": {
     "group": "NOGROUP",
     "key": "KC_NONUS_HASH",
     "label": "|",
@@ -281,7 +281,7 @@
       "KC_NUHS"
     ]
   },
-  "51": {
+  "0x33": {
     "group": "basic",
     "key": "KC_SEMICOLON",
     "label": ";",
@@ -289,7 +289,7 @@
       "KC_SCLN"
     ]
   },
-  "52": {
+  "0x34": {
     "group": "basic",
     "key": "KC_QUOTE",
     "label": "'",
@@ -297,7 +297,7 @@
       "KC_QUOT"
     ]
   },
-  "53": {
+  "0x35": {
     "group": "basic",
     "key": "KC_GRAVE",
     "label": "`",
@@ -305,7 +305,7 @@
       "KC_GRV"
     ]
   },
-  "54": {
+  "0x36": {
     "group": "basic",
     "key": "KC_COMMA",
     "label": ",",
@@ -313,12 +313,12 @@
       "KC_COMM"
     ]
   },
-  "55": {
+  "0x37": {
     "group": "basic",
     "key": "KC_DOT",
     "label": "."
   },
-  "56": {
+  "0x38": {
     "group": "basic",
     "key": "KC_SLASH",
     "label": "/",
@@ -326,7 +326,7 @@
       "KC_SLSH"
     ]
   },
-  "57": {
+  "0x39": {
     "group": "basic",
     "key": "KC_CAPS_LOCK",
     "label": "Caps Lock",
@@ -334,67 +334,67 @@
       "KC_CAPS"
     ]
   },
-  "58": {
+  "0x3A": {
     "group": "basic",
     "key": "KC_F1",
     "label": "F1"
   },
-  "59": {
+  "0x3B": {
     "group": "basic",
     "key": "KC_F2",
     "label": "F2"
   },
-  "60": {
+  "0x3C": {
     "group": "basic",
     "key": "KC_F3",
     "label": "F3"
   },
-  "61": {
+  "0x3D": {
     "group": "basic",
     "key": "KC_F4",
     "label": "F4"
   },
-  "62": {
+  "0x3E": {
     "group": "basic",
     "key": "KC_F5",
     "label": "F5"
   },
-  "63": {
+  "0x3F": {
     "group": "basic",
     "key": "KC_F6",
     "label": "F6"
   },
-  "64": {
+  "0x40": {
     "group": "basic",
     "key": "KC_F7",
     "label": "F7"
   },
-  "65": {
+  "0x41": {
     "group": "basic",
     "key": "KC_F8",
     "label": "F8"
   },
-  "66": {
+  "0x42": {
     "group": "basic",
     "key": "KC_F9",
     "label": "F9"
   },
-  "67": {
+  "0x43": {
     "group": "basic",
     "key": "KC_F10",
     "label": "F10"
   },
-  "68": {
+  "0x44": {
     "group": "basic",
     "key": "KC_F11",
     "label": "F11"
   },
-  "69": {
+  "0x45": {
     "group": "basic",
     "key": "KC_F12",
     "label": "F12"
   },
-  "70": {
+  "0x46": {
     "group": "basic",
     "key": "KC_PRINT_SCREEN",
     "label": "Print Screen",
@@ -402,7 +402,7 @@
       "KC_PSCR"
     ]
   },
-  "71": {
+  "0x47": {
     "group": "basic",
     "key": "KC_SCROLL_LOCK",
     "label": "Scroll Lock",
@@ -411,7 +411,7 @@
       "KC_BRMD"
     ]
   },
-  "72": {
+  "0x48": {
     "group": "basic",
     "key": "KC_PAUSE",
     "label": "Pause",
@@ -421,7 +421,7 @@
       "KC_BRMU"
     ]
   },
-  "73": {
+  "0x49": {
     "group": "basic",
     "key": "KC_INSERT",
     "label": "Insert",
@@ -429,12 +429,12 @@
       "KC_INS"
     ]
   },
-  "74": {
+  "0x4A": {
     "group": "basic",
     "key": "KC_HOME",
     "label": "Home"
   },
-  "75": {
+  "0x4B": {
     "group": "basic",
     "key": "KC_PAGE_UP",
     "label": "Page Up",
@@ -442,20 +442,20 @@
       "KC_PGUP"
     ]
   },
-  "76": {
+  "0x4C": {
     "group": "basic",
     "key": "KC_DELETE",
-    "label": "Delete",
+    "label": "Del",
     "aliases": [
       "KC_DEL"
     ]
   },
-  "77": {
+  "0x4D": {
     "group": "basic",
     "key": "KC_END",
     "label": "End"
   },
-  "78": {
+  "0x4E": {
     "group": "basic",
     "key": "KC_PAGE_DOWN",
     "label": "Page Down",
@@ -463,7 +463,7 @@
       "KC_PGDN"
     ]
   },
-  "79": {
+  "0x4F": {
     "group": "basic",
     "key": "KC_RIGHT",
     "label": "Right",
@@ -471,22 +471,22 @@
       "KC_RGHT"
     ]
   },
-  "80": {
+  "0x50": {
     "group": "basic",
     "key": "KC_LEFT",
     "label": "Left"
   },
-  "81": {
+  "0x51": {
     "group": "basic",
     "key": "KC_DOWN",
     "label": "Down"
   },
-  "82": {
+  "0x52": {
     "group": "basic",
     "key": "KC_UP",
     "label": "Up"
   },
-  "83": {
+  "0x53": {
     "group": "basic",
     "key": "KC_NUM_LOCK",
     "label": "Num Lock",
@@ -494,7 +494,7 @@
       "KC_NUM"
     ]
   },
-  "84": {
+  "0x54": {
     "group": "basic",
     "key": "KC_KP_SLASH",
     "label": "/",
@@ -502,7 +502,7 @@
       "KC_PSLS"
     ]
   },
-  "85": {
+  "0x55": {
     "group": "basic",
     "key": "KC_KP_ASTERISK",
     "label": "*",
@@ -510,7 +510,7 @@
       "KC_PAST"
     ]
   },
-  "86": {
+  "0x56": {
     "group": "basic",
     "key": "KC_KP_MINUS",
     "label": "-",
@@ -518,7 +518,7 @@
       "KC_PMNS"
     ]
   },
-  "87": {
+  "0x57": {
     "group": "basic",
     "key": "KC_KP_PLUS",
     "label": "+",
@@ -526,7 +526,7 @@
       "KC_PPLS"
     ]
   },
-  "88": {
+  "0x58": {
     "group": "basic",
     "key": "KC_KP_ENTER",
     "label": "Num\nEnter",
@@ -534,7 +534,7 @@
       "KC_PENT"
     ]
   },
-  "89": {
+  "0x59": {
     "group": "basic",
     "key": "KC_KP_1",
     "label": "1",
@@ -542,7 +542,7 @@
       "KC_P1"
     ]
   },
-  "90": {
+  "0x5A": {
     "group": "basic",
     "key": "KC_KP_2",
     "label": "2",
@@ -550,7 +550,7 @@
       "KC_P2"
     ]
   },
-  "91": {
+  "0x5B": {
     "group": "basic",
     "key": "KC_KP_3",
     "label": "3",
@@ -558,7 +558,7 @@
       "KC_P3"
     ]
   },
-  "92": {
+  "0x5C": {
     "group": "basic",
     "key": "KC_KP_4",
     "label": "4",
@@ -566,7 +566,7 @@
       "KC_P4"
     ]
   },
-  "93": {
+  "0x5D": {
     "group": "basic",
     "key": "KC_KP_5",
     "label": "5",
@@ -574,7 +574,7 @@
       "KC_P5"
     ]
   },
-  "94": {
+  "0x5E": {
     "group": "basic",
     "key": "KC_KP_6",
     "label": "6",
@@ -582,7 +582,7 @@
       "KC_P6"
     ]
   },
-  "95": {
+  "0x5F": {
     "group": "basic",
     "key": "KC_KP_7",
     "label": "7",
@@ -590,7 +590,7 @@
       "KC_P7"
     ]
   },
-  "96": {
+  "0x60": {
     "group": "basic",
     "key": "KC_KP_8",
     "label": "8",
@@ -598,7 +598,7 @@
       "KC_P8"
     ]
   },
-  "97": {
+  "0x61": {
     "group": "basic",
     "key": "KC_KP_9",
     "label": "9",
@@ -606,7 +606,7 @@
       "KC_P9"
     ]
   },
-  "98": {
+  "0x62": {
     "group": "basic",
     "key": "KC_KP_0",
     "label": "0",
@@ -614,7 +614,7 @@
       "KC_P0"
     ]
   },
-  "99": {
+  "0x63": {
     "group": "basic",
     "key": "KC_KP_DOT",
     "label": ".",
@@ -622,7 +622,7 @@
       "KC_PDOT"
     ]
   },
-  "101": {
+  "0x65": {
     "group": "basic",
     "key": "KC_APPLICATION",
     "label": "App",
@@ -630,12 +630,12 @@
       "KC_APP"
     ]
   },
-  "102": {
+  "0x66": {
     "group": "basic",
     "key": "KC_KB_POWER",
     "label": "KB Power"
   },
-  "103": {
+  "0x67": {
     "group": "basic",
     "key": "KC_KP_EQUAL",
     "label": "=",
@@ -643,67 +643,67 @@
       "KC_PEQL"
     ]
   },
-  "104": {
+  "0x68": {
     "group": "media",
     "key": "KC_F13",
     "label": "F13"
   },
-  "105": {
+  "0x69": {
     "group": "media",
     "key": "KC_F14",
     "label": "F14"
   },
-  "106": {
+  "0x6A": {
     "group": "media",
     "key": "KC_F15",
     "label": "F15"
   },
-  "107": {
+  "0x6B": {
     "group": "media",
     "key": "KC_F16",
     "label": "F16"
   },
-  "108": {
+  "0x6C": {
     "group": "media",
     "key": "KC_F17",
     "label": "F17"
   },
-  "109": {
+  "0x6D": {
     "group": "media",
     "key": "KC_F18",
     "label": "F18"
   },
-  "110": {
+  "0x6E": {
     "group": "media",
     "key": "KC_F19",
     "label": "F19"
   },
-  "111": {
+  "0x6F": {
     "group": "media",
     "key": "KC_F20",
     "label": "F20"
   },
-  "112": {
+  "0x70": {
     "group": "media",
     "key": "KC_F21",
     "label": "F21"
   },
-  "113": {
+  "0x71": {
     "group": "media",
     "key": "KC_F22",
     "label": "F22"
   },
-  "114": {
+  "0x72": {
     "group": "media",
     "key": "KC_F23",
     "label": "F23"
   },
-  "115": {
+  "0x73": {
     "group": "media",
     "key": "KC_F24",
     "label": "F24"
   },
-  "116": {
+  "0x74": {
     "group": "media",
     "key": "KC_EXECUTE",
     "label": "Execute",
@@ -711,17 +711,17 @@
       "KC_EXEC"
     ]
   },
-  "117": {
+  "0x75": {
     "group": "media",
     "key": "KC_HELP",
     "label": "Help"
   },
-  "118": {
+  "0x76": {
     "group": "basic",
     "key": "KC_MENU",
     "label": "Menu"
   },
-  "119": {
+  "0x77": {
     "group": "media",
     "key": "KC_SELECT",
     "label": "Select",
@@ -729,12 +729,12 @@
       "KC_SLCT"
     ]
   },
-  "120": {
+  "0x78": {
     "group": "media",
     "key": "KC_STOP",
     "label": "Stop"
   },
-  "121": {
+  "0x79": {
     "group": "media",
     "key": "KC_AGAIN",
     "label": "Again",
@@ -742,22 +742,22 @@
       "KC_AGIN"
     ]
   },
-  "122": {
+  "0x7A": {
     "group": "media",
     "key": "KC_UNDO",
     "label": "Undo"
   },
-  "123": {
+  "0x7B": {
     "group": "media",
     "key": "KC_CUT",
     "label": "Cut"
   },
-  "124": {
+  "0x7C": {
     "group": "media",
     "key": "KC_COPY",
     "label": "Copy"
   },
-  "125": {
+  "0x7D": {
     "group": "media",
     "key": "KC_PASTE",
     "label": "Paste",
@@ -765,27 +765,27 @@
       "KC_PSTE"
     ]
   },
-  "126": {
+  "0x7E": {
     "group": "basic",
     "key": "KC_FIND",
     "label": "Find"
   },
-  "127": {
+  "0x7F": {
     "group": "basic",
     "key": "KC_KB_MUTE",
     "label": "Mute"
   },
-  "128": {
+  "0x80": {
     "group": "basic",
     "key": "KC_KB_VOLUME_UP",
-    "label": "Vol Up"
+    "label": "Vol +"
   },
-  "129": {
+  "0x81": {
     "group": "basic",
     "key": "KC_KB_VOLUME_DOWN",
-    "label": "Vol Down"
+    "label": "Vol -"
   },
-  "130": {
+  "0x82": {
     "group": "NOGROUP",
     "key": "KC_LOCKING_CAPS_LOCK",
     "label": "Caps Lock",
@@ -793,7 +793,7 @@
       "KC_LCAP"
     ]
   },
-  "131": {
+  "0x83": {
     "group": "basic",
     "key": "KC_LOCKING_NUM_LOCK",
     "label": "Num Lock",
@@ -801,7 +801,7 @@
       "KC_LNUM"
     ]
   },
-  "132": {
+  "0x84": {
     "group": "basic",
     "key": "KC_LOCKING_SCROLL_LOCK",
     "label": "Scroll Lock",
@@ -809,7 +809,7 @@
       "KC_LSCR"
     ]
   },
-  "133": {
+  "0x85": {
     "group": "basic",
     "key": "KC_KP_COMMA",
     "label": ",",
@@ -817,12 +817,12 @@
       "KC_PCMM"
     ]
   },
-  "134": {
+  "0x86": {
     "group": "basic",
     "key": "KC_KP_EQUAL_AS400",
     "label": "="
   },
-  "153": {
+  "0x99": {
     "group": "NOGROUP",
     "key": "KC_ALTERNATE_ERASE",
     "label": "Alternate Erase",
@@ -830,7 +830,7 @@
       "KC_ERAS"
     ]
   },
-  "154": {
+  "0x9A": {
     "group": "NOGROUP",
     "key": "KC_SYSTEM_REQUEST",
     "label": "SysReq/Attention",
@@ -838,7 +838,7 @@
       "KC_SYRQ"
     ]
   },
-  "155": {
+  "0x9B": {
     "group": "basic",
     "key": "KC_CANCEL",
     "label": "Cancel",
@@ -846,7 +846,7 @@
       "KC_CNCL"
     ]
   },
-  "156": {
+  "0x9C": {
     "group": "NOGROUP",
     "key": "KC_CLEAR",
     "label": "Clear",
@@ -854,7 +854,7 @@
       "KC_CLR"
     ]
   },
-  "157": {
+  "0x9D": {
     "group": "NOGROUP",
     "key": "KC_PRIOR",
     "label": "Prior",
@@ -862,7 +862,7 @@
       "KC_PRIR"
     ]
   },
-  "158": {
+  "0x9E": {
     "group": "NOGROUP",
     "key": "KC_RETURN",
     "label": "Return",
@@ -870,7 +870,7 @@
       "KC_RETN"
     ]
   },
-  "159": {
+  "0x9F": {
     "group": "NOGROUP",
     "key": "KC_SEPARATOR",
     "label": "Separator",
@@ -878,17 +878,17 @@
       "KC_SEPR"
     ]
   },
-  "160": {
+  "0xA0": {
     "group": "NOGROUP",
     "key": "KC_OUT",
     "label": "Out"
   },
-  "161": {
+  "0xA1": {
     "group": "NOGROUP",
     "key": "KC_OPER",
     "label": "Oper"
   },
-  "162": {
+  "0xA2": {
     "group": "NOGROUP",
     "key": "KC_CLEAR_AGAIN",
     "label": "Clear/Again",
@@ -896,7 +896,7 @@
       "KC_CLAG"
     ]
   },
-  "163": {
+  "0xA3": {
     "group": "NOGROUP",
     "key": "KC_CRSEL",
     "label": "CrSel/Props",
@@ -904,7 +904,7 @@
       "KC_CRSL"
     ]
   },
-  "164": {
+  "0xA4": {
     "group": "NOGROUP",
     "key": "KC_EXSEL",
     "label": "ExSel",
@@ -912,7 +912,7 @@
       "KC_EXSL"
     ]
   },
-  "165": {
+  "0xA5": {
     "group": "system",
     "key": "KC_SYSTEM_POWER",
     "label": "System Power Down",
@@ -920,7 +920,7 @@
       "KC_PWR"
     ]
   },
-  "166": {
+  "0xA6": {
     "group": "system",
     "key": "KC_SYSTEM_SLEEP",
     "label": "System Sleep",
@@ -928,7 +928,7 @@
       "KC_SLEP"
     ]
   },
-  "167": {
+  "0xA7": {
     "group": "system",
     "key": "KC_SYSTEM_WAKE",
     "label": "System Wake",
@@ -936,7 +936,7 @@
       "KC_WAKE"
     ]
   },
-  "168": {
+  "0xA8": {
     "group": "media",
     "key": "KC_AUDIO_MUTE",
     "label": "Mute",
@@ -944,7 +944,7 @@
       "KC_MUTE"
     ]
   },
-  "169": {
+  "0xA9": {
     "group": "media",
     "key": "KC_AUDIO_VOL_UP",
     "label": "Vol Up",
@@ -952,7 +952,7 @@
       "KC_VOLU"
     ]
   },
-  "170": {
+  "0xAA": {
     "group": "media",
     "key": "KC_AUDIO_VOL_DOWN",
     "label": "Vol Down",
@@ -960,7 +960,7 @@
       "KC_VOLD"
     ]
   },
-  "171": {
+  "0xAB": {
     "group": "media",
     "key": "KC_MEDIA_NEXT_TRACK",
     "label": "Next",
@@ -968,7 +968,7 @@
       "KC_MNXT"
     ]
   },
-  "172": {
+  "0xAC": {
     "group": "media",
     "key": "KC_MEDIA_PREV_TRACK",
     "label": "Previous",
@@ -976,7 +976,7 @@
       "KC_MPRV"
     ]
   },
-  "173": {
+  "0xAD": {
     "group": "media",
     "key": "KC_MEDIA_STOP",
     "label": "Stop",
@@ -984,7 +984,7 @@
       "KC_MSTP"
     ]
   },
-  "174": {
+  "0xAE": {
     "group": "media",
     "key": "KC_MEDIA_PLAY_PAUSE",
     "label": "Play/Pause Track",
@@ -992,7 +992,7 @@
       "KC_MPLY"
     ]
   },
-  "175": {
+  "0xAF": {
     "group": "media",
     "key": "KC_MEDIA_SELECT",
     "label": "Launch Player",
@@ -1000,7 +1000,7 @@
       "KC_MSEL"
     ]
   },
-  "176": {
+  "0xB0": {
     "group": "media",
     "key": "KC_MEDIA_EJECT",
     "label": "Eject",
@@ -1008,12 +1008,12 @@
       "KC_EJCT"
     ]
   },
-  "177": {
+  "0xB1": {
     "group": "media",
     "key": "KC_MAIL",
     "label": "Launch Mail"
   },
-  "178": {
+  "0xB2": {
     "group": "media",
     "key": "KC_CALCULATOR",
     "label": "Launch Calculator",
@@ -1021,7 +1021,7 @@
       "KC_CALC"
     ]
   },
-  "179": {
+  "0xB3": {
     "group": "media",
     "key": "KC_MY_COMPUTER",
     "label": "My PC",
@@ -1029,7 +1029,7 @@
       "KC_MYCM"
     ]
   },
-  "180": {
+  "0xB4": {
     "group": "media",
     "key": "KC_WWW_SEARCH",
     "label": "Browser Search",
@@ -1037,7 +1037,7 @@
       "KC_WSCH"
     ]
   },
-  "181": {
+  "0xB5": {
     "group": "media",
     "key": "KC_WWW_HOME",
     "label": "Browser Home",
@@ -1045,7 +1045,7 @@
       "KC_WHOM"
     ]
   },
-  "182": {
+  "0xB6": {
     "group": "media",
     "key": "KC_WWW_BACK",
     "label": "Browser Back",
@@ -1053,7 +1053,7 @@
       "KC_WBAK"
     ]
   },
-  "183": {
+  "0xB7": {
     "group": "media",
     "key": "KC_WWW_FORWARD",
     "label": "Browser Forward",
@@ -1061,7 +1061,7 @@
       "KC_WFWD"
     ]
   },
-  "184": {
+  "0xB8": {
     "group": "media",
     "key": "KC_WWW_STOP",
     "label": "Browser Stop",
@@ -1069,7 +1069,7 @@
       "KC_WSTP"
     ]
   },
-  "185": {
+  "0xB9": {
     "group": "media",
     "key": "KC_WWW_REFRESH",
     "label": "Browser Refresh",
@@ -1077,7 +1077,7 @@
       "KC_WREF"
     ]
   },
-  "186": {
+  "0xBA": {
     "group": "media",
     "key": "KC_WWW_FAVORITES",
     "label": "Browser Favorites",
@@ -1085,7 +1085,7 @@
       "KC_WFAV"
     ]
   },
-  "187": {
+  "0xBB": {
     "group": "media",
     "key": "KC_MEDIA_FAST_FORWARD",
     "label": "Next Track",
@@ -1093,7 +1093,7 @@
       "KC_MFFD"
     ]
   },
-  "188": {
+  "0xBC": {
     "group": "media",
     "key": "KC_MEDIA_REWIND",
     "label": "Previous Track",
@@ -1101,7 +1101,7 @@
       "KC_MRWD"
     ]
   },
-  "189": {
+  "0xBD": {
     "group": "media",
     "key": "KC_BRIGHTNESS_UP",
     "label": "Brightness Up",
@@ -1109,7 +1109,7 @@
       "KC_BRIU"
     ]
   },
-  "190": {
+  "0xBE": {
     "group": "media",
     "key": "KC_BRIGHTNESS_DOWN",
     "label": "Brightness Down",
@@ -1117,7 +1117,7 @@
       "KC_BRID"
     ]
   },
-  "191": {
+  "0xBF": {
     "group": "media",
     "key": "KC_CONTROL_PANEL",
     "label": "Open Control Panel",
@@ -1125,7 +1125,7 @@
       "KC_CPNL"
     ]
   },
-  "192": {
+  "0xC0": {
     "group": "media",
     "key": "KC_ASSISTANT",
     "label": "Launch Assistant",
@@ -1133,7 +1133,7 @@
       "KC_ASST"
     ]
   },
-  "193": {
+  "0xC1": {
     "group": "media",
     "key": "KC_MISSION_CONTROL",
     "label": "Open Mission Control",
@@ -1141,7 +1141,7 @@
       "KC_MCTL"
     ]
   },
-  "194": {
+  "0xC2": {
     "group": "media",
     "key": "KC_LAUNCHPAD",
     "label": "Open Launchpad",
@@ -1149,7 +1149,7 @@
       "KC_LPAD"
     ]
   },
-  "205": {
+  "0xCD": {
     "group": "mouse",
     "key": "KC_MS_UP",
     "label": "Move cursor up",
@@ -1157,7 +1157,7 @@
       "KC_MS_U"
     ]
   },
-  "206": {
+  "0xCE": {
     "group": "mouse",
     "key": "KC_MS_DOWN",
     "label": "Move cursor down",
@@ -1165,7 +1165,7 @@
       "KC_MS_D"
     ]
   },
-  "207": {
+  "0xCF": {
     "group": "mouse",
     "key": "KC_MS_LEFT",
     "label": "Move cursor left",
@@ -1173,7 +1173,7 @@
       "KC_MS_L"
     ]
   },
-  "208": {
+  "0xD0": {
     "group": "mouse",
     "key": "KC_MS_RIGHT",
     "label": "Move cursor right",
@@ -1181,7 +1181,7 @@
       "KC_MS_R"
     ]
   },
-  "209": {
+  "0xD1": {
     "group": "mouse",
     "key": "KC_MS_BTN1",
     "label": "Press button 1",
@@ -1189,7 +1189,7 @@
       "KC_BTN1"
     ]
   },
-  "210": {
+  "0xD2": {
     "group": "mouse",
     "key": "KC_MS_BTN2",
     "label": "Press button 2",
@@ -1197,7 +1197,7 @@
       "KC_BTN2"
     ]
   },
-  "211": {
+  "0xD3": {
     "group": "mouse",
     "key": "KC_MS_BTN3",
     "label": "Press button 3",
@@ -1205,7 +1205,7 @@
       "KC_BTN3"
     ]
   },
-  "212": {
+  "0xD4": {
     "group": "mouse",
     "key": "KC_MS_BTN4",
     "label": "Press button 4",
@@ -1213,7 +1213,7 @@
       "KC_BTN4"
     ]
   },
-  "213": {
+  "0xD5": {
     "group": "mouse",
     "key": "KC_MS_BTN5",
     "label": "Press button 5",
@@ -1221,7 +1221,7 @@
       "KC_BTN5"
     ]
   },
-  "214": {
+  "0xD6": {
     "group": "mouse",
     "key": "KC_MS_BTN6",
     "label": "Press button 6",
@@ -1229,7 +1229,7 @@
       "KC_BTN6"
     ]
   },
-  "215": {
+  "0xD7": {
     "group": "mouse",
     "key": "KC_MS_BTN7",
     "label": "Press button 7",
@@ -1237,7 +1237,7 @@
       "KC_BTN7"
     ]
   },
-  "216": {
+  "0xD8": {
     "group": "mouse",
     "key": "KC_MS_BTN8",
     "label": "Press button 8",
@@ -1245,7 +1245,7 @@
       "KC_BTN8"
     ]
   },
-  "217": {
+  "0xD9": {
     "group": "mouse",
     "key": "KC_MS_WH_UP",
     "label": "Move wheel up",
@@ -1253,7 +1253,7 @@
       "KC_WH_U"
     ]
   },
-  "218": {
+  "0xDA": {
     "group": "mouse",
     "key": "KC_MS_WH_DOWN",
     "label": "Move wheel down",
@@ -1261,7 +1261,7 @@
       "KC_WH_D"
     ]
   },
-  "219": {
+  "0xDB": {
     "group": "mouse",
     "key": "KC_MS_WH_LEFT",
     "label": "Move wheel left",
@@ -1269,7 +1269,7 @@
       "KC_WH_L"
     ]
   },
-  "220": {
+  "0xDC": {
     "group": "mouse",
     "key": "KC_MS_WH_RIGHT",
     "label": "Move wheel right",
@@ -1277,7 +1277,7 @@
       "KC_WH_R"
     ]
   },
-  "221": {
+  "0xDD": {
     "group": "mouse",
     "key": "KC_MS_ACCEL0",
     "label": "Set speed to 0",
@@ -1285,7 +1285,7 @@
       "KC_ACL0"
     ]
   },
-  "222": {
+  "0xDE": {
     "group": "mouse",
     "key": "KC_MS_ACCEL1",
     "label": "Set speed to 1",
@@ -1293,7 +1293,7 @@
       "KC_ACL1"
     ]
   },
-  "223": {
+  "0xDF": {
     "group": "mouse",
     "key": "KC_MS_ACCEL2",
     "label": "Set speed to 2",
@@ -1301,7 +1301,7 @@
       "KC_ACL2"
     ]
   },
-  "224": {
+  "0xE0": {
     "group": "modifiers",
     "key": "KC_LEFT_CTRL",
     "label": "LCtrl",
@@ -1309,7 +1309,7 @@
       "KC_LCTL"
     ]
   },
-  "225": {
+  "0xE1": {
     "group": "modifiers",
     "key": "KC_LEFT_SHIFT",
     "label": "LShift",
@@ -1317,7 +1317,7 @@
       "KC_LSFT"
     ]
   },
-  "226": {
+  "0xE2": {
     "group": "modifiers",
     "key": "KC_LEFT_ALT",
     "label": "LAlt",
@@ -1326,7 +1326,7 @@
       "KC_LOPT"
     ]
   },
-  "227": {
+  "0xE3": {
     "group": "modifiers",
     "key": "KC_LEFT_GUI",
     "label": "LGUI",
@@ -1336,7 +1336,7 @@
       "KC_LWIN"
     ]
   },
-  "228": {
+  "0xE4": {
     "group": "modifiers",
     "key": "KC_RIGHT_CTRL",
     "label": "RCtrl",
@@ -1344,7 +1344,7 @@
       "KC_RCTL"
     ]
   },
-  "229": {
+  "0xE5": {
     "group": "modifiers",
     "key": "KC_RIGHT_SHIFT",
     "label": "RShift",
@@ -1352,7 +1352,7 @@
       "KC_RSFT"
     ]
   },
-  "230": {
+  "0xE6": {
     "group": "modifiers",
     "key": "KC_RIGHT_ALT",
     "label": "RAlt",
@@ -1362,7 +1362,7 @@
       "KC_ALGR"
     ]
   },
-  "231": {
+  "0xE7": {
     "group": "modifiers",
     "key": "KC_RIGHT_GUI",
     "label": "RGUI",
@@ -1372,329 +1372,329 @@
       "KC_RWIN"
     ]
   },
-  "22256": {
+  "0x56F0": {
     "group": "swap_hands",
     "key": "QK_SWAP_HANDS_TOGGLE",
     "aliases": [
       "SH_TOGG"
     ]
   },
-  "22257": {
+  "0x56F1": {
     "group": "swap_hands",
     "key": "QK_SWAP_HANDS_TAP_TOGGLE",
     "aliases": [
       "SH_TT"
     ]
   },
-  "22258": {
+  "0x56F2": {
     "group": "swap_hands",
     "key": "QK_SWAP_HANDS_MOMENTARY_ON",
     "aliases": [
       "SH_MON"
     ]
   },
-  "22259": {
+  "0x56F3": {
     "group": "swap_hands",
     "key": "QK_SWAP_HANDS_MOMENTARY_OFF",
     "aliases": [
       "SH_MOFF"
     ]
   },
-  "22260": {
+  "0x56F4": {
     "group": "swap_hands",
     "key": "QK_SWAP_HANDS_OFF",
     "aliases": [
       "SH_OFF"
     ]
   },
-  "22261": {
+  "0x56F5": {
     "group": "swap_hands",
     "key": "QK_SWAP_HANDS_ON",
     "aliases": [
       "SH_ON"
     ]
   },
-  "22262": {
+  "0x56F6": {
     "group": "swap_hands",
     "key": "QK_SWAP_HANDS_ONE_SHOT",
     "aliases": [
       "SH_OS"
     ]
   },
-  "28672": {
+  "0x7000": {
     "group": "magic",
     "key": "QK_MAGIC_SWAP_CONTROL_CAPS_LOCK",
     "aliases": [
       "CL_SWAP"
     ]
   },
-  "28673": {
+  "0x7001": {
     "group": "magic",
     "key": "QK_MAGIC_UNSWAP_CONTROL_CAPS_LOCK",
     "aliases": [
       "CL_NORM"
     ]
   },
-  "28674": {
+  "0x7002": {
     "group": "magic",
     "key": "QK_MAGIC_TOGGLE_CONTROL_CAPS_LOCK",
     "aliases": [
       "CL_TOGG"
     ]
   },
-  "28675": {
+  "0x7003": {
     "group": "magic",
     "key": "QK_MAGIC_CAPS_LOCK_AS_CONTROL_OFF",
     "aliases": [
       "CL_CAPS"
     ]
   },
-  "28676": {
+  "0x7004": {
     "group": "magic",
     "key": "QK_MAGIC_CAPS_LOCK_AS_CONTROL_ON",
     "aliases": [
       "CL_CTRL"
     ]
   },
-  "28677": {
+  "0x7005": {
     "group": "magic",
     "key": "QK_MAGIC_SWAP_LALT_LGUI",
     "aliases": [
       "AG_LSWP"
     ]
   },
-  "28678": {
+  "0x7006": {
     "group": "magic",
     "key": "QK_MAGIC_UNSWAP_LALT_LGUI",
     "aliases": [
       "AG_LNRM"
     ]
   },
-  "28679": {
+  "0x7007": {
     "group": "magic",
     "key": "QK_MAGIC_SWAP_RALT_RGUI",
     "aliases": [
       "AG_RSWP"
     ]
   },
-  "28680": {
+  "0x7008": {
     "group": "magic",
     "key": "QK_MAGIC_UNSWAP_RALT_RGUI",
     "aliases": [
       "AG_RNRM"
     ]
   },
-  "28681": {
+  "0x7009": {
     "group": "magic",
     "key": "QK_MAGIC_GUI_ON",
     "aliases": [
       "GU_ON"
     ]
   },
-  "28682": {
+  "0x700A": {
     "group": "magic",
     "key": "QK_MAGIC_GUI_OFF",
     "aliases": [
       "GU_OFF"
     ]
   },
-  "28683": {
+  "0x700B": {
     "group": "magic",
     "key": "QK_MAGIC_TOGGLE_GUI",
     "aliases": [
       "GU_TOGG"
     ]
   },
-  "28684": {
+  "0x700C": {
     "group": "magic",
     "key": "QK_MAGIC_SWAP_GRAVE_ESC",
     "aliases": [
       "GE_SWAP"
     ]
   },
-  "28685": {
+  "0x700D": {
     "group": "magic",
     "key": "QK_MAGIC_UNSWAP_GRAVE_ESC",
     "aliases": [
       "GE_NORM"
     ]
   },
-  "28686": {
+  "0x700E": {
     "group": "magic",
     "key": "QK_MAGIC_SWAP_BACKSLASH_BACKSPACE",
     "aliases": [
       "BS_SWAP"
     ]
   },
-  "28687": {
+  "0x700F": {
     "group": "magic",
     "key": "QK_MAGIC_UNSWAP_BACKSLASH_BACKSPACE",
     "aliases": [
       "BS_NORM"
     ]
   },
-  "28688": {
+  "0x7010": {
     "group": "magic",
     "key": "QK_MAGIC_TOGGLE_BACKSLASH_BACKSPACE",
     "aliases": [
       "BS_TOGG"
     ]
   },
-  "28689": {
+  "0x7011": {
     "group": "magic",
     "key": "QK_MAGIC_NKRO_ON",
     "aliases": [
       "NK_ON"
     ]
   },
-  "28690": {
+  "0x7012": {
     "group": "magic",
     "key": "QK_MAGIC_NKRO_OFF",
     "aliases": [
       "NK_OFF"
     ]
   },
-  "28691": {
+  "0x7013": {
     "group": "magic",
     "key": "QK_MAGIC_TOGGLE_NKRO",
     "aliases": [
       "NK_TOGG"
     ]
   },
-  "28692": {
+  "0x7014": {
     "group": "magic",
     "key": "QK_MAGIC_SWAP_ALT_GUI",
     "aliases": [
       "AG_SWAP"
     ]
   },
-  "28693": {
+  "0x7015": {
     "group": "magic",
     "key": "QK_MAGIC_UNSWAP_ALT_GUI",
     "aliases": [
       "AG_NORM"
     ]
   },
-  "28694": {
+  "0x7016": {
     "group": "magic",
     "key": "QK_MAGIC_TOGGLE_ALT_GUI",
     "aliases": [
       "AG_TOGG"
     ]
   },
-  "28695": {
+  "0x7017": {
     "group": "magic",
     "key": "QK_MAGIC_SWAP_LCTL_LGUI",
     "aliases": [
       "CG_LSWP"
     ]
   },
-  "28696": {
+  "0x7018": {
     "group": "magic",
     "key": "QK_MAGIC_UNSWAP_LCTL_LGUI",
     "aliases": [
       "CG_LNRM"
     ]
   },
-  "28697": {
+  "0x7019": {
     "group": "magic",
     "key": "QK_MAGIC_SWAP_RCTL_RGUI",
     "aliases": [
       "CG_RSWP"
     ]
   },
-  "28698": {
+  "0x701A": {
     "group": "magic",
     "key": "QK_MAGIC_UNSWAP_RCTL_RGUI",
     "aliases": [
       "CG_RNRM"
     ]
   },
-  "28699": {
+  "0x701B": {
     "group": "magic",
     "key": "QK_MAGIC_SWAP_CTL_GUI",
     "aliases": [
       "CG_SWAP"
     ]
   },
-  "28700": {
+  "0x701C": {
     "group": "magic",
     "key": "QK_MAGIC_UNSWAP_CTL_GUI",
     "aliases": [
       "CG_NORM"
     ]
   },
-  "28701": {
+  "0x701D": {
     "group": "magic",
     "key": "QK_MAGIC_TOGGLE_CTL_GUI",
     "aliases": [
       "CG_TOGG"
     ]
   },
-  "28702": {
+  "0x701E": {
     "group": "magic",
     "key": "QK_MAGIC_EE_HANDS_LEFT",
     "aliases": [
       "EH_LEFT"
     ]
   },
-  "28703": {
+  "0x701F": {
     "group": "magic",
     "key": "QK_MAGIC_EE_HANDS_RIGHT",
     "aliases": [
       "EH_RGHT"
     ]
   },
-  "28704": {
+  "0x7020": {
     "group": "magic",
     "key": "QK_MAGIC_SWAP_ESCAPE_CAPS_LOCK",
     "aliases": [
       "EC_SWAP"
     ]
   },
-  "28705": {
+  "0x7021": {
     "group": "magic",
     "key": "QK_MAGIC_UNSWAP_ESCAPE_CAPS_LOCK",
     "aliases": [
       "EC_NORM"
     ]
   },
-  "28706": {
+  "0x7022": {
     "group": "magic",
     "key": "QK_MAGIC_TOGGLE_ESCAPE_CAPS_LOCK",
     "aliases": [
       "EC_TOGG"
     ]
   },
-  "28928": {
+  "0x7100": {
     "group": "midi",
     "key": "QK_MIDI_ON",
     "aliases": [
       "MI_ON"
     ]
   },
-  "28929": {
+  "0x7101": {
     "group": "midi",
     "key": "QK_MIDI_OFF",
     "aliases": [
       "MI_OFF"
     ]
   },
-  "28930": {
+  "0x7102": {
     "group": "midi",
     "key": "QK_MIDI_TOGGLE",
     "aliases": [
       "MI_TOGG"
     ]
   },
-  "28931": {
+  "0x7103": {
     "group": "midi",
     "key": "QK_MIDI_NOTE_C_0",
     "aliases": [
       "MI_C"
     ]
   },
-  "28932": {
+  "0x7104": {
     "group": "midi",
     "key": "QK_MIDI_NOTE_C_SHARP_0",
     "aliases": [
@@ -1702,14 +1702,14 @@
       "MI_Db"
     ]
   },
-  "28933": {
+  "0x7105": {
     "group": "midi",
     "key": "QK_MIDI_NOTE_D_0",
     "aliases": [
       "MI_D"
     ]
   },
-  "28934": {
+  "0x7106": {
     "group": "midi",
     "key": "QK_MIDI_NOTE_D_SHARP_0",
     "aliases": [
@@ -1717,21 +1717,21 @@
       "MI_Eb"
     ]
   },
-  "28935": {
+  "0x7107": {
     "group": "midi",
     "key": "QK_MIDI_NOTE_E_0",
     "aliases": [
       "MI_E"
     ]
   },
-  "28936": {
+  "0x7108": {
     "group": "midi",
     "key": "QK_MIDI_NOTE_F_0",
     "aliases": [
       "MI_F"
     ]
   },
-  "28937": {
+  "0x7109": {
     "group": "midi",
     "key": "QK_MIDI_NOTE_F_SHARP_0",
     "aliases": [
@@ -1739,14 +1739,14 @@
       "MI_Gb"
     ]
   },
-  "28938": {
+  "0x710A": {
     "group": "midi",
     "key": "QK_MIDI_NOTE_G_0",
     "aliases": [
       "MI_G"
     ]
   },
-  "28939": {
+  "0x710B": {
     "group": "midi",
     "key": "QK_MIDI_NOTE_G_SHARP_0",
     "aliases": [
@@ -1754,14 +1754,14 @@
       "MI_Ab"
     ]
   },
-  "28940": {
+  "0x710C": {
     "group": "midi",
     "key": "QK_MIDI_NOTE_A_0",
     "aliases": [
       "MI_A"
     ]
   },
-  "28941": {
+  "0x710D": {
     "group": "midi",
     "key": "QK_MIDI_NOTE_A_SHARP_0",
     "aliases": [
@@ -1769,21 +1769,21 @@
       "MI_Bb"
     ]
   },
-  "28942": {
+  "0x710E": {
     "group": "midi",
     "key": "QK_MIDI_NOTE_B_0",
     "aliases": [
       "MI_B"
     ]
   },
-  "28943": {
+  "0x710F": {
     "group": "midi",
     "key": "QK_MIDI_NOTE_C_1",
     "aliases": [
       "MI_C1"
     ]
   },
-  "28944": {
+  "0x7110": {
     "group": "midi",
     "key": "QK_MIDI_NOTE_C_SHARP_1",
     "aliases": [
@@ -1791,14 +1791,14 @@
       "MI_Db1"
     ]
   },
-  "28945": {
+  "0x7111": {
     "group": "midi",
     "key": "QK_MIDI_NOTE_D_1",
     "aliases": [
       "MI_D1"
     ]
   },
-  "28946": {
+  "0x7112": {
     "group": "midi",
     "key": "QK_MIDI_NOTE_D_SHARP_1",
     "aliases": [
@@ -1806,21 +1806,21 @@
       "MI_Eb1"
     ]
   },
-  "28947": {
+  "0x7113": {
     "group": "midi",
     "key": "QK_MIDI_NOTE_E_1",
     "aliases": [
       "MI_E1"
     ]
   },
-  "28948": {
+  "0x7114": {
     "group": "midi",
     "key": "QK_MIDI_NOTE_F_1",
     "aliases": [
       "MI_F1"
     ]
   },
-  "28949": {
+  "0x7115": {
     "group": "midi",
     "key": "QK_MIDI_NOTE_F_SHARP_1",
     "aliases": [
@@ -1828,14 +1828,14 @@
       "MI_Gb1"
     ]
   },
-  "28950": {
+  "0x7116": {
     "group": "midi",
     "key": "QK_MIDI_NOTE_G_1",
     "aliases": [
       "MI_G1"
     ]
   },
-  "28951": {
+  "0x7117": {
     "group": "midi",
     "key": "QK_MIDI_NOTE_G_SHARP_1",
     "aliases": [
@@ -1843,14 +1843,14 @@
       "MI_Ab1"
     ]
   },
-  "28952": {
+  "0x7118": {
     "group": "midi",
     "key": "QK_MIDI_NOTE_A_1",
     "aliases": [
       "MI_A1"
     ]
   },
-  "28953": {
+  "0x7119": {
     "group": "midi",
     "key": "QK_MIDI_NOTE_A_SHARP_1",
     "aliases": [
@@ -1858,21 +1858,21 @@
       "MI_Bb1"
     ]
   },
-  "28954": {
+  "0x711A": {
     "group": "midi",
     "key": "QK_MIDI_NOTE_B_1",
     "aliases": [
       "MI_B1"
     ]
   },
-  "28955": {
+  "0x711B": {
     "group": "midi",
     "key": "QK_MIDI_NOTE_C_2",
     "aliases": [
       "MI_C2"
     ]
   },
-  "28956": {
+  "0x711C": {
     "group": "midi",
     "key": "QK_MIDI_NOTE_C_SHARP_2",
     "aliases": [
@@ -1880,14 +1880,14 @@
       "MI_Db2"
     ]
   },
-  "28957": {
+  "0x711D": {
     "group": "midi",
     "key": "QK_MIDI_NOTE_D_2",
     "aliases": [
       "MI_D2"
     ]
   },
-  "28958": {
+  "0x711E": {
     "group": "midi",
     "key": "QK_MIDI_NOTE_D_SHARP_2",
     "aliases": [
@@ -1895,21 +1895,21 @@
       "MI_Eb2"
     ]
   },
-  "28959": {
+  "0x711F": {
     "group": "midi",
     "key": "QK_MIDI_NOTE_E_2",
     "aliases": [
       "MI_E2"
     ]
   },
-  "28960": {
+  "0x7120": {
     "group": "midi",
     "key": "QK_MIDI_NOTE_F_2",
     "aliases": [
       "MI_F2"
     ]
   },
-  "28961": {
+  "0x7121": {
     "group": "midi",
     "key": "QK_MIDI_NOTE_F_SHARP_2",
     "aliases": [
@@ -1917,14 +1917,14 @@
       "MI_Gb2"
     ]
   },
-  "28962": {
+  "0x7122": {
     "group": "midi",
     "key": "QK_MIDI_NOTE_G_2",
     "aliases": [
       "MI_G2"
     ]
   },
-  "28963": {
+  "0x7123": {
     "group": "midi",
     "key": "QK_MIDI_NOTE_G_SHARP_2",
     "aliases": [
@@ -1932,14 +1932,14 @@
       "MI_Ab2"
     ]
   },
-  "28964": {
+  "0x7124": {
     "group": "midi",
     "key": "QK_MIDI_NOTE_A_2",
     "aliases": [
       "MI_A2"
     ]
   },
-  "28965": {
+  "0x7125": {
     "group": "midi",
     "key": "QK_MIDI_NOTE_A_SHARP_2",
     "aliases": [
@@ -1947,21 +1947,21 @@
       "MI_Bb2"
     ]
   },
-  "28966": {
+  "0x7126": {
     "group": "midi",
     "key": "QK_MIDI_NOTE_B_2",
     "aliases": [
       "MI_B2"
     ]
   },
-  "28967": {
+  "0x7127": {
     "group": "midi",
     "key": "QK_MIDI_NOTE_C_3",
     "aliases": [
       "MI_C3"
     ]
   },
-  "28968": {
+  "0x7128": {
     "group": "midi",
     "key": "QK_MIDI_NOTE_C_SHARP_3",
     "aliases": [
@@ -1969,14 +1969,14 @@
       "MI_Db3"
     ]
   },
-  "28969": {
+  "0x7129": {
     "group": "midi",
     "key": "QK_MIDI_NOTE_D_3",
     "aliases": [
       "MI_D3"
     ]
   },
-  "28970": {
+  "0x712A": {
     "group": "midi",
     "key": "QK_MIDI_NOTE_D_SHARP_3",
     "aliases": [
@@ -1984,21 +1984,21 @@
       "MI_Eb3"
     ]
   },
-  "28971": {
+  "0x712B": {
     "group": "midi",
     "key": "QK_MIDI_NOTE_E_3",
     "aliases": [
       "MI_E3"
     ]
   },
-  "28972": {
+  "0x712C": {
     "group": "midi",
     "key": "QK_MIDI_NOTE_F_3",
     "aliases": [
       "MI_F3"
     ]
   },
-  "28973": {
+  "0x712D": {
     "group": "midi",
     "key": "QK_MIDI_NOTE_F_SHARP_3",
     "aliases": [
@@ -2006,14 +2006,14 @@
       "MI_Gb3"
     ]
   },
-  "28974": {
+  "0x712E": {
     "group": "midi",
     "key": "QK_MIDI_NOTE_G_3",
     "aliases": [
       "MI_G3"
     ]
   },
-  "28975": {
+  "0x712F": {
     "group": "midi",
     "key": "QK_MIDI_NOTE_G_SHARP_3",
     "aliases": [
@@ -2021,14 +2021,14 @@
       "MI_Ab3"
     ]
   },
-  "28976": {
+  "0x7130": {
     "group": "midi",
     "key": "QK_MIDI_NOTE_A_3",
     "aliases": [
       "MI_A3"
     ]
   },
-  "28977": {
+  "0x7131": {
     "group": "midi",
     "key": "QK_MIDI_NOTE_A_SHARP_3",
     "aliases": [
@@ -2036,21 +2036,21 @@
       "MI_Bb3"
     ]
   },
-  "28978": {
+  "0x7132": {
     "group": "midi",
     "key": "QK_MIDI_NOTE_B_3",
     "aliases": [
       "MI_B3"
     ]
   },
-  "28979": {
+  "0x7133": {
     "group": "midi",
     "key": "QK_MIDI_NOTE_C_4",
     "aliases": [
       "MI_C4"
     ]
   },
-  "28980": {
+  "0x7134": {
     "group": "midi",
     "key": "QK_MIDI_NOTE_C_SHARP_4",
     "aliases": [
@@ -2058,14 +2058,14 @@
       "MI_Db4"
     ]
   },
-  "28981": {
+  "0x7135": {
     "group": "midi",
     "key": "QK_MIDI_NOTE_D_4",
     "aliases": [
       "MI_D4"
     ]
   },
-  "28982": {
+  "0x7136": {
     "group": "midi",
     "key": "QK_MIDI_NOTE_D_SHARP_4",
     "aliases": [
@@ -2073,21 +2073,21 @@
       "MI_Eb4"
     ]
   },
-  "28983": {
+  "0x7137": {
     "group": "midi",
     "key": "QK_MIDI_NOTE_E_4",
     "aliases": [
       "MI_E4"
     ]
   },
-  "28984": {
+  "0x7138": {
     "group": "midi",
     "key": "QK_MIDI_NOTE_F_4",
     "aliases": [
       "MI_F4"
     ]
   },
-  "28985": {
+  "0x7139": {
     "group": "midi",
     "key": "QK_MIDI_NOTE_F_SHARP_4",
     "aliases": [
@@ -2095,14 +2095,14 @@
       "MI_Gb4"
     ]
   },
-  "28986": {
+  "0x713A": {
     "group": "midi",
     "key": "QK_MIDI_NOTE_G_4",
     "aliases": [
       "MI_G4"
     ]
   },
-  "28987": {
+  "0x713B": {
     "group": "midi",
     "key": "QK_MIDI_NOTE_G_SHARP_4",
     "aliases": [
@@ -2110,14 +2110,14 @@
       "MI_Ab4"
     ]
   },
-  "28988": {
+  "0x713C": {
     "group": "midi",
     "key": "QK_MIDI_NOTE_A_4",
     "aliases": [
       "MI_A4"
     ]
   },
-  "28989": {
+  "0x713D": {
     "group": "midi",
     "key": "QK_MIDI_NOTE_A_SHARP_4",
     "aliases": [
@@ -2125,21 +2125,21 @@
       "MI_Bb4"
     ]
   },
-  "28990": {
+  "0x713E": {
     "group": "midi",
     "key": "QK_MIDI_NOTE_B_4",
     "aliases": [
       "MI_B4"
     ]
   },
-  "28991": {
+  "0x713F": {
     "group": "midi",
     "key": "QK_MIDI_NOTE_C_5",
     "aliases": [
       "MI_C5"
     ]
   },
-  "28992": {
+  "0x7140": {
     "group": "midi",
     "key": "QK_MIDI_NOTE_C_SHARP_5",
     "aliases": [
@@ -2147,14 +2147,14 @@
       "MI_Db5"
     ]
   },
-  "28993": {
+  "0x7141": {
     "group": "midi",
     "key": "QK_MIDI_NOTE_D_5",
     "aliases": [
       "MI_D5"
     ]
   },
-  "28994": {
+  "0x7142": {
     "group": "midi",
     "key": "QK_MIDI_NOTE_D_SHARP_5",
     "aliases": [
@@ -2162,21 +2162,21 @@
       "MI_Eb5"
     ]
   },
-  "28995": {
+  "0x7143": {
     "group": "midi",
     "key": "QK_MIDI_NOTE_E_5",
     "aliases": [
       "MI_E5"
     ]
   },
-  "28996": {
+  "0x7144": {
     "group": "midi",
     "key": "QK_MIDI_NOTE_F_5",
     "aliases": [
       "MI_F5"
     ]
   },
-  "28997": {
+  "0x7145": {
     "group": "midi",
     "key": "QK_MIDI_NOTE_F_SHARP_5",
     "aliases": [
@@ -2184,14 +2184,14 @@
       "MI_Gb5"
     ]
   },
-  "28998": {
+  "0x7146": {
     "group": "midi",
     "key": "QK_MIDI_NOTE_G_5",
     "aliases": [
       "MI_G5"
     ]
   },
-  "28999": {
+  "0x7147": {
     "group": "midi",
     "key": "QK_MIDI_NOTE_G_SHARP_5",
     "aliases": [
@@ -2199,14 +2199,14 @@
       "MI_Ab5"
     ]
   },
-  "29000": {
+  "0x7148": {
     "group": "midi",
     "key": "QK_MIDI_NOTE_A_5",
     "aliases": [
       "MI_A5"
     ]
   },
-  "29001": {
+  "0x7149": {
     "group": "midi",
     "key": "QK_MIDI_NOTE_A_SHARP_5",
     "aliases": [
@@ -2214,2177 +2214,2177 @@
       "MI_Bb5"
     ]
   },
-  "29002": {
+  "0x714A": {
     "group": "midi",
     "key": "QK_MIDI_NOTE_B_5",
     "aliases": [
       "MI_B5"
     ]
   },
-  "29003": {
+  "0x714B": {
     "group": "midi",
     "key": "QK_MIDI_OCTAVE_N2",
     "aliases": [
       "MI_OCN2"
     ]
   },
-  "29004": {
+  "0x714C": {
     "group": "midi",
     "key": "QK_MIDI_OCTAVE_N1",
     "aliases": [
       "MI_OCN1"
     ]
   },
-  "29005": {
+  "0x714D": {
     "group": "midi",
     "key": "QK_MIDI_OCTAVE_0",
     "aliases": [
       "MI_OC0"
     ]
   },
-  "29006": {
+  "0x714E": {
     "group": "midi",
     "key": "QK_MIDI_OCTAVE_1",
     "aliases": [
       "MI_OC1"
     ]
   },
-  "29007": {
+  "0x714F": {
     "group": "midi",
     "key": "QK_MIDI_OCTAVE_2",
     "aliases": [
       "MI_OC2"
     ]
   },
-  "29008": {
+  "0x7150": {
     "group": "midi",
     "key": "QK_MIDI_OCTAVE_3",
     "aliases": [
       "MI_OC3"
     ]
   },
-  "29009": {
+  "0x7151": {
     "group": "midi",
     "key": "QK_MIDI_OCTAVE_4",
     "aliases": [
       "MI_OC4"
     ]
   },
-  "29010": {
+  "0x7152": {
     "group": "midi",
     "key": "QK_MIDI_OCTAVE_5",
     "aliases": [
       "MI_OC5"
     ]
   },
-  "29011": {
+  "0x7153": {
     "group": "midi",
     "key": "QK_MIDI_OCTAVE_6",
     "aliases": [
       "MI_OC6"
     ]
   },
-  "29012": {
+  "0x7154": {
     "group": "midi",
     "key": "QK_MIDI_OCTAVE_7",
     "aliases": [
       "MI_OC7"
     ]
   },
-  "29013": {
+  "0x7155": {
     "group": "midi",
     "key": "QK_MIDI_OCTAVE_DOWN",
     "aliases": [
       "MI_OCTD"
     ]
   },
-  "29014": {
+  "0x7156": {
     "group": "midi",
     "key": "QK_MIDI_OCTAVE_UP",
     "aliases": [
       "MI_OCTU"
     ]
   },
-  "29015": {
+  "0x7157": {
     "group": "midi",
     "key": "QK_MIDI_TRANSPOSE_N6",
     "aliases": [
       "MI_TRN6"
     ]
   },
-  "29016": {
+  "0x7158": {
     "group": "midi",
     "key": "QK_MIDI_TRANSPOSE_N5",
     "aliases": [
       "MI_TRN5"
     ]
   },
-  "29017": {
+  "0x7159": {
     "group": "midi",
     "key": "QK_MIDI_TRANSPOSE_N4",
     "aliases": [
       "MI_TRN4"
     ]
   },
-  "29018": {
+  "0x715A": {
     "group": "midi",
     "key": "QK_MIDI_TRANSPOSE_N3",
     "aliases": [
       "MI_TRN3"
     ]
   },
-  "29019": {
+  "0x715B": {
     "group": "midi",
     "key": "QK_MIDI_TRANSPOSE_N2",
     "aliases": [
       "MI_TRN2"
     ]
   },
-  "29020": {
+  "0x715C": {
     "group": "midi",
     "key": "QK_MIDI_TRANSPOSE_N1",
     "aliases": [
       "MI_TRN1"
     ]
   },
-  "29021": {
+  "0x715D": {
     "group": "midi",
     "key": "QK_MIDI_TRANSPOSE_0",
     "aliases": [
       "MI_TR0"
     ]
   },
-  "29022": {
+  "0x715E": {
     "group": "midi",
     "key": "QK_MIDI_TRANSPOSE_1",
     "aliases": [
       "MI_TR1"
     ]
   },
-  "29023": {
+  "0x715F": {
     "group": "midi",
     "key": "QK_MIDI_TRANSPOSE_2",
     "aliases": [
       "MI_TR2"
     ]
   },
-  "29024": {
+  "0x7160": {
     "group": "midi",
     "key": "QK_MIDI_TRANSPOSE_3",
     "aliases": [
       "MI_TR3"
     ]
   },
-  "29025": {
+  "0x7161": {
     "group": "midi",
     "key": "QK_MIDI_TRANSPOSE_4",
     "aliases": [
       "MI_TR4"
     ]
   },
-  "29026": {
+  "0x7162": {
     "group": "midi",
     "key": "QK_MIDI_TRANSPOSE_5",
     "aliases": [
       "MI_TR5"
     ]
   },
-  "29027": {
+  "0x7163": {
     "group": "midi",
     "key": "QK_MIDI_TRANSPOSE_6",
     "aliases": [
       "MI_TR6"
     ]
   },
-  "29028": {
+  "0x7164": {
     "group": "midi",
     "key": "QK_MIDI_TRANSPOSE_DOWN",
     "aliases": [
       "MI_TRSD"
     ]
   },
-  "29029": {
+  "0x7165": {
     "group": "midi",
     "key": "QK_MIDI_TRANSPOSE_UP",
     "aliases": [
       "MI_TRSU"
     ]
   },
-  "29030": {
+  "0x7166": {
     "group": "midi",
     "key": "QK_MIDI_VELOCITY_0",
     "aliases": [
       "MI_VL0"
     ]
   },
-  "29031": {
+  "0x7167": {
     "group": "midi",
     "key": "QK_MIDI_VELOCITY_1",
     "aliases": [
       "MI_VL1"
     ]
   },
-  "29032": {
+  "0x7168": {
     "group": "midi",
     "key": "QK_MIDI_VELOCITY_2",
     "aliases": [
       "MI_VL2"
     ]
   },
-  "29033": {
+  "0x7169": {
     "group": "midi",
     "key": "QK_MIDI_VELOCITY_3",
     "aliases": [
       "MI_VL3"
     ]
   },
-  "29034": {
+  "0x716A": {
     "group": "midi",
     "key": "QK_MIDI_VELOCITY_4",
     "aliases": [
       "MI_VL4"
     ]
   },
-  "29035": {
+  "0x716B": {
     "group": "midi",
     "key": "QK_MIDI_VELOCITY_5",
     "aliases": [
       "MI_VL5"
     ]
   },
-  "29036": {
+  "0x716C": {
     "group": "midi",
     "key": "QK_MIDI_VELOCITY_6",
     "aliases": [
       "MI_VL6"
     ]
   },
-  "29037": {
+  "0x716D": {
     "group": "midi",
     "key": "QK_MIDI_VELOCITY_7",
     "aliases": [
       "MI_VL7"
     ]
   },
-  "29038": {
+  "0x716E": {
     "group": "midi",
     "key": "QK_MIDI_VELOCITY_8",
     "aliases": [
       "MI_VL8"
     ]
   },
-  "29039": {
+  "0x716F": {
     "group": "midi",
     "key": "QK_MIDI_VELOCITY_9",
     "aliases": [
       "MI_VL9"
     ]
   },
-  "29040": {
+  "0x7170": {
     "group": "midi",
     "key": "QK_MIDI_VELOCITY_10",
     "aliases": [
       "MI_VL10"
     ]
   },
-  "29041": {
+  "0x7171": {
     "group": "midi",
     "key": "QK_MIDI_VELOCITY_DOWN",
     "aliases": [
       "MI_VELD"
     ]
   },
-  "29042": {
+  "0x7172": {
     "group": "midi",
     "key": "QK_MIDI_VELOCITY_UP",
     "aliases": [
       "MI_VELU"
     ]
   },
-  "29043": {
+  "0x7173": {
     "group": "midi",
     "key": "QK_MIDI_CHANNEL_1",
     "aliases": [
       "MI_CH1"
     ]
   },
-  "29044": {
+  "0x7174": {
     "group": "midi",
     "key": "QK_MIDI_CHANNEL_2",
     "aliases": [
       "MI_CH2"
     ]
   },
-  "29045": {
+  "0x7175": {
     "group": "midi",
     "key": "QK_MIDI_CHANNEL_3",
     "aliases": [
       "MI_CH3"
     ]
   },
-  "29046": {
+  "0x7176": {
     "group": "midi",
     "key": "QK_MIDI_CHANNEL_4",
     "aliases": [
       "MI_CH4"
     ]
   },
-  "29047": {
+  "0x7177": {
     "group": "midi",
     "key": "QK_MIDI_CHANNEL_5",
     "aliases": [
       "MI_CH5"
     ]
   },
-  "29048": {
+  "0x7178": {
     "group": "midi",
     "key": "QK_MIDI_CHANNEL_6",
     "aliases": [
       "MI_CH6"
     ]
   },
-  "29049": {
+  "0x7179": {
     "group": "midi",
     "key": "QK_MIDI_CHANNEL_7",
     "aliases": [
       "MI_CH7"
     ]
   },
-  "29050": {
+  "0x717A": {
     "group": "midi",
     "key": "QK_MIDI_CHANNEL_8",
     "aliases": [
       "MI_CH8"
     ]
   },
-  "29051": {
+  "0x717B": {
     "group": "midi",
     "key": "QK_MIDI_CHANNEL_9",
     "aliases": [
       "MI_CH9"
     ]
   },
-  "29052": {
+  "0x717C": {
     "group": "midi",
     "key": "QK_MIDI_CHANNEL_10",
     "aliases": [
       "MI_CH10"
     ]
   },
-  "29053": {
+  "0x717D": {
     "group": "midi",
     "key": "QK_MIDI_CHANNEL_11",
     "aliases": [
       "MI_CH11"
     ]
   },
-  "29054": {
+  "0x717E": {
     "group": "midi",
     "key": "QK_MIDI_CHANNEL_12",
     "aliases": [
       "MI_CH12"
     ]
   },
-  "29055": {
+  "0x717F": {
     "group": "midi",
     "key": "QK_MIDI_CHANNEL_13",
     "aliases": [
       "MI_CH13"
     ]
   },
-  "29056": {
+  "0x7180": {
     "group": "midi",
     "key": "QK_MIDI_CHANNEL_14",
     "aliases": [
       "MI_CH14"
     ]
   },
-  "29057": {
+  "0x7181": {
     "group": "midi",
     "key": "QK_MIDI_CHANNEL_15",
     "aliases": [
       "MI_CH15"
     ]
   },
-  "29058": {
+  "0x7182": {
     "group": "midi",
     "key": "QK_MIDI_CHANNEL_16",
     "aliases": [
       "MI_CH16"
     ]
   },
-  "29059": {
+  "0x7183": {
     "group": "midi",
     "key": "QK_MIDI_CHANNEL_DOWN",
     "aliases": [
       "MI_CHND"
     ]
   },
-  "29060": {
+  "0x7184": {
     "group": "midi",
     "key": "QK_MIDI_CHANNEL_UP",
     "aliases": [
       "MI_CHNU"
     ]
   },
-  "29061": {
+  "0x7185": {
     "group": "midi",
     "key": "QK_MIDI_ALL_NOTES_OFF",
     "aliases": [
       "MI_AOFF"
     ]
   },
-  "29062": {
+  "0x7186": {
     "group": "midi",
     "key": "QK_MIDI_SUSTAIN",
     "aliases": [
       "MI_SUST"
     ]
   },
-  "29063": {
+  "0x7187": {
     "group": "midi",
     "key": "QK_MIDI_PORTAMENTO",
     "aliases": [
       "MI_PORT"
     ]
   },
-  "29064": {
+  "0x7188": {
     "group": "midi",
     "key": "QK_MIDI_SOSTENUTO",
     "aliases": [
       "MI_SOST"
     ]
   },
-  "29065": {
+  "0x7189": {
     "group": "midi",
     "key": "QK_MIDI_SOFT",
     "aliases": [
       "MI_SOFT"
     ]
   },
-  "29066": {
+  "0x718A": {
     "group": "midi",
     "key": "QK_MIDI_LEGATO",
     "aliases": [
       "MI_LEG"
     ]
   },
-  "29067": {
+  "0x718B": {
     "group": "midi",
     "key": "QK_MIDI_MODULATION",
     "aliases": [
       "MI_MOD"
     ]
   },
-  "29068": {
+  "0x718C": {
     "group": "midi",
     "key": "QK_MIDI_MODULATION_SPEED_DOWN",
     "aliases": [
       "MI_MODD"
     ]
   },
-  "29069": {
+  "0x718D": {
     "group": "midi",
     "key": "QK_MIDI_MODULATION_SPEED_UP",
     "aliases": [
       "MI_MODU"
     ]
   },
-  "29070": {
+  "0x718E": {
     "group": "midi",
     "key": "QK_MIDI_PITCH_BEND_DOWN",
     "aliases": [
       "MI_BNDD"
     ]
   },
-  "29071": {
+  "0x718F": {
     "group": "midi",
     "key": "QK_MIDI_PITCH_BEND_UP",
     "aliases": [
       "MI_BNDU"
     ]
   },
-  "29184": {
+  "0x7200": {
     "group": "sequencer",
     "key": "QK_SEQUENCER_ON",
     "aliases": [
       "SQ_ON"
     ]
   },
-  "29185": {
+  "0x7201": {
     "group": "sequencer",
     "key": "QK_SEQUENCER_OFF",
     "aliases": [
       "SQ_OFF"
     ]
   },
-  "29186": {
+  "0x7202": {
     "group": "sequencer",
     "key": "QK_SEQUENCER_TOGGLE",
     "aliases": [
       "SQ_TOGG"
     ]
   },
-  "29187": {
+  "0x7203": {
     "group": "sequencer",
     "key": "QK_SEQUENCER_TEMPO_DOWN",
     "aliases": [
       "SQ_TMPD"
     ]
   },
-  "29188": {
+  "0x7204": {
     "group": "sequencer",
     "key": "QK_SEQUENCER_TEMPO_UP",
     "aliases": [
       "SQ_TMPU"
     ]
   },
-  "29189": {
+  "0x7205": {
     "group": "sequencer",
     "key": "QK_SEQUENCER_RESOLUTION_DOWN",
     "aliases": [
       "SQ_RESD"
     ]
   },
-  "29190": {
+  "0x7206": {
     "group": "sequencer",
     "key": "QK_SEQUENCER_RESOLUTION_UP",
     "aliases": [
       "SQ_RESU"
     ]
   },
-  "29191": {
+  "0x7207": {
     "group": "sequencer",
     "key": "QK_SEQUENCER_STEPS_ALL",
     "aliases": [
       "SQ_SALL"
     ]
   },
-  "29192": {
+  "0x7208": {
     "group": "sequencer",
     "key": "QK_SEQUENCER_STEPS_CLEAR",
     "aliases": [
       "SQ_SCLR"
     ]
   },
-  "29696": {
+  "0x7400": {
     "group": "joystick",
     "key": "QK_JOYSTICK_BUTTON_0",
     "aliases": [
       "JS_0"
     ]
   },
-  "29697": {
+  "0x7401": {
     "group": "joystick",
     "key": "QK_JOYSTICK_BUTTON_1",
     "aliases": [
       "JS_1"
     ]
   },
-  "29698": {
+  "0x7402": {
     "group": "joystick",
     "key": "QK_JOYSTICK_BUTTON_2",
     "aliases": [
       "JS_2"
     ]
   },
-  "29699": {
+  "0x7403": {
     "group": "joystick",
     "key": "QK_JOYSTICK_BUTTON_3",
     "aliases": [
       "JS_3"
     ]
   },
-  "29700": {
+  "0x7404": {
     "group": "joystick",
     "key": "QK_JOYSTICK_BUTTON_4",
     "aliases": [
       "JS_4"
     ]
   },
-  "29701": {
+  "0x7405": {
     "group": "joystick",
     "key": "QK_JOYSTICK_BUTTON_5",
     "aliases": [
       "JS_5"
     ]
   },
-  "29702": {
+  "0x7406": {
     "group": "joystick",
     "key": "QK_JOYSTICK_BUTTON_6",
     "aliases": [
       "JS_6"
     ]
   },
-  "29703": {
+  "0x7407": {
     "group": "joystick",
     "key": "QK_JOYSTICK_BUTTON_7",
     "aliases": [
       "JS_7"
     ]
   },
-  "29704": {
+  "0x7408": {
     "group": "joystick",
     "key": "QK_JOYSTICK_BUTTON_8",
     "aliases": [
       "JS_8"
     ]
   },
-  "29705": {
+  "0x7409": {
     "group": "joystick",
     "key": "QK_JOYSTICK_BUTTON_9",
     "aliases": [
       "JS_9"
     ]
   },
-  "29706": {
+  "0x740A": {
     "group": "joystick",
     "key": "QK_JOYSTICK_BUTTON_10",
     "aliases": [
       "JS_10"
     ]
   },
-  "29707": {
+  "0x740B": {
     "group": "joystick",
     "key": "QK_JOYSTICK_BUTTON_11",
     "aliases": [
       "JS_11"
     ]
   },
-  "29708": {
+  "0x740C": {
     "group": "joystick",
     "key": "QK_JOYSTICK_BUTTON_12",
     "aliases": [
       "JS_12"
     ]
   },
-  "29709": {
+  "0x740D": {
     "group": "joystick",
     "key": "QK_JOYSTICK_BUTTON_13",
     "aliases": [
       "JS_13"
     ]
   },
-  "29710": {
+  "0x740E": {
     "group": "joystick",
     "key": "QK_JOYSTICK_BUTTON_14",
     "aliases": [
       "JS_14"
     ]
   },
-  "29711": {
+  "0x740F": {
     "group": "joystick",
     "key": "QK_JOYSTICK_BUTTON_15",
     "aliases": [
       "JS_15"
     ]
   },
-  "29712": {
+  "0x7410": {
     "group": "joystick",
     "key": "QK_JOYSTICK_BUTTON_16",
     "aliases": [
       "JS_16"
     ]
   },
-  "29713": {
+  "0x7411": {
     "group": "joystick",
     "key": "QK_JOYSTICK_BUTTON_17",
     "aliases": [
       "JS_17"
     ]
   },
-  "29714": {
+  "0x7412": {
     "group": "joystick",
     "key": "QK_JOYSTICK_BUTTON_18",
     "aliases": [
       "JS_18"
     ]
   },
-  "29715": {
+  "0x7413": {
     "group": "joystick",
     "key": "QK_JOYSTICK_BUTTON_19",
     "aliases": [
       "JS_19"
     ]
   },
-  "29716": {
+  "0x7414": {
     "group": "joystick",
     "key": "QK_JOYSTICK_BUTTON_20",
     "aliases": [
       "JS_20"
     ]
   },
-  "29717": {
+  "0x7415": {
     "group": "joystick",
     "key": "QK_JOYSTICK_BUTTON_21",
     "aliases": [
       "JS_21"
     ]
   },
-  "29718": {
+  "0x7416": {
     "group": "joystick",
     "key": "QK_JOYSTICK_BUTTON_22",
     "aliases": [
       "JS_22"
     ]
   },
-  "29719": {
+  "0x7417": {
     "group": "joystick",
     "key": "QK_JOYSTICK_BUTTON_23",
     "aliases": [
       "JS_23"
     ]
   },
-  "29720": {
+  "0x7418": {
     "group": "joystick",
     "key": "QK_JOYSTICK_BUTTON_24",
     "aliases": [
       "JS_24"
     ]
   },
-  "29721": {
+  "0x7419": {
     "group": "joystick",
     "key": "QK_JOYSTICK_BUTTON_25",
     "aliases": [
       "JS_25"
     ]
   },
-  "29722": {
+  "0x741A": {
     "group": "joystick",
     "key": "QK_JOYSTICK_BUTTON_26",
     "aliases": [
       "JS_26"
     ]
   },
-  "29723": {
+  "0x741B": {
     "group": "joystick",
     "key": "QK_JOYSTICK_BUTTON_27",
     "aliases": [
       "JS_27"
     ]
   },
-  "29724": {
+  "0x741C": {
     "group": "joystick",
     "key": "QK_JOYSTICK_BUTTON_28",
     "aliases": [
       "JS_28"
     ]
   },
-  "29725": {
+  "0x741D": {
     "group": "joystick",
     "key": "QK_JOYSTICK_BUTTON_29",
     "aliases": [
       "JS_29"
     ]
   },
-  "29726": {
+  "0x741E": {
     "group": "joystick",
     "key": "QK_JOYSTICK_BUTTON_30",
     "aliases": [
       "JS_30"
     ]
   },
-  "29727": {
+  "0x741F": {
     "group": "joystick",
     "key": "QK_JOYSTICK_BUTTON_31",
     "aliases": [
       "JS_31"
     ]
   },
-  "29760": {
+  "0x7440": {
     "group": "programmable_button",
     "key": "QK_PROGRAMMABLE_BUTTON_1",
     "aliases": [
       "PB_1"
     ]
   },
-  "29761": {
+  "0x7441": {
     "group": "programmable_button",
     "key": "QK_PROGRAMMABLE_BUTTON_2",
     "aliases": [
       "PB_2"
     ]
   },
-  "29762": {
+  "0x7442": {
     "group": "programmable_button",
     "key": "QK_PROGRAMMABLE_BUTTON_3",
     "aliases": [
       "PB_3"
     ]
   },
-  "29763": {
+  "0x7443": {
     "group": "programmable_button",
     "key": "QK_PROGRAMMABLE_BUTTON_4",
     "aliases": [
       "PB_4"
     ]
   },
-  "29764": {
+  "0x7444": {
     "group": "programmable_button",
     "key": "QK_PROGRAMMABLE_BUTTON_5",
     "aliases": [
       "PB_5"
     ]
   },
-  "29765": {
+  "0x7445": {
     "group": "programmable_button",
     "key": "QK_PROGRAMMABLE_BUTTON_6",
     "aliases": [
       "PB_6"
     ]
   },
-  "29766": {
+  "0x7446": {
     "group": "programmable_button",
     "key": "QK_PROGRAMMABLE_BUTTON_7",
     "aliases": [
       "PB_7"
     ]
   },
-  "29767": {
+  "0x7447": {
     "group": "programmable_button",
     "key": "QK_PROGRAMMABLE_BUTTON_8",
     "aliases": [
       "PB_8"
     ]
   },
-  "29768": {
+  "0x7448": {
     "group": "programmable_button",
     "key": "QK_PROGRAMMABLE_BUTTON_9",
     "aliases": [
       "PB_9"
     ]
   },
-  "29769": {
+  "0x7449": {
     "group": "programmable_button",
     "key": "QK_PROGRAMMABLE_BUTTON_10",
     "aliases": [
       "PB_10"
     ]
   },
-  "29770": {
+  "0x744A": {
     "group": "programmable_button",
     "key": "QK_PROGRAMMABLE_BUTTON_11",
     "aliases": [
       "PB_11"
     ]
   },
-  "29771": {
+  "0x744B": {
     "group": "programmable_button",
     "key": "QK_PROGRAMMABLE_BUTTON_12",
     "aliases": [
       "PB_12"
     ]
   },
-  "29772": {
+  "0x744C": {
     "group": "programmable_button",
     "key": "QK_PROGRAMMABLE_BUTTON_13",
     "aliases": [
       "PB_13"
     ]
   },
-  "29773": {
+  "0x744D": {
     "group": "programmable_button",
     "key": "QK_PROGRAMMABLE_BUTTON_14",
     "aliases": [
       "PB_14"
     ]
   },
-  "29774": {
+  "0x744E": {
     "group": "programmable_button",
     "key": "QK_PROGRAMMABLE_BUTTON_15",
     "aliases": [
       "PB_15"
     ]
   },
-  "29775": {
+  "0x744F": {
     "group": "programmable_button",
     "key": "QK_PROGRAMMABLE_BUTTON_16",
     "aliases": [
       "PB_16"
     ]
   },
-  "29776": {
+  "0x7450": {
     "group": "programmable_button",
     "key": "QK_PROGRAMMABLE_BUTTON_17",
     "aliases": [
       "PB_17"
     ]
   },
-  "29777": {
+  "0x7451": {
     "group": "programmable_button",
     "key": "QK_PROGRAMMABLE_BUTTON_18",
     "aliases": [
       "PB_18"
     ]
   },
-  "29778": {
+  "0x7452": {
     "group": "programmable_button",
     "key": "QK_PROGRAMMABLE_BUTTON_19",
     "aliases": [
       "PB_19"
     ]
   },
-  "29779": {
+  "0x7453": {
     "group": "programmable_button",
     "key": "QK_PROGRAMMABLE_BUTTON_20",
     "aliases": [
       "PB_20"
     ]
   },
-  "29780": {
+  "0x7454": {
     "group": "programmable_button",
     "key": "QK_PROGRAMMABLE_BUTTON_21",
     "aliases": [
       "PB_21"
     ]
   },
-  "29781": {
+  "0x7455": {
     "group": "programmable_button",
     "key": "QK_PROGRAMMABLE_BUTTON_22",
     "aliases": [
       "PB_22"
     ]
   },
-  "29782": {
+  "0x7456": {
     "group": "programmable_button",
     "key": "QK_PROGRAMMABLE_BUTTON_23",
     "aliases": [
       "PB_23"
     ]
   },
-  "29783": {
+  "0x7457": {
     "group": "programmable_button",
     "key": "QK_PROGRAMMABLE_BUTTON_24",
     "aliases": [
       "PB_24"
     ]
   },
-  "29784": {
+  "0x7458": {
     "group": "programmable_button",
     "key": "QK_PROGRAMMABLE_BUTTON_25",
     "aliases": [
       "PB_25"
     ]
   },
-  "29785": {
+  "0x7459": {
     "group": "programmable_button",
     "key": "QK_PROGRAMMABLE_BUTTON_26",
     "aliases": [
       "PB_26"
     ]
   },
-  "29786": {
+  "0x745A": {
     "group": "programmable_button",
     "key": "QK_PROGRAMMABLE_BUTTON_27",
     "aliases": [
       "PB_27"
     ]
   },
-  "29787": {
+  "0x745B": {
     "group": "programmable_button",
     "key": "QK_PROGRAMMABLE_BUTTON_28",
     "aliases": [
       "PB_28"
     ]
   },
-  "29788": {
+  "0x745C": {
     "group": "programmable_button",
     "key": "QK_PROGRAMMABLE_BUTTON_29",
     "aliases": [
       "PB_29"
     ]
   },
-  "29789": {
+  "0x745D": {
     "group": "programmable_button",
     "key": "QK_PROGRAMMABLE_BUTTON_30",
     "aliases": [
       "PB_30"
     ]
   },
-  "29790": {
+  "0x745E": {
     "group": "programmable_button",
     "key": "QK_PROGRAMMABLE_BUTTON_31",
     "aliases": [
       "PB_31"
     ]
   },
-  "29791": {
+  "0x745F": {
     "group": "programmable_button",
     "key": "QK_PROGRAMMABLE_BUTTON_32",
     "aliases": [
       "PB_32"
     ]
   },
-  "29824": {
+  "0x7480": {
     "group": "audio",
     "key": "QK_AUDIO_ON",
     "aliases": [
       "AU_ON"
     ]
   },
-  "29825": {
+  "0x7481": {
     "group": "audio",
     "key": "QK_AUDIO_OFF",
     "aliases": [
       "AU_OFF"
     ]
   },
-  "29826": {
+  "0x7482": {
     "group": "audio",
     "key": "QK_AUDIO_TOGGLE",
     "aliases": [
       "AU_TOGG"
     ]
   },
-  "29834": {
+  "0x748A": {
     "group": "audio",
     "key": "QK_AUDIO_CLICKY_TOGGLE",
     "aliases": [
       "CK_TOGG"
     ]
   },
-  "29835": {
+  "0x748B": {
     "group": "audio",
     "key": "QK_AUDIO_CLICKY_ON",
     "aliases": [
       "CK_ON"
     ]
   },
-  "29836": {
+  "0x748C": {
     "group": "audio",
     "key": "QK_AUDIO_CLICKY_OFF",
     "aliases": [
       "CK_OFF"
     ]
   },
-  "29837": {
+  "0x748D": {
     "group": "audio",
     "key": "QK_AUDIO_CLICKY_UP",
     "aliases": [
       "CK_UP"
     ]
   },
-  "29838": {
+  "0x748E": {
     "group": "audio",
     "key": "QK_AUDIO_CLICKY_DOWN",
     "aliases": [
       "CK_DOWN"
     ]
   },
-  "29839": {
+  "0x748F": {
     "group": "audio",
     "key": "QK_AUDIO_CLICKY_RESET",
     "aliases": [
       "CK_RST"
     ]
   },
-  "29840": {
+  "0x7490": {
     "group": "audio",
     "key": "QK_MUSIC_ON",
     "aliases": [
       "MU_ON"
     ]
   },
-  "29841": {
+  "0x7491": {
     "group": "audio",
     "key": "QK_MUSIC_OFF",
     "aliases": [
       "MU_OFF"
     ]
   },
-  "29842": {
+  "0x7492": {
     "group": "audio",
     "key": "QK_MUSIC_TOGGLE",
     "aliases": [
       "MU_TOGG"
     ]
   },
-  "29843": {
+  "0x7493": {
     "group": "audio",
     "key": "QK_MUSIC_MODE_NEXT",
     "aliases": [
       "MU_NEXT"
     ]
   },
-  "29844": {
+  "0x7494": {
     "group": "audio",
     "key": "QK_AUDIO_VOICE_NEXT",
     "aliases": [
       "AU_NEXT"
     ]
   },
-  "29845": {
+  "0x7495": {
     "group": "audio",
     "key": "QK_AUDIO_VOICE_PREVIOUS",
     "aliases": [
       "AU_PREV"
     ]
   },
-  "29936": {
+  "0x74F0": {
     "group": "steno",
     "key": "QK_STENO_BOLT"
   },
-  "29937": {
+  "0x74F1": {
     "group": "steno",
     "key": "QK_STENO_GEMINI"
   },
-  "29938": {
+  "0x74F2": {
     "group": "steno",
     "key": "QK_STENO_COMB"
   },
-  "29948": {
+  "0x74FC": {
     "group": "steno",
     "key": "QK_STENO_COMB_MAX"
   },
-  "30464": {
+  "0x7700": {
     "group": "macro",
     "key": "QK_MACRO_0",
     "aliases": [
       "M0"
     ]
   },
-  "30465": {
+  "0x7701": {
     "group": "macro",
     "key": "QK_MACRO_1",
     "aliases": [
       "M1"
     ]
   },
-  "30466": {
+  "0x7702": {
     "group": "macro",
     "key": "QK_MACRO_2",
     "aliases": [
       "M2"
     ]
   },
-  "30467": {
+  "0x7703": {
     "group": "macro",
     "key": "QK_MACRO_3",
     "aliases": [
       "M3"
     ]
   },
-  "30468": {
+  "0x7704": {
     "group": "macro",
     "key": "QK_MACRO_4",
     "aliases": [
       "M4"
     ]
   },
-  "30469": {
+  "0x7705": {
     "group": "macro",
     "key": "QK_MACRO_5",
     "aliases": [
       "M5"
     ]
   },
-  "30470": {
+  "0x7706": {
     "group": "macro",
     "key": "QK_MACRO_6",
     "aliases": [
       "M6"
     ]
   },
-  "30471": {
+  "0x7707": {
     "group": "macro",
     "key": "QK_MACRO_7",
     "aliases": [
       "M7"
     ]
   },
-  "30472": {
+  "0x7708": {
     "group": "macro",
     "key": "QK_MACRO_8",
     "aliases": [
       "M8"
     ]
   },
-  "30473": {
+  "0x7709": {
     "group": "macro",
     "key": "QK_MACRO_9",
     "aliases": [
       "M9"
     ]
   },
-  "30474": {
+  "0x770A": {
     "group": "macro",
     "key": "QK_MACRO_10",
     "aliases": [
       "M10"
     ]
   },
-  "30475": {
+  "0x770B": {
     "group": "macro",
     "key": "QK_MACRO_11",
     "aliases": [
       "M11"
     ]
   },
-  "30476": {
+  "0x770C": {
     "group": "macro",
     "key": "QK_MACRO_12",
     "aliases": [
       "M12"
     ]
   },
-  "30477": {
+  "0x770D": {
     "group": "macro",
     "key": "QK_MACRO_13",
     "aliases": [
       "M13"
     ]
   },
-  "30478": {
+  "0x770E": {
     "group": "macro",
     "key": "QK_MACRO_14",
     "aliases": [
       "M14"
     ]
   },
-  "30479": {
+  "0x770F": {
     "group": "macro",
     "key": "QK_MACRO_15",
     "aliases": [
       "M15"
     ]
   },
-  "30480": {
+  "0x7710": {
     "group": "macro",
     "key": "QK_MACRO_16",
     "aliases": [
       "M16"
     ]
   },
-  "30481": {
+  "0x7711": {
     "group": "macro",
     "key": "QK_MACRO_17",
     "aliases": [
       "M17"
     ]
   },
-  "30482": {
+  "0x7712": {
     "group": "macro",
     "key": "QK_MACRO_18",
     "aliases": [
       "M18"
     ]
   },
-  "30483": {
+  "0x7713": {
     "group": "macro",
     "key": "QK_MACRO_19",
     "aliases": [
       "M19"
     ]
   },
-  "30484": {
+  "0x7714": {
     "group": "macro",
     "key": "QK_MACRO_20",
     "aliases": [
       "M20"
     ]
   },
-  "30485": {
+  "0x7715": {
     "group": "macro",
     "key": "QK_MACRO_21",
     "aliases": [
       "M21"
     ]
   },
-  "30486": {
+  "0x7716": {
     "group": "macro",
     "key": "QK_MACRO_22",
     "aliases": [
       "MC_22"
     ]
   },
-  "30487": {
+  "0x7717": {
     "group": "macro",
     "key": "QK_MACRO_23",
     "aliases": [
       "MC_23"
     ]
   },
-  "30488": {
+  "0x7718": {
     "group": "macro",
     "key": "QK_MACRO_24",
     "aliases": [
       "MC_24"
     ]
   },
-  "30489": {
+  "0x7719": {
     "group": "macro",
     "key": "QK_MACRO_25",
     "aliases": [
       "MC_25"
     ]
   },
-  "30490": {
+  "0x771A": {
     "group": "macro",
     "key": "QK_MACRO_26",
     "aliases": [
       "MC_26"
     ]
   },
-  "30491": {
+  "0x771B": {
     "group": "macro",
     "key": "QK_MACRO_27",
     "aliases": [
       "MC_27"
     ]
   },
-  "30492": {
+  "0x771C": {
     "group": "macro",
     "key": "QK_MACRO_28",
     "aliases": [
       "MC_28"
     ]
   },
-  "30493": {
+  "0x771D": {
     "group": "macro",
     "key": "QK_MACRO_29",
     "aliases": [
       "MC_29"
     ]
   },
-  "30494": {
+  "0x771E": {
     "group": "macro",
     "key": "QK_MACRO_30",
     "aliases": [
       "MC_30"
     ]
   },
-  "30495": {
+  "0x771F": {
     "group": "macro",
     "key": "QK_MACRO_31",
     "aliases": [
       "MC_31"
     ]
   },
-  "30720": {
+  "0x7800": {
     "group": "backlight",
     "key": "QK_BACKLIGHT_ON",
     "aliases": [
       "BL_ON"
     ]
   },
-  "30721": {
+  "0x7801": {
     "group": "backlight",
     "key": "QK_BACKLIGHT_OFF",
     "aliases": [
       "BL_OFF"
     ]
   },
-  "30722": {
+  "0x7802": {
     "group": "backlight",
     "key": "QK_BACKLIGHT_TOGGLE",
     "aliases": [
       "BL_TOGG"
     ]
   },
-  "30723": {
+  "0x7803": {
     "group": "backlight",
     "key": "QK_BACKLIGHT_DOWN",
     "aliases": [
       "BL_DOWN"
     ]
   },
-  "30724": {
+  "0x7804": {
     "group": "backlight",
     "key": "QK_BACKLIGHT_UP",
     "aliases": [
       "BL_UP"
     ]
   },
-  "30725": {
+  "0x7805": {
     "group": "backlight",
     "key": "QK_BACKLIGHT_STEP",
     "aliases": [
       "BL_STEP"
     ]
   },
-  "30726": {
+  "0x7806": {
     "group": "backlight",
     "key": "QK_BACKLIGHT_TOGGLE_BREATHING",
     "aliases": [
       "BL_BRTG"
     ]
   },
-  "30752": {
+  "0x7820": {
     "group": "rgb",
     "key": "RGB_TOG"
   },
-  "30753": {
+  "0x7821": {
     "group": "rgb",
     "key": "RGB_MODE_FORWARD",
     "aliases": [
       "RGB_MOD"
     ]
   },
-  "30754": {
+  "0x7822": {
     "group": "rgb",
     "key": "RGB_MODE_REVERSE",
     "aliases": [
       "RGB_RMOD"
     ]
   },
-  "30755": {
+  "0x7823": {
     "group": "rgb",
     "key": "RGB_HUI"
   },
-  "30756": {
+  "0x7824": {
     "group": "rgb",
     "key": "RGB_HUD"
   },
-  "30757": {
+  "0x7825": {
     "group": "rgb",
     "key": "RGB_SAI"
   },
-  "30758": {
+  "0x7826": {
     "group": "rgb",
     "key": "RGB_SAD"
   },
-  "30759": {
+  "0x7827": {
     "group": "rgb",
     "key": "RGB_VAI"
   },
-  "30760": {
+  "0x7828": {
     "group": "rgb",
     "key": "RGB_VAD"
   },
-  "30761": {
+  "0x7829": {
     "group": "rgb",
     "key": "RGB_SPI"
   },
-  "30762": {
+  "0x782A": {
     "group": "rgb",
     "key": "RGB_SPD"
   },
-  "30763": {
+  "0x782B": {
     "group": "rgb",
     "key": "RGB_MODE_PLAIN",
     "aliases": [
       "RGB_M_P"
     ]
   },
-  "30764": {
+  "0x782C": {
     "group": "rgb",
     "key": "RGB_MODE_BREATHE",
     "aliases": [
       "RGB_M_B"
     ]
   },
-  "30765": {
+  "0x782D": {
     "group": "rgb",
     "key": "RGB_MODE_RAINBOW",
     "aliases": [
       "RGB_M_R"
     ]
   },
-  "30766": {
+  "0x782E": {
     "group": "rgb",
     "key": "RGB_MODE_SWIRL",
     "aliases": [
       "RGB_M_SW"
     ]
   },
-  "30767": {
+  "0x782F": {
     "group": "rgb",
     "key": "RGB_MODE_SNAKE",
     "aliases": [
       "RGB_M_SN"
     ]
   },
-  "30768": {
+  "0x7830": {
     "group": "rgb",
     "key": "RGB_MODE_KNIGHT",
     "aliases": [
       "RGB_M_K"
     ]
   },
-  "30769": {
+  "0x7831": {
     "group": "rgb",
     "key": "RGB_MODE_XMAS",
     "aliases": [
       "RGB_M_X"
     ]
   },
-  "30770": {
+  "0x7832": {
     "group": "rgb",
     "key": "RGB_MODE_GRADIENT",
     "aliases": [
       "RGB_M_G"
     ]
   },
-  "30771": {
+  "0x7833": {
     "group": "rgb",
     "key": "RGB_MODE_RGBTEST",
     "aliases": [
       "RGB_M_T"
     ]
   },
-  "30772": {
+  "0x7834": {
     "group": "rgb",
     "key": "RGB_MODE_TWINKLE",
     "aliases": [
       "RGB_M_TW"
     ]
   },
-  "31744": {
+  "0x7C00": {
     "group": "quantum",
     "key": "QK_BOOTLOADER",
     "aliases": [
       "QK_BOOT"
     ]
   },
-  "31745": {
+  "0x7C01": {
     "group": "quantum",
     "key": "QK_REBOOT",
     "aliases": [
       "QK_RBT"
     ]
   },
-  "31746": {
+  "0x7C02": {
     "group": "quantum",
     "key": "QK_DEBUG_TOGGLE",
     "aliases": [
       "DB_TOGG"
     ]
   },
-  "31747": {
+  "0x7C03": {
     "group": "quantum",
     "key": "QK_CLEAR_EEPROM",
     "aliases": [
       "EE_CLR"
     ]
   },
-  "31748": {
+  "0x7C04": {
     "group": "quantum",
     "key": "QK_MAKE"
   },
-  "31760": {
+  "0x7C10": {
     "group": "quantum",
     "key": "QK_AUTO_SHIFT_DOWN",
     "aliases": [
       "AS_DOWN"
     ]
   },
-  "31761": {
+  "0x7C11": {
     "group": "quantum",
     "key": "QK_AUTO_SHIFT_UP",
     "aliases": [
       "AS_UP"
     ]
   },
-  "31762": {
+  "0x7C12": {
     "group": "quantum",
     "key": "QK_AUTO_SHIFT_REPORT",
     "aliases": [
       "AS_RPT"
     ]
   },
-  "31763": {
+  "0x7C13": {
     "group": "quantum",
     "key": "QK_AUTO_SHIFT_ON",
     "aliases": [
       "AS_ON"
     ]
   },
-  "31764": {
+  "0x7C14": {
     "group": "quantum",
     "key": "QK_AUTO_SHIFT_OFF",
     "aliases": [
       "AS_OFF"
     ]
   },
-  "31765": {
+  "0x7C15": {
     "group": "quantum",
     "key": "QK_AUTO_SHIFT_TOGGLE",
     "aliases": [
       "AS_TOGG"
     ]
   },
-  "31766": {
+  "0x7C16": {
     "group": "quantum",
     "key": "QK_GRAVE_ESCAPE",
     "aliases": [
       "QK_GESC"
     ]
   },
-  "31767": {
+  "0x7C17": {
     "group": "quantum",
     "key": "QK_VELOCIKEY_TOGGLE",
     "aliases": [
       "VK_TOGG"
     ]
   },
-  "31768": {
+  "0x7C18": {
     "group": "quantum",
     "key": "QK_SPACE_CADET_LEFT_CTRL_PARENTHESIS_OPEN",
     "aliases": [
       "SC_LCPO"
     ]
   },
-  "31769": {
+  "0x7C19": {
     "group": "quantum",
     "key": "QK_SPACE_CADET_RIGHT_CTRL_PARENTHESIS_CLOSE",
     "aliases": [
       "SC_RCPC"
     ]
   },
-  "31770": {
+  "0x7C1A": {
     "group": "quantum",
     "key": "QK_SPACE_CADET_LEFT_SHIFT_PARENTHESIS_OPEN",
     "aliases": [
       "SC_LSPO"
     ]
   },
-  "31771": {
+  "0x7C1B": {
     "group": "quantum",
     "key": "QK_SPACE_CADET_RIGHT_SHIFT_PARENTHESIS_CLOSE",
     "aliases": [
       "SC_RSPC"
     ]
   },
-  "31772": {
+  "0x7C1C": {
     "group": "quantum",
     "key": "QK_SPACE_CADET_LEFT_ALT_PARENTHESIS_OPEN",
     "aliases": [
       "SC_LAPO"
     ]
   },
-  "31773": {
+  "0x7C1D": {
     "group": "quantum",
     "key": "QK_SPACE_CADET_RIGHT_ALT_PARENTHESIS_CLOSE",
     "aliases": [
       "SC_RAPC"
     ]
   },
-  "31774": {
+  "0x7C1E": {
     "group": "quantum",
     "key": "QK_SPACE_CADET_RIGHT_SHIFT_ENTER",
     "aliases": [
       "SC_SENT"
     ]
   },
-  "31776": {
+  "0x7C20": {
     "group": "quantum",
     "key": "QK_OUTPUT_AUTO",
     "aliases": [
       "OU_AUTO"
     ]
   },
-  "31777": {
+  "0x7C21": {
     "group": "quantum",
     "key": "QK_OUTPUT_USB",
     "aliases": [
       "OU_USB"
     ]
   },
-  "31778": {
+  "0x7C22": {
     "group": "quantum",
     "key": "QK_OUTPUT_BLUETOOTH",
     "aliases": [
       "OU_BT"
     ]
   },
-  "31792": {
+  "0x7C30": {
     "group": "quantum",
     "key": "QK_UNICODE_MODE_NEXT",
     "aliases": [
       "UC_NEXT"
     ]
   },
-  "31793": {
+  "0x7C31": {
     "group": "quantum",
     "key": "QK_UNICODE_MODE_PREVIOUS",
     "aliases": [
       "UC_PREV"
     ]
   },
-  "31794": {
+  "0x7C32": {
     "group": "quantum",
     "key": "QK_UNICODE_MODE_MACOS",
     "aliases": [
       "UC_MAC"
     ]
   },
-  "31795": {
+  "0x7C33": {
     "group": "quantum",
     "key": "QK_UNICODE_MODE_LINUX",
     "aliases": [
       "UC_LINX"
     ]
   },
-  "31796": {
+  "0x7C34": {
     "group": "quantum",
     "key": "QK_UNICODE_MODE_WINDOWS",
     "aliases": [
       "UC_WIN"
     ]
   },
-  "31797": {
+  "0x7C35": {
     "group": "quantum",
     "key": "QK_UNICODE_MODE_BSD",
     "aliases": [
       "UC_BSD"
     ]
   },
-  "31798": {
+  "0x7C36": {
     "group": "quantum",
     "key": "QK_UNICODE_MODE_WINCOMPOSE",
     "aliases": [
       "UC_WINC"
     ]
   },
-  "31799": {
+  "0x7C37": {
     "group": "quantum",
     "key": "QK_UNICODE_MODE_EMACS",
     "aliases": [
       "UC_EMAC"
     ]
   },
-  "31808": {
+  "0x7C40": {
     "group": "quantum",
     "key": "QK_HAPTIC_ON",
     "aliases": [
       "HF_ON"
     ]
   },
-  "31809": {
+  "0x7C41": {
     "group": "quantum",
     "key": "QK_HAPTIC_OFF",
     "aliases": [
       "HF_OFF"
     ]
   },
-  "31810": {
+  "0x7C42": {
     "group": "quantum",
     "key": "QK_HAPTIC_TOGGLE",
     "aliases": [
       "HF_TOGG"
     ]
   },
-  "31811": {
+  "0x7C43": {
     "group": "quantum",
     "key": "QK_HAPTIC_RESET",
     "aliases": [
       "HF_RST"
     ]
   },
-  "31812": {
+  "0x7C44": {
     "group": "quantum",
     "key": "QK_HAPTIC_FEEDBACK_TOGGLE",
     "aliases": [
       "HF_FDBK"
     ]
   },
-  "31813": {
+  "0x7C45": {
     "group": "quantum",
     "key": "QK_HAPTIC_BUZZ_TOGGLE",
     "aliases": [
       "HF_BUZZ"
     ]
   },
-  "31814": {
+  "0x7C46": {
     "group": "quantum",
     "key": "QK_HAPTIC_MODE_NEXT",
     "aliases": [
       "HF_NEXT"
     ]
   },
-  "31815": {
+  "0x7C47": {
     "group": "quantum",
     "key": "QK_HAPTIC_MODE_PREVIOUS",
     "aliases": [
       "HF_PREV"
     ]
   },
-  "31816": {
+  "0x7C48": {
     "group": "quantum",
     "key": "QK_HAPTIC_CONTINUOUS_TOGGLE",
     "aliases": [
       "HF_CONT"
     ]
   },
-  "31817": {
+  "0x7C49": {
     "group": "quantum",
     "key": "QK_HAPTIC_CONTINUOUS_UP",
     "aliases": [
       "HF_CONU"
     ]
   },
-  "31818": {
+  "0x7C4A": {
     "group": "quantum",
     "key": "QK_HAPTIC_CONTINUOUS_DOWN",
     "aliases": [
       "HF_COND"
     ]
   },
-  "31819": {
+  "0x7C4B": {
     "group": "quantum",
     "key": "QK_HAPTIC_DWELL_UP",
     "aliases": [
       "HF_DWLU"
     ]
   },
-  "31820": {
+  "0x7C4C": {
     "group": "quantum",
     "key": "QK_HAPTIC_DWELL_DOWN",
     "aliases": [
       "HF_DWLD"
     ]
   },
-  "31824": {
+  "0x7C50": {
     "group": "quantum",
     "key": "QK_COMBO_ON",
     "aliases": [
       "CM_ON"
     ]
   },
-  "31825": {
+  "0x7C51": {
     "group": "quantum",
     "key": "QK_COMBO_OFF",
     "aliases": [
       "CM_OFF"
     ]
   },
-  "31826": {
+  "0x7C52": {
     "group": "quantum",
     "key": "QK_COMBO_TOGGLE",
     "aliases": [
       "CM_TOGG"
     ]
   },
-  "31827": {
+  "0x7C53": {
     "group": "quantum",
     "key": "QK_DYNAMIC_MACRO_RECORD_START_1",
     "aliases": [
       "DM_REC1"
     ]
   },
-  "31828": {
+  "0x7C54": {
     "group": "quantum",
     "key": "QK_DYNAMIC_MACRO_RECORD_START_2",
     "aliases": [
       "DM_REC2"
     ]
   },
-  "31829": {
+  "0x7C55": {
     "group": "quantum",
     "key": "QK_DYNAMIC_MACRO_RECORD_STOP",
     "aliases": [
       "DM_RSTP"
     ]
   },
-  "31830": {
+  "0x7C56": {
     "group": "quantum",
     "key": "QK_DYNAMIC_MACRO_PLAY_1",
     "aliases": [
       "DM_PLY1"
     ]
   },
-  "31831": {
+  "0x7C57": {
     "group": "quantum",
     "key": "QK_DYNAMIC_MACRO_PLAY_2",
     "aliases": [
       "DM_PLY2"
     ]
   },
-  "31832": {
+  "0x7C58": {
     "group": "quantum",
     "key": "QK_LEADER",
     "aliases": [
       "QK_LEAD"
     ]
   },
-  "31833": {
+  "0x7C59": {
     "group": "quantum",
     "key": "QK_LOCK"
   },
-  "31834": {
+  "0x7C5A": {
     "group": "quantum",
     "key": "QK_ONE_SHOT_ON",
     "aliases": [
       "OS_ON"
     ]
   },
-  "31835": {
+  "0x7C5B": {
     "group": "quantum",
     "key": "QK_ONE_SHOT_OFF",
     "aliases": [
       "OS_OFF"
     ]
   },
-  "31836": {
+  "0x7C5C": {
     "group": "quantum",
     "key": "QK_ONE_SHOT_TOGGLE",
     "aliases": [
       "OS_TOGG"
     ]
   },
-  "31837": {
+  "0x7C5D": {
     "group": "quantum",
     "key": "QK_KEY_OVERRIDE_TOGGLE",
     "aliases": [
       "KO_TOGG"
     ]
   },
-  "31838": {
+  "0x7C5E": {
     "group": "quantum",
     "key": "QK_KEY_OVERRIDE_ON",
     "aliases": [
       "KO_ON"
     ]
   },
-  "31839": {
+  "0x7C5F": {
     "group": "quantum",
     "key": "QK_KEY_OVERRIDE_OFF",
     "aliases": [
       "KO_OFF"
     ]
   },
-  "31840": {
+  "0x7C60": {
     "group": "quantum",
     "key": "QK_SECURE_LOCK",
     "aliases": [
       "SE_LOCK"
     ]
   },
-  "31841": {
+  "0x7C61": {
     "group": "quantum",
     "key": "QK_SECURE_UNLOCK",
     "aliases": [
       "SE_UNLK"
     ]
   },
-  "31842": {
+  "0x7C62": {
     "group": "quantum",
     "key": "QK_SECURE_TOGGLE",
     "aliases": [
       "SE_TOGG"
     ]
   },
-  "31843": {
+  "0x7C63": {
     "group": "quantum",
     "key": "QK_SECURE_REQUEST",
     "aliases": [
       "SE_REQ"
     ]
   },
-  "31856": {
+  "0x7C70": {
     "group": "quantum",
     "key": "QK_DYNAMIC_TAPPING_TERM_PRINT",
     "aliases": [
       "DT_PRNT"
     ]
   },
-  "31857": {
+  "0x7C71": {
     "group": "quantum",
     "key": "QK_DYNAMIC_TAPPING_TERM_UP",
     "aliases": [
       "DT_UP"
     ]
   },
-  "31858": {
+  "0x7C72": {
     "group": "quantum",
     "key": "QK_DYNAMIC_TAPPING_TERM_DOWN",
     "aliases": [
       "DT_DOWN"
     ]
   },
-  "31859": {
+  "0x7C73": {
     "group": "quantum",
     "key": "QK_CAPS_WORD_TOGGLE",
     "aliases": [
       "CW_TOGG"
     ]
   },
-  "31860": {
+  "0x7C74": {
     "group": "quantum",
     "key": "QK_AUTOCORRECT_ON",
     "aliases": [
       "AC_ON"
     ]
   },
-  "31861": {
+  "0x7C75": {
     "group": "quantum",
     "key": "QK_AUTOCORRECT_OFF",
     "aliases": [
       "AC_OFF"
     ]
   },
-  "31862": {
+  "0x7C76": {
     "group": "quantum",
     "key": "QK_AUTOCORRECT_TOGGLE",
     "aliases": [
       "AC_TOGG"
     ]
   },
-  "31863": {
+  "0x7C77": {
     "group": "quantum",
     "key": "QK_TRI_LAYER_LOWER",
     "aliases": [
       "TL_LOWR"
     ]
   },
-  "31864": {
+  "0x7C78": {
     "group": "quantum",
     "key": "QK_TRI_LAYER_UPPER",
     "aliases": [
       "TL_UPPR"
     ]
   },
-  "31865": {
+  "0x7C79": {
     "group": "quantum",
     "key": "QK_REPEAT_KEY",
     "aliases": [
       "QK_REP"
     ]
   },
-  "31866": {
+  "0x7C7A": {
     "group": "quantum",
     "key": "QK_ALT_REPEAT_KEY",
     "aliases": [
       "QK_AREP"
     ]
   },
-  "32256": {
+  "0x7E00": {
     "key": "QK_KB_0",
     "group": "kb"
   },
-  "32257": {
+  "0x7E01": {
     "group": "kb",
     "key": "QK_KB_1"
   },
-  "32258": {
+  "0x7E02": {
     "group": "kb",
     "key": "QK_KB_2"
   },
-  "32259": {
+  "0x7E03": {
     "group": "kb",
     "key": "QK_KB_3"
   },
-  "32260": {
+  "0x7E04": {
     "group": "kb",
     "key": "QK_KB_4"
   },
-  "32261": {
+  "0x7E05": {
     "group": "kb",
     "key": "QK_KB_5"
   },
-  "32262": {
+  "0x7E06": {
     "group": "kb",
     "key": "QK_KB_6"
   },
-  "32263": {
+  "0x7E07": {
     "group": "kb",
     "key": "QK_KB_7"
   },
-  "32264": {
+  "0x7E08": {
     "group": "kb",
     "key": "QK_KB_8"
   },
-  "32265": {
+  "0x7E09": {
     "group": "kb",
     "key": "QK_KB_9"
   },
-  "32266": {
+  "0x7E0A": {
     "group": "kb",
     "key": "QK_KB_10"
   },
-  "32267": {
+  "0x7E0B": {
     "group": "kb",
     "key": "QK_KB_11"
   },
-  "32268": {
+  "0x7E0C": {
     "group": "kb",
     "key": "QK_KB_12"
   },
-  "32269": {
+  "0x7E0D": {
     "group": "kb",
     "key": "QK_KB_13"
   },
-  "32270": {
+  "0x7E0E": {
     "group": "kb",
     "key": "QK_KB_14"
   },
-  "32271": {
+  "0x7E0F": {
     "group": "kb",
     "key": "QK_KB_15"
   },
-  "32272": {
+  "0x7E10": {
     "group": "kb",
     "key": "QK_KB_16"
   },
-  "32273": {
+  "0x7E11": {
     "group": "kb",
     "key": "QK_KB_17"
   },
-  "32274": {
+  "0x7E12": {
     "group": "kb",
     "key": "QK_KB_18"
   },
-  "32275": {
+  "0x7E13": {
     "group": "kb",
     "key": "QK_KB_19"
   },
-  "32276": {
+  "0x7E14": {
     "group": "kb",
     "key": "QK_KB_20"
   },
-  "32277": {
+  "0x7E15": {
     "group": "kb",
     "key": "QK_KB_21"
   },
-  "32278": {
+  "0x7E16": {
     "group": "kb",
     "key": "QK_KB_22"
   },
-  "32279": {
+  "0x7E17": {
     "group": "kb",
     "key": "QK_KB_23"
   },
-  "32280": {
+  "0x7E18": {
     "group": "kb",
     "key": "QK_KB_24"
   },
-  "32281": {
+  "0x7E19": {
     "group": "kb",
     "key": "QK_KB_25"
   },
-  "32282": {
+  "0x7E1A": {
     "group": "kb",
     "key": "QK_KB_26"
   },
-  "32283": {
+  "0x7E1B": {
     "group": "kb",
     "key": "QK_KB_27"
   },
-  "32284": {
+  "0x7E1C": {
     "group": "kb",
     "key": "QK_KB_28"
   },
-  "32285": {
+  "0x7E1D": {
     "group": "kb",
     "key": "QK_KB_29"
   },
-  "32286": {
+  "0x7E1E": {
     "group": "kb",
     "key": "QK_KB_30"
   },
-  "32287": {
+  "0x7E1F": {
     "group": "kb",
     "key": "QK_KB_31"
   },
-  "32320": {
+  "0x7E40": {
     "group": "user",
     "key": "QK_USER_0"
   },
-  "32321": {
+  "0x7E41": {
     "group": "user",
     "key": "QK_USER_1"
   },
-  "32322": {
+  "0x7E42": {
     "group": "user",
     "key": "QK_USER_2"
   }
