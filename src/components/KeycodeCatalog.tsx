@@ -1,4 +1,5 @@
 import { Box, Tab, Tabs, Tooltip } from "@mui/material";
+import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
 import { useContext, useState } from "react";
 import { match, P } from "ts-pattern";
 import { DefaultQmkKeycode, KeycodeConverter, QmkKeycode } from "./keycodes/keycodeConverter";
@@ -136,6 +137,9 @@ function KeyListKey(props: {
   widthMultiplier?: number;
   marginRight?: number;
   animationDelay?: number;
+  showEditIndicator?: boolean;
+  editOnClick?: boolean;
+  onEditClick?: () => void;
 }) {
   const [isDragging, setIsDragging] = useState(false);
   const [showToolTip, setShowToolTip] = useState(false);
@@ -198,7 +202,10 @@ function KeyListKey(props: {
           setShowToolTip(false);
         }}
         onClick={() => {
-          if (focusContext.focusedKey && focusContext.onKeycodeChange) {
+          if (props.editOnClick && props.onClick) {
+            setShowToolTip(false);
+            props.onClick();
+          } else if (focusContext.focusedKey && focusContext.onKeycodeChange) {
             focusContext.onKeycodeChange(focusContext.focusedKey, props.keycode);
           } else if (props.onClick) {
             setShowToolTip(false);
@@ -207,7 +214,18 @@ function KeyListKey(props: {
         }}
       >
         <div>{props.keycode.shiftedLabel ?? ""}</div>
-        <div>{props.keycode.label}</div>
+        <div>
+          {props.keycode.label}
+          {props.showEditIndicator && (
+            <EditOutlinedIcon
+              onClick={(event) => {
+                event.stopPropagation();
+                props.onEditClick?.();
+              }}
+              sx={{ fontSize: 12, ml: 0.25, verticalAlign: "middle", cursor: "pointer" }}
+            />
+          )}
+        </div>
       </div>
     </Tooltip>
   );
@@ -330,7 +348,10 @@ function CustomTabPanel(props: TabPanelProps) {
 
 export function KeycodeCatalog(props: {
   keycodeConverter: KeycodeConverter;
-  tab: { label: string; keygroup: string[] }[];
+  tab?: { label: string; keygroup: string[] }[];
+  directKeygroups?: string[];
+  showTapDanceEditIndicator?: boolean;
+  showComboOverrideEditIndicator?: boolean;
   comboCount?: number;
   overrideCount?: number;
   onMacroSelect?: (index: number) => void;
@@ -339,52 +360,56 @@ export function KeycodeCatalog(props: {
   onOverrideSelect?: (index: number) => void;
 }) {
   const [tabValue, setTabValue] = useState(0);
+  const contentTabs = props.tab ??
+    (props.directKeygroups ?? []).map((keygroup) => ({ label: keygroup, keygroup: [keygroup] }));
   return (
     <Box sx={{ width: "100%" }}>
-      <Box>
-        <Tabs
-          value={tabValue}
-          onChange={(_event, newValue: number) => {
-            setTabValue(newValue);
-            console.log("tab");
-          }}
-          variant="scrollable"
-          scrollButtons={false}
-          sx={{
-            width: "100%",
-            maxWidth: "100%",
-            py: 0,
-          }}
-        >
-          {props.tab.map((tab) => (
-            <Tab
-              key={tab.label}
-              label={tab.label}
-              className="keycode-catalog-tab"
-              sx={{
-                color: "#b8c7dc",
-                fontWeight: 600,
-                textTransform: "none",
-                border: "1px solid #334155",
-                borderRadius: 0,
-                backgroundColor: "rgba(30, 41, 59, 0.7)",
-                "&:first-of-type": {
-                  borderRadius: "8px 0 0 0",
-                },
-                "&:last-of-type": {
-                  borderRadius: "0 8px 0 0",
-                },
-                "&.Mui-selected": {
-                  color: "#f8fafc",
-                  borderColor: "#475569",
-                  backgroundColor: "#334155",
-                },
-              }}
-            />
-          ))}
-        </Tabs>
-      </Box>
-      {props.tab.map((tab, index) => (
+      {props.tab && (
+        <Box>
+          <Tabs
+            value={tabValue}
+            onChange={(_event, newValue: number) => {
+              setTabValue(newValue);
+              console.log("tab");
+            }}
+            variant="scrollable"
+            scrollButtons={false}
+            sx={{
+              width: "100%",
+              maxWidth: "100%",
+              py: 0,
+            }}
+          >
+            {props.tab.map((tab) => (
+              <Tab
+                key={tab.label}
+                label={tab.label}
+                className="keycode-catalog-tab"
+                sx={{
+                  color: "#b8c7dc",
+                  fontWeight: 600,
+                  textTransform: "none",
+                  border: "1px solid #334155",
+                  borderRadius: 0,
+                  backgroundColor: "rgba(30, 41, 59, 0.7)",
+                  "&:first-of-type": {
+                    borderRadius: "8px 0 0 0",
+                  },
+                  "&:last-of-type": {
+                    borderRadius: "0 8px 0 0",
+                  },
+                  "&.Mui-selected": {
+                    color: "#f8fafc",
+                    borderColor: "#475569",
+                    backgroundColor: "#334155",
+                  },
+                }}
+              />
+            ))}
+          </Tabs>
+        </Box>
+      )}
+      {contentTabs.map((tab, index) => (
         <CustomTabPanel key={index} value={tabValue} index={index}>
           <Box
             sx={{
@@ -462,8 +487,17 @@ export function KeycodeCatalog(props: {
                           .with("tapdance", () => (
                             <KeyListKey
                               key={keycode.value}
-                              keycode={{ ...keycode, label: keycode.label + " 🖊" }}
+                              keycode={
+                                keycode
+                              }
                               draggable={true}
+                              showEditIndicator={props.showTapDanceEditIndicator}
+                              editOnClick={props.showTapDanceEditIndicator}
+                              onEditClick={
+                                props.showTapDanceEditIndicator
+                                  ? () => props.onTapdanceSelect?.(keycode.value & 0x1f)
+                                  : undefined
+                              }
                               animationDelay={animationDelay}
                               onClick={() => {
                                 props.onTapdanceSelect?.(keycode.value & 0x1f);
@@ -498,11 +532,18 @@ export function KeycodeCatalog(props: {
                         key={`combo-${idx}`}
                         keycode={{
                           ...DefaultQmkKeycode,
-                          label: `Combo ${idx} 🖊`,
-                          key: `Edit Combo`,
+                          label: `Combo ${idx}`,
+                          key: `Combo`,
                           value: idx,
                         }}
                         draggable={false}
+                        showEditIndicator={props.showComboOverrideEditIndicator}
+                        editOnClick={props.showComboOverrideEditIndicator}
+                        onEditClick={
+                          props.showComboOverrideEditIndicator
+                            ? () => props.onComoboSelect?.(idx)
+                            : undefined
+                        }
                         animationDelay={Math.min(MAX_ANIMATION_DELAY_MS, idx * 12)}
                         onClick={() => {
                           props.onComoboSelect?.(idx);
@@ -527,11 +568,18 @@ export function KeycodeCatalog(props: {
                         key={`override-${idx}`}
                         keycode={{
                           ...DefaultQmkKeycode,
-                          label: `Override ${idx} 🖊`,
-                          key: `Edit override`,
+                          label: `Override ${idx}`,
+                          key: `Override`,
                           value: idx,
                         }}
                         draggable={false}
+                        showEditIndicator={props.showComboOverrideEditIndicator}
+                        editOnClick={props.showComboOverrideEditIndicator}
+                        onEditClick={
+                          props.showComboOverrideEditIndicator
+                            ? () => props.onOverrideSelect?.(idx)
+                            : undefined
+                        }
                         animationDelay={Math.min(MAX_ANIMATION_DELAY_MS, idx * 12)}
                         onClick={() => {
                           props.onOverrideSelect?.(idx);

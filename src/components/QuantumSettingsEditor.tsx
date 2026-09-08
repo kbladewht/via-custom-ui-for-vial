@@ -6,7 +6,7 @@ import { MenuItemProperties, MenuSectionProperties, ViaMenuItem } from "./ViaMen
 import quantumTranslations from "../locales/quantum.json";
 import { KeycodeConverter } from "./keycodes/keycodeConverter";
 import { MacroEditor } from "./MacroEditor";
-import { ComboOverrideEditor, KeymapEditor, KeymapProperties } from "./KeymapEditor";
+import { ComboOverrideEditor, KeymapEditor, KeymapProperties, TapDanceSelector } from "./KeymapEditor";
 import { DynamicEntryCount } from "../services/vialKeyboad";
 
 export function QuantumSettingsEditor(props: {
@@ -34,6 +34,7 @@ export function QuantumSettingsEditor(props: {
   const tabs = [
     { label: "Keymap", content: [] } as { label: string; content: never[] },
     { label: "Combo/Override", content: [] } as { label: string; content: never[] },
+    { label: "TapDance", content: [] } as { label: string; content: never[] },
     { label: "Quantum", content: [] } as { label: string; content: never[] },
     { label: "Macro", content: [] } as { label: string; content: never[] },
     ...(props.customMenus?.length
@@ -144,6 +145,13 @@ export function QuantumSettingsEditor(props: {
             />
           ) : menu.label === "Combo/Override" && props.dynamicEntryCount ? (
             <ComboOverrideEditor
+              via={props.via}
+              language={props.language}
+              keymapLanguage={props.keymapLanguage}
+              dynamicEntryCount={props.dynamicEntryCount}
+            />
+          ) : menu.label === "TapDance" && props.dynamicEntryCount ? (
+            <TapDanceSelector
               via={props.via}
               language={props.language}
               keymapLanguage={props.keymapLanguage}

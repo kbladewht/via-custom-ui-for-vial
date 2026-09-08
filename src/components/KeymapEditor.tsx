@@ -1231,7 +1231,8 @@ export function ComboOverrideEditor(props: {
       ) : (
         <KeycodeCatalog
           keycodeConverter={keycodeConverter}
-          tab={[{ label: "Combo/Override", keygroup: ["combo", "keyoverride"] }]}
+          directKeygroups={["combo", "keyoverride"]}
+          showComboOverrideEditIndicator
           comboCount={props.dynamicEntryCount.combo}
           overrideCount={props.dynamicEntryCount.override}
           onComoboSelect={(index) => {
@@ -1242,6 +1243,50 @@ export function ComboOverrideEditor(props: {
             setOverrideIndex(index);
             setEditor("override");
           }}
+        />
+      )}
+    </Box>
+  );
+}
+
+export function TapDanceSelector(props: {
+  via: ViaKeyboard;
+  language: "zh" | "en";
+  keymapLanguage: string;
+  dynamicEntryCount: { combo: number; override: number; layer: number; tapdance: number };
+}) {
+  const [keycodeConverter, setKeycodeConverter] = useState<KeycodeConverter>();
+  const [editorIndex, setEditorIndex] = useState<number>();
+
+  useEffect(() => {
+    KeycodeConverter.Create(
+      props.dynamicEntryCount.layer,
+      undefined,
+      0,
+      props.dynamicEntryCount.tapdance,
+      props.keymapLanguage,
+      "0.0.3",
+      props.language,
+    ).then((converter) => setKeycodeConverter(converter));
+  }, [props.dynamicEntryCount, props.keymapLanguage, props.language]);
+
+  if (!keycodeConverter) return null;
+
+  return (
+    <Box sx={{ width: "100%", p: 1 }}>
+      {editorIndex === undefined ? (
+        <KeycodeCatalog
+          keycodeConverter={keycodeConverter}
+          directKeygroups={["tapdance"]}
+          showTapDanceEditIndicator
+          onTapdanceSelect={(index) => setEditorIndex(index)}
+        />
+      ) : (
+        <TapDanceEditor
+          via={props.via}
+          keycodeConverter={keycodeConverter}
+          tapdanceIndex={editorIndex}
+          onBack={() => setEditorIndex(undefined)}
         />
       )}
     </Box>
@@ -1262,12 +1307,6 @@ export function KeymapEditor(props: {
     override: number;
   };
 }) {
-  const [menuType, setMenuType] = useState<"layer" | "tapdance" | "combo" | "override">(
-    "layer",
-  );
-  const [tdIndex, setTdIndex] = useState(-1);
-  const [comboIndex, setComboIndex] = useState(-1);
-  const [overrideIndex, setOverrideIndex] = useState(-1);
   const [keycodeConverter, setKeycodeConverter] = useState<KeycodeConverter>();
 
   // State for the focused key context
@@ -1336,45 +1375,11 @@ export function KeymapEditor(props: {
           backgroundColor: "#0f172a",
         }}
       >
-        <Box hidden={menuType !== "layer"}>
-          <LayerEditor
-            {...props}
-            layerCount={props.dynamicEntryCount.layer}
-            keycodeConverter={keycodeConverter}
-          ></LayerEditor>
-        </Box>
-        <Box hidden={menuType !== "tapdance"}>
-          <TapDanceEditor
-            via={props.via}
-            keycodeConverter={keycodeConverter}
-            tapdanceIndex={tdIndex}
-            onBack={() => {
-              setMenuType("layer");
-            }}
-          ></TapDanceEditor>
-        </Box>
-        <Box hidden={menuType !== "combo"}>
-          <ComboEditor
-            via={props.via}
-            keycodeConverter={keycodeConverter}
-            comboIndex={comboIndex}
-            comboCount={props.dynamicEntryCount.combo}
-            onBack={() => {
-              setMenuType("layer");
-            }}
-          ></ComboEditor>
-        </Box>
-        <Box hidden={menuType !== "override"}>
-          <OverrideEditor
-            via={props.via}
-            keycodeConverter={keycodeConverter}
-            overrideIndex={overrideIndex}
-            overrideCount={props.dynamicEntryCount.override}
-            onBack={() => {
-              setMenuType("layer");
-            }}
-          ></OverrideEditor>
-        </Box>
+        <LayerEditor
+          {...props}
+          layerCount={props.dynamicEntryCount.layer}
+          keycodeConverter={keycodeConverter}
+        ></LayerEditor>
       </Box>
 
       <Box
@@ -1419,18 +1424,6 @@ export function KeymapEditor(props: {
           ]}
           comboCount={props.dynamicEntryCount.combo}
           overrideCount={props.dynamicEntryCount.override}
-          onTapdanceSelect={(index) => {
-            setMenuType("tapdance");
-            setTdIndex(index);
-          }}
-          onComoboSelect={(index) => {
-            setMenuType("combo");
-            setComboIndex(index);
-          }}
-          onOverrideSelect={(index) => {
-            setMenuType("override");
-            setOverrideIndex(index);
-          }}
           ></KeycodeCatalog>
       </Box>
     </FocusedKeyContext.Provider>
