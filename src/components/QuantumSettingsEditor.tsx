@@ -128,10 +128,8 @@ export function QuantumSettingsEditor(props: {
           <Tab
             key={menu.id}
             label={
-              menu.id === "Quantum"
-                ? "QMK Settings"
-                : (quantumTranslations[props.language].tabs as Record<string, string>)[menu.id] ??
-                  menu.label
+              (quantumTranslations[props.language].tabs as Record<string, string>)[menu.id] ??
+              menu.label
             }
             sx={{
               color: "#b8c7dc",
