@@ -185,6 +185,7 @@ export class KeycodeConverter {
     this.layer = layer;
     this.keycode_range = keycode_range;
     const languageKey = language.trim().toLocaleLowerCase();
+    const languageKeys = languageKey === "zh" ? [languageKey, "chinese"] : [languageKey];
 
     this.tapKeycodeList = Object.entries(keycodes)
       .filter(
@@ -217,9 +218,10 @@ export class KeycodeConverter {
         } else {
           let langLabel: string | undefined = undefined;
           let shiftedLabel: string | undefined = k[1].shiftedLabel;
-          if (k[1].language && k[1].language[languageKey]) {
-            langLabel = k[1].language[languageKey].label;
-            shiftedLabel = k[1].language[languageKey].shiftedLabel;
+          const languageDefinition = k[1].language && languageKeys.map((key) => k[1].language?.[key]).find(Boolean);
+          if (languageDefinition) {
+            langLabel = languageDefinition.label;
+            shiftedLabel = languageDefinition.shiftedLabel;
           }
 
           return {
