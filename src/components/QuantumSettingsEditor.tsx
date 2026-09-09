@@ -7,7 +7,7 @@ import quantumTranslations from "../locales/quantum.json";
 import { KeycodeConverter } from "./keycodes/keycodeConverter";
 import { MacroEditor } from "./MacroEditor";
 import { LightingEditor } from "./LightingEditor";
-import { ComboOverrideEditor, KeymapEditor, KeymapProperties, KeyOverrideSelector, TapDanceSelector } from "./KeymapEditor";
+import { AltRepeatKeySelector, ComboOverrideEditor, KeymapEditor, KeymapProperties, KeyOverrideSelector, TapDanceSelector } from "./KeymapEditor";
 import { DynamicEntryCount } from "../services/vialKeyboad";
 
 export function QuantumSettingsEditor(props: {
@@ -46,6 +46,7 @@ export function QuantumSettingsEditor(props: {
     { id: "TapDance", label: "TapDance" },
     { id: "Combos", label: "Combos" },
     { id: "KeyOverride", label: "Key Overrides" },
+    { id: "AltRepeatKey", label: "Alt Repeat Key" },
     { id: "Quantum", label: "QMK Settings" },
     ...(props.customMenus?.length
       ? [{ id: "Custom", label: "Custom" }]
@@ -181,6 +182,13 @@ export function QuantumSettingsEditor(props: {
             />
           ) : menu.id === "KeyOverride" && props.dynamicEntryCount ? (
             <KeyOverrideSelector
+              via={props.via}
+              language={props.language}
+              keymapLanguage={props.keymapLanguage}
+              dynamicEntryCount={props.dynamicEntryCount}
+            />
+          ) : menu.id === "AltRepeatKey" && props.dynamicEntryCount ? (
+            <AltRepeatKeySelector
               via={props.via}
               language={props.language}
               keymapLanguage={props.keymapLanguage}

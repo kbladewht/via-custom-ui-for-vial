@@ -12,7 +12,8 @@
       "Macro": "宏",
       "TapDance": "TapDance",
       "Combos": "组合",
-      "KeyOverride": "按键覆盖"
+      "KeyOverride": "按键覆盖",
+      "AltRepeatKey": "Alt Repeat Key"
     },
     "tabs": {
       "Keymap": "按键映射",
@@ -21,6 +22,7 @@
       "TapDance": "Tap Dance",
       "Combos": "Combos",
       "KeyOverride": "Key Overrides",
+      "AltRepeatKey": "Alt Repeat Key",
       "Magic": "Magic",
       "Grave Escape": "Grave Escape",
       "Tap-Hold": "Tap-Hold",
@@ -44,7 +46,8 @@
       "Macro": "Macro",
       "TapDance": "TapDance",
       "Combos": "Combos",
-      "KeyOverride": "Key Overrides"
+      "KeyOverride": "Key Overrides",
+      "AltRepeatKey": "Alt Repeat Key"
     },
     "tabs": {
       "Keymap": "Keymap",
@@ -53,6 +56,7 @@
       "TapDance": "Tap Dance",
       "Combos": "Combos",
       "KeyOverride": "Key Overrides",
+      "AltRepeatKey": "Alt Repeat Key",
       "Magic": "Magic",
       "Grave Escape": "Grave Escape",
       "Tap-Hold": "Tap-Hold",

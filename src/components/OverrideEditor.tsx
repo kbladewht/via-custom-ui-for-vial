@@ -69,19 +69,21 @@ export function OverrideEditor(props: {
     ]);
   };
 
+  const handleChange = (newOverride: OverrideValue) => {
+    setOverride((prev) => ({
+      ...prev,
+      [`${props.overrideIndex}`]: newOverride,
+    }));
+    sendOverride(props.overrideIndex, newOverride);
+  };
+
   return (
     <Box ref={boundaryRef} sx={{ width: "100%", flex: 1, display: "flex", flexDirection: "column" }}>
       <OverrideEntry
         override={override[props.overrideIndex] ?? defaultOverrideValue}
         keycodeconverter={props.keycodeConverter}
         boundaryRef={boundaryRef}
-        onSave={(newOverride) => {
-          setOverride((prev) => ({
-            ...prev,
-            [`${props.overrideIndex}`]: newOverride,
-          }));
-          sendOverride(props.overrideIndex, newOverride);
-        }}
+        onChange={handleChange}
       />
     </Box>
   );
@@ -111,7 +113,7 @@ function OverrideEntry(props: {
   override: OverrideValue;
   keycodeconverter: KeycodeConverter;
   boundaryRef?: React.RefObject<HTMLDivElement>;
-  onSave?: (override: OverrideValue) => void;
+  onChange?: (override: OverrideValue) => void;
 }) {
   const [candidateOverride, setCandidateOverride] = useState<OverrideValue>(props.override);
   const [selectedKeyIndex, setSelectedKeyIndex] = useState<number>(); // 0: trigger, 1: replacement
@@ -122,6 +124,11 @@ function OverrideEntry(props: {
   useEffect(() => {
     setCandidateOverride(props.override);
   }, [props.override]);
+
+  const updateCandidate = (newVal: OverrideValue) => {
+    setCandidateOverride(newVal);
+    props.onChange?.(newVal);
+  };
 
   const focusedKey: KeymapKeyProperties | null =
     selectedKeyIndex === undefined
@@ -149,32 +156,14 @@ function OverrideEntry(props: {
         setFocusedKey: () => {},
         onKeycodeChange: (_target, keycode) => {
           if (selectedKeyIndex === 0) {
-            setCandidateOverride((prev) => ({ ...prev, trigger: keycode }));
+            updateCandidate({ ...candidateOverride, trigger: keycode });
           } else if (selectedKeyIndex === 1) {
-            setCandidateOverride((prev) => ({ ...prev, replacement: keycode }));
+            updateCandidate({ ...candidateOverride, replacement: keycode });
           }
         },
       }}
     >
       <Box sx={{ flex: 1, position: "relative" }}>
-        {/* Save and Revert buttons */}
-        <Box sx={{ position: "absolute", right: 0, top: 0, display: "flex", gap: 1, zIndex: 1 }}>
-          <Button
-            variant="outlined"
-            onClick={() => setCandidateOverride(props.override)}
-            sx={{ color: "#e2e8f0", borderColor: "#64748b", backgroundColor: "#334155" }}
-          >
-            Revert
-          </Button>
-          <Button
-            variant="outlined"
-            onClick={() => props.onSave?.(candidateOverride)}
-            sx={{ color: "#f8fafc", borderColor: "#64748b", backgroundColor: "#334155" }}
-          >
-            Save
-          </Button>
-        </Box>
-
         <Grid container spacing={2} sx={{ maxWidth: 640, mx: "auto", mt: 0 }}>
           {/* Enable */}
           <Grid item xs={4}>
@@ -187,10 +176,10 @@ function OverrideEntry(props: {
               size="small"
               checked={(candidateOverride.options & (1 << 7)) !== 0}
               onChange={(_event, checked) => {
-                setCandidateOverride((prev) => ({
-                  ...prev,
-                  options: (prev.options & ~(1 << 7)) | (checked ? 1 << 7 : 0),
-                }));
+                updateCandidate({
+                  ...candidateOverride,
+                  options: (candidateOverride.options & ~(1 << 7)) | (checked ? 1 << 7 : 0),
+                });
               }}
               sx={{ color: "#64748b", "&.Mui-checked": { color: "#38bdf8" }, p: 0.5 }}
             />
@@ -220,10 +209,10 @@ function OverrideEntry(props: {
                       size="small"
                       checked={(candidateOverride.layers & (1 << idx)) !== 0}
                       onChange={(_event, checked) => {
-                        setCandidateOverride((prev) => ({
-                          ...prev,
-                          layers: (prev.layers & ~(1 << idx)) | (checked ? 1 << idx : 0),
-                        }));
+                        updateCandidate({
+                          ...candidateOverride,
+                          layers: (candidateOverride.layers & ~(1 << idx)) | (checked ? 1 << idx : 0),
+                        });
                       }}
                       sx={{ color: "#64748b", "&.Mui-checked": { color: "#38bdf8" }, p: "2px" }}
                     />
@@ -236,7 +225,7 @@ function OverrideEntry(props: {
               <Button
                 size="small"
                 variant="outlined"
-                onClick={() => setCandidateOverride((prev) => ({ ...prev, layers: 0xffff }))}
+                onClick={() => updateCandidate({ ...candidateOverride, layers: 0xffff })}
                 sx={{
                   color: "#cbd5e1",
                   borderColor: "#475569",
@@ -252,7 +241,7 @@ function OverrideEntry(props: {
               <Button
                 size="small"
                 variant="outlined"
-                onClick={() => setCandidateOverride((prev) => ({ ...prev, layers: 0x0000 }))}
+                onClick={() => updateCandidate({ ...candidateOverride, layers: 0x0000 })}
                 sx={{
                   color: "#cbd5e1",
                   borderColor: "#475569",
@@ -287,7 +276,7 @@ function OverrideEntry(props: {
                 }
               }}
               onKeycodeChange={(keycode) => {
-                setCandidateOverride((prev) => ({ ...prev, trigger: keycode }));
+                updateCandidate({ ...candidateOverride, trigger: keycode });
               }}
             />
           </Grid>
@@ -301,7 +290,7 @@ function OverrideEntry(props: {
           <Grid item xs={8}>
             <ModifierCheckbox
               value={candidateOverride.triggerMods}
-              onChange={(value) => setCandidateOverride((prev) => ({ ...prev, triggerMods: value }))}
+              onChange={(value) => updateCandidate({ ...candidateOverride, triggerMods: value })}
             />
           </Grid>
 
@@ -314,7 +303,7 @@ function OverrideEntry(props: {
           <Grid item xs={8}>
             <ModifierCheckbox
               value={candidateOverride.negativeModMask}
-              onChange={(value) => setCandidateOverride((prev) => ({ ...prev, negativeModMask: value }))}
+              onChange={(value) => updateCandidate({ ...candidateOverride, negativeModMask: value })}
             />
           </Grid>
 
@@ -327,7 +316,7 @@ function OverrideEntry(props: {
           <Grid item xs={8}>
             <ModifierCheckbox
               value={candidateOverride.suppressedMods}
-              onChange={(value) => setCandidateOverride((prev) => ({ ...prev, suppressedMods: value }))}
+              onChange={(value) => updateCandidate({ ...candidateOverride, suppressedMods: value })}
             />
           </Grid>
 
@@ -350,7 +339,7 @@ function OverrideEntry(props: {
                 }
               }}
               onKeycodeChange={(keycode) => {
-                setCandidateOverride((prev) => ({ ...prev, replacement: keycode }));
+                updateCandidate({ ...candidateOverride, replacement: keycode });
               }}
             />
           </Grid>
@@ -372,10 +361,10 @@ function OverrideEntry(props: {
                       size="small"
                       checked={(candidateOverride.options & (1 << opt.bit)) !== 0}
                       onChange={(_event, checked) => {
-                        setCandidateOverride((prev) => ({
-                          ...prev,
-                          options: (prev.options & ~(1 << opt.bit)) | (checked ? 1 << opt.bit : 0),
-                        }));
+                        updateCandidate({
+                          ...candidateOverride,
+                          options: (candidateOverride.options & ~(1 << opt.bit)) | (checked ? 1 << opt.bit : 0),
+                        });
                       }}
                       sx={{ color: "#64748b", "&.Mui-checked": { color: "#38bdf8" }, p: "2px" }}
                     />
@@ -418,9 +407,9 @@ function OverrideEntry(props: {
           onChange={(event) => {
             setPopupKeycode(event.keycode);
             if (selectedKeyIndex === 0) {
-              setCandidateOverride((prev) => ({ ...prev, trigger: event.keycode }));
+              updateCandidate({ ...candidateOverride, trigger: event.keycode });
             } else if (selectedKeyIndex === 1) {
-              setCandidateOverride((prev) => ({ ...prev, replacement: event.keycode }));
+              updateCandidate({ ...candidateOverride, replacement: event.keycode });
             }
           }}
         />

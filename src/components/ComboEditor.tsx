@@ -47,6 +47,14 @@ export function ComboEditor(props: {
     ]);
   };
 
+  const handleChange = (newCombo: ComboValue) => {
+    const newComboSet = { ...combo };
+    newComboSet[props.comboIndex] = newCombo;
+    setCombo(newComboSet);
+    sendCombo(props.comboIndex, newCombo);
+    console.log(`update combo ${props.comboIndex}`);
+  };
+
   return (
     <Box ref={boundaryRef} sx={{ width: "100%", flex: 1, display: "flex", flexDirection: "column" }}>
       <ComboEntry
@@ -63,13 +71,7 @@ export function ComboEditor(props: {
         }
         keycodeconverter={props.keycodeConverter}
         boundaryRef={boundaryRef}
-        onSave={(newCombo) => {
-          const newComboSet = { ...combo };
-          newComboSet[props.comboIndex] = newCombo;
-          setCombo(newComboSet);
-          sendCombo(props.comboIndex, newCombo);
-          console.log(`update combo ${props.comboIndex}`);
-        }}
+        onChange={handleChange}
       ></ComboEntry>
     </Box>
   );
@@ -83,7 +85,7 @@ function ComboEntry(props: {
   combo: ComboValue;
   keycodeconverter: KeycodeConverter;
   boundaryRef?: React.RefObject<HTMLDivElement>;
-  onSave?: (combo: ComboValue) => void;
+  onChange?: (combo: ComboValue) => void;
 }) {
   const [candidateCombo, setCandidateCombo] = useState<ComboValue>(props.combo);
   const [selectedKeyIndex, setSelectedKeyIndex] = useState<number>();
@@ -94,6 +96,11 @@ function ComboEntry(props: {
   useEffect(() => {
     setCandidateCombo(props.combo);
   }, [props.combo]);
+
+  const updateCandidate = (updated: ComboValue) => {
+    setCandidateCombo(updated);
+    props.onChange?.(updated);
+  };
 
   const focusedKey: KeymapKeyProperties | null =
     selectedKeyIndex === undefined
@@ -110,7 +117,7 @@ function ComboEntry(props: {
         setFocusedKey: () => {},
         onKeycodeChange: (_target, keycode) => {
           if (selectedKeyIndex !== undefined) {
-            setCandidateCombo({
+            updateCandidate({
               keys: candidateCombo.keys.map((key, index) => (index === selectedKeyIndex ? keycode : key)),
             } as ComboValue);
           }
@@ -145,7 +152,7 @@ function ComboEntry(props: {
                     }
                   }}
                   onKeycodeChange={(keycode) => {
-                    setCandidateCombo({
+                    updateCandidate({
                       keys: candidateCombo.keys.map((k, id) => (id == idx ? keycode : k)),
                     } as ComboValue);
                   }}
@@ -155,22 +162,6 @@ function ComboEntry(props: {
           );
         })}
       </Grid>
-      <Box sx={{ position: "absolute", right: 0, top: 232, display: "flex", gap: 1 }}>
-        <Button
-          variant="outlined"
-          onClick={() => setCandidateCombo(props.combo)}
-          sx={{ color: "#e2e8f0", borderColor: "#64748b", backgroundColor: "#334155" }}
-        >
-          Revert
-        </Button>
-        <Button
-          variant="outlined"
-          onClick={() => props.onSave?.(candidateCombo)}
-          sx={{ color: "#f8fafc", borderColor: "#64748b", backgroundColor: "#334155" }}
-        >
-          Save
-        </Button>
-      </Box>
       {selectedKeyIndex !== undefined && (
         <Box sx={{ maxHeight: 360, overflowY: "auto", mt: 2 }}>
           <KeycodeCatalog
