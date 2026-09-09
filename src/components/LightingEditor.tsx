@@ -3,7 +3,27 @@ import { useEffect, useState } from "react";
 import { MuiColorInput } from "mui-color-input";
 import { ViaKeyboard } from "../services/vialKeyboad";
 
-const EFFECTS = ["Disable", "Solid Color", "Breathing", "Rainbow", "Snake"];
+const VIAL_RGB_EFFECTS = [
+  "Disable", "Direct Control", "Solid Color", "Alphas Mods", "Gradient Up Down",
+  "Gradient Left Right", "Breathing", "Band Sat", "Band Val", "Band Pinwheel Sat",
+  "Band Pinwheel Val", "Band Spiral Sat", "Band Spiral Val", "Cycle All", "Cycle Left Right",
+  "Cycle Up Down", "Rainbow Moving Chevron", "Cycle Out In", "Cycle Out In Dual", "Cycle Pinwheel",
+  "Cycle Spiral", "Dual Beacon", "Rainbow Beacon", "Rainbow Pinwheels", "Raindrops",
+  "Jellybean Raindrops", "Hue Breathing", "Hue Pendulum", "Hue Wave", "Typing Heatmap",
+  "Digital Rain", "Solid Reactive Simple", "Solid Reactive", "Solid Reactive Wide",
+  "Solid Reactive Multiwide", "Solid Reactive Cross", "Solid Reactive Multicross",
+  "Solid Reactive Nexus", "Solid Reactive Multinexus", "Splash", "Multisplash", "Solid Splash",
+  "Solid Multisplash", "Pixel Rain", "Pixel Fractal",
+];
+
+const QMK_RGB_EFFECTS = [
+  "All Off", "Solid Color", "Breathing 1", "Breathing 2", "Breathing 3", "Breathing 4",
+  "Rainbow Mood 1", "Rainbow Mood 2", "Rainbow Mood 3", "Rainbow Swirl 1", "Rainbow Swirl 2",
+  "Rainbow Swirl 3", "Rainbow Swirl 4", "Rainbow Swirl 5", "Rainbow Swirl 6", "Snake 1",
+  "Snake 2", "Snake 3", "Snake 4", "Snake 5", "Snake 6", "Knight 1", "Knight 2", "Knight 3",
+  "Christmas", "Gradient 1", "Gradient 2", "Gradient 3", "Gradient 4", "Gradient 5", "Gradient 6",
+  "Gradient 7", "Gradient 8", "Gradient 9", "Gradient 10", "RGB Test", "Alternating",
+];
 
 function hexToHsv(value: string) {
   const hex = value.replace("#", "");
@@ -33,6 +53,7 @@ export function LightingEditor(props: { via: ViaKeyboard; lighting?: string }) {
   const [color, setColor] = useState("#ff0000");
   const [brightness, setBrightness] = useState(128);
   const [speed, setSpeed] = useState(50);
+  const [effects, setEffects] = useState<{ id: number; label: string }[]>([]);
   const [error, setError] = useState<string>();
 
   const setRgbValue = async (value: { brightness?: number; effect?: number; speed?: number; hue?: number; saturation?: number }) => {
@@ -66,12 +87,17 @@ export function LightingEditor(props: { via: ViaKeyboard; lighting?: string }) {
   useEffect(() => {
     if (props.lighting === "qmk_rgblight" || props.lighting === "qmk_backlight_rgblight") {
       void props.via.GetQmkRgblight().then((value) => {
+        setEffects(QMK_RGB_EFFECTS.map((label, id) => ({ id, label })));
         setEffect(value.effect);
         setBrightness(value.brightness);
         setSpeed(value.speed);
       }).catch((caught) => setError(caught instanceof Error ? caught.message : String(caught)));
     } else if (props.lighting === "vialrgb") {
       void props.via.GetVialRgb().then((value) => {
+        setEffects(value.supportedEffects.map((id) => ({
+          id,
+          label: VIAL_RGB_EFFECTS[id] ?? `Effect ${id}`,
+        })));
         setEffect(value.mode);
         setBrightness(value.brightness);
         setSpeed(value.speed);
@@ -102,9 +128,9 @@ export function LightingEditor(props: { via: ViaKeyboard; lighting?: string }) {
               void setRgbValue({ effect: value });
             }}
           >
-            {EFFECTS.map((item, index) => (
-              <MenuItem key={item} value={index}>
-                {item}
+            {effects.map((item) => (
+              <MenuItem key={item.id} value={item.id}>
+                {item.label}
               </MenuItem>
             ))}
           </Select>
