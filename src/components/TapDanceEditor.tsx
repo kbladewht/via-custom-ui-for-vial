@@ -1,4 +1,4 @@
-import { Box, Button, Grid, TextField } from "@mui/material";
+import { Box, Grid, TextField } from "@mui/material";
 import { Fragment, useEffect, useRef, useState } from "react";
 import { ViaKeyboard } from "../services/vialKeyboad";
 import { DefaultQmkKeycode, KeycodeConverter, QmkKeycode } from "./keycodes/keycodeConverter";
@@ -10,6 +10,7 @@ export function TapDanceEditor(props: {
   via: ViaKeyboard;
   keycodeConverter: KeycodeConverter;
   tapdanceIndex: number;
+  language?: "zh" | "en";
 }) {
   const [tapDance, setTapDance] = useState<{ [id: string]: TapDanceValue }>({});
   const boundaryRef = useRef<HTMLDivElement>(null);
@@ -39,9 +40,16 @@ export function TapDanceEditor(props: {
     ]);
   };
 
+  const handleChange = (td: TapDanceValue) => {
+    setTapDance((prev) => ({
+      ...prev,
+      [`${props.tapdanceIndex}`]: td,
+    }));
+    sendTapdance(props.tapdanceIndex, td);
+  };
+
   return (
     <Box ref={boundaryRef} sx={{ width: "100%", flex: 1, display: "flex", flexDirection: "column" }}>
-      {/* <Box>{`Edit TD${props.tapdanceIndex}`}</Box> */}
       <TapDanceEntry
         td={
           tapDance[props.tapdanceIndex] ?? {
@@ -54,11 +62,8 @@ export function TapDanceEditor(props: {
         }
         keycodeconverter={props.keycodeConverter}
         boundaryRef={boundaryRef}
-        onSave={(td: TapDanceValue) => {
-          console.log(`Set TD${props.tapdanceIndex}`);
-          console.log(td);
-          sendTapdance(props.tapdanceIndex, td);
-        }}
+        language={props.language}
+        onChange={handleChange}
       ></TapDanceEntry>
     </Box>
   );
@@ -76,7 +81,8 @@ function TapDanceEntry(props: {
   td: TapDanceValue;
   keycodeconverter: KeycodeConverter;
   boundaryRef?: React.RefObject<HTMLDivElement>;
-  onSave?: (td: TapDanceValue) => void;
+  language?: "zh" | "en";
+  onChange?: (td: TapDanceValue) => void;
 }) {
   const [tappingTerm, setTappingTerm] = useState(props.td.tappingTerm.toString());
   const [candidateTapdance, setCandidateTapdance] = useState<TapDanceValue>(props.td);
@@ -85,11 +91,18 @@ function TapDanceEntry(props: {
   const [popupAnchor, setPopupAnchor] = useState<HTMLElement>();
   const [popupKeycode, setPopupKeycode] = useState(DefaultQmkKeycode);
 
+  const isZh = props.language === "zh";
+
+  const updateCandidate = (updated: TapDanceValue) => {
+    setCandidateTapdance(updated);
+    props.onChange?.(updated);
+  };
+
   const handleChange = [
-    (value: QmkKeycode) => setCandidateTapdance({ ...candidateTapdance, onTap: value }),
-    (value: QmkKeycode) => setCandidateTapdance({ ...candidateTapdance, onHold: value }),
-    (value: QmkKeycode) => setCandidateTapdance({ ...candidateTapdance, onDoubleTap: value }),
-    (value: QmkKeycode) => setCandidateTapdance({ ...candidateTapdance, onTapHold: value }),
+    (value: QmkKeycode) => updateCandidate({ ...candidateTapdance, onTap: value }),
+    (value: QmkKeycode) => updateCandidate({ ...candidateTapdance, onHold: value }),
+    (value: QmkKeycode) => updateCandidate({ ...candidateTapdance, onDoubleTap: value }),
+    (value: QmkKeycode) => updateCandidate({ ...candidateTapdance, onTapHold: value }),
   ];
 
   useEffect(() => {
@@ -125,19 +138,19 @@ function TapDanceEntry(props: {
       <Grid container spacing={1} sx={{ maxWidth: 480, mx: "auto", mt: 0 }}>
         {[
           {
-            label: "On tap",
+            label: isZh ? "单击 (On tap)" : "On tap",
             key: candidateTapdance.onTap,
           },
           {
-            label: "On hold",
+            label: isZh ? "长按 (On hold)" : "On hold",
             key: candidateTapdance.onHold,
           },
           {
-            label: "On double tap",
+            label: isZh ? "双击 (On double tap)" : "On double tap",
             key: candidateTapdance.onDoubleTap,
           },
           {
-            label: "On tap + hold",
+            label: isZh ? "单击并长按 (On tap + hold)" : "On tap + hold",
             key: candidateTapdance.onTapHold,
           },
         ].map((k, idx) => {
@@ -145,7 +158,7 @@ function TapDanceEntry(props: {
             <Fragment key={idx}>
               <Grid item xs={5}>
                 <Box className="editor-field-label" alignContent={"center"} textAlign={"right"} height={"100%"}>
-                  {k.label}
+                  {isZh ? ["单击", "长按", "双击", "单击后长按"][idx] : ["On tap", "On hold", "On double tap", "On tap + hold"][idx]}
                 </Box>
               </Grid>
               <Grid item xs={7}>
@@ -171,7 +184,7 @@ function TapDanceEntry(props: {
         <Grid container spacing={1} sx={{ maxWidth: 480, mx: "auto" }}>
           <Grid item xs={5}>
             <Box className="editor-field-label" alignContent={"center"} textAlign={"right"} height={"100%"}>
-              Tapping term [ms]
+              {isZh ? "双击判定时间 [ms]" : "Tapping term [ms]"}
             </Box>
           </Grid>
           <Grid item xs={7}>
@@ -181,7 +194,7 @@ function TapDanceEntry(props: {
                 setTappingTerm(event.target.value);
                 const time = parseInt(event.target.value);
                 if (0 <= time && time <= 0xffff) {
-                  setCandidateTapdance({ ...candidateTapdance, tappingTerm: time });
+                  updateCandidate({ ...candidateTapdance, tappingTerm: time });
                 }
               }}
               sx={{ maxWidth: 150 }}
@@ -193,22 +206,6 @@ function TapDanceEntry(props: {
             />
           </Grid>
         </Grid>
-        <Box sx={{ position: "absolute", right: 0, top: 4, display: "flex", gap: 1 }}>
-          <Button
-            variant="outlined"
-            onClick={() => setCandidateTapdance(props.td)}
-            sx={{ color: "#e2e8f0", borderColor: "#64748b", backgroundColor: "#334155" }}
-          >
-            Revert
-          </Button>
-          <Button
-            variant="outlined"
-            onClick={() => props.onSave?.(candidateTapdance)}
-            sx={{ color: "#f8fafc", borderColor: "#64748b", backgroundColor: "#334155" }}
-          >
-            Save
-          </Button>
-        </Box>
       </Box>
       {selectedKeyIndex !== undefined && (
         <Box sx={{ maxHeight: 360, overflowY: "auto", mt: 2 }}>

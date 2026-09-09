@@ -105,32 +105,32 @@ const MODIFIERS = [
 const OVERRIDE_OPTIONS = [
   {
     label: "Activate when the trigger key is pressed down",
-    labelZh: "按下触发键时激活 (Activate when trigger key is pressed down)",
+    labelZh: "按下触发键时激活",
     bit: 0,
   },
   {
     label: "Activate when a necessary modifier is pressed down",
-    labelZh: "按下所需修饰键时激活 (Activate when necessary modifier is pressed down)",
+    labelZh: "按下所需修饰键时激活",
     bit: 1,
   },
   {
     label: "Activate when a negative modifier is released",
-    labelZh: "释放负向修饰键时激活 (Activate when negative modifier is released)",
+    labelZh: "释放负向修饰键时激活",
     bit: 2,
   },
   {
     label: "Activate on one modifier",
-    labelZh: "仅单个修饰键时激活 (Activate on one modifier)",
+    labelZh: "仅单个修饰键时激活",
     bit: 3,
   },
   {
     label: "Don't deactivate when another key is pressed down",
-    labelZh: "按下其他键时不解除激活 (Don't deactivate when another key is pressed down)",
+    labelZh: "按下其他键时不解除激活",
     bit: 5,
   },
   {
     label: "Don't register the trigger key again after the override is deactivated",
-    labelZh: "解除覆盖后不再重复触发原按键 (Don't register trigger key again after deactivated)",
+    labelZh: "解除覆盖后不再重复触发原按键",
     bit: 4,
   },
 ];
@@ -197,7 +197,7 @@ function OverrideEntry(props: {
           {/* Enable */}
           <Grid item xs={3}>
             <Box className="editor-field-label" alignContent="center" textAlign="right" height="100%">
-              {isZh ? "启用 (Enable)" : "Enable"}
+              {isZh ? "启用" : "Enable"}
             </Box>
           </Grid>
           <Grid item xs={9}>
@@ -266,7 +266,7 @@ function OverrideEntry(props: {
                   fontSize: "0.75rem",
                 }}
               >
-                {isZh ? "全选 (Enable all)" : "Enable all"}
+                {isZh ? "全选" : "Enable all"}
               </Button>
               <Button
                 size="small"
@@ -282,7 +282,7 @@ function OverrideEntry(props: {
                   fontSize: "0.75rem",
                 }}
               >
-                {isZh ? "全不选 (Disable all)" : "Disable all"}
+                {isZh ? "全不选" : "Disable all"}
               </Button>
             </Box>
           </Grid>
@@ -290,7 +290,7 @@ function OverrideEntry(props: {
           {/* Trigger */}
           <Grid item xs={3}>
             <Box className="editor-field-label" alignContent="center" textAlign="right" height="100%">
-              {isZh ? "触发按键 (Trigger)" : "Trigger"}
+              {isZh ? "触发按键" : "Trigger"}
             </Box>
           </Grid>
           <Grid item xs={9}>
@@ -314,7 +314,7 @@ function OverrideEntry(props: {
           {/* Trigger mods */}
           <Grid item xs={3}>
             <Box className="editor-field-label" alignContent="flex-start" textAlign="right" pt={0.5}>
-              {isZh ? "触发修饰键 (Trigger mods)" : "Trigger mods"}
+              {isZh ? "触发修饰键" : "Trigger mods"}
             </Box>
           </Grid>
           <Grid item xs={9}>
@@ -327,7 +327,7 @@ function OverrideEntry(props: {
           {/* Negative mods */}
           <Grid item xs={3}>
             <Box className="editor-field-label" alignContent="flex-start" textAlign="right" pt={0.5}>
-              {isZh ? "排除修饰键 (Negative mods)" : "Negative mods"}
+              {isZh ? "排除修饰键" : "Negative mods"}
             </Box>
           </Grid>
           <Grid item xs={9}>
@@ -340,7 +340,7 @@ function OverrideEntry(props: {
           {/* Suppressed mods */}
           <Grid item xs={3}>
             <Box className="editor-field-label" alignContent="flex-start" textAlign="right" pt={0.5}>
-              {isZh ? "抑制修饰键 (Suppressed mods)" : "Suppressed mods"}
+              {isZh ? "抑制修饰键" : "Suppressed mods"}
             </Box>
           </Grid>
           <Grid item xs={9}>
@@ -353,7 +353,7 @@ function OverrideEntry(props: {
           {/* Replacement */}
           <Grid item xs={3}>
             <Box className="editor-field-label" alignContent="center" textAlign="right" height="100%">
-              {isZh ? "替换按键 (Replacement)" : "Replacement"}
+              {isZh ? "替换按键" : "Replacement"}
             </Box>
           </Grid>
           <Grid item xs={9}>
@@ -377,7 +377,7 @@ function OverrideEntry(props: {
           {/* Options */}
           <Grid item xs={3}>
             <Box className="editor-field-label" alignContent="flex-start" textAlign="right" pt={0.5}>
-              {isZh ? "选项 (Options)" : "Options"}
+              {isZh ? "选项" : "Options"}
             </Box>
           </Grid>
           <Grid item xs={9}>

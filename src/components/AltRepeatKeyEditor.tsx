@@ -172,7 +172,7 @@ function AltRepeatKeyEntry(props: {
           {/* Enable */}
           <Grid item xs={3}>
             <Box className="editor-field-label" alignContent="center" textAlign="right" height="100%">
-              {isZh ? "启用 (Enable)" : "Enable"}
+              {isZh ? "启用" : "Enable"}
             </Box>
           </Grid>
           <Grid item xs={9}>
@@ -192,7 +192,7 @@ function AltRepeatKeyEntry(props: {
           {/* Last key */}
           <Grid item xs={3}>
             <Box className="editor-field-label" alignContent="center" textAlign="right" height="100%">
-              {isZh ? "上一键 (Last key)" : "Last key"}
+              {isZh ? "上一键" : "Last key"}
             </Box>
           </Grid>
           <Grid item xs={9}>
@@ -216,7 +216,7 @@ function AltRepeatKeyEntry(props: {
           {/* Alt key */}
           <Grid item xs={3}>
             <Box className="editor-field-label" alignContent="center" textAlign="right" height="100%">
-              {isZh ? "替代键 (Alt key)" : "Alt key"}
+              {isZh ? "替代键" : "Alt key"}
             </Box>
           </Grid>
           <Grid item xs={9}>
@@ -278,7 +278,7 @@ function AltRepeatKeyEntry(props: {
           {/* Options */}
           <Grid item xs={3}>
             <Box className="editor-field-label" alignContent="flex-start" textAlign="right" pt={0.5}>
-              {isZh ? "选项 (Options)" : "Options"}
+              {isZh ? "选项" : "Options"}
             </Box>
           </Grid>
           <Grid item xs={9}>
@@ -290,10 +290,10 @@ function AltRepeatKeyEntry(props: {
                     <Typography sx={{ fontSize: "0.82rem", color: "#cbd5e1", whiteSpace: "nowrap" }}>
                       {isZh
                         ? opt.bit === 0
-                          ? "默认使用此替代键 (Default to this alt key)"
+                          ? "默认使用此替代键"
                           : opt.bit === 1
-                            ? "双向生效 (Bidirectional)"
-                            : "忽略左右修饰键方向 (Ignore mod handedness)"
+                            ? "双向生效"
+                            : "忽略左右修饰键方向"
                         : opt.label}
                     </Typography>
                   }

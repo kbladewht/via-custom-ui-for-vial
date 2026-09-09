@@ -689,6 +689,7 @@ export function ComboOverrideEditor(props: {
           via={props.via}
           keycodeConverter={keycodeConverter}
           comboIndex={comboIndex}
+          language={props.language}
         />
       )}
     </Box>
@@ -765,6 +766,7 @@ export function TapDanceSelector(props: {
             via={props.via}
             keycodeConverter={keycodeConverter}
             tapdanceIndex={editorIndex}
+            language={props.language}
           />
         </Box>
       )}

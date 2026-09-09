@@ -10,6 +10,7 @@ export function ComboEditor(props: {
   via: ViaKeyboard;
   keycodeConverter: KeycodeConverter;
   comboIndex: number;
+  language?: "zh" | "en";
 }) {
   const [combo, setCombo] = useState<{ [id: string]: ComboValue }>({});
   const boundaryRef = useRef<HTMLDivElement>(null);
@@ -71,6 +72,7 @@ export function ComboEditor(props: {
         }
         keycodeconverter={props.keycodeConverter}
         boundaryRef={boundaryRef}
+        language={props.language}
         onChange={handleChange}
       ></ComboEntry>
     </Box>
@@ -85,6 +87,7 @@ function ComboEntry(props: {
   combo: ComboValue;
   keycodeconverter: KeycodeConverter;
   boundaryRef?: React.RefObject<HTMLDivElement>;
+  language?: "zh" | "en";
   onChange?: (combo: ComboValue) => void;
 }) {
   const [candidateCombo, setCandidateCombo] = useState<ComboValue>(props.combo);
@@ -92,6 +95,12 @@ function ComboEntry(props: {
   const [popupOpen, setPopupOpen] = useState(false);
   const [popupAnchor, setPopupAnchor] = useState<HTMLElement>();
   const [popupKeycode, setPopupKeycode] = useState(DefaultQmkKeycode);
+
+  const isZh = props.language === "zh";
+
+  const keyLabels = isZh
+    ? ["按键 1", "按键 2", "按键 3", "按键 4", "输出按键"]
+    : ["key 1", "key 2", "key 3", "key 4", "output key"];
 
   useEffect(() => {
     setCandidateCombo(props.combo);
@@ -136,7 +145,7 @@ function ComboEntry(props: {
                   height={"100%"}
                   sx={{ color: "#e5eefb", fontWeight: 500 }}
                 >
-                  {["key 1", "key 2", "key 3", "key 4", "output key"][idx]}
+                  {keyLabels[idx]}
                 </Box>
               </Grid>
               <Grid item xs={7}>
