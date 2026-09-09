@@ -372,7 +372,9 @@ export function QuantumSettingsEditor(props: {
           ) : menu.id === "Lighting" ? (
             <LightingEditor via={props.via} lighting={props.keymap?.lighting} language={props.language} />
           ) : menu.id === "MatrixTester" && props.keymap ? (
-            <MatrixTester keymap={props.keymap} via={props.via} language={props.language} />
+            tabValue === idx ? (
+              <MatrixTester keymap={props.keymap} via={props.via} language={props.language} isActive={true} />
+            ) : null
           ) : menu.id === "Custom" ? (
             <Box sx={{ p: 2 }}>
               {props.customMenus?.map((customMenu) => (

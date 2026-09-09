@@ -316,6 +316,7 @@ class VialKeyboard {
       const send = Uint8Array.from(msg);
       try {
         if (!silent) this.onLoading(true);
+        this.receive_flag = false;
         await this.comm.write(Uint8Array.from(send));
         const res = await this.readResponse(500);
         console.log(`received: ${this.formatHex(res)}`);
@@ -403,6 +404,24 @@ class VialKeyboard {
       via_keyboard_value_id.id_layout_options,
     ]);
     return res ? res[5] | (res[4] << 8) | (res[3] << 16) | (res[2] << 24) : 0;
+  }
+
+  async GetSwitchMatrixState(silent: boolean = true): Promise<Uint8Array | undefined> {
+    const res = await this.Command(
+      [
+        via_command_id.id_get_keyboard_value,
+        via_keyboard_value_id.id_switch_matrix_state,
+      ],
+      silent,
+    );
+    if (!res || res.length < 2) return undefined;
+    if (
+      res[0] !== via_command_id.id_get_keyboard_value ||
+      res[1] !== via_keyboard_value_id.id_switch_matrix_state
+    ) {
+      return undefined;
+    }
+    return res.slice(2);
   }
 
   async SetLayoutOption(layout: number) {

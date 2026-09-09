@@ -10,6 +10,7 @@ export function MatrixTester(props: {
   keymap: KeymapProperties;
   via: ViaKeyboard;
   language: "zh" | "en";
+  isActive?: boolean;
 }) {
   const [layoutOption, setLayoutOption] = useState<{ [layout: number]: number }>({ 0: 0 });
   const [activeMatrixKeys, setActiveMatrixKeys] = useState<Set<string>>(new Set());
@@ -20,12 +21,13 @@ export function MatrixTester(props: {
 
   const isZh = props.language === "zh";
 
-  // Load layout options on mount
+  // Load layout options on mount or when active
   useEffect(() => {
+    if (props.isActive === false) return;
     void props.via.GetLayoutOption().then((option) => {
       setLayoutOption({ 0: option & 0xff });
     }).catch(() => {});
-  }, [props.via]);
+  }, [props.via, props.isActive]);
 
   // Dummy keycode converter for geometry generation
   const dummyConverter = useMemo(() => {
@@ -57,14 +59,21 @@ export function MatrixTester(props: {
     return (Math.max(...keys.map((k) => k.y)) + 1.5) * (WIDTH_1U + KEY_GAP);
   }, [keys]);
 
-  // Polling loop for switch matrix state
+  // Polling loop for switch matrix state - only runs when active
   useEffect(() => {
+    if (props.isActive === false) {
+      isPollingRef.current = false;
+      activeKeysRef.current.clear();
+      setActiveMatrixKeys(new Set());
+      return;
+    }
+
     isPollingRef.current = true;
     let timerId: number | undefined;
 
     const rows = props.keymap.matrix.rows;
     const cols = props.keymap.matrix.cols;
-    const bytesPerRow = Math.ceil(cols / 8);
+    const bytesPerRow = cols <= 8 ? 1 : cols <= 16 ? 2 : 4;
 
     const pollMatrix = async () => {
       if (!isPollingRef.current) return;
@@ -76,19 +85,31 @@ export function MatrixTester(props: {
             const currentTested = new Set(testedKeysRef.current);
 
             for (let r = 0; r < rows; r++) {
+              const rowOffset = r * bytesPerRow;
+              if (rowOffset >= matrixData.length) break;
+
+              let rowVal = 0;
+              if (bytesPerRow === 1) {
+                rowVal = matrixData[rowOffset];
+              } else if (bytesPerRow === 2) {
+                rowVal = (matrixData[rowOffset] << 8) | (matrixData[rowOffset + 1] ?? 0);
+              } else if (bytesPerRow === 4) {
+                rowVal =
+                  ((matrixData[rowOffset] << 24) >>> 0) |
+                  ((matrixData[rowOffset + 1] ?? 0) << 16) |
+                  ((matrixData[rowOffset + 2] ?? 0) << 8) |
+                  (matrixData[rowOffset + 3] ?? 0);
+              }
+
               for (let c = 0; c < cols; c++) {
-                const byteIdx = r * bytesPerRow + Math.floor(c / 8);
-                const bit = c % 8;
-                if (byteIdx < matrixData.length) {
-                  const isDown = ((matrixData[byteIdx] >> bit) & 1) === 1;
-                  if (isDown) {
-                    const keyId = `${r},${c}`;
-                    currentActive.add(keyId);
-                    if (!currentTested.has(keyId)) {
-                      currentTested.add(keyId);
-                      // Sound on new key press
-                      playKeycapLandingSound(r * 10 + c);
-                    }
+                const isDown = ((rowVal >> c) & 1) === 1;
+                if (isDown) {
+                  const keyId = `${r},${c}`;
+                  currentActive.add(keyId);
+                  if (!currentTested.has(keyId)) {
+                    currentTested.add(keyId);
+                    // Sound on new key press
+                    playKeycapLandingSound(r * 10 + c);
                   }
                 }
               }
@@ -133,7 +154,7 @@ export function MatrixTester(props: {
         clearTimeout(timerId);
       }
     };
-  }, [props.via, props.keymap.matrix]);
+  }, [props.via, props.keymap.matrix, props.isActive]);
 
   const handleReset = () => {
     activeKeysRef.current.clear();
