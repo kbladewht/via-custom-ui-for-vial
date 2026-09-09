@@ -164,14 +164,14 @@ function OverrideEntry(props: {
       }}
     >
       <Box sx={{ flex: 1, position: "relative" }}>
-        <Grid container spacing={2} sx={{ maxWidth: 640, mx: "auto", mt: 0 }}>
+        <Grid container spacing={2} sx={{ maxWidth: 840, mx: "auto", mt: 0 }}>
           {/* Enable */}
-          <Grid item xs={4}>
+          <Grid item xs={3}>
             <Box className="editor-field-label" alignContent="center" textAlign="right" height="100%">
               Enable
             </Box>
           </Grid>
-          <Grid item xs={8}>
+          <Grid item xs={9}>
             <Checkbox
               size="small"
               checked={(candidateOverride.options & (1 << 7)) !== 0}
@@ -186,18 +186,19 @@ function OverrideEntry(props: {
           </Grid>
 
           {/* Enable on layers */}
-          <Grid item xs={4}>
+          <Grid item xs={3}>
             <Box className="editor-field-label" alignContent="flex-start" textAlign="right" pt={0.5}>
               Enable on layers
             </Box>
           </Grid>
-          <Grid item xs={8}>
+          <Grid item xs={9}>
             <Box
               sx={{
                 display: "grid",
                 gridTemplateColumns: "repeat(8, 1fr)",
                 gap: "2px 4px",
                 alignItems: "center",
+                maxWidth: 480,
               }}
             >
               {[...Array(16)].map((_, idx) => (
@@ -258,12 +259,12 @@ function OverrideEntry(props: {
           </Grid>
 
           {/* Trigger */}
-          <Grid item xs={4}>
+          <Grid item xs={3}>
             <Box className="editor-field-label" alignContent="center" textAlign="right" height="100%">
               Trigger
             </Box>
           </Grid>
-          <Grid item xs={8}>
+          <Grid item xs={9}>
             <EditableKey
               keycode={candidateOverride.trigger}
               isFocused={selectedKeyIndex === 0}
@@ -282,12 +283,12 @@ function OverrideEntry(props: {
           </Grid>
 
           {/* Trigger mods */}
-          <Grid item xs={4}>
+          <Grid item xs={3}>
             <Box className="editor-field-label" alignContent="flex-start" textAlign="right" pt={0.5}>
               Trigger mods
             </Box>
           </Grid>
-          <Grid item xs={8}>
+          <Grid item xs={9}>
             <ModifierCheckbox
               value={candidateOverride.triggerMods}
               onChange={(value) => updateCandidate({ ...candidateOverride, triggerMods: value })}
@@ -295,12 +296,12 @@ function OverrideEntry(props: {
           </Grid>
 
           {/* Negative mods */}
-          <Grid item xs={4}>
+          <Grid item xs={3}>
             <Box className="editor-field-label" alignContent="flex-start" textAlign="right" pt={0.5}>
               Negative mods
             </Box>
           </Grid>
-          <Grid item xs={8}>
+          <Grid item xs={9}>
             <ModifierCheckbox
               value={candidateOverride.negativeModMask}
               onChange={(value) => updateCandidate({ ...candidateOverride, negativeModMask: value })}
@@ -308,12 +309,12 @@ function OverrideEntry(props: {
           </Grid>
 
           {/* Suppressed mods */}
-          <Grid item xs={4}>
+          <Grid item xs={3}>
             <Box className="editor-field-label" alignContent="flex-start" textAlign="right" pt={0.5}>
               Suppressed mods
             </Box>
           </Grid>
-          <Grid item xs={8}>
+          <Grid item xs={9}>
             <ModifierCheckbox
               value={candidateOverride.suppressedMods}
               onChange={(value) => updateCandidate({ ...candidateOverride, suppressedMods: value })}
@@ -321,12 +322,12 @@ function OverrideEntry(props: {
           </Grid>
 
           {/* Replacement */}
-          <Grid item xs={4}>
+          <Grid item xs={3}>
             <Box className="editor-field-label" alignContent="center" textAlign="right" height="100%">
               Replacement
             </Box>
           </Grid>
-          <Grid item xs={8}>
+          <Grid item xs={9}>
             <EditableKey
               keycode={candidateOverride.replacement}
               isFocused={selectedKeyIndex === 1}
@@ -345,17 +346,21 @@ function OverrideEntry(props: {
           </Grid>
 
           {/* Options */}
-          <Grid item xs={4}>
+          <Grid item xs={3}>
             <Box className="editor-field-label" alignContent="flex-start" textAlign="right" pt={0.5}>
               Options
             </Box>
           </Grid>
-          <Grid item xs={8}>
+          <Grid item xs={9}>
             <Box sx={{ display: "flex", flexDirection: "column", gap: 0.25 }}>
               {OVERRIDE_OPTIONS.map((opt) => (
                 <FormControlLabel
                   key={opt.bit}
-                  label={<Typography sx={{ fontSize: "0.82rem", color: "#cbd5e1" }}>{opt.label}</Typography>}
+                  label={
+                    <Typography sx={{ fontSize: "0.82rem", color: "#cbd5e1", whiteSpace: "nowrap" }}>
+                      {opt.label}
+                    </Typography>
+                  }
                   control={
                     <Checkbox
                       size="small"

@@ -168,14 +168,14 @@ function AltRepeatKeyEntry(props: {
       }}
     >
       <Box sx={{ flex: 1, position: "relative" }}>
-        <Grid container spacing={2} sx={{ maxWidth: 540, mx: "auto", mt: 0 }}>
+        <Grid container spacing={2} sx={{ maxWidth: 780, mx: "auto", mt: 0 }}>
           {/* Enable */}
-          <Grid item xs={4}>
+          <Grid item xs={3}>
             <Box className="editor-field-label" alignContent="center" textAlign="right" height="100%">
               {isZh ? "启用 (Enable)" : "Enable"}
             </Box>
           </Grid>
-          <Grid item xs={8}>
+          <Grid item xs={9}>
             <Checkbox
               size="small"
               checked={(candidate.options & (1 << 7)) !== 0}
@@ -190,12 +190,12 @@ function AltRepeatKeyEntry(props: {
           </Grid>
 
           {/* Last key */}
-          <Grid item xs={4}>
+          <Grid item xs={3}>
             <Box className="editor-field-label" alignContent="center" textAlign="right" height="100%">
               {isZh ? "上一键 (Last key)" : "Last key"}
             </Box>
           </Grid>
-          <Grid item xs={8}>
+          <Grid item xs={9}>
             <EditableKey
               keycode={candidate.lastKey}
               isFocused={selectedKeyIndex === 0}
@@ -214,12 +214,12 @@ function AltRepeatKeyEntry(props: {
           </Grid>
 
           {/* Alt key */}
-          <Grid item xs={4}>
+          <Grid item xs={3}>
             <Box className="editor-field-label" alignContent="center" textAlign="right" height="100%">
               {isZh ? "替代键 (Alt key)" : "Alt key"}
             </Box>
           </Grid>
-          <Grid item xs={8}>
+          <Grid item xs={9}>
             <EditableKey
               keycode={candidate.altKey}
               isFocused={selectedKeyIndex === 1}
@@ -238,17 +238,18 @@ function AltRepeatKeyEntry(props: {
           </Grid>
 
           {/* Allowed mods */}
-          <Grid item xs={4}>
+          <Grid item xs={3}>
             <Box className="editor-field-label" alignContent="flex-start" textAlign="right" pt={0.5}>
               {isZh ? "允许修饰键" : "Allowed mods"}
             </Box>
           </Grid>
-          <Grid item xs={8}>
+          <Grid item xs={9}>
             <Box
               sx={{
                 display: "grid",
                 gridTemplateColumns: "repeat(4, 1fr)",
                 gap: "2px 4px",
+                maxWidth: 480,
               }}
             >
               {MODIFIERS.map((mod) => (
@@ -275,18 +276,18 @@ function AltRepeatKeyEntry(props: {
           </Grid>
 
           {/* Options */}
-          <Grid item xs={4}>
+          <Grid item xs={3}>
             <Box className="editor-field-label" alignContent="flex-start" textAlign="right" pt={0.5}>
               {isZh ? "选项 (Options)" : "Options"}
             </Box>
           </Grid>
-          <Grid item xs={8}>
+          <Grid item xs={9}>
             <Box sx={{ display: "flex", flexDirection: "column", gap: 0.25 }}>
               {ALT_REPEAT_OPTIONS.map((opt) => (
                 <FormControlLabel
                   key={opt.bit}
                   label={
-                    <Typography sx={{ fontSize: "0.82rem", color: "#cbd5e1" }}>
+                    <Typography sx={{ fontSize: "0.82rem", color: "#cbd5e1", whiteSpace: "nowrap" }}>
                       {isZh
                         ? opt.bit === 0
                           ? "默认使用此替代键 (Default to this alt key)"
