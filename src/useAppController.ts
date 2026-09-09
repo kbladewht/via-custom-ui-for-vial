@@ -58,8 +58,8 @@ export function useAppController() {
     { name: string; index: number; connection: ConnectionType; opened: boolean }[]
   >([]);
   const [deviceIndex, setDeviceIndex] = useState<number>();
-  const [keymapLanguage, setKeymapLanguage] = useState("zh");
-  const [uiLanguage, setUiLanguage] = useState<"zh" | "en">("zh");
+  const [keymapLanguage, setKeymapLanguage] = useState("US");
+  const [uiLanguage, setUiLanguage] = useState<"zh" | "en">("en");
   const [batteryLevel, setBatteryLevel] = useState<number | null>(null);
   const [currentLayer, setCurrentLayer] = useState<number | null>(null);
   const [shortcutHelpAnchor, setShortcutHelpAnchor] = useState<HTMLElement | null>(null);

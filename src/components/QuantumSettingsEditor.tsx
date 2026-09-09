@@ -225,8 +225,9 @@ export function QuantumSettingsEditor(props: {
                   <Box
                     sx={{
                       display: "grid",
-                      gridTemplateColumns: "repeat(auto-fit, minmax(110px, 1fr))",
-                      gap: 1,
+                      gridTemplateColumns: "repeat(auto-fit, 50px)",
+                      justifyContent: "start",
+                      gap: 0.5,
                       mb: 2,
                     }}
                   >
@@ -237,14 +238,17 @@ export function QuantumSettingsEditor(props: {
                         color={selectedMacroIndex === index ? "primary" : "inherit"}
                         onClick={() => setSelectedMacroIndex(index)}
                         sx={{
+                          width: 50,
+                          minWidth: 50,
                           minHeight: 44,
+                          px: 0,
                           color: selectedMacroIndex === index ? "#f8fafc" : "#cbd5e1",
                           borderColor: "rgba(148, 163, 184, 0.5)",
                           backgroundColor:
                             selectedMacroIndex === index ? "rgba(59, 130, 246, 0.32)" : "transparent",
                         }}
                       >
-                        Macro {index}
+                        M{index}
                       </Button>
                     ))}
                   </Box>
