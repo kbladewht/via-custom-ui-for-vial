@@ -16,6 +16,54 @@ const VIAL_RGB_EFFECTS = [
   "Solid Multisplash", "Pixel Rain", "Pixel Fractal",
 ];
 
+const VIAL_RGB_EFFECTS_ZH: { [key: string]: string } = {
+  "Disable": "关闭",
+  "Direct Control": "直接控制",
+  "Solid Color": "单色常量",
+  "Alphas Mods": "字母与修饰键分色",
+  "Gradient Up Down": "上下渐变",
+  "Gradient Left Right": "左右渐变",
+  "Breathing": "呼吸灯",
+  "Band Sat": "饱和度光带",
+  "Band Val": "亮度光带",
+  "Band Pinwheel Sat": "旋转风车饱和度",
+  "Band Pinwheel Val": "旋转风车亮度",
+  "Band Spiral Sat": "螺旋饱和度",
+  "Band Spiral Val": "螺旋亮度",
+  "Cycle All": "全彩循环",
+  "Cycle Left Right": "左右彩虹流动",
+  "Cycle Up Down": "上下彩虹流动",
+  "Rainbow Moving Chevron": "彩虹人字波",
+  "Cycle Out In": "外向内循环",
+  "Cycle Out In Dual": "双向内外循环",
+  "Cycle Pinwheel": "风车循环",
+  "Cycle Spiral": "螺旋循环",
+  "Dual Beacon": "双向信标",
+  "Rainbow Beacon": "彩虹信标",
+  "Rainbow Pinwheels": "彩虹风车",
+  "Raindrops": "雨滴效果",
+  "Jellybean Raindrops": "糖豆雨滴",
+  "Hue Breathing": "色相呼吸",
+  "Hue Pendulum": "色相摆动",
+  "Hue Wave": "色相波浪",
+  "Typing Heatmap": "打字热力图",
+  "Digital Rain": "黑客帝国数字雨",
+  "Solid Reactive Simple": "单色简易触发",
+  "Solid Reactive": "单色按键触发",
+  "Solid Reactive Wide": "单色宽域触发",
+  "Solid Reactive Multiwide": "单色多重宽域触发",
+  "Solid Reactive Cross": "单色十字波纹",
+  "Solid Reactive Multicross": "单色多重十字波纹",
+  "Solid Reactive Nexus": "单色连结点放射",
+  "Solid Reactive Multinexus": "单色多重连结点放射",
+  "Splash": "彩虹涟漪",
+  "Multisplash": "多重彩虹涟漪",
+  "Solid Splash": "单色涟漪",
+  "Solid Multisplash": "单色多重涟漪",
+  "Pixel Rain": "像素雨",
+  "Pixel Fractal": "像素分形",
+};
+
 const QMK_RGB_EFFECTS = [
   "All Off", "Solid Color", "Breathing 1", "Breathing 2", "Breathing 3", "Breathing 4",
   "Rainbow Mood 1", "Rainbow Mood 2", "Rainbow Mood 3", "Rainbow Swirl 1", "Rainbow Swirl 2",
@@ -24,6 +72,46 @@ const QMK_RGB_EFFECTS = [
   "Christmas", "Gradient 1", "Gradient 2", "Gradient 3", "Gradient 4", "Gradient 5", "Gradient 6",
   "Gradient 7", "Gradient 8", "Gradient 9", "Gradient 10", "RGB Test", "Alternating",
 ];
+
+const QMK_RGB_EFFECTS_ZH: { [key: string]: string } = {
+  "All Off": "全部关闭",
+  "Solid Color": "单色",
+  "Breathing 1": "呼吸 1",
+  "Breathing 2": "呼吸 2",
+  "Breathing 3": "呼吸 3",
+  "Breathing 4": "呼吸 4",
+  "Rainbow Mood 1": "彩虹氛围 1",
+  "Rainbow Mood 2": "彩虹氛围 2",
+  "Rainbow Mood 3": "彩虹氛围 3",
+  "Rainbow Swirl 1": "彩虹漩涡 1",
+  "Rainbow Swirl 2": "彩虹漩涡 2",
+  "Rainbow Swirl 3": "彩虹漩涡 3",
+  "Rainbow Swirl 4": "彩虹漩涡 4",
+  "Rainbow Swirl 5": "彩虹漩涡 5",
+  "Rainbow Swirl 6": "彩虹漩涡 6",
+  "Snake 1": "贪吃蛇 1",
+  "Snake 2": "贪吃蛇 2",
+  "Snake 3": "贪吃蛇 3",
+  "Snake 4": "贪吃蛇 4",
+  "Snake 5": "贪吃蛇 5",
+  "Snake 6": "贪吃蛇 6",
+  "Knight 1": "骑士巡逻 1",
+  "Knight 2": "骑士巡逻 2",
+  "Knight 3": "骑士巡逻 3",
+  "Christmas": "圣诞节",
+  "Gradient 1": "渐变 1",
+  "Gradient 2": "渐变 2",
+  "Gradient 3": "渐变 3",
+  "Gradient 4": "渐变 4",
+  "Gradient 5": "渐变 5",
+  "Gradient 6": "渐变 6",
+  "Gradient 7": "渐变 7",
+  "Gradient 8": "渐变 8",
+  "Gradient 9": "渐变 9",
+  "Gradient 10": "渐变 10",
+  "RGB Test": "RGB 测试",
+  "Alternating": "交替闪烁",
+};
 
 function hexToHsv(value: string) {
   const hex = value.replace("#", "");
@@ -71,7 +159,7 @@ function hsvToHex(hue: number, saturation: number, value: number) {
     .join("")}`;
 }
 
-export function LightingEditor(props: { via: ViaKeyboard; lighting?: string }) {
+export function LightingEditor(props: { via: ViaKeyboard; lighting?: string; language?: "zh" | "en" }) {
   const [effect, setEffect] = useState(0);
   const [color, setColor] = useState("#ff0000");
   const [brightness, setBrightness] = useState(128);
@@ -79,6 +167,16 @@ export function LightingEditor(props: { via: ViaKeyboard; lighting?: string }) {
   const [effects, setEffects] = useState<{ id: number; label: string }[]>([]);
   const [error, setError] = useState<string>();
   const [colorPickerOpen, setColorPickerOpen] = useState(false);
+
+  const isZh = props.language === "zh";
+
+  const getEffectLabel = (_id: number, defaultLabel: string, isVial: boolean) => {
+    if (!isZh) return defaultLabel;
+    if (isVial) {
+      return VIAL_RGB_EFFECTS_ZH[defaultLabel] ?? defaultLabel;
+    }
+    return QMK_RGB_EFFECTS_ZH[defaultLabel] ?? defaultLabel;
+  };
 
   const setRgbValue = async (value: { brightness?: number; effect?: number; speed?: number; hue?: number; saturation?: number }) => {
     try {
@@ -111,7 +209,12 @@ export function LightingEditor(props: { via: ViaKeyboard; lighting?: string }) {
   useEffect(() => {
     if (props.lighting === "qmk_rgblight" || props.lighting === "qmk_backlight_rgblight") {
       void props.via.GetQmkRgblight().then((value) => {
-        setEffects(QMK_RGB_EFFECTS.map((label, id) => ({ id, label })));
+        setEffects(
+          QMK_RGB_EFFECTS.map((label, id) => ({
+            id,
+            label: getEffectLabel(id, label, false),
+          }))
+        );
         setEffect(value.effect);
         setBrightness(value.brightness);
         setSpeed(value.speed);
@@ -119,17 +222,22 @@ export function LightingEditor(props: { via: ViaKeyboard; lighting?: string }) {
       }).catch((caught) => setError(caught instanceof Error ? caught.message : String(caught)));
     } else if (props.lighting === "vialrgb") {
       void props.via.GetVialRgb().then((value) => {
-        setEffects(value.supportedEffects.map((id) => ({
-          id,
-          label: VIAL_RGB_EFFECTS[id] ?? `Effect ${id}`,
-        })));
+        setEffects(
+          value.supportedEffects.map((id) => {
+            const rawLabel = VIAL_RGB_EFFECTS[id] ?? `Effect ${id}`;
+            return {
+              id,
+              label: getEffectLabel(id, rawLabel, true),
+            };
+          })
+        );
         setEffect(value.mode);
         setBrightness(value.brightness);
         setSpeed(value.speed);
         setColor(hsvToHex(value.hue, value.saturation, value.brightness));
       }).catch((caught) => setError(caught instanceof Error ? caught.message : String(caught)));
     }
-  }, [props.lighting, props.via]);
+  }, [props.lighting, props.via, props.language]);
 
   return (
     <Box sx={{ width: "100%", maxWidth: 560, p: 2 }}>
