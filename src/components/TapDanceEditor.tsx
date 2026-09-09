@@ -3,6 +3,8 @@ import { Fragment, useEffect, useRef, useState } from "react";
 import { ViaKeyboard } from "../services/vialKeyboad";
 import { DefaultQmkKeycode, KeycodeConverter, QmkKeycode } from "./keycodes/keycodeConverter";
 import { EditableKey, KeymapKeyPopUp } from "./KeymapEditor";
+import { KeycodeCatalog } from "./KeycodeCatalog";
+import { FocusedKeyContext, KeymapKeyProperties } from "./keymapTypes";
 
 export function TapDanceEditor(props: {
   via: ViaKeyboard;
@@ -49,6 +51,7 @@ export function TapDanceEditor(props: {
           }
         }
         keycodeconverter={props.keycodeConverter}
+        boundaryRef={boundaryRef}
         onSave={(td: TapDanceValue) => {
           console.log(`Set TD${props.tapdanceIndex}`);
           console.log(td);
@@ -74,11 +77,11 @@ function TapDanceEntry(props: {
   onSave?: (td: TapDanceValue) => void;
 }) {
   const [tappingTerm, setTappingTerm] = useState(props.td.tappingTerm.toString());
-  const [popupOpen, setpopupOpen] = useState(false);
-  const [anchorEl, setAnchorEl] = useState<HTMLElement | undefined>(undefined);
-  const [candidateKeycode, setCandidateKeycode] = useState(DefaultQmkKeycode);
   const [candidateTapdance, setCandidateTapdance] = useState<TapDanceValue>(props.td);
-  const [keyIndex, setKeyIndex] = useState(0);
+  const [selectedKeyIndex, setSelectedKeyIndex] = useState<number>();
+  const [popupOpen, setPopupOpen] = useState(false);
+  const [popupAnchor, setPopupAnchor] = useState<HTMLElement>();
+  const [popupKeycode, setPopupKeycode] = useState(DefaultQmkKeycode);
 
   const handleChange = [
     (value: QmkKeycode) => setCandidateTapdance({ ...candidateTapdance, onTap: value }),
@@ -92,7 +95,30 @@ function TapDanceEntry(props: {
     setTappingTerm(props.td.tappingTerm.toString());
   }, [props.td]);
 
+  const focusedKey: KeymapKeyProperties | null =
+    selectedKeyIndex === undefined
+      ? null
+      : {
+          matrix: [], x: 0, y: 0, offsetx: 0, offsety: 0, r: 0, rx: 0, ry: 0, w: 1, h: 1,
+          layout: [], keycode: [
+            candidateTapdance.onTap,
+            candidateTapdance.onHold,
+            candidateTapdance.onDoubleTap,
+            candidateTapdance.onTapHold,
+          ][selectedKeyIndex],
+          reactKey: selectedKeyIndex.toString(),
+        };
+
   return (
+    <FocusedKeyContext.Provider
+      value={{
+        focusedKey,
+        setFocusedKey: () => {},
+        onKeycodeChange: (_target, keycode) => {
+          if (selectedKeyIndex !== undefined) handleChange[selectedKeyIndex](keycode);
+        },
+      }}
+    >
     <Box sx={{ flex: 1, position: "relative" }}>
       <Grid container spacing={1} sx={{ maxWidth: 480, mx: "auto", mt: 0 }}>
         {[
@@ -123,11 +149,14 @@ function TapDanceEntry(props: {
               <Grid item xs={7}>
                 <EditableKey
                   keycode={k.key}
-                  onClick={(target) => {
-                    setpopupOpen(true);
-                    setAnchorEl(target);
-                    setCandidateKeycode(k.key);
-                    setKeyIndex(idx);
+                  isFocused={selectedKeyIndex === idx}
+                  onClick={(target, ctrlKey) => {
+                    setSelectedKeyIndex(idx);
+                    if (ctrlKey) {
+                      setPopupKeycode(k.key);
+                      setPopupAnchor(target);
+                      setPopupOpen(true);
+                    }
                   }}
                   onKeycodeChange={handleChange[idx]}
                 ></EditableKey>
@@ -175,23 +204,38 @@ function TapDanceEntry(props: {
             Save
           </Button>
       </Box>
+      {selectedKeyIndex !== undefined && (
+        <Box sx={{ maxHeight: 360, overflowY: "auto", mt: 2 }}>
+          <KeycodeCatalog
+            keycodeConverter={props.keycodeconverter}
+            tab={[
+              { label: "Basic", keygroup: ["basic"] },
+              { label: "Mouse", keygroup: ["mouse"] },
+              { label: "Media", keygroup: ["media"] },
+              { label: "Quantum", keygroup: ["quantum", "magic"] },
+              { label: "Layer", keygroup: ["layer"] },
+              { label: "Macro", keygroup: ["macro"] },
+              { label: "Tap Dance", keygroup: ["tapdance"] },
+            ]}
+          />
+        </Box>
+      )}
       <KeymapKeyPopUp
         open={popupOpen}
-        keycode={candidateKeycode}
+        keycode={popupKeycode}
         keycodeconverter={props.keycodeconverter}
-        anchor={anchorEl}
+        anchor={popupAnchor}
         boundary={props.boundaryRef?.current ?? null}
         onClickAway={() => {
-          if (popupOpen) {
-            setpopupOpen(false);
-            setAnchorEl(undefined);
-            handleChange[keyIndex](candidateKeycode);
-          }
+          setPopupOpen(false);
+          setPopupAnchor(undefined);
         }}
         onChange={(event) => {
-          setCandidateKeycode(event.keycode);
+          setPopupKeycode(event.keycode);
+          if (selectedKeyIndex !== undefined) handleChange[selectedKeyIndex](event.keycode);
         }}
-      ></KeymapKeyPopUp>
+      />
     </Box>
+    </FocusedKeyContext.Provider>
   );
 }

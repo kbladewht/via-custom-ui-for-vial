@@ -59,6 +59,7 @@ export function KeymapKeyPopUp(props: {
       mouseEvent="onMouseUp"
       touchEvent="onTouchEnd"
       onClickAway={(e) => {
+        if (props.anchor?.contains(e.target as Node)) return;
         if (!(e.target as HTMLElement).className.includes("keycode-catalog-tab")) {
           props.onClickAway?.();
         }
@@ -68,6 +69,8 @@ export function KeymapKeyPopUp(props: {
         open={props.open}
         anchorEl={props.anchor}
         placement="auto-start"
+        disablePortal={false}
+        sx={{ zIndex: (theme) => theme.zIndex.modal + 1 }}
         modifiers={[
           {
             name: "preventOverflow",

@@ -64,13 +64,14 @@ function KeyLegend(props: { keycode: QmkKeycode }) {
 
 export function EditableKey(props: {
   keycode: QmkKeycode;
+  isFocused?: boolean;
   onKeycodeChange?: (newKeycode: QmkKeycode) => void;
   onClick?: (target: HTMLElement, ctrlKey: boolean) => void;
 }) {
   const [isDragOver, setIsDragOver] = useState(false);
   return (
     <div
-      className={`keymap-key ${isDragOver && "drag-over"}`}
+      className={`keymap-key ${isDragOver && "drag-over"} ${props.isFocused && "keymap-key-focused"}`}
       style={{
         width: WIDTH_1U,
         height: WIDTH_1U,
