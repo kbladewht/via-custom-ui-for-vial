@@ -20,9 +20,9 @@
       "Macro": "宏",
       "Lighting": "灯效",
       "TapDance": "Tap Dance",
-      "Combos": "Combos",
-      "KeyOverride": "Key Overrides",
-      "AltRepeatKey": "Alt Repeat Key",
+      "Combos": "组合键",
+      "KeyOverride": "按键覆盖",
+      "AltRepeatKey": "替代重复键",
       "Magic": "Magic",
       "Grave Escape": "Grave Escape",
       "Tap-Hold": "Tap-Hold",
@@ -30,7 +30,7 @@
       "Combo": "组合键",
       "One Shot Keys": "单次按键",
       "Mouse Keys": "鼠标按键",
-      "Quantum": "QMK Settings"
+      "Quantum": "QMK 设置"
     }
   },
   "en": {

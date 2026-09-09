@@ -242,20 +242,22 @@ export function LightingEditor(props: { via: ViaKeyboard; lighting?: string; lan
   return (
     <Box sx={{ width: "100%", maxWidth: 560, p: 2 }}>
       {props.lighting === undefined && (
-        <Box sx={{ color: "#fbbf24", mb: 1 }}>Keyboard lighting is not declared in its Vial definition.</Box>
+        <Box sx={{ color: "#fbbf24", mb: 1 }}>
+          {isZh ? "键盘定义中未声明 RGB 灯效支持。" : "Keyboard lighting is not declared in its Vial definition."}
+        </Box>
       )}
       {error && <Box sx={{ color: "#f87171", mb: 1 }}>{error}</Box>}
       <Box sx={{ display: "grid", gridTemplateColumns: "110px minmax(180px, 1fr)", alignItems: "center", rowGap: 1.25 }}>
         <Box component="label" htmlFor="lighting-effect" sx={{ color: "#e5eefb", fontSize: "0.9rem" }}>
-          RGB Effect
+          {isZh ? "RGB 特效" : "RGB Effect"}
         </Box>
         <FormControl size="small" fullWidth>
-          <InputLabel id="lighting-effect-label">RGB Effect</InputLabel>
+          <InputLabel id="lighting-effect-label">{isZh ? "RGB 特效" : "RGB Effect"}</InputLabel>
           <Select
             labelId="lighting-effect-label"
             id="lighting-effect"
             value={effects.length > 0 && effects.some((item) => item.id === effect) ? effect : (effects[0]?.id ?? "")}
-            label="RGB Effect"
+            label={isZh ? "RGB 特效" : "RGB Effect"}
             onChange={(event) => {
               const value = Number(event.target.value);
               setEffect(value);
@@ -271,11 +273,11 @@ export function LightingEditor(props: { via: ViaKeyboard; lighting?: string; lan
         </FormControl>
 
         <Box component="label" htmlFor="lighting-color" sx={{ color: "#e5eefb", fontSize: "0.9rem" }}>
-          RGB Color
+          {isZh ? "RGB 颜色" : "RGB Color"}
         </Box>
         <>
           <ButtonBase
-            aria-label="Choose RGB color"
+            aria-label={isZh ? "选择 RGB 颜色" : "Choose RGB color"}
             onClick={() => setColorPickerOpen(true)}
             sx={{
               width: "100%",
@@ -300,7 +302,7 @@ export function LightingEditor(props: { via: ViaKeyboard; lighting?: string; lan
         </>
 
         <Box component="label" htmlFor="lighting-brightness" sx={{ color: "#e5eefb", fontSize: "0.9rem" }}>
-          RGB Brightness
+          {isZh ? "RGB 亮度" : "RGB Brightness"}
         </Box>
         <Slider
           id="lighting-brightness"
@@ -317,7 +319,7 @@ export function LightingEditor(props: { via: ViaKeyboard; lighting?: string; lan
         />
 
         <Box component="label" htmlFor="lighting-speed" sx={{ color: "#e5eefb", fontSize: "0.9rem" }}>
-          RGB Speed
+          {isZh ? "RGB 速度" : "RGB Speed"}
         </Box>
         <Slider
           id="lighting-speed"
