@@ -18,11 +18,13 @@ export function TapDanceEditor(props: {
     navigator.locks.request("load-tapdance", async () => {
       if (props.tapdanceIndex < 0) return;
       const td = (await props.via.GetTapDance([props.tapdanceIndex]))[0];
-      const newTapDance = { ...tapDance };
-      newTapDance[`${props.tapdanceIndex}`] = props.keycodeConverter.convertTapDance(td);
-      setTapDance(newTapDance);
+      const converted = props.keycodeConverter.convertTapDance(td);
+      setTapDance((prev) => ({
+        ...prev,
+        [`${props.tapdanceIndex}`]: converted,
+      }));
     });
-  }, [props.tapdanceIndex, props.keycodeConverter]);
+  }, [props.tapdanceIndex, props.keycodeConverter, props.via]);
 
   const sendTapdance = (id: number, value: TapDanceValue) => {
     props.via.SetTapDance([

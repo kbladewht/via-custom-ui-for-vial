@@ -700,7 +700,7 @@ export function TapDanceSelector(props: {
   dynamicEntryCount: { combo: number; override: number; layer: number; tapdance: number };
 }) {
   const [keycodeConverter, setKeycodeConverter] = useState<KeycodeConverter>();
-  const [editorIndex, setEditorIndex] = useState<number>();
+  const [editorIndex, setEditorIndex] = useState<number>(0);
 
   useEffect(() => {
     KeycodeConverter.Create(
@@ -719,7 +719,7 @@ export function TapDanceSelector(props: {
   return (
     <Box sx={{ width: "100%", p: 1 }}>
       <Tabs
-        value={editorIndex === undefined ? false : editorIndex}
+        value={editorIndex}
         onChange={(_event, index: number) => setEditorIndex(index)}
         variant="scrollable"
         scrollButtons="auto"
@@ -757,7 +757,7 @@ export function TapDanceSelector(props: {
           />
         ))}
       </Tabs>
-      {editorIndex !== undefined && (
+      {props.dynamicEntryCount.tapdance > 0 && (
         <Box sx={{ width: "100%", flex: 1, mt: 2, display: "flex" }}>
           <TapDanceEditor
             via={props.via}
