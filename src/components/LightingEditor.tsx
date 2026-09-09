@@ -146,7 +146,7 @@ export function LightingEditor(props: { via: ViaKeyboard; lighting?: string }) {
           <Select
             labelId="lighting-effect-label"
             id="lighting-effect"
-            value={effect}
+            value={effects.length > 0 && effects.some((item) => item.id === effect) ? effect : (effects[0]?.id ?? "")}
             label="RGB Effect"
             onChange={(event) => {
               const value = Number(event.target.value);

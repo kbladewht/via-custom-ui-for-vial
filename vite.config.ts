@@ -6,8 +6,12 @@ import { defineConfig } from 'vite';
 export default defineConfig({
   plugins: [react()],
   base: process.env.TAURI_ENV_PLATFORM === undefined ? "/via-custom-ui-for-vial/" : "./",
+  define: {
+    "os.EOL": JSON.stringify("\n"),
+  },
   resolve: {
     alias: {
+      os: path.resolve(__dirname, "node_modules/hjson/lib/hjson-common.js"),
       webRawHID:
         process.env.TAURI_ENV_PLATFORM === undefined
           ? path.resolve(__dirname, "src/services/platform/web/webRawHID.ts")

@@ -216,7 +216,7 @@ export function useAppController() {
       if (event instanceof PointerEvent && event.target instanceof Element && event.target.closest("[data-keymap-load]")) {
         discardPendingKeycapAudio();
       }
-      prepareKeycapAudio();
+      prepareKeycapAudio(true);
     };
     window.addEventListener("pagehide", closeBluetoothOnPageHide);
     window.addEventListener("pointerdown", unlockKeycapAudio, { once: true, capture: true });

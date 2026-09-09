@@ -12,8 +12,12 @@ function flushPendingKeycapNotes() {
   });
 }
 
-export function prepareKeycapAudio() {
+export function prepareKeycapAudio(isUserGesture = false) {
   try {
+    if (!keycapAudioContext && !isUserGesture) {
+      // Avoid initializing AudioContext automatically before the first user gesture
+      return;
+    }
     keycapAudioContext ??= new AudioContext();
     if (keycapAudioContext.state === "suspended") {
       void keycapAudioContext.resume().then(flushPendingKeycapNotes);
