@@ -234,7 +234,7 @@
       "KC_LPAD"
     ],
     "language": {
-      "chinese": {
+      "zh": {
         "label": "打开启动台"
       }
     }
@@ -247,7 +247,7 @@
       "KC_MS_U"
     ],
     "language": {
-      "chinese": {
+      "zh": {
         "label": "鼠标上移"
       }
     }
@@ -260,7 +260,7 @@
       "KC_MS_D"
     ],
     "language": {
-      "chinese": {
+      "zh": {
         "label": "鼠标下移"
       }
     }
@@ -273,7 +273,7 @@
       "KC_MS_L"
     ],
     "language": {
-      "chinese": {
+      "zh": {
         "label": "鼠标左移"
       }
     }
@@ -286,7 +286,7 @@
       "KC_MS_R"
     ],
     "language": {
-      "chinese": {
+      "zh": {
         "label": "鼠标右移"
       }
     }
@@ -299,7 +299,7 @@
       "KC_BTN1"
     ],
     "language": {
-      "chinese": {
+      "zh": {
         "label": "鼠标按键1"
       }
     }
@@ -312,7 +312,7 @@
       "KC_BTN2"
     ],
     "language": {
-      "chinese": {
+      "zh": {
         "label": "鼠标按键2"
       }
     }
@@ -325,7 +325,7 @@
       "KC_BTN3"
     ],
     "language": {
-      "chinese": {
+      "zh": {
         "label": "鼠标按键3"
       }
     }
@@ -338,7 +338,7 @@
       "KC_BTN4"
     ],
     "language": {
-      "chinese": {
+      "zh": {
         "label": "鼠标按键4"
       }
     }
@@ -351,7 +351,7 @@
       "KC_BTN5"
     ],
     "language": {
-      "chinese": {
+      "zh": {
         "label": "鼠标按键5"
       }
     }
@@ -364,7 +364,7 @@
       "KC_BTN6"
     ],
     "language": {
-      "chinese": {
+      "zh": {
         "label": "鼠标按键6"
       }
     }
@@ -377,7 +377,7 @@
       "KC_BTN7"
     ],
     "language": {
-      "chinese": {
+      "zh": {
         "label": "鼠标按键7"
       }
     }
@@ -390,7 +390,7 @@
       "KC_BTN8"
     ],
     "language": {
-      "chinese": {
+      "zh": {
         "label": "鼠标按键8"
       }
     }
@@ -403,7 +403,7 @@
       "KC_WH_U"
     ],
     "language": {
-      "chinese": {
+      "zh": {
         "label": "滚轮上移"
       }
     }
@@ -416,7 +416,7 @@
       "KC_WH_D"
     ],
     "language": {
-      "chinese": {
+      "zh": {
         "label": "滚轮下移"
       }
     }
@@ -429,7 +429,7 @@
       "KC_WH_L"
     ],
     "language": {
-      "chinese": {
+      "zh": {
         "label": "滚轮左移"
       }
     }
@@ -442,7 +442,7 @@
       "KC_WH_R"
     ],
     "language": {
-      "chinese": {
+      "zh": {
         "label": "滚轮右移"
       }
     }
@@ -455,7 +455,7 @@
       "KC_ACL0"
     ],
     "language": {
-      "chinese": {
+      "zh": {
         "label": "鼠标速度0"
       }
     }
@@ -468,7 +468,7 @@
       "KC_ACL1"
     ],
     "language": {
-      "chinese": {
+      "zh": {
         "label": "鼠标速度1"
       }
     }
@@ -481,7 +481,7 @@
       "KC_ACL2"
     ],
     "language": {
-      "chinese": {
+      "zh": {
         "label": "鼠标速度2"
       }
     }
