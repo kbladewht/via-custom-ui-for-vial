@@ -3,13 +3,13 @@ import { Fragment, useEffect, useRef, useState } from "react";
 import { ViaKeyboard } from "../services/vialKeyboad";
 import { DefaultQmkKeycode, KeycodeConverter, QmkKeycode } from "./keycodes/keycodeConverter";
 import { EditableKey, KeymapKeyPopUp } from "./KeymapEditor";
+import { KeycodeCatalog } from "./KeycodeCatalog";
+import { FocusedKeyContext, KeymapKeyProperties } from "./keymapTypes";
 
 export function ComboEditor(props: {
   via: ViaKeyboard;
   keycodeConverter: KeycodeConverter;
   comboIndex: number;
-  comboCount: number;
-  onBack: () => void;
 }) {
   const [combo, setCombo] = useState<{ [id: string]: ComboValue }>({});
   const boundaryRef = useRef<HTMLDivElement>(null);
@@ -48,8 +48,7 @@ export function ComboEditor(props: {
   };
 
   return (
-    <Box ref ={boundaryRef}>
-      <div>{`Edit combo ${props.comboIndex}`}</div>
+    <Box ref={boundaryRef} sx={{ width: "100%", flex: 1, display: "flex", flexDirection: "column" }}>
       <ComboEntry
         combo={
           combo[props.comboIndex] ?? {
@@ -71,7 +70,6 @@ export function ComboEditor(props: {
           sendCombo(props.comboIndex, newCombo);
           console.log(`update combo ${props.comboIndex}`);
         }}
-        onBack={props.onBack}
       ></ComboEntry>
     </Box>
   );
@@ -86,22 +84,41 @@ function ComboEntry(props: {
   keycodeconverter: KeycodeConverter;
   boundaryRef?: React.RefObject<HTMLDivElement>;
   onSave?: (combo: ComboValue) => void;
-  onBack?: () => void;
 }) {
-  const [popupOpen, setpopupOpen] = useState(false);
-  const [anchorEl, setAnchorEl] = useState<HTMLElement | undefined>(undefined);
-  const [candidateKeycode, setCandidateKeycode] = useState(DefaultQmkKeycode);
   const [candidateCombo, setCandidateCombo] = useState<ComboValue>(props.combo);
-  const [keyIndex, setKeyIndex] = useState(0);
+  const [selectedKeyIndex, setSelectedKeyIndex] = useState<number>();
+  const [popupOpen, setPopupOpen] = useState(false);
+  const [popupAnchor, setPopupAnchor] = useState<HTMLElement>();
+  const [popupKeycode, setPopupKeycode] = useState(DefaultQmkKeycode);
 
   useEffect(() => {
     setCandidateCombo(props.combo);
   }, [props.combo]);
 
+  const focusedKey: KeymapKeyProperties | null =
+    selectedKeyIndex === undefined
+      ? null
+      : {
+          matrix: [], x: 0, y: 0, offsetx: 0, offsety: 0, r: 0, rx: 0, ry: 0, w: 1, h: 1,
+          layout: [], keycode: candidateCombo.keys[selectedKeyIndex], reactKey: selectedKeyIndex.toString(),
+        };
+
   return (
-    <>
-      <Box mt={2}></Box>
-      <Grid container spacing={1}>
+    <FocusedKeyContext.Provider
+      value={{
+        focusedKey,
+        setFocusedKey: () => {},
+        onKeycodeChange: (_target, keycode) => {
+          if (selectedKeyIndex !== undefined) {
+            setCandidateCombo({
+              keys: candidateCombo.keys.map((key, index) => (index === selectedKeyIndex ? keycode : key)),
+            } as ComboValue);
+          }
+        },
+      }}
+    >
+      <Box sx={{ flex: 1, position: "relative" }}>
+      <Grid container spacing={1} sx={{ maxWidth: 480, mx: "auto", mt: 0 }}>
         {candidateCombo.keys.map((k, idx) => {
           return (
             <Fragment key={idx}>
@@ -118,11 +135,14 @@ function ComboEntry(props: {
               <Grid item xs={7}>
                 <EditableKey
                   keycode={k}
-                  onClick={(target) => {
-                    setpopupOpen(true);
-                    setAnchorEl(target);
-                    setCandidateKeycode(k);
-                    setKeyIndex(idx);
+                  isFocused={selectedKeyIndex === idx}
+                  onClick={(target, ctrlKey) => {
+                    setSelectedKeyIndex(idx);
+                    if (ctrlKey) {
+                      setPopupKeycode(k);
+                      setPopupAnchor(target);
+                      setPopupOpen(true);
+                    }
                   }}
                   onKeycodeChange={(keycode) => {
                     setCandidateCombo({
@@ -134,46 +154,59 @@ function ComboEntry(props: {
             </Fragment>
           );
         })}
-        <Grid item xs={1}>
-          <Button
-            onClick={() => {
-              props.onBack?.();
-            }}
-          >
-            BACK
-          </Button>
-        </Grid>
-        <Grid item xs={4}>
-          <Box sx={{ display: "flex", justifyContent: "right" }}>
-            <Button onClick={() => setCandidateCombo(props.combo)}>Clear</Button>
-          </Box>
-        </Grid>
-        <Grid item xs={7}>
-          <Button variant="outlined" onClick={() => props.onSave?.(candidateCombo)}>
-            Save
-          </Button>
-        </Grid>
       </Grid>
-
+      <Box sx={{ position: "absolute", right: 0, top: 232, display: "flex", gap: 1 }}>
+        <Button
+          variant="outlined"
+          onClick={() => setCandidateCombo(props.combo)}
+          sx={{ color: "#e2e8f0", borderColor: "#64748b", backgroundColor: "#334155" }}
+        >
+          Revert
+        </Button>
+        <Button
+          variant="outlined"
+          onClick={() => props.onSave?.(candidateCombo)}
+          sx={{ color: "#f8fafc", borderColor: "#64748b", backgroundColor: "#334155" }}
+        >
+          Save
+        </Button>
+      </Box>
+      {selectedKeyIndex !== undefined && (
+        <Box sx={{ maxHeight: 360, overflowY: "auto", mt: 2 }}>
+          <KeycodeCatalog
+            keycodeConverter={props.keycodeconverter}
+            tab={[
+              { label: "Basic", keygroup: ["basic"] },
+              { label: "Mouse", keygroup: ["mouse"] },
+              { label: "Media", keygroup: ["media"] },
+              { label: "Quantum", keygroup: ["quantum", "magic"] },
+              { label: "Layer", keygroup: ["layer"] },
+              { label: "Macro", keygroup: ["macro"] },
+              { label: "Tap Dance", keygroup: ["tapdance"] },
+            ]}
+          />
+        </Box>
+      )}
       <KeymapKeyPopUp
         open={popupOpen}
-        keycode={candidateKeycode}
+        keycode={popupKeycode}
         keycodeconverter={props.keycodeconverter}
-        anchor={anchorEl}
+        anchor={popupAnchor}
         boundary={props.boundaryRef?.current ?? null}
         onClickAway={() => {
-          if (popupOpen) {
-            setpopupOpen(false);
-            setAnchorEl(undefined);
+          setPopupOpen(false);
+          setPopupAnchor(undefined);
+        }}
+        onChange={(event) => {
+          setPopupKeycode(event.keycode);
+          if (selectedKeyIndex !== undefined) {
             setCandidateCombo({
-              keys: candidateCombo.keys.map((k, id) => (id == keyIndex ? candidateKeycode : k)),
+              keys: candidateCombo.keys.map((key, index) => (index === selectedKeyIndex ? event.keycode : key)),
             } as ComboValue);
           }
         }}
-        onChange={(event) => {
-          setCandidateKeycode(event.keycode);
-        }}
-      ></KeymapKeyPopUp>
-    </>
+      />
+      </Box>
+    </FocusedKeyContext.Provider>
   );
 }
