@@ -4,9 +4,10 @@
     "keycodeTabs": {
       "Basic": "基础按键",
       "Mouse": "鼠标",
-      "User/Wireless": "用户",
+      "UserWireless": "用户",
       "Media": "媒体",
       "Quantum": "Quantum",
+      "RGB": "RGB",
       "Layer": "层",
       "Macro": "宏",
       "TapDance": "TapDance",
@@ -29,9 +30,10 @@
     "keycodeTabs": {
       "Basic": "Basic",
       "Mouse": "Mouse",
-      "User/Wireless": "User",
+      "UserWireless": "User",
       "Media": "Media",
       "Quantum": "Quantum",
+      "RGB": "RGB",
       "Layer": "Layer",
       "Macro": "Macro",
       "TapDance": "TapDance",
