@@ -36,8 +36,8 @@ export function TapDanceEditor(props: {
   };
 
   return (
-    <Box ref={boundaryRef}>
-      <Box>{`Edit TD${props.tapdanceIndex}`}</Box>
+    <Box ref={boundaryRef} sx={{ width: "100%", flex: 1, display: "flex", flexDirection: "column" }}>
+      {/* <Box>{`Edit TD${props.tapdanceIndex}`}</Box> */}
       <TapDanceEntry
         td={
           tapDance[props.tapdanceIndex] ?? {
@@ -93,9 +93,8 @@ function TapDanceEntry(props: {
   }, [props.td]);
 
   return (
-    <>
-      <Box mt={2}></Box>
-      <Grid container spacing={1}>
+    <Box sx={{ flex: 1, position: "relative" }}>
+      <Grid container spacing={1} sx={{ maxWidth: 480, mx: "auto", mt: 0 }}>
         {[
           {
             label: "On tap",
@@ -159,18 +158,15 @@ function TapDanceEntry(props: {
             }}
           ></TextField>
         </Grid>
-        <Grid item xs={5}>
-          <Box sx={{ display: "flex", justifyContent: "right" }}>
-            <Button
-              variant="outlined"
-              onClick={() => setCandidateTapdance(props.td)}
-              sx={{ color: "#e2e8f0", borderColor: "#64748b", backgroundColor: "#334155" }}
-            >
-              Revert
-            </Button>
-          </Box>
-        </Grid>
-        <Grid item xs={7}>
+      </Grid>
+      <Box sx={{ position: "absolute", right: 0, bottom: 0, display: "flex", gap: 1 }}>
+        <Button
+          variant="outlined"
+          onClick={() => setCandidateTapdance(props.td)}
+          sx={{ color: "#e2e8f0", borderColor: "#64748b", backgroundColor: "#334155" }}
+        >
+          Revert
+        </Button>
           <Button
             variant="outlined"
             onClick={() => props.onSave?.(candidateTapdance)}
@@ -178,8 +174,7 @@ function TapDanceEntry(props: {
           >
             Save
           </Button>
-        </Grid>
-      </Grid>
+      </Box>
       <KeymapKeyPopUp
         open={popupOpen}
         keycode={candidateKeycode}
@@ -197,6 +192,6 @@ function TapDanceEntry(props: {
           setCandidateKeycode(event.keycode);
         }}
       ></KeymapKeyPopUp>
-    </>
+    </Box>
   );
 }

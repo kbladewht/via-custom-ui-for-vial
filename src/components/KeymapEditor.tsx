@@ -678,7 +678,7 @@ export function ComboOverrideEditor(props: {
   if (!keycodeConverter) return null;
 
   return (
-    <Box sx={{ width: "100%", p: 1 }}>
+    <Box sx={{ width: "100%", minHeight: "calc(100vh - 180px)", p: 1, display: "flex", flexDirection: "column" }}>
       {editor === "combo" ? (
         <ComboEditor
           via={props.via}
@@ -747,6 +747,7 @@ export function TapDanceSelector(props: {
         variant="scrollable"
         scrollButtons="auto"
         aria-label="Tap Dance entries"
+        className="tapdance-tabs"
         sx={{
           py: 0,
           "& .MuiTabs-flexContainer": {
@@ -760,9 +761,10 @@ export function TapDanceSelector(props: {
             label={index}
             value={index}
             sx={{
-              minWidth: 36,
-              minHeight: 32,
-              px: 0.75,
+              width: 28,
+              minWidth: 28,
+              minHeight: 28,
+              px: 0,
               color: "#b8c7dc",
               fontWeight: 600,
               textTransform: "none",
@@ -779,7 +781,7 @@ export function TapDanceSelector(props: {
         ))}
       </Tabs>
       {editorIndex !== undefined && (
-        <Box sx={{ maxWidth: 480, mx: "auto", mt: 2 }}>
+        <Box sx={{ width: "100%", flex: 1, mt: 2, display: "flex" }}>
           <TapDanceEditor
             via={props.via}
             keycodeConverter={keycodeConverter}

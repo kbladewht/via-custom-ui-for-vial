@@ -310,6 +310,21 @@ textarea {
   display: none;
 }
 
+.tapdance-tabs .MuiTabs-scroller {
+  margin-left: 0 !important;
+}
+
+.tapdance-tabs .MuiTabs-flexContainer {
+  justify-content: flex-start !important;
+}
+
+.tapdance-tabs .MuiTab-root {
+  width: 28px !important;
+  min-width: 28px !important;
+  min-height: 28px !important;
+  padding: 0 !important;
+}
+
 .MuiLink-root {
   color: #93c5fd !important;
   text-decoration: none !important;
