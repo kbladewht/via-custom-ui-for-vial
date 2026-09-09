@@ -842,6 +842,7 @@ export function KeyOverrideSelector(props: {
             via={props.via}
             keycodeConverter={keycodeConverter}
             overrideIndex={editorIndex}
+            language={props.language}
           />
         </Box>
       )}
