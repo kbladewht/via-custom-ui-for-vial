@@ -1,11 +1,11 @@
 import { Box } from "@mui/material";
 import { useEffect, useState } from "react";
 import { ViaKeyboard } from "../../services/vialKeyboad";
-import { buildBluetoothShortcuts } from "../keymapLogic";
+import { buildBluetoothShortcuts } from "./keymapLogic";
 import { KeymapLayer } from "./KeymapLayer";
 import { LayerSelector, LayoutSelector } from "./LayerControls";
 import { KeycodeConverter, QmkKeycode } from "../keycodes/keycodeConverter";
-import { KeymapKeyProperties, KeymapProperties } from "../keymapTypes";
+import { KeymapKeyProperties, KeymapProperties } from "./keymapTypes";
 
 export function LayerEditor(props: {
   keymap: KeymapProperties;

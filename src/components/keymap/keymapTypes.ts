@@ -1,5 +1,5 @@
 import { createContext } from "react";
-import { QmkKeycode } from "./keycodes/keycodeConverter";
+import { QmkKeycode } from "../keycodes/keycodeConverter";
 
 export interface FocusedKeyContextType {
   focusedKey: KeymapKeyProperties | null;

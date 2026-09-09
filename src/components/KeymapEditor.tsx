@@ -18,7 +18,7 @@ import {
   KeymapProperties,
   KEY_GAP,
   WIDTH_1U,
-} from "./keymapTypes";
+} from "./keymap/keymapTypes";
 import { KeycodeConverter } from "./keycodes/keycodeConverter";
 
 export {
@@ -39,7 +39,7 @@ export {
   AltRepeatKeySelector,
 } from "./keymap/FeatureSelectors";
 export { LanguageSelector } from "./LanguageSelector";
-export type { KeymapKeyProperties, KeymapProperties } from "./keymapTypes";
+export type { KeymapKeyProperties, KeymapProperties } from "./keymap/keymapTypes";
 
 export function KeymapEditor(props: {
   keymap: KeymapProperties;

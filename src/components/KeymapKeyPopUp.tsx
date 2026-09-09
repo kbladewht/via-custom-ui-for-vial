@@ -12,7 +12,7 @@ import {
 import { matchSorter } from "match-sorter";
 import { useEffect, useRef, useState } from "react";
 import { DefaultQmkKeycode, KeycodeConverter, ModifierBit, ModifierBits, QmkKeycode } from "./keycodes/keycodeConverter";
-import { KeymapKeyProperties } from "./keymapTypes";
+import { KeymapKeyProperties } from "./keymap/keymapTypes";
 
 export function KeymapKeyPopUp(props: {
   open: boolean;

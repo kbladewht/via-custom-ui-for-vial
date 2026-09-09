@@ -5,7 +5,7 @@ import { ViaKeyboard } from "../services/vialKeyboad";
 import { DefaultQmkKeycode, KeycodeConverter, QmkKeycode } from "./keycodes/keycodeConverter";
 import { EditableKey, KeymapKeyPopUp } from "./KeymapEditor";
 import { KeycodeCatalog } from "./KeycodeCatalog";
-import { FocusedKeyContext, KeymapKeyProperties } from "./keymapTypes";
+import { FocusedKeyContext, KeymapKeyProperties } from "./keymap/keymapTypes";
 
 export interface OverrideValue {
   trigger: QmkKeycode;

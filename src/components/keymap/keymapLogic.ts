@@ -1,5 +1,5 @@
 import { match, P } from "ts-pattern";
-import { KeycodeConverter } from "./keycodes/keycodeConverter";
+import { KeycodeConverter } from "../keycodes/keycodeConverter";
 import { KeymapKeyProperties, KeymapProperties } from "./keymapTypes";
 
 export function convertToKeymapKeys(

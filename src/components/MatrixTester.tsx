@@ -3,8 +3,8 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { DynamicEntryCount, ViaKeyboard } from "../services/vialKeyboad";
 import { playKeycapLandingSound } from "./keycapAudio";
 import { DefaultQmkKeycode, KeycodeConverter } from "./keycodes/keycodeConverter";
-import { convertToKeymapKeys } from "./keymapLogic";
-import { KEY_GAP, KeymapKeyProperties, KeymapProperties, WIDTH_1U } from "./keymapTypes";
+import { convertToKeymapKeys } from "./keymap/keymapLogic";
+import { KEY_GAP, KeymapKeyProperties, KeymapProperties, WIDTH_1U } from "./keymap/keymapTypes";
 
 export function MatrixTester(props: {
   keymap: KeymapProperties;

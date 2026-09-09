@@ -1,7 +1,7 @@
 import { Box } from "@mui/material";
 import { useContext, useEffect, useRef, useState } from "react";
 import { playKeycapLandingSound } from "../keycapAudio";
-import { convertToKeymapKeys } from "../keymapLogic";
+import { convertToKeymapKeys } from "./keymapLogic";
 import { KeymapKeyPopUp } from "../KeymapKeyPopUp";
 import { KeymapKey } from "./KeymapItem";
 import {
@@ -15,7 +15,7 @@ import {
   KeymapKeyProperties,
   KeymapProperties,
   WIDTH_1U,
-} from "../keymapTypes";
+} from "./keymapTypes";
 
 export function KeymapLayer(props: {
   keymapReady: boolean;

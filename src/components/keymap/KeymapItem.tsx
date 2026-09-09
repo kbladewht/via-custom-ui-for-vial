@@ -1,7 +1,7 @@
 import { Grid } from "@mui/material";
 import { useState } from "react";
 import { QmkKeycode } from "../keycodes/keycodeConverter";
-import { KEY_GAP, KeymapKeyProperties, WIDTH_1U } from "../keymapTypes";
+import { KEY_GAP, KeymapKeyProperties, WIDTH_1U } from "./keymapTypes";
 
 export function KeyLegend(props: { keycode: QmkKeycode }) {
   const { keycode } = props;
