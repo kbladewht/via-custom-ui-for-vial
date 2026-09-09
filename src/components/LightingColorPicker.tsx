@@ -139,7 +139,8 @@ export function LightingColorPicker(props: {
           variant="outlined"
           onClick={props.onCancel}
           sx={{
-            minWidth: 46,
+            width: 64,
+            minWidth: 64,
             px: 1,
             py: 0.35,
             fontSize: "11px",
@@ -150,7 +151,7 @@ export function LightingColorPicker(props: {
         >
           Cancel
         </Button>
-        <Button variant="contained" onClick={() => props.onConfirm(rgbToHex(rgb))} sx={{ minWidth: 46, px: 1, py: 0.35, fontSize: "11px" }}>
+        <Button variant="contained" onClick={() => props.onConfirm(rgbToHex(rgb))} sx={{ width: 64, minWidth: 64, px: 1, py: 0.35, fontSize: "11px" }}>
           OK
         </Button>
       </DialogActions>
