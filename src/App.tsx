@@ -16,9 +16,9 @@ import {
 import { match, P } from "ts-pattern";
 import "./App.css";
 import { KeyboardSelector } from "./components/KeyboardSelector";
+import { LanguageSelector } from "./components/LanguageSelector";
 import {
   discardPendingKeycapAudio,
-  LanguageSelector,
   prepareKeycapAudio,
 } from "./components/KeymapEditor";
 import { QuantumSettingsEditor } from "./components/QuantumSettingsEditor";
