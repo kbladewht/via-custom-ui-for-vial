@@ -1,6 +1,6 @@
 import { Box, Button, MenuItem, Select, Typography } from "@mui/material";
 import { useEffect, useMemo, useRef, useState } from "react";
-import { ViaKeyboard } from "../services/vialKeyboad";
+import { DynamicEntryCount, ViaKeyboard } from "../services/vialKeyboad";
 import { playKeycapLandingSound } from "./keycapAudio";
 import { DefaultQmkKeycode, KeycodeConverter } from "./keycodes/keycodeConverter";
 import { convertToKeymapKeys } from "./keymapLogic";
@@ -10,11 +10,15 @@ export function MatrixTester(props: {
   keymap: KeymapProperties;
   via: ViaKeyboard;
   language: "zh" | "en";
+  keymapLanguage?: string;
+  dynamicEntryCount?: DynamicEntryCount;
   isActive?: boolean;
 }) {
   const [layoutOption, setLayoutOption] = useState<{ [layout: number]: number }>({ 0: 0 });
   const [activeMatrixKeys, setActiveMatrixKeys] = useState<Set<string>>(new Set());
   const [testedMatrixKeys, setTestedMatrixKeys] = useState<Set<string>>(new Set());
+  const [keycodeConverter, setKeycodeConverter] = useState<KeycodeConverter>();
+  const [layer0Keys, setLayer0Keys] = useState<number[]>([]);
   const activeKeysRef = useRef<Set<string>>(new Set());
   const testedKeysRef = useRef<Set<string>>(new Set());
   const isPollingRef = useRef(true);
@@ -29,24 +33,52 @@ export function MatrixTester(props: {
     }).catch(() => {});
   }, [props.via, props.isActive]);
 
-  // Dummy keycode converter for geometry generation
+  // Load keycode converter and layer 0 keycodes
+  useEffect(() => {
+    if (props.isActive === false) return;
+    KeycodeConverter.Create(
+      props.dynamicEntryCount?.layer ?? 16,
+      props.keymap.customKeycodes,
+      props.dynamicEntryCount?.macro ?? 0,
+      props.dynamicEntryCount?.tapdance ?? 0,
+      props.keymapLanguage ?? "Chinese",
+      "0.0.3",
+      props.language,
+    )
+      .then((converter) => setKeycodeConverter(converter))
+      .catch(() => {});
+
+    void props.via
+      .GetLayer(0, props.keymap.matrix, true)
+      .then((keys) => setLayer0Keys(keys))
+      .catch(() => {});
+  }, [
+    props.via,
+    props.keymap,
+    props.language,
+    props.keymapLanguage,
+    props.dynamicEntryCount,
+    props.isActive,
+  ]);
+
+  // Fallback converter for geometry generation
   const dummyConverter = useMemo(() => {
     return {
       convertIntToKeycode: () => DefaultQmkKeycode,
     } as unknown as KeycodeConverter;
   }, []);
 
-  // Compute key positions
+  // Compute key positions with layer 0 keycodes
   const keys: KeymapKeyProperties[] = useMemo(() => {
     return convertToKeymapKeys(
       props.keymap,
       layoutOption,
+      layer0Keys,
       [],
-      [],
-      dummyConverter,
+      keycodeConverter ?? dummyConverter,
       {},
     );
-  }, [props.keymap, layoutOption, dummyConverter]);
+  }, [props.keymap, layoutOption, layer0Keys, keycodeConverter, dummyConverter]);
 
   // Calculate layout bounds
   const rightmostPos = useMemo(() => {
@@ -271,19 +303,22 @@ export function MatrixTester(props: {
 
             let bg = "rgba(45, 50, 58, 0.9)";
             let borderColor = "#484f5c";
-            let textColor = "#64748b";
+            let textColor = "#8fa4bd";
             let boxShadow = "none";
 
             if (isActive) {
-              bg = "#94a3b8";
-              borderColor = "#e2e8f0";
+              bg = "#e2e8f0";
+              borderColor = "#ffffff";
               textColor = "#0f172a";
-              boxShadow = "0 0 12px rgba(255, 255, 255, 0.45)";
+              boxShadow = "0 0 14px rgba(255, 255, 255, 0.6)";
             } else if (isTested) {
               bg = "#475569";
               borderColor = "#64748b";
-              textColor = "#e2e8f0";
+              textColor = "#f8fafc";
             }
+
+            const labelText = p.keycode.label || p.keycode.key || "";
+            const isLongLabel = labelText.length > 3;
 
             const style: React.CSSProperties = p.r !== 0
               ? {
@@ -303,9 +338,10 @@ export function MatrixTester(props: {
                   alignItems: "center",
                   justifyContent: "center",
                   color: textColor,
-                  fontSize: "11px",
+                  fontSize: isLongLabel ? "10px" : "12px",
+                  fontWeight: 600,
                   userSelect: "none",
-                  transition: "background-color 70ms ease, border-color 70ms ease, box-shadow 70ms ease",
+                  transition: "background-color 70ms ease, border-color 70ms ease, box-shadow 70ms ease, color 70ms ease",
                 } as React.CSSProperties
               : {
                   position: "absolute",
@@ -323,18 +359,36 @@ export function MatrixTester(props: {
                   alignItems: "center",
                   justifyContent: "center",
                   color: textColor,
-                  fontSize: "11px",
+                  fontSize: isLongLabel ? "10px" : "12px",
+                  fontWeight: 600,
                   userSelect: "none",
-                  transition: "background-color 70ms ease, border-color 70ms ease, box-shadow 70ms ease",
+                  transition: "background-color 70ms ease, border-color 70ms ease, box-shadow 70ms ease, color 70ms ease",
                 } as React.CSSProperties;
 
             return (
               <div
                 key={idx}
                 style={style}
-                title={`Row: ${p.matrix[0]}, Col: ${p.matrix[1]}`}
+                title={`Row: ${p.matrix[0]}, Col: ${p.matrix[1]}${labelText ? ` (${labelText})` : ""}`}
               >
-                {p.isEncoder && (p.matrix[1] === 0 ? "⌄" : "⌃")}
+                {p.isEncoder ? (
+                  <span style={{ fontSize: "14px", fontWeight: "bold" }}>
+                    {p.matrix[1] === 0 ? "⌄" : "⌃"}
+                  </span>
+                ) : (
+                  <span
+                    style={{
+                      maxWidth: "92%",
+                      overflow: "hidden",
+                      textOverflow: "ellipsis",
+                      whiteSpace: "nowrap",
+                      textAlign: "center",
+                      lineHeight: 1.1,
+                    }}
+                  >
+                    {labelText}
+                  </span>
+                )}
               </div>
             );
           })}
