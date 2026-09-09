@@ -11,9 +11,16 @@
       "Layer": "层",
       "Macro": "宏",
       "TapDance": "TapDance",
-      "Combos": "组合"
+      "Combos": "组合",
+      "KeyOverride": "按键覆盖"
     },
     "tabs": {
+      "Keymap": "按键映射",
+      "Macro": "宏",
+      "Lighting": "灯效",
+      "TapDance": "Tap Dance",
+      "Combos": "Combos",
+      "KeyOverride": "Key Overrides",
       "Magic": "Magic",
       "Grave Escape": "Grave Escape",
       "Tap-Hold": "Tap-Hold",
@@ -21,7 +28,6 @@
       "Combo": "组合键",
       "One Shot Keys": "单次按键",
       "Mouse Keys": "鼠标按键",
-      "Macro": "宏",
       "Quantum": "QMK Settings"
     }
   },
@@ -37,9 +43,16 @@
       "Layer": "Layer",
       "Macro": "Macro",
       "TapDance": "TapDance",
-      "Combos": "Combos"
+      "Combos": "Combos",
+      "KeyOverride": "Key Overrides"
     },
     "tabs": {
+      "Keymap": "Keymap",
+      "Macro": "Macro",
+      "Lighting": "Lighting",
+      "TapDance": "Tap Dance",
+      "Combos": "Combos",
+      "KeyOverride": "Key Overrides",
       "Magic": "Magic",
       "Grave Escape": "Grave Escape",
       "Tap-Hold": "Tap-Hold",
@@ -47,8 +60,6 @@
       "Combo": "Combo",
       "One Shot Keys": "One Shot Keys",
       "Mouse Keys": "Mouse Keys",
-      "Macro": "Macro",
-      "Combos": "Combos",
       "Quantum": "QMK Settings"
     }
   }

@@ -7,7 +7,7 @@ import quantumTranslations from "../locales/quantum.json";
 import { KeycodeConverter } from "./keycodes/keycodeConverter";
 import { MacroEditor } from "./MacroEditor";
 import { LightingEditor } from "./LightingEditor";
-import { ComboOverrideEditor, KeymapEditor, KeymapProperties, TapDanceSelector } from "./KeymapEditor";
+import { ComboOverrideEditor, KeymapEditor, KeymapProperties, KeyOverrideSelector, TapDanceSelector } from "./KeymapEditor";
 import { DynamicEntryCount } from "../services/vialKeyboad";
 
 export function QuantumSettingsEditor(props: {
@@ -38,6 +38,7 @@ export function QuantumSettingsEditor(props: {
     { id: "Lighting", label: "Lighting" },
     { id: "TapDance", label: "TapDance" },
     { id: "Combos", label: "Combos" },
+    { id: "KeyOverride", label: "Key Overrides" },
     { id: "Quantum", label: "QMK Settings" },
     ...(props.customMenus?.length
       ? [{ id: "Custom", label: "Custom" }]
@@ -162,6 +163,13 @@ export function QuantumSettingsEditor(props: {
             />
           ) : menu.id === "TapDance" && props.dynamicEntryCount ? (
             <TapDanceSelector
+              via={props.via}
+              language={props.language}
+              keymapLanguage={props.keymapLanguage}
+              dynamicEntryCount={props.dynamicEntryCount}
+            />
+          ) : menu.id === "KeyOverride" && props.dynamicEntryCount ? (
+            <KeyOverrideSelector
               via={props.via}
               language={props.language}
               keymapLanguage={props.keymapLanguage}

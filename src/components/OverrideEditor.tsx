@@ -1,77 +1,12 @@
-import { Box, Button, Checkbox, FormControlLabel, FormGroup, Grid, Switch } from "@mui/material";
-import { Fragment, useEffect, useRef, useState } from "react";
+import { Box, Button, Checkbox, FormControlLabel, Grid, Typography } from "@mui/material";
+import { useEffect, useRef, useState } from "react";
 import { ViaKeyboard } from "../services/vialKeyboad";
 import { DefaultQmkKeycode, KeycodeConverter, QmkKeycode } from "./keycodes/keycodeConverter";
 import { EditableKey, KeymapKeyPopUp } from "./KeymapEditor";
+import { KeycodeCatalog } from "./KeycodeCatalog";
+import { FocusedKeyContext, KeymapKeyProperties } from "./keymapTypes";
 
-export function OverrideEditor(props: {
-  via: ViaKeyboard;
-  keycodeConverter: KeycodeConverter;
-  overrideIndex: number;
-  overrideCount: number;
-  onBack: () => void;
-}) {
-  const [override, setOverride] = useState<{ [id: string]: OverrideValue }>({});
-  const boundaryRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    navigator.locks.request("load-override", async () => {
-      if (props.overrideIndex < 0) return;
-
-      const overrideValue = (await props.via.GetOverride([props.overrideIndex]))[0];
-      const newOverride = { ...override };
-      newOverride[`${props.overrideIndex}`] = {
-        ...overrideValue,
-        trigger: props.keycodeConverter.convertIntToKeycode(overrideValue.trigger),
-        replacement: props.keycodeConverter.convertIntToKeycode(overrideValue.replacement),
-      };
-      setOverride(newOverride);
-      console.log(newOverride);
-    });
-  }, [props.overrideIndex, props.keycodeConverter]);
-
-  const sendOverride = (id: number, value: OverrideValue) => {
-    props.via.SetOverride([
-      {
-        ...value,
-        id: id,
-        trigger: value.trigger.value,
-        replacement: value.replacement.value,
-      },
-    ]);
-  };
-
-  return (
-    <Box ref={boundaryRef}>
-      <div>{`Edit override ${props.overrideIndex}`}</div>
-      <OverrideEntry
-        override={
-          override[props.overrideIndex] ?? {
-            trigger: DefaultQmkKeycode,
-            replacement: DefaultQmkKeycode,
-            layers: 0,
-            triggerMods: 0,
-            negativeModMask: 0,
-            suppressedMods: 0,
-            options: 0,
-          }
-        }
-        keycodeconverter={props.keycodeConverter}
-        onSave={(newOverride) => {
-          const newOverrideSet = { ...override };
-          newOverrideSet[props.overrideIndex] = newOverride;
-          setOverride(newOverrideSet);
-          sendOverride(props.overrideIndex, newOverride);
-          console.log(`update override ${props.overrideIndex}`);
-          console.log(newOverride);
-        }}
-        onBack={props.onBack}
-      ></OverrideEntry>
-    </Box>
-  );
-}
-
-interface OverrideValue {
+export interface OverrideValue {
   trigger: QmkKeycode;
   replacement: QmkKeycode;
   layers: number;
@@ -81,272 +16,445 @@ interface OverrideValue {
   options: number;
 }
 
-enum OverrideOption {
-  ACTIVATION_TRIGGER_DOWN = 1 << 0,
-  ACTIVATION_REQUIRED_MOD_DOWN = 1 << 1,
-  ACTIVATION_NEGATIVE_MOD_UP = 1 << 2,
-  ONE_MOD = 1 << 3,
-  NO_REREGISTER_TRIGGER = 1 << 4,
-  NO_UNREGISTER_ON_OTHER_KEY_DOWN = 1 << 5,
-  ENABLED = 1 << 7,
+export const defaultOverrideValue: OverrideValue = {
+  trigger: DefaultQmkKeycode,
+  replacement: DefaultQmkKeycode,
+  layers: 0xffff,
+  triggerMods: 0,
+  negativeModMask: 0,
+  suppressedMods: 0,
+  options: (1 << 0) | (1 << 1) | (1 << 2),
+};
+
+export function OverrideEditor(props: {
+  via: ViaKeyboard;
+  keycodeConverter: KeycodeConverter;
+  overrideIndex: number;
+}) {
+  const [override, setOverride] = useState<{ [id: string]: OverrideValue }>({});
+  const boundaryRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    navigator.locks.request("load-override", async () => {
+      if (props.overrideIndex < 0) return;
+
+      const overrideValue = (await props.via.GetOverride([props.overrideIndex]))[0];
+      if (!overrideValue) return;
+
+      const converted: OverrideValue = {
+        ...overrideValue,
+        trigger: props.keycodeConverter.convertIntToKeycode(overrideValue.trigger),
+        replacement: props.keycodeConverter.convertIntToKeycode(overrideValue.replacement),
+      };
+
+      setOverride((prev) => ({
+        ...prev,
+        [`${props.overrideIndex}`]: converted,
+      }));
+    });
+  }, [props.overrideIndex, props.keycodeConverter, props.via]);
+
+  const sendOverride = (id: number, value: OverrideValue) => {
+    props.via.SetOverride([
+      {
+        id: id,
+        trigger: value.trigger.value,
+        replacement: value.replacement.value,
+        layers: value.layers,
+        triggerMods: value.triggerMods,
+        negativeModMask: value.negativeModMask,
+        suppressedMods: value.suppressedMods,
+        options: value.options,
+      },
+    ]);
+  };
+
+  return (
+    <Box ref={boundaryRef} sx={{ width: "100%", flex: 1, display: "flex", flexDirection: "column" }}>
+      <OverrideEntry
+        override={override[props.overrideIndex] ?? defaultOverrideValue}
+        keycodeconverter={props.keycodeConverter}
+        boundaryRef={boundaryRef}
+        onSave={(newOverride) => {
+          setOverride((prev) => ({
+            ...prev,
+            [`${props.overrideIndex}`]: newOverride,
+          }));
+          sendOverride(props.overrideIndex, newOverride);
+        }}
+      />
+    </Box>
+  );
 }
+
+const MODIFIERS = [
+  { label: "LCtrl", bit: 0 },
+  { label: "LShift", bit: 1 },
+  { label: "LAlt", bit: 2 },
+  { label: "LGui", bit: 3 },
+  { label: "RCtrl", bit: 4 },
+  { label: "RShift", bit: 5 },
+  { label: "RAlt", bit: 6 },
+  { label: "RGui", bit: 7 },
+];
+
+const OVERRIDE_OPTIONS = [
+  { label: "Activate when the trigger key is pressed down", bit: 0 },
+  { label: "Activate when a necessary modifier is pressed down", bit: 1 },
+  { label: "Activate when a negative modifier is released", bit: 2 },
+  { label: "Activate on one modifier", bit: 3 },
+  { label: "Don't deactivate when another key is pressed down", bit: 5 },
+  { label: "Don't register the trigger key again after the override is deactivated", bit: 4 },
+];
 
 function OverrideEntry(props: {
   override: OverrideValue;
   keycodeconverter: KeycodeConverter;
-  boundrayRef?: React.RefObject<HTMLDivElement>;
+  boundaryRef?: React.RefObject<HTMLDivElement>;
   onSave?: (override: OverrideValue) => void;
-  onBack?: () => void;
 }) {
-  const [popupOpen, setpopupOpen] = useState(false);
-  const [anchorEl, setAnchorEl] = useState<HTMLElement | undefined>(undefined);
-  const [candidateKeycode, setCandidateKeycode] = useState(DefaultQmkKeycode);
   const [candidateOverride, setCandidateOverride] = useState<OverrideValue>(props.override);
-  const [keyIndex, setKeyIndex] = useState(0);
+  const [selectedKeyIndex, setSelectedKeyIndex] = useState<number>(); // 0: trigger, 1: replacement
+  const [popupOpen, setPopupOpen] = useState(false);
+  const [popupAnchor, setPopupAnchor] = useState<HTMLElement>();
+  const [popupKeycode, setPopupKeycode] = useState(DefaultQmkKeycode);
 
   useEffect(() => {
     setCandidateOverride(props.override);
   }, [props.override]);
 
+  const focusedKey: KeymapKeyProperties | null =
+    selectedKeyIndex === undefined
+      ? null
+      : {
+          matrix: [],
+          x: 0,
+          y: 0,
+          offsetx: 0,
+          offsety: 0,
+          r: 0,
+          rx: 0,
+          ry: 0,
+          w: 1,
+          h: 1,
+          layout: [],
+          keycode: selectedKeyIndex === 0 ? candidateOverride.trigger : candidateOverride.replacement,
+          reactKey: selectedKeyIndex.toString(),
+        };
+
   return (
-    <>
-      <Box mt={2}></Box>
-      <Grid container spacing={1}>
-        <Grid item xs={5}>
-          <Box className="editor-field-label" alignContent={"center"} textAlign={"right"} height={"100%"}>
-            Enable
-          </Box>
-        </Grid>
-        <Grid item xs={7}>
-          <Switch
-            checked={(candidateOverride.options & OverrideOption.ENABLED) != 0}
-            onChange={(_event, checked) => {
-              setCandidateOverride({
-                ...candidateOverride,
-                options:
-                  (candidateOverride.options & ~OverrideOption.ENABLED) |
-                  (checked ? OverrideOption.ENABLED : 0),
-              });
-            }}
-          ></Switch>
-        </Grid>
-
-        <Grid item xs={5}>
-          <Box className="editor-field-label" alignContent={"center"} textAlign={"right"} height={"100%"}>
-            Trigger mods
-          </Box>
-        </Grid>
-        <Grid item xs={7}>
-          <ModifierCheckbox
-            value={candidateOverride.triggerMods}
-            onChange={(value) => setCandidateOverride({ ...candidateOverride, triggerMods: value })}
-          ></ModifierCheckbox>
-        </Grid>
-
-        {[candidateOverride.trigger, candidateOverride.replacement].map((k, idx) => {
-          return (
-            <Fragment key={idx}>
-              <Grid item xs={5}>
-                <Box className="editor-field-label" alignContent={"center"} textAlign={"right"} height={"100%"}>
-                  {["Trigger", "Override"][idx]}
-                </Box>
-              </Grid>
-              <Grid item xs={7}>
-                <EditableKey
-                  keycode={k}
-                  onClick={(target) => {
-                    setpopupOpen(true);
-                    setAnchorEl(target);
-                    setCandidateKeycode(k);
-                    setKeyIndex(idx);
-                  }}
-                  onKeycodeChange={(keycode) => {
-                    if (idx == 0) {
-                      setCandidateOverride({ ...candidateOverride, trigger: keycode });
-                    } else if (idx == 1) {
-                      setCandidateOverride({ ...candidateOverride, replacement: keycode });
-                    }
-                  }}
-                ></EditableKey>
-              </Grid>
-            </Fragment>
-          );
-        })}
-
-        <Grid item xs={5}>
-          <Box className="editor-field-label" alignContent={"center"} textAlign={"right"} height={"100%"}>
-            Negative mods
-          </Box>
-        </Grid>
-        <Grid item xs={7}>
-          <ModifierCheckbox
-            value={candidateOverride.negativeModMask}
-            onChange={(value) =>
-              setCandidateOverride({ ...candidateOverride, negativeModMask: value })
-            }
-          ></ModifierCheckbox>
-        </Grid>
-
-        <Grid item xs={5}>
-          <Box className="editor-field-label" alignContent={"center"} textAlign={"right"} height={"100%"}>
-            Suppressed mods
-          </Box>
-        </Grid>
-        <Grid item xs={7}>
-          <ModifierCheckbox
-            value={candidateOverride.suppressedMods}
-            onChange={(value) =>
-              setCandidateOverride({ ...candidateOverride, suppressedMods: value })
-            }
-          ></ModifierCheckbox>
-        </Grid>
-
-        <Grid item xs={5}>
-          <Box className="editor-field-label" alignContent={"center"} textAlign={"right"} height={"100%"}>
-            Enable on layers
-          </Box>
-        </Grid>
-        <Grid item xs={7}>
-          <FormGroup row>
-            {[...Array(16)].map((_, idx) => {
-              return (
-                <FormControlLabel
-                  key={idx}
-                  label={`${idx}`}
-                  style={{ minWidth: "60px" }}
-                  control={
-                    <Checkbox
-                      size="small"
-                      checked={(candidateOverride.layers & (1 << idx)) > 0}
-                      onChange={(_event, checked) => {
-                        setCandidateOverride({
-                          ...candidateOverride,
-                          layers:
-                            (candidateOverride.layers & ~(1 << idx)) | (checked ? 1 << idx : 0),
-                        });
-                      }}
-                    ></Checkbox>
-                  }
-                ></FormControlLabel>
-              );
-            })}
-          </FormGroup>
-        </Grid>
-
-        <Grid item xs={5}></Grid>
-        <Grid item xs={7}>
-          <Button onClick={() => setCandidateOverride({ ...candidateOverride, layers: 0xffff })}>
-            Enable all
-          </Button>
-          <Button onClick={() => setCandidateOverride({ ...candidateOverride, layers: 0x0000 })}>
-            Disable all
-          </Button>
-        </Grid>
-
-        <Grid item xs={5}>
-          <Box className="editor-field-label" alignContent={"center"} textAlign={"right"} height={"100%"}>
-            Options
-          </Box>
-        </Grid>
-        <Grid item xs={7}>
-          <FormGroup>
-            {[
-              "Activate when the trigger key is pressed down",
-              "Activate when a necessary  modifier is pressed down",
-              "Activate when a negative  modifier is released",
-              "Activate on one modifier",
-              "Don't deactivate when another key is pressed down",
-              "Don't register the trigger key again after the override is deactivated",
-            ].map((label, idx) => {
-              return (
-                <FormControlLabel
-                  key={idx}
-                  label={label}
-                  control={
-                    <Checkbox
-                      size="small"
-                      checked={(candidateOverride.options & (1 << idx)) != 0}
-                      onChange={(_event, checked) => {
-                        setCandidateOverride({
-                          ...candidateOverride,
-                          options:
-                            (candidateOverride.options & ~(1 << idx)) | (checked ? 1 << idx : 0),
-                        });
-                      }}
-                    ></Checkbox>
-                  }
-                />
-              );
-            })}
-          </FormGroup>
-        </Grid>
-
-        <Grid item xs={1}>
+    <FocusedKeyContext.Provider
+      value={{
+        focusedKey,
+        setFocusedKey: () => {},
+        onKeycodeChange: (_target, keycode) => {
+          if (selectedKeyIndex === 0) {
+            setCandidateOverride((prev) => ({ ...prev, trigger: keycode }));
+          } else if (selectedKeyIndex === 1) {
+            setCandidateOverride((prev) => ({ ...prev, replacement: keycode }));
+          }
+        },
+      }}
+    >
+      <Box sx={{ flex: 1, position: "relative" }}>
+        {/* Save and Revert buttons */}
+        <Box sx={{ position: "absolute", right: 0, top: 0, display: "flex", gap: 1, zIndex: 1 }}>
           <Button
-            onClick={() => {
-              props.onBack?.();
-            }}
+            variant="outlined"
+            onClick={() => setCandidateOverride(props.override)}
+            sx={{ color: "#e2e8f0", borderColor: "#64748b", backgroundColor: "#334155" }}
           >
-            BACK
+            Revert
           </Button>
-        </Grid>
-        <Grid item xs={4}>
-          <Box sx={{ display: "flex", justifyContent: "right" }}>
-            <Button onClick={() => setCandidateOverride(props.override)}>Clear</Button>
-          </Box>
-        </Grid>
-        <Grid item xs={7}>
-          <Button variant="outlined" onClick={() => props.onSave?.(candidateOverride)}>
+          <Button
+            variant="outlined"
+            onClick={() => props.onSave?.(candidateOverride)}
+            sx={{ color: "#f8fafc", borderColor: "#64748b", backgroundColor: "#334155" }}
+          >
             Save
           </Button>
-        </Grid>
-      </Grid>
+        </Box>
 
-      <KeymapKeyPopUp
-        open={popupOpen}
-        keycode={candidateKeycode}
-        keycodeconverter={props.keycodeconverter}
-        anchor={anchorEl}
-        boundary={props.boundrayRef?.current ?? null}
-        onClickAway={() => {
-          if (popupOpen) {
-            setpopupOpen(false);
-            setAnchorEl(undefined);
-            if (keyIndex == 0) {
-              setCandidateOverride({ ...candidateOverride, trigger: candidateKeycode });
-            } else if (keyIndex == 1) {
-              setCandidateOverride({ ...candidateOverride, replacement: candidateKeycode });
+        <Grid container spacing={2} sx={{ maxWidth: 640, mx: "auto", mt: 0 }}>
+          {/* Enable */}
+          <Grid item xs={4}>
+            <Box className="editor-field-label" alignContent="center" textAlign="right" height="100%">
+              Enable
+            </Box>
+          </Grid>
+          <Grid item xs={8}>
+            <Checkbox
+              size="small"
+              checked={(candidateOverride.options & (1 << 7)) !== 0}
+              onChange={(_event, checked) => {
+                setCandidateOverride((prev) => ({
+                  ...prev,
+                  options: (prev.options & ~(1 << 7)) | (checked ? 1 << 7 : 0),
+                }));
+              }}
+              sx={{ color: "#64748b", "&.Mui-checked": { color: "#38bdf8" }, p: 0.5 }}
+            />
+          </Grid>
+
+          {/* Enable on layers */}
+          <Grid item xs={4}>
+            <Box className="editor-field-label" alignContent="flex-start" textAlign="right" pt={0.5}>
+              Enable on layers
+            </Box>
+          </Grid>
+          <Grid item xs={8}>
+            <Box
+              sx={{
+                display: "grid",
+                gridTemplateColumns: "repeat(8, 1fr)",
+                gap: "2px 4px",
+                alignItems: "center",
+              }}
+            >
+              {[...Array(16)].map((_, idx) => (
+                <FormControlLabel
+                  key={idx}
+                  label={<Typography sx={{ fontSize: "0.82rem", color: "#cbd5e1" }}>{idx}</Typography>}
+                  control={
+                    <Checkbox
+                      size="small"
+                      checked={(candidateOverride.layers & (1 << idx)) !== 0}
+                      onChange={(_event, checked) => {
+                        setCandidateOverride((prev) => ({
+                          ...prev,
+                          layers: (prev.layers & ~(1 << idx)) | (checked ? 1 << idx : 0),
+                        }));
+                      }}
+                      sx={{ color: "#64748b", "&.Mui-checked": { color: "#38bdf8" }, p: "2px" }}
+                    />
+                  }
+                  sx={{ m: 0 }}
+                />
+              ))}
+            </Box>
+            <Box sx={{ display: "flex", gap: 1, mt: 1 }}>
+              <Button
+                size="small"
+                variant="outlined"
+                onClick={() => setCandidateOverride((prev) => ({ ...prev, layers: 0xffff }))}
+                sx={{
+                  color: "#cbd5e1",
+                  borderColor: "#475569",
+                  backgroundColor: "#1e293b",
+                  textTransform: "none",
+                  py: 0.25,
+                  px: 1,
+                  fontSize: "0.75rem",
+                }}
+              >
+                Enable all
+              </Button>
+              <Button
+                size="small"
+                variant="outlined"
+                onClick={() => setCandidateOverride((prev) => ({ ...prev, layers: 0x0000 }))}
+                sx={{
+                  color: "#cbd5e1",
+                  borderColor: "#475569",
+                  backgroundColor: "#1e293b",
+                  textTransform: "none",
+                  py: 0.25,
+                  px: 1,
+                  fontSize: "0.75rem",
+                }}
+              >
+                Disable all
+              </Button>
+            </Box>
+          </Grid>
+
+          {/* Trigger */}
+          <Grid item xs={4}>
+            <Box className="editor-field-label" alignContent="center" textAlign="right" height="100%">
+              Trigger
+            </Box>
+          </Grid>
+          <Grid item xs={8}>
+            <EditableKey
+              keycode={candidateOverride.trigger}
+              isFocused={selectedKeyIndex === 0}
+              onClick={(target, ctrlKey) => {
+                setSelectedKeyIndex(0);
+                if (ctrlKey) {
+                  setPopupKeycode(candidateOverride.trigger);
+                  setPopupAnchor(target);
+                  setPopupOpen(true);
+                }
+              }}
+              onKeycodeChange={(keycode) => {
+                setCandidateOverride((prev) => ({ ...prev, trigger: keycode }));
+              }}
+            />
+          </Grid>
+
+          {/* Trigger mods */}
+          <Grid item xs={4}>
+            <Box className="editor-field-label" alignContent="flex-start" textAlign="right" pt={0.5}>
+              Trigger mods
+            </Box>
+          </Grid>
+          <Grid item xs={8}>
+            <ModifierCheckbox
+              value={candidateOverride.triggerMods}
+              onChange={(value) => setCandidateOverride((prev) => ({ ...prev, triggerMods: value }))}
+            />
+          </Grid>
+
+          {/* Negative mods */}
+          <Grid item xs={4}>
+            <Box className="editor-field-label" alignContent="flex-start" textAlign="right" pt={0.5}>
+              Negative mods
+            </Box>
+          </Grid>
+          <Grid item xs={8}>
+            <ModifierCheckbox
+              value={candidateOverride.negativeModMask}
+              onChange={(value) => setCandidateOverride((prev) => ({ ...prev, negativeModMask: value }))}
+            />
+          </Grid>
+
+          {/* Suppressed mods */}
+          <Grid item xs={4}>
+            <Box className="editor-field-label" alignContent="flex-start" textAlign="right" pt={0.5}>
+              Suppressed mods
+            </Box>
+          </Grid>
+          <Grid item xs={8}>
+            <ModifierCheckbox
+              value={candidateOverride.suppressedMods}
+              onChange={(value) => setCandidateOverride((prev) => ({ ...prev, suppressedMods: value }))}
+            />
+          </Grid>
+
+          {/* Replacement */}
+          <Grid item xs={4}>
+            <Box className="editor-field-label" alignContent="center" textAlign="right" height="100%">
+              Replacement
+            </Box>
+          </Grid>
+          <Grid item xs={8}>
+            <EditableKey
+              keycode={candidateOverride.replacement}
+              isFocused={selectedKeyIndex === 1}
+              onClick={(target, ctrlKey) => {
+                setSelectedKeyIndex(1);
+                if (ctrlKey) {
+                  setPopupKeycode(candidateOverride.replacement);
+                  setPopupAnchor(target);
+                  setPopupOpen(true);
+                }
+              }}
+              onKeycodeChange={(keycode) => {
+                setCandidateOverride((prev) => ({ ...prev, replacement: keycode }));
+              }}
+            />
+          </Grid>
+
+          {/* Options */}
+          <Grid item xs={4}>
+            <Box className="editor-field-label" alignContent="flex-start" textAlign="right" pt={0.5}>
+              Options
+            </Box>
+          </Grid>
+          <Grid item xs={8}>
+            <Box sx={{ display: "flex", flexDirection: "column", gap: 0.25 }}>
+              {OVERRIDE_OPTIONS.map((opt) => (
+                <FormControlLabel
+                  key={opt.bit}
+                  label={<Typography sx={{ fontSize: "0.82rem", color: "#cbd5e1" }}>{opt.label}</Typography>}
+                  control={
+                    <Checkbox
+                      size="small"
+                      checked={(candidateOverride.options & (1 << opt.bit)) !== 0}
+                      onChange={(_event, checked) => {
+                        setCandidateOverride((prev) => ({
+                          ...prev,
+                          options: (prev.options & ~(1 << opt.bit)) | (checked ? 1 << opt.bit : 0),
+                        }));
+                      }}
+                      sx={{ color: "#64748b", "&.Mui-checked": { color: "#38bdf8" }, p: "2px" }}
+                    />
+                  }
+                  sx={{ m: 0 }}
+                />
+              ))}
+            </Box>
+          </Grid>
+        </Grid>
+
+        {/* Keycode catalog for selecting trigger / replacement */}
+        {selectedKeyIndex !== undefined && (
+          <Box sx={{ maxHeight: 360, overflowY: "auto", mt: 2 }}>
+            <KeycodeCatalog
+              keycodeConverter={props.keycodeconverter}
+              tab={[
+                { label: "Basic", keygroup: ["basic"] },
+                { label: "Mouse", keygroup: ["mouse"] },
+                { label: "Media", keygroup: ["media"] },
+                { label: "Quantum", keygroup: ["quantum", "magic"] },
+                { label: "Layer", keygroup: ["layer"] },
+                { label: "Macro", keygroup: ["macro"] },
+                { label: "Tap Dance", keygroup: ["tapdance"] },
+              ]}
+            />
+          </Box>
+        )}
+
+        <KeymapKeyPopUp
+          open={popupOpen}
+          keycode={popupKeycode}
+          keycodeconverter={props.keycodeconverter}
+          anchor={popupAnchor}
+          boundary={props.boundaryRef?.current ?? null}
+          onClickAway={() => {
+            setPopupOpen(false);
+            setPopupAnchor(undefined);
+          }}
+          onChange={(event) => {
+            setPopupKeycode(event.keycode);
+            if (selectedKeyIndex === 0) {
+              setCandidateOverride((prev) => ({ ...prev, trigger: event.keycode }));
+            } else if (selectedKeyIndex === 1) {
+              setCandidateOverride((prev) => ({ ...prev, replacement: event.keycode }));
             }
-          }
-        }}
-        onChange={(event) => {
-          setCandidateKeycode(event.keycode);
-        }}
-      ></KeymapKeyPopUp>
-    </>
+          }}
+        />
+      </Box>
+    </FocusedKeyContext.Provider>
   );
 }
 
 function ModifierCheckbox(props: { value: number; onChange: (value: number) => void }) {
   return (
-    <FormGroup row>
-      {["LCtrl", "LShift", "LAlt", "LGUI", "RCtrl", "Rshift", "RAlt", "RGUI"].map((mod, bitIdx) => {
-        return (
-          <FormControlLabel
-            key={`${mod}`}
-            label={mod}
-            control={
-              <Checkbox
-                size="small"
-                checked={(props.value & (1 << bitIdx)) > 0}
-                onChange={(_event, checked) => {
-                  props.onChange((props.value & ~(1 << bitIdx)) | (checked ? 1 << bitIdx : 0));
-                }}
-              ></Checkbox>
-            }
-          ></FormControlLabel>
-        );
-      })}
-    </FormGroup>
+    <Box
+      sx={{
+        display: "grid",
+        gridTemplateColumns: "repeat(4, 1fr)",
+        gap: "2px 4px",
+      }}
+    >
+      {MODIFIERS.map((mod) => (
+        <FormControlLabel
+          key={mod.label}
+          label={<Typography sx={{ fontSize: "0.82rem", color: "#cbd5e1" }}>{mod.label}</Typography>}
+          control={
+            <Checkbox
+              size="small"
+              checked={(props.value & (1 << mod.bit)) !== 0}
+              onChange={(_event, checked) => {
+                props.onChange((props.value & ~(1 << mod.bit)) | (checked ? 1 << mod.bit : 0));
+              }}
+              sx={{ color: "#64748b", "&.Mui-checked": { color: "#38bdf8" }, p: "2px" }}
+            />
+          }
+          sx={{ m: 0 }}
+        />
+      ))}
+    </Box>
   );
 }
