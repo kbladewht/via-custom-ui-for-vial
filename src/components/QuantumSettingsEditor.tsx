@@ -8,6 +8,7 @@ import { KeycodeConverter } from "./keycodes/keycodeConverter";
 import { MacroEditor } from "./MacroEditor";
 import { LightingEditor } from "./LightingEditor";
 import { AltRepeatKeySelector, ComboOverrideEditor, KeymapEditor, KeymapProperties, KeyOverrideSelector, TapDanceSelector } from "./KeymapEditor";
+import { MatrixTester } from "./MatrixTester";
 import { DynamicEntryCount } from "../services/vialKeyboad";
 
 export function QuantumSettingsEditor(props: {
@@ -48,6 +49,7 @@ export function QuantumSettingsEditor(props: {
     { id: "KeyOverride", label: "Key Overrides" },
     { id: "AltRepeatKey", label: "Alt Repeat Key" },
     { id: "Quantum", label: "QMK Settings" },
+    { id: "MatrixTester", label: "Matrix tester" },
     ...(props.customMenus?.length
       ? [{ id: "Custom", label: "Custom" }]
       : []),
@@ -369,6 +371,8 @@ export function QuantumSettingsEditor(props: {
             </Box>
           ) : menu.id === "Lighting" ? (
             <LightingEditor via={props.via} lighting={props.keymap?.lighting} language={props.language} />
+          ) : menu.id === "MatrixTester" && props.keymap ? (
+            <MatrixTester keymap={props.keymap} via={props.via} language={props.language} />
           ) : menu.id === "Custom" ? (
             <Box sx={{ p: 2 }}>
               {props.customMenus?.map((customMenu) => (
