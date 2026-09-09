@@ -29,8 +29,15 @@ export function QuantumSettingsEditor(props: {
   const [tabValue, setTabValue] = useState(0);
   const [quantumTabValue, setQuantumTabValue] = useState(0);
   const [quantumValue, setQuantumValue] = useState<{ [id: string]: number }>({});
+  const [savedQuantumValue, setSavedQuantumValue] = useState<{ [id: string]: number }>({});
   const [selectedMacroIndex, setSelectedMacroIndex] = useState(0);
   const [keycodeConverter, setKeycodeConverter] = useState<KeycodeConverter>();
+
+  const isZh = props.language === "zh";
+
+  const isDirty = Object.keys(quantumValue).some(
+    (key) => savedQuantumValue[key] !== undefined && quantumValue[key] !== savedQuantumValue[key]
+  );
 
   const tabs = [
     { id: "Keymap", label: "Keymap" },
@@ -67,31 +74,35 @@ export function QuantumSettingsEditor(props: {
       .filter((v) => quantumValue[v.content[0]] === undefined)
       .map((v) => v.content[1] as number);
     const newValue = { ...quantumValue };
+    const newSaved = { ...savedQuantumValue };
     undefinedIds.forEach((id) => {
       newValue[id] = 0;
+      if (newSaved[id] === undefined) {
+        newSaved[id] = 0;
+      }
     });
     props.onChange(newValue);
     setQuantumValue(newValue);
+    setSavedQuantumValue(newSaved);
 
     if (undefinedIds.length === 0) return;
 
     const loadQuantumSettings = async () => {
       const value = await props.via.GetQuantumSettingsValue(undefinedIds);
-      const newValue = Object.entries(value).reduce(
-        (acc, v) => {
-          const id = currentTab.content.find((c) => {
-            return c.content[1].toString() === v[0];
-          });
-          return {
-            ...acc,
-            [id?.content[0] ?? "id-unknown"]:
-              v[1] & ((1 << (8 * ((id?.content[2] as number) ?? 2))) - 1),
-          };
-        },
-        { ...quantumValue },
-      );
-      setQuantumValue(newValue);
-      console.log(newValue);
+      const loadedUpdates: { [id: string]: number } = {};
+      Object.entries(value).forEach((v) => {
+        const id = currentTab.content.find((c) => {
+          return c.content[1].toString() === v[0];
+        });
+        if (id) {
+          loadedUpdates[id.content[0]] =
+            v[1] & ((1 << (8 * ((id.content[2] as number) ?? 2))) - 1);
+        }
+      });
+      setQuantumValue((prev) => ({ ...prev, ...loadedUpdates }));
+      setSavedQuantumValue((prev) => ({ ...prev, ...loadedUpdates }));
+      props.onChange({ ...newValue, ...loadedUpdates });
+      console.log(loadedUpdates);
     };
 
     if (navigator.locks?.request) {
@@ -219,11 +230,86 @@ export function QuantumSettingsEditor(props: {
                   }}
                 />
                 <Box sx={{ display: "flex", gap: 1, mt: 2 }}>
-                  <Button className="quantum-setting-save" variant="contained" onClick={props.onSave}>
-                    Save
+                  <Button
+                    variant="outlined"
+                    disabled={!isDirty}
+                    onClick={async () => {
+                      await props.onSave?.();
+                      setSavedQuantumValue({ ...quantumValue });
+                    }}
+                    sx={{
+                      minWidth: 68,
+                      px: 2,
+                      py: 0.4,
+                      fontSize: "0.85rem",
+                      textTransform: "none",
+                      borderRadius: "4px",
+                      border: "1px solid #475569",
+                      color: isDirty ? "#f8fafc" : "#64748b",
+                      backgroundColor: isDirty ? "#243042" : "rgba(30, 41, 59, 0.4)",
+                      "&:hover": {
+                        borderColor: isDirty ? "#64748b" : "#475569",
+                        backgroundColor: isDirty ? "#334155" : "rgba(30, 41, 59, 0.4)",
+                      },
+                      "&.Mui-disabled": {
+                        color: "#64748b",
+                        borderColor: "#334155",
+                        backgroundColor: "rgba(30, 41, 59, 0.3)",
+                      },
+                    }}
+                  >
+                    {isZh ? "保存" : "Save"}
                   </Button>
-                  <Button className="quantum-setting-erase" variant="contained" color="error" onClick={props.onErase}>
-                    Erase
+                  <Button
+                    variant="outlined"
+                    disabled={!isDirty}
+                    onClick={() => {
+                      setQuantumValue({ ...savedQuantumValue });
+                      props.onChange({ ...savedQuantumValue });
+                    }}
+                    sx={{
+                      minWidth: 68,
+                      px: 2,
+                      py: 0.4,
+                      fontSize: "0.85rem",
+                      textTransform: "none",
+                      borderRadius: "4px",
+                      border: "1px solid #475569",
+                      color: isDirty ? "#f8fafc" : "#64748b",
+                      backgroundColor: isDirty ? "#243042" : "rgba(30, 41, 59, 0.4)",
+                      "&:hover": {
+                        borderColor: isDirty ? "#64748b" : "#475569",
+                        backgroundColor: isDirty ? "#334155" : "rgba(30, 41, 59, 0.4)",
+                      },
+                      "&.Mui-disabled": {
+                        color: "#64748b",
+                        borderColor: "#334155",
+                        backgroundColor: "rgba(30, 41, 59, 0.3)",
+                      },
+                    }}
+                  >
+                    {isZh ? "撤销" : "Undo"}
+                  </Button>
+                  <Button
+                    variant="outlined"
+                    onClick={props.onErase}
+                    sx={{
+                      minWidth: 68,
+                      px: 2,
+                      py: 0.4,
+                      fontSize: "0.85rem",
+                      textTransform: "none",
+                      borderRadius: "4px",
+                      border: "1px solid #475569",
+                      color: "#f8fafc",
+                      backgroundColor: "#243042",
+                      "&:hover": {
+                        borderColor: "#64748b",
+                        backgroundColor: "#334155",
+                      },
+                    }}
+                  >
+                    {isZh ? "重置" : "Reset"}
                   </Button>
                 </Box>
               </Box>

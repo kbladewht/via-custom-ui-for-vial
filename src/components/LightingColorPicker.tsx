@@ -68,6 +68,7 @@ export function LightingColorPicker(props: {
 
   const labels = {
     basicColors: isZh ? "基础颜色" : "Basic colors",
+    hex: isZh ? "十六进制颜色 (HEX)" : "HEX",
     hue: isZh ? "色相 (Hue)" : "Hue",
     red: isZh ? "红 (Red)" : "Red",
     saturation: isZh ? "饱和度 (Saturation)" : "Saturation",
@@ -123,7 +124,7 @@ export function LightingColorPicker(props: {
             <Box sx={{ height: 220, cursor: "crosshair", position: "relative", background: `linear-gradient(to top, #000, transparent), linear-gradient(to right, #fff, transparent), hsl(${hsv.h} 100% 50%)` }} onClick={selectPoint}>
               <Box sx={{ position: "absolute", width: 14, height: 14, border: "2px solid white", borderRadius: "50%", left: `calc(${hsv.s}% - 7px)`, top: `calc(${100 - hsv.v}% - 7px)`, boxShadow: "0 0 0 1px #111" }} />
             </Box>
-            <TextField size="small" label="HTML" value={draftHex} onChange={(event) => { setDraftHex(event.target.value); if (/^#[0-9a-f]{6}$/i.test(event.target.value)) updateRgb(hexToRgb(event.target.value)); }} />
+            <TextField size="small" label={labels.hex} value={draftHex} onChange={(event) => { setDraftHex(event.target.value); if (/^#[0-9a-f]{6}$/i.test(event.target.value)) updateRgb(hexToRgb(event.target.value)); }} />
           </Box>
         </Box>
         <Box sx={{ display: "grid", gridTemplateColumns: "repeat(2, minmax(0, 1fr))", gap: 1, mt: 1.5 }}>
