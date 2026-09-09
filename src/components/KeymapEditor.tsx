@@ -873,17 +873,11 @@ export function KeymapEditor(props: {
           <KeycodeCatalog
           keycodeConverter={keycodeConverter}
           tab={[
-            {
-              label: quantumTranslations[props.language].keycodeTabs.Basic,
-              keygroup: ["basic"],
-            },
+            { label: quantumTranslations[props.language].keycodeTabs.Basic, keygroup: ["basic"] },
             { label: quantumTranslations[props.language].keycodeTabs.Mouse, keygroup: ["mouse"] },
-            {
-              label: quantumTranslations[props.language].keycodeTabs.UserWireless,
-              keygroup: ["custom"],
-            },
+            { label: quantumTranslations[props.language].keycodeTabs.UserWireless, keygroup: ["custom"] },
             { label: quantumTranslations[props.language].keycodeTabs.Media, keygroup: ["media"] },
-            { label: quantumTranslations[props.language].keycodeTabs.Quantum, keygroup: ["quantum","magic"] },
+            { label: quantumTranslations[props.language].keycodeTabs.Quantum, keygroup: ["quantum", "magic"] },
             { label: quantumTranslations[props.language].keycodeTabs.RGB, keygroup: ["backlight", "rgb", "rgb_matrix"] },
             { label: quantumTranslations[props.language].keycodeTabs.Layer, keygroup: ["layer"] },
             { label: quantumTranslations[props.language].keycodeTabs.Macro, keygroup: ["macro"] },

@@ -6,6 +6,7 @@ import { MenuItemProperties, MenuSectionProperties, ViaMenuItem } from "./ViaMen
 import quantumTranslations from "../locales/quantum.json";
 import { KeycodeConverter } from "./keycodes/keycodeConverter";
 import { MacroEditor } from "./MacroEditor";
+import { LightingEditor } from "./LightingEditor";
 import { ComboOverrideEditor, KeymapEditor, KeymapProperties, TapDanceSelector } from "./KeymapEditor";
 import { DynamicEntryCount } from "../services/vialKeyboad";
 
@@ -34,6 +35,7 @@ export function QuantumSettingsEditor(props: {
   const tabs = [
     { id: "Keymap", label: "Keymap" },
     { id: "Macro", label: "Macro" },
+    { id: "Lighting", label: "Lighting" },
     { id: "TapDance", label: "TapDance" },
     { id: "Combos", label: "Combos" },
     { id: "Quantum", label: "QMK Settings" },
@@ -264,6 +266,8 @@ export function QuantumSettingsEditor(props: {
                 <Box sx={{ color: "#cbd5e1" }}>No macros available.</Box>
               )}
             </Box>
+          ) : menu.id === "Lighting" ? (
+            <LightingEditor />
           ) : menu.id === "Custom" ? (
             <Box sx={{ p: 2 }}>
               {props.customMenus?.map((customMenu) => (
