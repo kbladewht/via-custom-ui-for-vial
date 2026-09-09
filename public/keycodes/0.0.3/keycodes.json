@@ -1152,7 +1152,7 @@
   "0xCD": {
     "group": "mouse",
     "key": "KC_MS_UP",
-    "label": "Move cursor up",
+    "label": "Mouse Up",
     "aliases": [
       "KC_MS_U"
     ]
@@ -1160,7 +1160,7 @@
   "0xCE": {
     "group": "mouse",
     "key": "KC_MS_DOWN",
-    "label": "Move cursor down",
+    "label": "Mouse Down",
     "aliases": [
       "KC_MS_D"
     ]
@@ -1168,7 +1168,7 @@
   "0xCF": {
     "group": "mouse",
     "key": "KC_MS_LEFT",
-    "label": "Move cursor left",
+    "label": "Mouse Left",
     "aliases": [
       "KC_MS_L"
     ]
@@ -1176,7 +1176,7 @@
   "0xD0": {
     "group": "mouse",
     "key": "KC_MS_RIGHT",
-    "label": "Move cursor right",
+    "label": "Mouse Right",
     "aliases": [
       "KC_MS_R"
     ]

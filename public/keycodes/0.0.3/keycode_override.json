@@ -242,7 +242,7 @@
   "0xCD": {
     "group": "mouse",
     "key": "KC_MS_UP",
-    "label": "Move cursor up",
+    "label": "Mouse Up",
     "aliases": [
       "KC_MS_U"
     ],
@@ -255,7 +255,7 @@
   "0xCE": {
     "group": "mouse",
     "key": "KC_MS_DOWN",
-    "label": "Move cursor down",
+    "label": "Mouse Down",
     "aliases": [
       "KC_MS_D"
     ],
@@ -268,7 +268,7 @@
   "0xCF": {
     "group": "mouse",
     "key": "KC_MS_LEFT",
-    "label": "Move cursor left",
+    "label": "Mouse Left",
     "aliases": [
       "KC_MS_L"
     ],
@@ -281,7 +281,7 @@
   "0xD0": {
     "group": "mouse",
     "key": "KC_MS_RIGHT",
-    "label": "Move cursor right",
+    "label": "Mouse Right",
     "aliases": [
       "KC_MS_R"
     ],
@@ -294,7 +294,7 @@
   "0xD1": {
     "group": "mouse",
     "key": "KC_MS_BTN1",
-    "label": "Press button 1",
+    "label": "Mouse 1",
     "aliases": [
       "KC_BTN1"
     ],
@@ -307,7 +307,7 @@
   "0xD2": {
     "group": "mouse",
     "key": "KC_MS_BTN2",
-    "label": "Press button 2",
+    "label": "Mouse 2",
     "aliases": [
       "KC_BTN2"
     ],
@@ -320,7 +320,7 @@
   "0xD3": {
     "group": "mouse",
     "key": "KC_MS_BTN3",
-    "label": "Press button 3",
+    "label": "Mouse 3",
     "aliases": [
       "KC_BTN3"
     ],
@@ -333,7 +333,7 @@
   "0xD4": {
     "group": "mouse",
     "key": "KC_MS_BTN4",
-    "label": "Press button 4",
+    "label": "Mouse 4",
     "aliases": [
       "KC_BTN4"
     ],
@@ -346,7 +346,7 @@
   "0xD5": {
     "group": "mouse",
     "key": "KC_MS_BTN5",
-    "label": "Press button 5",
+    "label": "Mouse 5",
     "aliases": [
       "KC_BTN5"
     ],
@@ -357,9 +357,9 @@
     }
   },
   "0xD6": {
-    "group": "mouse",
+    "group": "mouse_na",
     "key": "KC_MS_BTN6",
-    "label": "Press button 6",
+    "label": "Mouse 6",
     "aliases": [
       "KC_BTN6"
     ],
@@ -370,9 +370,9 @@
     }
   },
   "0xD7": {
-    "group": "mouse",
+    "group": "mouse_na",
     "key": "KC_MS_BTN7",
-    "label": "Press button 7",
+    "label": "Mouse 7",
     "aliases": [
       "KC_BTN7"
     ],
@@ -383,9 +383,9 @@
     }
   },
   "0xD8": {
-    "group": "mouse",
+    "group": "mouse_na",
     "key": "KC_MS_BTN8",
-    "label": "Press button 8",
+    "label": "Mouse 8",
     "aliases": [
       "KC_BTN8"
     ],
@@ -398,7 +398,7 @@
   "0xD9": {
     "group": "mouse",
     "key": "KC_MS_WH_UP",
-    "label": "Move wheel up",
+    "label": "Mouse Wheel Up",
     "aliases": [
       "KC_WH_U"
     ],
@@ -411,7 +411,7 @@
   "0xDA": {
     "group": "mouse",
     "key": "KC_MS_WH_DOWN",
-    "label": "Move wheel down",
+    "label": "Mouse Wheel Down",
     "aliases": [
       "KC_WH_D"
     ],
@@ -424,7 +424,7 @@
   "0xDB": {
     "group": "mouse",
     "key": "KC_MS_WH_LEFT",
-    "label": "Move wheel left",
+    "label": "Mouse Wheel Left",
     "aliases": [
       "KC_WH_L"
     ],
@@ -437,7 +437,7 @@
   "0xDC": {
     "group": "mouse",
     "key": "KC_MS_WH_RIGHT",
-    "label": "Move wheel right",
+    "label": "Mouse Wheel Right",
     "aliases": [
       "KC_WH_R"
     ],
@@ -450,7 +450,7 @@
   "0xDD": {
     "group": "mouse",
     "key": "KC_MS_ACCEL0",
-    "label": "Set speed to 0",
+    "label": "Mouse Accel 0",
     "aliases": [
       "KC_ACL0"
     ],
@@ -463,7 +463,7 @@
   "0xDE": {
     "group": "mouse",
     "key": "KC_MS_ACCEL1",
-    "label": "Set speed to 1",
+    "label": "Mouse Accel 1",
     "aliases": [
       "KC_ACL1"
     ],
@@ -476,7 +476,7 @@
   "0xDF": {
     "group": "mouse",
     "key": "KC_MS_ACCEL2",
-    "label": "Set speed to 2",
+    "label": "Mouse Accel 2",
     "aliases": [
       "KC_ACL2"
     ],
