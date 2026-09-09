@@ -15,13 +15,25 @@ import {
   Typography,
 } from "@mui/material";
 import { matchSorter } from "match-sorter";
-import { createContext, useContext, useEffect, useRef, useState } from "react";
-import { match, P } from "ts-pattern";
+import { useContext, useEffect, useRef, useState } from "react";
 import "../App.css";
 import quantumTranslations from "../locales/quantum.json";
 import { ViaKeyboard } from "../services/vialKeyboad";
 import { ComboEditor } from "./ComboEditor";
 import { KeycodeCatalog } from "./KeycodeCatalog";
+import {
+  discardPendingKeycapAudio,
+  playKeycapLandingSound,
+  prepareKeycapAudio,
+} from "./keycapAudio";
+import { buildBluetoothShortcuts, convertToKeymapKeys } from "./keymapLogic";
+import {
+  FocusedKeyContext,
+  KeymapKeyProperties,
+  KeymapProperties,
+  KEY_GAP,
+  WIDTH_1U,
+} from "./keymapTypes";
 import {
   DefaultQmkKeycode,
   KeycodeConverter,
@@ -32,121 +44,14 @@ import {
 import { OverrideEditor } from "./OverrideEditor";
 import { TapDanceEditor } from "./TapDanceEditor";
 
-// Create a context to track the focused key and keycode change handler
-export interface FocusedKeyContextType {
-  focusedKey: KeymapKeyProperties | null;
-  setFocusedKey: (key: KeymapKeyProperties | null) => void;
-  onKeycodeChange?: (target: KeymapKeyProperties, newKeycode: QmkKeycode) => void;
-}
-
-export const FocusedKeyContext = createContext<FocusedKeyContextType>({
-  focusedKey: null,
-  setFocusedKey: () => {},
-});
-
-export interface KeymapProperties {
-  matrix: { rows: number; cols: number };
-  layouts: {
-    labels?: string[][];
-    keymap: (
-      | string
-      | {
-          x?: number;
-          y?: number;
-          r?: number;
-          rx?: number;
-          ry?: number;
-          w?: number;
-          h?: number;
-        }
-    )[][];
-  };
-  customKeycodes?: { name: string; title: string; shortName: string }[];
-}
-
-export interface KeymapKeyProperties {
-  matrix: number[];
-  x: number;
-  y: number;
-  offsetx: number;
-  offsety: number;
-  r: number;
-  rx: number;
-  ry: number;
-  w: number;
-  h: number;
-  layout: number[];
-  keycode: QmkKeycode;
-  shortcut?: string;
-  reactKey: string;
-  animationDelay?: number;
-  isEncoder?: boolean;
-  onKeycodeChange?: (target: KeymapKeyProperties, newKeycode: QmkKeycode) => void;
-  onClick?: (target: HTMLElement, ctrlKey: boolean) => void;
-}
-
-export const KEY_GAP = 2;
-export const WIDTH_1U = 50;
-
-let keycapAudioContext: AudioContext | undefined;
-const pendingKeycapNotes: number[] = [];
-
-export function discardPendingKeycapAudio() {
-  pendingKeycapNotes.length = 0;
-}
-
-function flushPendingKeycapNotes() {
-  const notes = pendingKeycapNotes.splice(0);
-  notes.forEach((noteIndex, index) => {
-    window.setTimeout(() => playKeycapLandingSound(noteIndex), index * 120);
-  });
-}
-
-export function prepareKeycapAudio() {
-  try {
-    keycapAudioContext ??= new AudioContext();
-    if (keycapAudioContext.state === "suspended") {
-      void keycapAudioContext.resume().then(flushPendingKeycapNotes);
-    } else {
-      flushPendingKeycapNotes();
-    }
-  } catch {
-    keycapAudioContext = undefined;
-  }
-}
-
-function playKeycapLandingSound(noteIndex: number) {
-  if (!keycapAudioContext || keycapAudioContext.state !== "running") {
-    if (!pendingKeycapNotes.includes(noteIndex)) pendingKeycapNotes.push(noteIndex);
-    return;
-  }
-
-  const start = keycapAudioContext.currentTime;
-  const notes = [261.63, 293.66, 329.63, 392, 440, 523.25];
-  const frequency = notes[noteIndex % notes.length];
-  const melody = keycapAudioContext.createOscillator();
-  const shimmer = keycapAudioContext.createOscillator();
-  const melodyGain = keycapAudioContext.createGain();
-  const shimmerGain = keycapAudioContext.createGain();
-  melody.type = "sine";
-  shimmer.type = "triangle";
-  melody.frequency.setValueAtTime(frequency, start);
-  shimmer.frequency.setValueAtTime(frequency * 2, start);
-  melodyGain.gain.setValueAtTime(0.0001, start);
-  melodyGain.gain.exponentialRampToValueAtTime(0.035, start + 0.012);
-  melodyGain.gain.exponentialRampToValueAtTime(0.0001, start + 0.16);
-  shimmerGain.gain.setValueAtTime(0.0001, start);
-  shimmerGain.gain.exponentialRampToValueAtTime(0.009, start + 0.012);
-  shimmerGain.gain.exponentialRampToValueAtTime(0.0001, start + 0.11);
-  melody.connect(melodyGain);
-  shimmer.connect(shimmerGain);
-  melodyGain.connect(keycapAudioContext.destination);
-  shimmerGain.connect(keycapAudioContext.destination);
-  melody.start(start);
-  shimmer.start(start);
-  melody.stop(start + 0.17);
-  shimmer.stop(start + 0.12);
-}
+export {
+  discardPendingKeycapAudio,
+  prepareKeycapAudio,
+  FocusedKeyContext,
+  KEY_GAP,
+  WIDTH_1U,
+};
+export type { KeymapKeyProperties, KeymapProperties } from "./keymapTypes";
 
 function KeyLegend(props: { keycode: QmkKeycode }) {
   const { keycode } = props;
@@ -491,97 +396,6 @@ export function KeymapKeyPopUp(props: {
   );
 }
 
-function convertToKeymapKeys(
-  props: KeymapProperties,
-  layoutOptions: { [layout: number]: number },
-  keymap: number[],
-  encodermap: number[][],
-  keycodeconverter: KeycodeConverter,
-  shortcutByKeycode: { [keycode: number]: string },
-): KeymapKeyProperties[] {
-  let current = {
-    x: 0,
-    y: 0,
-    offsetx: 0,
-    offsety: 0,
-    r: 0,
-    rx: 0,
-    ry: 0,
-    w: 1,
-    h: 1,
-  };
-
-  const keys: KeymapKeyProperties[] = [];
-  let firstKey = true;
-  for (const row of props.layouts.keymap) {
-    for (const col of row) {
-      match(col)
-        .with(P.string, (col) => {
-          const layout = col
-            .split("\n")[3]
-            ?.split(",")
-            ?.map((s) => parseInt(s));
-
-          const keyPos = col
-            .split("\n")[0]
-            .split(",")
-            .map((v) => parseInt(v))
-            .slice(0, 2);
-          const hasMatrixPosition = keyPos.length === 2 && keyPos.every(Number.isInteger);
-
-          const isEncoder = col.split("\n").at(-1)?.trim() === "e";
-
-          
-          if (
-            hasMatrixPosition &&
-            ((layout?.length ?? 0) < 2 || layoutOptions[layout[0]] == layout[1])
-          ) {
-            if (firstKey) {
-              firstKey = false;
-              current.y = 0;
-            }
-            const keycode = keycodeconverter.convertIntToKeycode(
-              isEncoder
-                ? (encodermap?.[keyPos[0]]?.[keyPos[1]] ?? 0)
-                : (keymap[keyPos[1] + keyPos[0] * props.matrix.cols] ?? 0),
-            );
-            keys.push({
-              ...current,
-              matrix: keyPos,
-              layout: [],
-              keycode,
-              shortcut: shortcutByKeycode[keycode.value],
-              isEncoder: isEncoder,
-              reactKey: "",
-            });
-          }
-
-          if ((layout?.length ?? 0) < 2 || layoutOptions[layout[0]] == layout[1]) {
-            current.x += current.w;
-            current.w = 1;
-            current.h = 1;
-          }
-        })
-        .with(P._, (col) => {
-          current = {
-            ...current,
-            ...col,
-            x: current.x + (col.r ? 0 : (col.x ?? 0)),
-            y: current.y + (col.r ? 0 : (col.y ?? 0)),
-            offsetx: col.r ? (col.x ?? 0) : 0,
-            offsety: col.r ? (col.y ?? 0) : 0,
-          };
-        });
-    }
-    current.x = 0;
-    current.y += 1;
-    current.y = current.r ? 0 : current.y;
-    current.w = 1;
-    current.h = 1;
-  }
-  return keys;
-}
-
 function LayoutSelector(props: {
   layouts: {
     labels?: string[][];
@@ -842,109 +656,6 @@ function KeymapLayer(props: {
       ></KeymapKeyPopUp>
     </Box>
   );
-}
-
-function buildBluetoothShortcuts(
-  keymaps: { [layer: number]: number[] },
-  customKeycodes: { name: string; title: string; shortName: string }[] | undefined,
-  keycodeconverter: KeycodeConverter,
-  matrixCols: number,
-) {
-  const shortcuts: { [keycode: number]: string } = {};
-  const entries: { name: string; label: string; shortcut: string }[] = [];
-  console.groupCollapsed("[BLE shortcut] scan");
-  console.log("layers:", Object.keys(keymaps));
-  console.log("keymap sizes:", Object.fromEntries(Object.entries(keymaps).map(([layer, values]) => [layer, values.length])));
-  const bluetoothKeycodes = keycodeconverter
-    .getTapKeycodeList()
-    .filter((keycode) =>
-      customKeycodes?.some((custom) => {
-        const name = custom.name.trim();
-        return custom.name === keycode.key &&
-          (name.startsWith("BLE_") || name.includes("2.4G"));
-      }),
-    );
-  console.log(
-    "candidates:",
-    bluetoothKeycodes.map((keycode) => ({ key: keycode.key, value: `0x${keycode.value.toString(16)}`, label: keycode.label })),
-  );
-  for (const bluetoothKeycode of bluetoothKeycodes) {
-    let targetLayer = -1;
-    let targetIndex = -1;
-    for (let layer = 2; layer >= 0; layer--) {
-      const index = keymaps[layer]?.indexOf(bluetoothKeycode.value) ?? -1;
-      if (index >= 0) {
-        targetLayer = layer;
-        targetIndex = index;
-        break;
-      }
-    }
-
-    if (targetLayer < 0) {
-      console.warn(`[BLE shortcut] ${bluetoothKeycode.key} not found in loaded layers`);
-      continue;
-    }
-
-    console.log(
-      `[BLE shortcut] ${bluetoothKeycode.key} target: layer ${targetLayer}, ` +
-        `R${Math.floor(targetIndex / matrixCols)} C${targetIndex % matrixCols}`,
-    );
-    const parts: string[] = [];
-    const hasDirectBaseTransition = targetLayer > 1 && (keymaps[0] ?? []).some((value) => {
-      const keycode = keycodeconverter.convertIntToKeycode(value);
-      return keycode.hold === targetLayer ||
-        keycode.label === `MO${targetLayer}` ||
-        keycode.key === `MO(${targetLayer})`;
-    });
-    for (let layer = targetLayer; layer > 0; layer--) {
-      const previousKeymap = keymaps[layer - 1] ?? [];
-      const transitionIndex = previousKeymap?.findIndex((value) => {
-        const keycode = keycodeconverter.convertIntToKeycode(value);
-        return keycode.hold === layer || keycode.label === `MO${layer}`;
-      }) ?? -1;
-      const transition = transitionIndex >= 0
-        ? keycodeconverter.convertIntToKeycode(previousKeymap![transitionIndex])
-        : undefined;
-      const baseTransitionKeycode = layer > 1 && transitionIndex >= 0
-        ? keymaps[0]?.[transitionIndex]
-        : undefined;
-      const baseTransitionLabel = baseTransitionKeycode === undefined
-        ? undefined
-        : keycodeconverter.convertIntToKeycode(baseTransitionKeycode).label;
-
-      const transitionText = layer > 1 && baseTransitionLabel
-        ? baseTransitionLabel
-        : transition?.hold === layer
-          ? `${transition.label || transition.key} (MO${layer})`
-          : `MO(${layer})`;
-      console.log(
-        `[BLE shortcut] enter layer ${layer}:`,
-        transition ?? "not found, fallback",
-        transitionText,
-      );
-      if (hasDirectBaseTransition && layer < targetLayer) {
-        continue;
-      }
-      parts.unshift(transitionText);
-    }
-
-    const baseKeycode = keymaps[0]?.[targetIndex];
-    const baseKeyLabel = baseKeycode === undefined
-      ? undefined
-      : keycodeconverter.convertIntToKeycode(baseKeycode).label;
-    parts.push(baseKeyLabel || bluetoothKeycode.label || bluetoothKeycode.key);
-    const shortcut = parts.join(" + ");
-    shortcuts[bluetoothKeycode.value] = shortcut;
-    console.log(`[BLE shortcut] result ${bluetoothKeycode.key}: ${shortcut}`);
-    const custom = customKeycodes?.find((item) => item.name === bluetoothKeycode.key);
-    if (custom) {
-      entries.push({ name: custom.name.trim(), label: custom.shortName, shortcut });
-    }
-  }
-  console.log("entries:", entries);
-  console.groupEnd();
-
-  return { byKeycode: shortcuts, entries };
 }
 
 function LayerEditor(props: {
