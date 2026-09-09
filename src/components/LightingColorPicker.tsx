@@ -56,12 +56,27 @@ function clamp(value: number, min = 0, max = 255) {
 export function LightingColorPicker(props: {
   open: boolean;
   value: string;
+  language?: "zh" | "en";
   onCancel: () => void;
   onConfirm: (value: string) => void;
 }) {
   const [hsv, setHsv] = useState<Hsv>({ h: 0, s: 100, v: 100 });
   const [rgb, setRgb] = useState<Rgb>({ r: 255, g: 0, b: 0 });
   const [draftHex, setDraftHex] = useState(props.value);
+
+  const isZh = props.language === "zh";
+
+  const labels = {
+    basicColors: isZh ? "基础颜色" : "Basic colors",
+    hue: isZh ? "色相 (Hue)" : "Hue",
+    red: isZh ? "红 (Red)" : "Red",
+    saturation: isZh ? "饱和度 (Saturation)" : "Saturation",
+    green: isZh ? "绿 (Green)" : "Green",
+    value: isZh ? "明度 (Value)" : "Value",
+    blue: isZh ? "蓝 (Blue)" : "Blue",
+    cancel: isZh ? "取消" : "Cancel",
+    ok: isZh ? "确定" : "OK",
+  };
 
   useEffect(() => {
     if (!props.open) return;
@@ -96,7 +111,7 @@ export function LightingColorPicker(props: {
       <DialogContent sx={{ p: 2 }}>
         <Box sx={{ display: "grid", gridTemplateColumns: "minmax(150px, 1fr) 28px 150px", gap: 2, alignItems: "start", mt: 1 }}>
           <Box>
-            <Box sx={{ color: "text.secondary", mb: 1 }}>Basic colors</Box>
+            <Box sx={{ color: "text.secondary", mb: 1 }}>{labels.basicColors}</Box>
             <Box sx={{ display: "grid", gridTemplateColumns: "repeat(8, 1fr)", gap: 0.75 }}>
               {PRESET_COLORS.map((preset) => (
                 <Box key={preset} onClick={() => updateRgb(hexToRgb(preset))} sx={{ aspectRatio: "1", cursor: "pointer", backgroundColor: preset, border: "1px solid rgba(255,255,255,.45)", borderRadius: 0.5 }} />
@@ -113,12 +128,12 @@ export function LightingColorPicker(props: {
         </Box>
         <Box sx={{ display: "grid", gridTemplateColumns: "repeat(2, minmax(0, 1fr))", gap: 1, mt: 1.5 }}>
           {([
-            ["Hue", "h"],
-            ["Red", "r"],
-            ["Saturation", "s"],
-            ["Green", "g"],
-            ["Value", "v"],
-            ["Blue", "b"],
+            [labels.hue, "h"],
+            [labels.red, "r"],
+            [labels.saturation, "s"],
+            [labels.green, "g"],
+            [labels.value, "v"],
+            [labels.blue, "b"],
           ] as const).map(([label, key]) => (
             <TextField
               key={key}
@@ -149,10 +164,10 @@ export function LightingColorPicker(props: {
             "&:hover": { borderColor: "#cbd5e1", backgroundColor: "rgba(148, 163, 184, 0.12)" },
           }}
         >
-          Cancel
+          {labels.cancel}
         </Button>
         <Button variant="contained" onClick={() => props.onConfirm(rgbToHex(rgb))} sx={{ width: 64, minWidth: 64, px: 1, py: 0.35, fontSize: "11px" }}>
-          OK
+          {labels.ok}
         </Button>
       </DialogActions>
     </Dialog>

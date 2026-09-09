@@ -289,6 +289,7 @@ export function LightingEditor(props: { via: ViaKeyboard; lighting?: string; lan
           <LightingColorPicker
             open={colorPickerOpen}
             value={color}
+            language={props.language}
             onCancel={() => setColorPickerOpen(false)}
             onConfirm={(value) => {
               setColor(value);
