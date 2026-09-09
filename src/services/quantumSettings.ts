@@ -140,6 +140,7 @@ export const QuantumSettingDefinition: {
       },
     ],
   },
+  /*
   {
     label: "Mouse Keys",
     content: [
@@ -199,6 +200,7 @@ export const QuantumSettingDefinition: {
       },
     ],
   },
+  */
 ];
 
 export async function QuantumSettingsReadAll(via: ViaKeyboard): Promise<{ [id: string]: number }> {
