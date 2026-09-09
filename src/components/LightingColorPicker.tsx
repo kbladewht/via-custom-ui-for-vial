@@ -1,5 +1,6 @@
 import { Box, Button, Dialog, DialogActions, DialogContent, DialogTitle, TextField } from "@mui/material";
 import { useEffect, useState } from "react";
+import quantumTranslations from "../locales/quantum.json";
 
 const PRESET_COLORS = [
   "#000000", "#8b0000", "#006400", "#8b4513", "#008000", "#808000", "#00ff00", "#ffff00",
@@ -63,21 +64,8 @@ export function LightingColorPicker(props: {
   const [hsv, setHsv] = useState<Hsv>({ h: 0, s: 100, v: 100 });
   const [rgb, setRgb] = useState<Rgb>({ r: 255, g: 0, b: 0 });
   const [draftHex, setDraftHex] = useState(props.value);
-
-  const isZh = props.language === "zh";
-
-  const labels = {
-    basicColors: isZh ? "基础颜色" : "Basic colors",
-    hex: isZh ? "十六进制颜色 (HEX)" : "HEX",
-    hue: isZh ? "色相 (Hue)" : "Hue",
-    red: isZh ? "红 (Red)" : "Red",
-    saturation: isZh ? "饱和度 (Saturation)" : "Saturation",
-    green: isZh ? "绿 (Green)" : "Green",
-    value: isZh ? "明度 (Value)" : "Value",
-    blue: isZh ? "蓝 (Blue)" : "Blue",
-    cancel: isZh ? "取消" : "Cancel",
-    ok: isZh ? "确定" : "OK",
-  };
+  const t = quantumTranslations[props.language ?? "en"];
+  const labels = t.colorPicker;
 
   useEffect(() => {
     if (!props.open) return;

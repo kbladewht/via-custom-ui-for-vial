@@ -1,5 +1,6 @@
 import { Box, Grid } from "@mui/material";
 import { Fragment, useEffect, useRef, useState } from "react";
+import quantumTranslations from "../locales/quantum.json";
 import { ViaKeyboard } from "../services/vialKeyboad";
 import { DefaultQmkKeycode, KeycodeConverter, QmkKeycode } from "./keycodes/keycodeConverter";
 import { EditableKey, KeymapKeyPopUp } from "./KeymapEditor";
@@ -96,11 +97,8 @@ function ComboEntry(props: {
   const [popupAnchor, setPopupAnchor] = useState<HTMLElement>();
   const [popupKeycode, setPopupKeycode] = useState(DefaultQmkKeycode);
 
-  const isZh = props.language === "zh";
-
-  const keyLabels = isZh
-    ? ["按键 1", "按键 2", "按键 3", "按键 4", "输出按键"]
-    : ["key 1", "key 2", "key 3", "key 4", "output key"];
+  const t = quantumTranslations[props.language ?? "en"];
+  const keyLabels = t.combos.keys;
 
   useEffect(() => {
     setCandidateCombo(props.combo);

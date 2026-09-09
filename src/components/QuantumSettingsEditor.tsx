@@ -33,7 +33,7 @@ export function QuantumSettingsEditor(props: {
   const [selectedMacroIndex, setSelectedMacroIndex] = useState(0);
   const [keycodeConverter, setKeycodeConverter] = useState<KeycodeConverter>();
 
-  const isZh = props.language === "zh";
+  const t = quantumTranslations[props.language ?? "en"];
 
   const isDirty = Object.keys(quantumValue).some(
     (key) => savedQuantumValue[key] !== undefined && quantumValue[key] !== savedQuantumValue[key]
@@ -264,7 +264,7 @@ export function QuantumSettingsEditor(props: {
                       },
                     }}
                   >
-                    {isZh ? "保存" : "Save"}
+                    {t.common.save}
                   </Button>
                   <Button
                     variant="outlined"
@@ -294,7 +294,7 @@ export function QuantumSettingsEditor(props: {
                       },
                     }}
                   >
-                    {isZh ? "撤销" : "Undo"}
+                    {t.common.undo}
                   </Button>
                   <Button
                     variant="outlined"
@@ -315,7 +315,7 @@ export function QuantumSettingsEditor(props: {
                       },
                     }}
                   >
-                    {isZh ? "重置" : "Reset"}
+                    {t.common.reset}
                   </Button>
                 </Box>
               </Box>

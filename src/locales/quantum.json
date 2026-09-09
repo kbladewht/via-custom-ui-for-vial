@@ -1,6 +1,16 @@
 {
   "zh": {
     "switchLabel": "English",
+    "common": {
+      "save": "保存",
+      "undo": "撤销",
+      "reset": "重置",
+      "revert": "还原",
+      "cancel": "取消",
+      "ok": "确定",
+      "enableAll": "全选",
+      "disableAll": "全不选"
+    },
     "keycodeTabs": {
       "Basic": "基础按键",
       "Mouse": "鼠标",
@@ -31,10 +41,82 @@
       "One Shot Keys": "单次按键",
       "Mouse Keys": "鼠标按键",
       "Quantum": "QMK 设置"
+    },
+    "lighting": {
+      "effect": "RGB 特效",
+      "color": "RGB 颜色",
+      "brightness": "RGB 亮度",
+      "speed": "RGB 速度",
+      "chooseColor": "选择 RGB 颜色",
+      "notSupported": "键盘定义中未声明 RGB 灯效支持。"
+    },
+    "colorPicker": {
+      "basicColors": "基础颜色",
+      "hex": "十六进制颜色 (HEX)",
+      "hue": "色相 (Hue)",
+      "red": "红 (Red)",
+      "saturation": "饱和度 (Saturation)",
+      "green": "绿 (Green)",
+      "value": "明度 (Value)",
+      "blue": "蓝 (Blue)",
+      "cancel": "取消",
+      "ok": "确定"
+    },
+    "tapDance": {
+      "onTap": "单击",
+      "onHold": "长按",
+      "onDoubleTap": "双击",
+      "onTapHold": "单击后长按",
+      "tappingTerm": "双击判定时间 [ms]"
+    },
+    "combos": {
+      "keys": ["按键 1", "按键 2", "按键 3", "按键 4", "输出按键"]
+    },
+    "keyOverride": {
+      "enable": "启用",
+      "enableOnLayers": "启用的层",
+      "enableAll": "全选",
+      "disableAll": "全不选",
+      "trigger": "触发按键",
+      "triggerMods": "触发修饰键",
+      "negativeMods": "排除修饰键",
+      "suppressedMods": "抑制修饰键",
+      "replacement": "替换按键",
+      "options": "选项",
+      "optionLabels": [
+        "按下触发键时激活",
+        "按下所需修饰键时激活",
+        "释放负向修饰键时激活",
+        "仅单个修饰键时激活",
+        "解除覆盖后不再重复触发原按键",
+        "按下其他键时不解除激活"
+      ]
+    },
+    "altRepeatKey": {
+      "enable": "启用",
+      "lastKey": "上一键",
+      "altKey": "替代键",
+      "allowedMods": "允许修饰键",
+      "options": "选项",
+      "optionLabels": [
+        "默认使用此替代键",
+        "双向生效",
+        "忽略左右修饰键方向"
+      ]
     }
   },
   "en": {
     "switchLabel": "中文",
+    "common": {
+      "save": "Save",
+      "undo": "Undo",
+      "reset": "Reset",
+      "revert": "Revert",
+      "cancel": "Cancel",
+      "ok": "OK",
+      "enableAll": "Enable all",
+      "disableAll": "Disable all"
+    },
     "keycodeTabs": {
       "Basic": "Basic",
       "Mouse": "Mouse",
@@ -65,6 +147,68 @@
       "One Shot Keys": "One Shot Keys",
       "Mouse Keys": "Mouse Keys",
       "Quantum": "QMK Settings"
+    },
+    "lighting": {
+      "effect": "RGB Effect",
+      "color": "RGB Color",
+      "brightness": "RGB Brightness",
+      "speed": "RGB Speed",
+      "chooseColor": "Choose RGB color",
+      "notSupported": "Keyboard lighting is not declared in its Vial definition."
+    },
+    "colorPicker": {
+      "basicColors": "Basic colors",
+      "hex": "HEX",
+      "hue": "Hue",
+      "red": "Red",
+      "saturation": "Saturation",
+      "green": "Green",
+      "value": "Value",
+      "blue": "Blue",
+      "cancel": "Cancel",
+      "ok": "OK"
+    },
+    "tapDance": {
+      "onTap": "On tap",
+      "onHold": "On hold",
+      "onDoubleTap": "On double tap",
+      "onTapHold": "On tap + hold",
+      "tappingTerm": "Tapping term [ms]"
+    },
+    "combos": {
+      "keys": ["key 1", "key 2", "key 3", "key 4", "output key"]
+    },
+    "keyOverride": {
+      "enable": "Enable",
+      "enableOnLayers": "Enable on layers",
+      "enableAll": "Enable all",
+      "disableAll": "Disable all",
+      "trigger": "Trigger",
+      "triggerMods": "Trigger mods",
+      "negativeMods": "Negative mods",
+      "suppressedMods": "Suppressed mods",
+      "replacement": "Replacement",
+      "options": "Options",
+      "optionLabels": [
+        "Activate when the trigger key is pressed down",
+        "Activate when a necessary modifier is pressed down",
+        "Activate when a negative modifier is released",
+        "Activate on one modifier",
+        "Don't register the trigger key again after the override is deactivated",
+        "Don't deactivate when another key is pressed down"
+      ]
+    },
+    "altRepeatKey": {
+      "enable": "Enable",
+      "lastKey": "Last key",
+      "altKey": "Alt key",
+      "allowedMods": "Allowed mods",
+      "options": "Options",
+      "optionLabels": [
+        "Default to this alt key",
+        "Bidirectional",
+        "Ignore mod handedness"
+      ]
     }
   }
 }

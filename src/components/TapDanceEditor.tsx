@@ -1,5 +1,6 @@
 import { Box, Grid, TextField } from "@mui/material";
 import { Fragment, useEffect, useRef, useState } from "react";
+import quantumTranslations from "../locales/quantum.json";
 import { ViaKeyboard } from "../services/vialKeyboad";
 import { DefaultQmkKeycode, KeycodeConverter, QmkKeycode } from "./keycodes/keycodeConverter";
 import { EditableKey, KeymapKeyPopUp } from "./KeymapEditor";
@@ -91,7 +92,8 @@ function TapDanceEntry(props: {
   const [popupAnchor, setPopupAnchor] = useState<HTMLElement>();
   const [popupKeycode, setPopupKeycode] = useState(DefaultQmkKeycode);
 
-  const isZh = props.language === "zh";
+  const t = quantumTranslations[props.language ?? "en"];
+  const labels = t.tapDance;
 
   const updateCandidate = (updated: TapDanceValue) => {
     setCandidateTapdance(updated);
@@ -124,6 +126,13 @@ function TapDanceEntry(props: {
           reactKey: selectedKeyIndex.toString(),
         };
 
+  const tapDanceFields = [
+    { label: labels.onTap, key: candidateTapdance.onTap },
+    { label: labels.onHold, key: candidateTapdance.onHold },
+    { label: labels.onDoubleTap, key: candidateTapdance.onDoubleTap },
+    { label: labels.onTapHold, key: candidateTapdance.onTapHold },
+  ];
+
   return (
     <FocusedKeyContext.Provider
       value={{
@@ -136,29 +145,12 @@ function TapDanceEntry(props: {
     >
     <Box sx={{ flex: 1, position: "relative" }}>
       <Grid container spacing={1} sx={{ maxWidth: 480, mx: "auto", mt: 0 }}>
-        {[
-          {
-            label: isZh ? "单击 (On tap)" : "On tap",
-            key: candidateTapdance.onTap,
-          },
-          {
-            label: isZh ? "长按 (On hold)" : "On hold",
-            key: candidateTapdance.onHold,
-          },
-          {
-            label: isZh ? "双击 (On double tap)" : "On double tap",
-            key: candidateTapdance.onDoubleTap,
-          },
-          {
-            label: isZh ? "单击并长按 (On tap + hold)" : "On tap + hold",
-            key: candidateTapdance.onTapHold,
-          },
-        ].map((k, idx) => {
+        {tapDanceFields.map((k, idx) => {
           return (
             <Fragment key={idx}>
               <Grid item xs={5}>
                 <Box className="editor-field-label" alignContent={"center"} textAlign={"right"} height={"100%"}>
-                  {isZh ? ["单击", "长按", "双击", "单击后长按"][idx] : ["On tap", "On hold", "On double tap", "On tap + hold"][idx]}
+                  {k.label}
                 </Box>
               </Grid>
               <Grid item xs={7}>
@@ -184,7 +176,7 @@ function TapDanceEntry(props: {
         <Grid container spacing={1} sx={{ maxWidth: 480, mx: "auto" }}>
           <Grid item xs={5}>
             <Box className="editor-field-label" alignContent={"center"} textAlign={"right"} height={"100%"}>
-              {isZh ? "双击判定时间 [ms]" : "Tapping term [ms]"}
+              {labels.tappingTerm}
             </Box>
           </Grid>
           <Grid item xs={7}>

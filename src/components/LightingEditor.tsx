@@ -1,5 +1,6 @@
 import { Box, ButtonBase, FormControl, InputLabel, MenuItem, Select, Slider } from "@mui/material";
 import { useEffect, useState } from "react";
+import quantumTranslations from "../locales/quantum.json";
 import { ViaKeyboard } from "../services/vialKeyboad";
 import { LightingColorPicker } from "./LightingColorPicker";
 
@@ -239,25 +240,27 @@ export function LightingEditor(props: { via: ViaKeyboard; lighting?: string; lan
     }
   }, [props.lighting, props.via, props.language]);
 
+  const t = quantumTranslations[props.language ?? "en"];
+
   return (
     <Box sx={{ width: "100%", maxWidth: 560, p: 2 }}>
       {props.lighting === undefined && (
         <Box sx={{ color: "#fbbf24", mb: 1 }}>
-          {isZh ? "键盘定义中未声明 RGB 灯效支持。" : "Keyboard lighting is not declared in its Vial definition."}
+          {t.lighting.notSupported}
         </Box>
       )}
       {error && <Box sx={{ color: "#f87171", mb: 1 }}>{error}</Box>}
       <Box sx={{ display: "grid", gridTemplateColumns: "110px minmax(180px, 1fr)", alignItems: "center", rowGap: 1.25 }}>
         <Box component="label" htmlFor="lighting-effect" sx={{ color: "#e5eefb", fontSize: "0.9rem" }}>
-          {isZh ? "RGB 特效" : "RGB Effect"}
+          {t.lighting.effect}
         </Box>
         <FormControl size="small" fullWidth>
-          <InputLabel id="lighting-effect-label">{isZh ? "RGB 特效" : "RGB Effect"}</InputLabel>
+          <InputLabel id="lighting-effect-label">{t.lighting.effect}</InputLabel>
           <Select
             labelId="lighting-effect-label"
             id="lighting-effect"
             value={effects.length > 0 && effects.some((item) => item.id === effect) ? effect : (effects[0]?.id ?? "")}
-            label={isZh ? "RGB 特效" : "RGB Effect"}
+            label={t.lighting.effect}
             onChange={(event) => {
               const value = Number(event.target.value);
               setEffect(value);
@@ -273,11 +276,11 @@ export function LightingEditor(props: { via: ViaKeyboard; lighting?: string; lan
         </FormControl>
 
         <Box component="label" htmlFor="lighting-color" sx={{ color: "#e5eefb", fontSize: "0.9rem" }}>
-          {isZh ? "RGB 颜色" : "RGB Color"}
+          {t.lighting.color}
         </Box>
         <>
           <ButtonBase
-            aria-label={isZh ? "选择 RGB 颜色" : "Choose RGB color"}
+            aria-label={t.lighting.chooseColor}
             onClick={() => setColorPickerOpen(true)}
             sx={{
               width: "100%",
@@ -302,7 +305,7 @@ export function LightingEditor(props: { via: ViaKeyboard; lighting?: string; lan
         </>
 
         <Box component="label" htmlFor="lighting-brightness" sx={{ color: "#e5eefb", fontSize: "0.9rem" }}>
-          {isZh ? "RGB 亮度" : "RGB Brightness"}
+          {t.lighting.brightness}
         </Box>
         <Slider
           id="lighting-brightness"
@@ -319,7 +322,7 @@ export function LightingEditor(props: { via: ViaKeyboard; lighting?: string; lan
         />
 
         <Box component="label" htmlFor="lighting-speed" sx={{ color: "#e5eefb", fontSize: "0.9rem" }}>
-          {isZh ? "RGB 速度" : "RGB Speed"}
+          {t.lighting.speed}
         </Box>
         <Slider
           id="lighting-speed"

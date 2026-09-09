@@ -1,5 +1,6 @@
 import { Box, Checkbox, FormControlLabel, Grid, Typography } from "@mui/material";
 import { useEffect, useRef, useState } from "react";
+import quantumTranslations from "../locales/quantum.json";
 import { ViaKeyboard } from "../services/vialKeyboad";
 import { DefaultQmkKeycode, KeycodeConverter, QmkKeycode } from "./keycodes/keycodeConverter";
 import { EditableKey, KeymapKeyPopUp } from "./KeymapEditor";
@@ -32,9 +33,9 @@ const MODIFIERS = [
 ];
 
 const ALT_REPEAT_OPTIONS = [
-  { label: "Default to this alt key", bit: 0 },
-  { label: "Bidirectional", bit: 1 },
-  { label: "Ignore mod handedness", bit: 2 },
+  { index: 0, bit: 0 },
+  { index: 1, bit: 1 },
+  { index: 2, bit: 2 },
 ];
 
 export function AltRepeatKeyEditor(props: {
@@ -123,7 +124,8 @@ function AltRepeatKeyEntry(props: {
   const [popupAnchor, setPopupAnchor] = useState<HTMLElement>();
   const [popupKeycode, setPopupKeycode] = useState(DefaultQmkKeycode);
 
-  const isZh = props.language === "zh";
+  const t = quantumTranslations[props.language ?? "en"];
+  const labels = t.altRepeatKey;
 
   useEffect(() => {
     setCandidate(props.altRepeat);
@@ -172,7 +174,7 @@ function AltRepeatKeyEntry(props: {
           {/* Enable */}
           <Grid item xs={3}>
             <Box className="editor-field-label" alignContent="center" textAlign="right" height="100%">
-              {isZh ? "启用" : "Enable"}
+              {labels.enable}
             </Box>
           </Grid>
           <Grid item xs={9}>
@@ -192,7 +194,7 @@ function AltRepeatKeyEntry(props: {
           {/* Last key */}
           <Grid item xs={3}>
             <Box className="editor-field-label" alignContent="center" textAlign="right" height="100%">
-              {isZh ? "上一键" : "Last key"}
+              {labels.lastKey}
             </Box>
           </Grid>
           <Grid item xs={9}>
@@ -216,7 +218,7 @@ function AltRepeatKeyEntry(props: {
           {/* Alt key */}
           <Grid item xs={3}>
             <Box className="editor-field-label" alignContent="center" textAlign="right" height="100%">
-              {isZh ? "替代键" : "Alt key"}
+              {labels.altKey}
             </Box>
           </Grid>
           <Grid item xs={9}>
@@ -240,7 +242,7 @@ function AltRepeatKeyEntry(props: {
           {/* Allowed mods */}
           <Grid item xs={3}>
             <Box className="editor-field-label" alignContent="flex-start" textAlign="right" pt={0.5}>
-              {isZh ? "允许修饰键" : "Allowed mods"}
+              {labels.allowedMods}
             </Box>
           </Grid>
           <Grid item xs={9}>
@@ -278,7 +280,7 @@ function AltRepeatKeyEntry(props: {
           {/* Options */}
           <Grid item xs={3}>
             <Box className="editor-field-label" alignContent="flex-start" textAlign="right" pt={0.5}>
-              {isZh ? "选项" : "Options"}
+              {labels.options}
             </Box>
           </Grid>
           <Grid item xs={9}>
@@ -288,13 +290,7 @@ function AltRepeatKeyEntry(props: {
                   key={opt.bit}
                   label={
                     <Typography sx={{ fontSize: "0.82rem", color: "#cbd5e1", whiteSpace: "nowrap" }}>
-                      {isZh
-                        ? opt.bit === 0
-                          ? "默认使用此替代键"
-                          : opt.bit === 1
-                            ? "双向生效"
-                            : "忽略左右修饰键方向"
-                        : opt.label}
+                      {labels.optionLabels[opt.index]}
                     </Typography>
                   }
                   control={
