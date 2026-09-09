@@ -14,6 +14,7 @@ import {
 import { MuiColorInput, MuiColorInputColors } from "mui-color-input";
 import { ChangeEvent, SyntheticEvent } from "react";
 import evaluate from "simple-evaluate";
+import quantumTranslations from "../locales/quantum.json";
 
 interface MenuItemProperties {
   label: string;
@@ -26,6 +27,7 @@ type ToggleElement = {
   options?: [number, number];
   content: [string, number, number, number?];
   value?: number;
+  language?: "zh" | "en";
   onChange: (value: number) => void;
 };
 
@@ -35,6 +37,7 @@ type RangeElement = {
   options?: [number, number];
   content: [string, number, number, number?];
   value: number;
+  language?: "zh" | "en";
   onChange: (value: number) => void;
 };
 
@@ -44,6 +47,7 @@ type DropdownElement = {
   content: [string, number, number, number?];
   options: Array<[string, number]> | Array<string>;
   value: number;
+  language?: "zh" | "en";
   onChange: (value: number) => void;
 };
 
@@ -52,6 +56,7 @@ type ColorElement = {
   label: string;
   content: [string, number, number, number?];
   value: number;
+  language?: "zh" | "en";
   onChange: (value: number) => void;
 };
 
@@ -61,6 +66,7 @@ type ButtonElement = {
   content: [string, number, number, number?];
   options?: Array<number>;
   value: number;
+  language?: "zh" | "en";
   onChange: (value: number) => void;
 };
 
@@ -70,6 +76,7 @@ type MultipleCheckboxElement = {
   content: [string, number, number, number?];
   options: Array<[string, number]> | Array<string>;
   value: number;
+  language?: "zh" | "en";
   onChange: (value: number) => void;
 };
 
@@ -92,8 +99,21 @@ type MenuSectionProperties = {
   label: string;
   content: (MenuElementProperties | ShowIfElement)[];
   customValues: { [id: string]: number };
+  language?: "zh" | "en";
   onChange: (id: [string, number, number, number?], value: number) => void;
 };
+
+function translateLabel(label: string, lang: "zh" | "en" = "en"): string {
+  if (lang !== "zh") return label;
+  const qmkLabels = quantumTranslations.zh.qmkSettings.labels as Record<string, string>;
+  return qmkLabels[label] ?? label;
+}
+
+function translateOption(option: string, lang: "zh" | "en" = "en"): string {
+  if (lang !== "zh") return option;
+  const qmkOptions = quantumTranslations.zh.qmkSettings.options as Record<string, string>;
+  return qmkOptions[option] ?? option;
+}
 
 function ViaToggle(props: ToggleElement) {
   const handleChange = (_event: React.ChangeEvent<HTMLInputElement>, checked: boolean) => {
@@ -102,7 +122,7 @@ function ViaToggle(props: ToggleElement) {
   return (
     <>
       <Grid item xs={3}>
-        <h4>{props.label}</h4>
+        <h4>{translateLabel(props.label, props.language)}</h4>
       </Grid>
       <Grid item xs={9}>
         <Switch onChange={handleChange} checked={props.value == (props.options?.[1] ?? 1)}></Switch>
@@ -141,7 +161,7 @@ function ViaRange(props: RangeElement) {
   return (
     <>
       <Grid item xs={3}>
-        <h4>{props.label}</h4>
+        <h4>{translateLabel(props.label, props.language)}</h4>
       </Grid>
       <Grid item xs={8}>
         <Slider
@@ -187,7 +207,7 @@ function ViaDropDown(props: DropdownElement) {
   return (
     <>
       <Grid item xs={3}>
-        <h4>{props.label}</h4>
+        <h4>{translateLabel(props.label, props.language)}</h4>
       </Grid>
       <Grid item xs={9}>
         <FormControl fullWidth>
@@ -195,7 +215,7 @@ function ViaDropDown(props: DropdownElement) {
             {labels.map((o) => {
               return (
                 <MenuItem key={`${props.label}-${o[0]}`} value={String(o[0])}>
-                  {o[0]}
+                  {translateOption(String(o[0]), props.language)}
                 </MenuItem>
               );
             })}
@@ -214,7 +234,7 @@ function ViaColor(props: ColorElement) {
   return (
     <>
       <Grid item xs={3}>
-        <h4>{props.label}</h4>
+        <h4>{translateLabel(props.label, props.language)}</h4>
       </Grid>
       <Grid item xs={9}>
         <FormControl fullWidth>
@@ -237,7 +257,7 @@ function ViaButton(props: ButtonElement) {
   return (
     <>
       <Grid item xs={3}>
-        <h4>{props.label}</h4>
+        <h4>{translateLabel(props.label, props.language)}</h4>
       </Grid>
       <Grid item xs={9}>
         <Button
@@ -246,7 +266,7 @@ function ViaButton(props: ButtonElement) {
             props.onChange(props.options?.[0] ?? 0);
           }}
         >
-          {props.label}
+          {translateLabel(props.label, props.language)}
         </Button>
       </Grid>
     </>
@@ -270,7 +290,12 @@ function ViaMultipleCheckbox(props: MultipleCheckboxElement) {
   };
 
   const valueToLabel = (value: string[]) => {
-    return value.map((v) => labels.find((label) => v === label[0])?.[0]).join(", ");
+    return value
+      .map((v) => {
+        const raw = labels.find((label) => v === label[0])?.[0] ?? "";
+        return translateOption(raw, props.language);
+      })
+      .join(", ");
   };
 
   const valueToArray = (value: number): string[] => {
@@ -287,7 +312,7 @@ function ViaMultipleCheckbox(props: MultipleCheckboxElement) {
   return (
     <>
       <Grid item xs={3}>
-        <h4>{props.label}</h4>
+        <h4>{translateLabel(props.label, props.language)}</h4>
       </Grid>
       <Grid item xs={9}>
         <FormControl fullWidth>
@@ -313,7 +338,7 @@ function ViaMultipleCheckbox(props: MultipleCheckboxElement) {
               return (
                 <MenuItem key={`${props.label}-${o[0]}`} value={o[0]}>
                   <Checkbox checked={(props.value & (1 << o[1])) !== 0} />
-                  <ListItemText primary={o[0]} />
+                  <ListItemText primary={translateOption(String(o[0]), props.language)} />
                 </MenuItem>
               );
             })}
@@ -332,6 +357,7 @@ function MenuElement(props: MenuSectionProperties, elem: MenuElementProperties, 
           <ViaToggle
             key={key}
             {...elem}
+            language={props.language}
             value={props.customValues[elem.content[0]] ?? 0}
             onChange={(value) => props.onChange(elem.content, value)}
           />
@@ -341,6 +367,7 @@ function MenuElement(props: MenuSectionProperties, elem: MenuElementProperties, 
           <ViaRange
             key={key}
             {...elem}
+            language={props.language}
             value={props.customValues[elem.content[0]] ?? 0}
             onChange={(value) => props.onChange(elem.content, value)}
           />
@@ -350,6 +377,7 @@ function MenuElement(props: MenuSectionProperties, elem: MenuElementProperties, 
           <ViaDropDown
             key={key}
             {...elem}
+            language={props.language}
             value={props.customValues[elem.content[0]] ?? 0}
             onChange={(value) => props.onChange(elem.content, value)}
           />
@@ -359,6 +387,7 @@ function MenuElement(props: MenuSectionProperties, elem: MenuElementProperties, 
           <ViaColor
             key={key}
             {...elem}
+            language={props.language}
             value={props.customValues[elem.content[0]] ?? 0}
             onChange={(value) => props.onChange(elem.content, value)}
           />
@@ -368,6 +397,7 @@ function MenuElement(props: MenuSectionProperties, elem: MenuElementProperties, 
           <ViaButton
             key={key}
             {...elem}
+            language={props.language}
             value={props.customValues[elem.content[0]] ?? 0}
             onChange={(value) => props.onChange(elem.content, value)}
           />
@@ -377,6 +407,7 @@ function MenuElement(props: MenuSectionProperties, elem: MenuElementProperties, 
           <ViaMultipleCheckbox
             key={key}
             {...elem}
+            language={props.language}
             value={props.customValues[elem.content[0]] ?? 0}
             onChange={(value) => props.onChange(elem.content, value)}
           />

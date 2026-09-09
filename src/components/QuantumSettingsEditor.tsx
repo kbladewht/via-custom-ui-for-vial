@@ -228,6 +228,7 @@ export function QuantumSettingsEditor(props: {
                 <ViaMenuItem
                   {...(QuantumSettingDefinition[quantumTabValue] as MenuSectionProperties)}
                   customValues={quantumValue}
+                  language={props.language}
                   onChange={(id, value) => {
                     console.log(`update ${id} to ${value}`);
                     const newValues = { ...quantumValue, [id[0]]: value };
