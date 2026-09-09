@@ -1,4 +1,4 @@
-import { Box, Button, FormControl, Grid, MenuItem, Select } from "@mui/material";
+import { Box, Button, FormControl, Grid, MenuItem, Select, Tab, Tabs } from "@mui/material";
 import { useContext, useEffect, useRef, useState } from "react";
 import "../App.css";
 import quantumTranslations from "../locales/quantum.json";
@@ -741,20 +741,51 @@ export function TapDanceSelector(props: {
 
   return (
     <Box sx={{ width: "100%", p: 1 }}>
-      {editorIndex === undefined ? (
-        <KeycodeCatalog
-          keycodeConverter={keycodeConverter}
-          directKeygroups={["tapdance"]}
-          showTapDanceEditIndicator
-          onTapdanceSelect={(index) => setEditorIndex(index)}
-        />
-      ) : (
-        <TapDanceEditor
-          via={props.via}
-          keycodeConverter={keycodeConverter}
-          tapdanceIndex={editorIndex}
-          onBack={() => setEditorIndex(undefined)}
-        />
+      <Tabs
+        value={editorIndex === undefined ? false : editorIndex}
+        onChange={(_event, index: number) => setEditorIndex(index)}
+        variant="scrollable"
+        scrollButtons="auto"
+        aria-label="Tap Dance entries"
+        sx={{
+          py: 0,
+          "& .MuiTabs-flexContainer": {
+            justifyContent: "flex-start",
+          },
+        }}
+      >
+        {Array.from({ length: props.dynamicEntryCount.tapdance }, (_, index) => (
+          <Tab
+            key={index}
+            label={index}
+            value={index}
+            sx={{
+              minWidth: 36,
+              minHeight: 32,
+              px: 0.75,
+              color: "#b8c7dc",
+              fontWeight: 600,
+              textTransform: "none",
+              border: "1px solid #334155",
+              borderRadius: "8px 8px 0 0",
+              backgroundColor: "rgba(30, 41, 59, 0.7)",
+              "&.Mui-selected": {
+                color: "#f8fafc",
+                borderColor: "#475569",
+                backgroundColor: "#334155",
+              },
+            }}
+          />
+        ))}
+      </Tabs>
+      {editorIndex !== undefined && (
+        <Box sx={{ maxWidth: 480, mx: "auto", mt: 2 }}>
+          <TapDanceEditor
+            via={props.via}
+            keycodeConverter={keycodeConverter}
+            tapdanceIndex={editorIndex}
+          />
+        </Box>
       )}
     </Box>
   );

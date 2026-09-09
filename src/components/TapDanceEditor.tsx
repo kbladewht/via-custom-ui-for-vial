@@ -8,7 +8,6 @@ export function TapDanceEditor(props: {
   via: ViaKeyboard;
   keycodeConverter: KeycodeConverter;
   tapdanceIndex: number;
-  onBack: () => void;
 }) {
   const [tapDance, setTapDance] = useState<{ [id: string]: TapDanceValue }>({});
   const boundaryRef = useRef<HTMLDivElement>(null);
@@ -55,7 +54,6 @@ export function TapDanceEditor(props: {
           console.log(td);
           sendTapdance(props.tapdanceIndex, td);
         }}
-        onBack={props.onBack}
       ></TapDanceEntry>
     </Box>
   );
@@ -74,7 +72,6 @@ function TapDanceEntry(props: {
   keycodeconverter: KeycodeConverter;
   boundaryRef?: React.RefObject<HTMLDivElement>;
   onSave?: (td: TapDanceValue) => void;
-  onBack?: () => void;
 }) {
   const [tappingTerm, setTappingTerm] = useState(props.td.tappingTerm.toString());
   const [popupOpen, setpopupOpen] = useState(false);
@@ -162,22 +159,23 @@ function TapDanceEntry(props: {
             }}
           ></TextField>
         </Grid>
-        <Grid item xs={1}>
-          <Button
-            onClick={() => {
-              props.onBack?.();
-            }}
-          >
-            BACK
-          </Button>
-        </Grid>
-        <Grid item xs={4}>
+        <Grid item xs={5}>
           <Box sx={{ display: "flex", justifyContent: "right" }}>
-            <Button onClick={() => setCandidateTapdance(props.td)}>Clear</Button>
+            <Button
+              variant="outlined"
+              onClick={() => setCandidateTapdance(props.td)}
+              sx={{ color: "#e2e8f0", borderColor: "#64748b", backgroundColor: "#334155" }}
+            >
+              Revert
+            </Button>
           </Box>
         </Grid>
         <Grid item xs={7}>
-          <Button variant="outlined" onClick={() => props.onSave?.(candidateTapdance)}>
+          <Button
+            variant="outlined"
+            onClick={() => props.onSave?.(candidateTapdance)}
+            sx={{ color: "#f8fafc", borderColor: "#64748b", backgroundColor: "#334155" }}
+          >
             Save
           </Button>
         </Grid>
