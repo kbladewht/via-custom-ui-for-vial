@@ -48,6 +48,29 @@ function hexToHsv(value: string) {
   };
 }
 
+function hsvToHex(hue: number, saturation: number, value: number) {
+  const h = (hue / 255) * 360;
+  const s = saturation / 255;
+  const v = value / 255;
+  const chroma = v * s;
+  const x = chroma * (1 - Math.abs(((h / 60) % 2) - 1));
+  const match = v - chroma;
+  const [red, green, blue] = h < 60
+    ? [chroma, x, 0]
+    : h < 120
+      ? [x, chroma, 0]
+      : h < 180
+        ? [0, chroma, x]
+        : h < 240
+          ? [0, x, chroma]
+          : h < 300
+            ? [x, 0, chroma]
+            : [chroma, 0, x];
+  return `#${[red, green, blue]
+    .map((channel) => Math.round((channel + match) * 255).toString(16).padStart(2, "0"))
+    .join("")}`;
+}
+
 export function LightingEditor(props: { via: ViaKeyboard; lighting?: string }) {
   const [effect, setEffect] = useState(0);
   const [color, setColor] = useState("#ff0000");
@@ -92,6 +115,7 @@ export function LightingEditor(props: { via: ViaKeyboard; lighting?: string }) {
         setEffect(value.effect);
         setBrightness(value.brightness);
         setSpeed(value.speed);
+        setColor(hsvToHex(value.hue, value.saturation, value.brightness));
       }).catch((caught) => setError(caught instanceof Error ? caught.message : String(caught)));
     } else if (props.lighting === "vialrgb") {
       void props.via.GetVialRgb().then((value) => {
@@ -102,6 +126,7 @@ export function LightingEditor(props: { via: ViaKeyboard; lighting?: string }) {
         setEffect(value.mode);
         setBrightness(value.brightness);
         setSpeed(value.speed);
+        setColor(hsvToHex(value.hue, value.saturation, value.brightness));
       }).catch((caught) => setError(caught instanceof Error ? caught.message : String(caught)));
     }
   }, [props.lighting, props.via]);

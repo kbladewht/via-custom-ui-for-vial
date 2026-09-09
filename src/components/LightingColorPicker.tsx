@@ -79,7 +79,7 @@ export function LightingColorPicker(props: {
   };
 
   const updateHsv = (nextHsv: Hsv) => {
-    const normalized = { h: (nextHsv.h + 360) % 360, s: clamp(nextHsv.s, 0, 100), v: clamp(nextHsv.v, 0, 100) };
+    const normalized = { h: clamp((nextHsv.h + 360) % 360, 0, 360), s: clamp(nextHsv.s, 0, 100), v: clamp(nextHsv.v, 0, 100) };
     setHsv(normalized);
     setRgb(hsvToRgb(normalized));
     setDraftHex(rgbToHex(hsvToRgb(normalized)));
@@ -91,9 +91,9 @@ export function LightingColorPicker(props: {
   };
 
   return (
-    <Dialog open={props.open} onClose={props.onCancel} maxWidth="sm" fullWidth>
-      <DialogTitle>Select Color</DialogTitle>
-      <DialogContent>
+    <Dialog open={props.open} onClose={props.onCancel} maxWidth="sm" fullWidth PaperProps={{ sx: { backgroundColor: "#0f172a", color: "#e2e8f0", border: "1px solid #475569", borderRadius: 2 } }}>
+      <DialogTitle sx={{ display: "none" }}>Select Color</DialogTitle>
+      <DialogContent sx={{ p: 2 }}>
         <Box sx={{ display: "grid", gridTemplateColumns: "minmax(150px, 1fr) 28px 150px", gap: 2, alignItems: "start", mt: 1 }}>
           <Box>
             <Box sx={{ color: "text.secondary", mb: 1 }}>Basic colors</Box>
@@ -111,14 +111,48 @@ export function LightingColorPicker(props: {
             <TextField size="small" label="HTML" value={draftHex} onChange={(event) => { setDraftHex(event.target.value); if (/^#[0-9a-f]{6}$/i.test(event.target.value)) updateRgb(hexToRgb(event.target.value)); }} />
           </Box>
         </Box>
-        <Box sx={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 1.25, mt: 2 }}>
-          {(["h", "s", "v"] as const).map((key) => <TextField key={key} size="small" label={key.toUpperCase()} type="number" value={Math.round(hsv[key])} onChange={(event) => updateHsv({ ...hsv, [key]: Number(event.target.value) })} />)}
-          {(["r", "g", "b"] as const).map((key) => <TextField key={key} size="small" label={key.toUpperCase()} type="number" value={rgb[key]} onChange={(event) => updateRgb({ ...rgb, [key]: Number(event.target.value) })} />)}
+        <Box sx={{ display: "grid", gridTemplateColumns: "repeat(2, minmax(0, 1fr))", gap: 1, mt: 1.5 }}>
+          {([
+            ["Hue", "h"],
+            ["Red", "r"],
+            ["Saturation", "s"],
+            ["Green", "g"],
+            ["Value", "v"],
+            ["Blue", "b"],
+          ] as const).map(([label, key]) => (
+            <TextField
+              key={key}
+              size="small"
+              label={label}
+              type="number"
+              value={key === "h" || key === "s" || key === "v" ? Math.round(hsv[key]) : rgb[key]}
+              onChange={(event) => key === "h" || key === "s" || key === "v"
+                ? updateHsv({ ...hsv, [key]: Number(event.target.value) })
+                : updateRgb({ ...rgb, [key]: Number(event.target.value) })}
+              sx={{ "& .MuiInputBase-root": { color: "#e2e8f0" }, "& .MuiInputLabel-root": { color: "#94a3b8" }, "& .MuiOutlinedInput-notchedOutline": { borderColor: "#64748b" } }}
+            />
+          ))}
         </Box>
       </DialogContent>
       <DialogActions>
-        <Button onClick={props.onCancel}>Cancel</Button>
-        <Button variant="contained" onClick={() => props.onConfirm(rgbToHex(rgb))}>OK</Button>
+        <Button
+          variant="outlined"
+          onClick={props.onCancel}
+          sx={{
+            minWidth: 46,
+            px: 1,
+            py: 0.35,
+            fontSize: "11px",
+            color: "#cbd5e1",
+            borderColor: "#64748b",
+            "&:hover": { borderColor: "#cbd5e1", backgroundColor: "rgba(148, 163, 184, 0.12)" },
+          }}
+        >
+          Cancel
+        </Button>
+        <Button variant="contained" onClick={() => props.onConfirm(rgbToHex(rgb))} sx={{ minWidth: 46, px: 1, py: 0.35, fontSize: "11px" }}>
+          OK
+        </Button>
       </DialogActions>
     </Dialog>
   );
