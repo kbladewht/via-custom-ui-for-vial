@@ -1,7 +1,7 @@
-import { Box, FormControl, InputLabel, MenuItem, Select, Slider } from "@mui/material";
+import { Box, ButtonBase, FormControl, InputLabel, MenuItem, Select, Slider } from "@mui/material";
 import { useEffect, useState } from "react";
-import { MuiColorInput } from "mui-color-input";
 import { ViaKeyboard } from "../services/vialKeyboad";
+import { LightingColorPicker } from "./LightingColorPicker";
 
 const VIAL_RGB_EFFECTS = [
   "Disable", "Direct Control", "Solid Color", "Alphas Mods", "Gradient Up Down",
@@ -55,6 +55,7 @@ export function LightingEditor(props: { via: ViaKeyboard; lighting?: string }) {
   const [speed, setSpeed] = useState(50);
   const [effects, setEffects] = useState<{ id: number; label: string }[]>([]);
   const [error, setError] = useState<string>();
+  const [colorPickerOpen, setColorPickerOpen] = useState(false);
 
   const setRgbValue = async (value: { brightness?: number; effect?: number; speed?: number; hue?: number; saturation?: number }) => {
     try {
@@ -139,16 +140,30 @@ export function LightingEditor(props: { via: ViaKeyboard; lighting?: string }) {
         <Box component="label" htmlFor="lighting-color" sx={{ color: "#e5eefb", fontSize: "0.9rem" }}>
           RGB Color
         </Box>
-        <MuiColorInput
-          id="lighting-color"
-          value={color}
-          format="hex"
-          size="small"
-          onChange={(value: string) => {
-            setColor(value);
-            void setRgbValue(hexToHsv(value));
-          }}
-        />
+        <>
+          <ButtonBase
+            aria-label="Choose RGB color"
+            onClick={() => setColorPickerOpen(true)}
+            sx={{
+              width: "100%",
+              height: 32,
+              borderRadius: 1,
+              backgroundColor: color,
+              border: "1px solid rgba(226, 232, 240, 0.7)",
+              boxShadow: "inset 0 0 0 1px rgba(15, 23, 42, 0.35)",
+            }}
+          />
+          <LightingColorPicker
+            open={colorPickerOpen}
+            value={color}
+            onCancel={() => setColorPickerOpen(false)}
+            onConfirm={(value) => {
+              setColor(value);
+              setColorPickerOpen(false);
+              void setRgbValue(hexToHsv(value));
+            }}
+          />
+        </>
 
         <Box component="label" htmlFor="lighting-brightness" sx={{ color: "#e5eefb", fontSize: "0.9rem" }}>
           RGB Brightness
