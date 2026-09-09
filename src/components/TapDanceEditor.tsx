@@ -165,8 +165,8 @@ function TapDanceEntry(props: {
           );
         })}
       </Grid>
-      <Box sx={{ position: "relative", maxWidth: 480, mx: "auto", mt: 1 }}>
-        <Grid container spacing={1}>
+      <Box sx={{ position: "relative", width: "100%", mt: 1 }}>
+        <Grid container spacing={1} sx={{ maxWidth: 480, mx: "auto" }}>
           <Grid item xs={5}>
             <Box className="editor-field-label" alignContent={"center"} textAlign={"right"} height={"100%"}>
               Tapping term [ms]
@@ -191,7 +191,7 @@ function TapDanceEntry(props: {
             />
           </Grid>
         </Grid>
-        <Box sx={{ position: "absolute", left: "calc(100% + 8px)", top: 4, display: "flex", gap: 1 }}>
+        <Box sx={{ position: "absolute", right: 0, top: 4, display: "flex", gap: 1 }}>
           <Button
             variant="outlined"
             onClick={() => setCandidateTapdance(props.td)}
