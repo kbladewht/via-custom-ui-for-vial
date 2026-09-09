@@ -8,6 +8,7 @@ export interface VialDefinition {
   layouts: { keymap: string[][] };
   customKeycodes: { name: string; title: string; shortName: string }[];
   menus: MenuDefinition[];
+  lighting?: "qmk_rgblight" | "qmk_backlight" | "qmk_backlight_rgblight" | "vialrgb";
 }
 
 export interface MenuItemDefiniton {
@@ -91,6 +92,16 @@ enum vial_command_id {
   vial_qmk_settings_reset = 0x0c,
   vial_dynamic_entry_op = 0x0d,
 }
+
+const VIA_LIGHTING_SET_VALUE = 0x07;
+const VIA_LIGHTING_GET_VALUE = 0x08;
+const VIA_LIGHTING_SAVE = 0x09;
+const QMK_RGBLIGHT_BRIGHTNESS = 0x80;
+const QMK_RGBLIGHT_EFFECT = 0x81;
+const QMK_RGBLIGHT_EFFECT_SPEED = 0x82;
+const QMK_RGBLIGHT_COLOR = 0x83;
+const VIALRGB_GET_INFO = 0x40;
+const VIALRGB_GET_MODE = 0x41;
 
 enum dynamic_vial_id {
   dynamic_vial_get_number_of_entries = 0x00,
@@ -201,6 +212,102 @@ class VialKeyboard {
 
   Connected() {
     return this.comm.connected;
+  }
+
+  async GetQmkRgblight(): Promise<{
+    brightness: number;
+    effect: number;
+    speed: number;
+    hue: number;
+    saturation: number;
+  }> {
+    const getValue = async (id: number) => (await this.Command([VIA_LIGHTING_GET_VALUE, id]))[2] ?? 0;
+    const color = await this.Command([VIA_LIGHTING_GET_VALUE, QMK_RGBLIGHT_COLOR]);
+    return {
+      brightness: await getValue(QMK_RGBLIGHT_BRIGHTNESS),
+      effect: await getValue(QMK_RGBLIGHT_EFFECT),
+      speed: await getValue(QMK_RGBLIGHT_EFFECT_SPEED),
+      hue: color[2] ?? 0,
+      saturation: color[3] ?? 0,
+    };
+  }
+
+  async SetQmkRgblight(value: {
+    brightness?: number;
+    effect?: number;
+    speed?: number;
+    hue?: number;
+    saturation?: number;
+  }) {
+    const setValue = async (id: number, ...data: number[]) => {
+      const response = await this.Command([VIA_LIGHTING_SET_VALUE, id, ...data]);
+      if (response[0] !== VIA_LIGHTING_SET_VALUE || response[1] !== id) {
+        throw new Error(`VIA lighting command failed: ${this.formatHex(response)}`);
+      }
+    };
+    if (value.brightness !== undefined) await setValue(QMK_RGBLIGHT_BRIGHTNESS, value.brightness);
+    if (value.effect !== undefined) await setValue(QMK_RGBLIGHT_EFFECT, value.effect);
+    if (value.speed !== undefined) await setValue(QMK_RGBLIGHT_EFFECT_SPEED, value.speed);
+    if (value.hue !== undefined || value.saturation !== undefined) {
+      await setValue(QMK_RGBLIGHT_COLOR, value.hue ?? 0, value.saturation ?? 0);
+    }
+  }
+
+  async GetVialRgb(): Promise<{
+    maximumBrightness: number;
+    mode: number;
+    speed: number;
+    hue: number;
+    saturation: number;
+    brightness: number;
+    supportedEffects: number[];
+  }> {
+    const info = await this.Command([VIA_LIGHTING_GET_VALUE, VIALRGB_GET_INFO]);
+    const mode = await this.Command([VIA_LIGHTING_GET_VALUE, VIALRGB_GET_MODE]);
+    const supportedEffects: number[] = [];
+    for (let offset = 0; offset < 0xffff; offset += 30) {
+      const response = await this.Command([
+        VIA_LIGHTING_GET_VALUE,
+        0x42,
+        offset & 0xff,
+        (offset >> 8) & 0xff,
+      ]);
+      for (let index = 2; index + 1 < response.length; index += 2) {
+        const effect = response[index] | (response[index + 1] << 8);
+        if (effect === 0xffff) break;
+        supportedEffects.push(effect);
+      }
+      if (response.includes(0xff) && response.includes(0xff)) break;
+    }
+    return {
+      maximumBrightness: info[4] ?? 255,
+      mode: (mode[2] ?? 0) | ((mode[3] ?? 0) << 8),
+      speed: mode[4] ?? 0,
+      hue: mode[5] ?? 0,
+      saturation: mode[6] ?? 0,
+      brightness: mode[7] ?? 0,
+      supportedEffects: supportedEffects.length > 0 ? supportedEffects : [0, 1, 2, 3],
+    };
+  }
+
+  async SetVialRgb(value: { mode?: number; speed?: number; hue?: number; saturation?: number; brightness?: number }) {
+    const response = await this.Command([
+      VIA_LIGHTING_SET_VALUE,
+      VIALRGB_GET_MODE,
+      value.mode ?? 0,
+      (value.mode ?? 0) >> 8,
+      value.speed ?? 0,
+      value.hue ?? 0,
+      value.saturation ?? 0,
+      value.brightness ?? 0,
+    ]);
+    if (response[0] !== VIA_LIGHTING_SET_VALUE || response[1] !== VIALRGB_GET_MODE) {
+      throw new Error(`VialRGB command failed: ${this.formatHex(response)}`);
+    }
+  }
+
+  async SaveLighting() {
+    await this.Command([VIA_LIGHTING_SAVE]);
   }
 
   async Command(msg: ArrayLike<number>, silent: boolean = false): Promise<Uint8Array> {

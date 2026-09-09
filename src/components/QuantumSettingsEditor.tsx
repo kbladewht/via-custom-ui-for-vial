@@ -267,7 +267,7 @@ export function QuantumSettingsEditor(props: {
               )}
             </Box>
           ) : menu.id === "Lighting" ? (
-            <LightingEditor />
+            <LightingEditor via={props.via} lighting={props.keymap?.lighting} />
           ) : menu.id === "Custom" ? (
             <Box sx={{ p: 2 }}>
               {props.customMenus?.map((customMenu) => (

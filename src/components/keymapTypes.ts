@@ -30,6 +30,7 @@ export interface KeymapProperties {
     )[][];
   };
   customKeycodes?: { name: string; title: string; shortName: string }[];
+  lighting?: "qmk_rgblight" | "qmk_backlight" | "qmk_backlight_rgblight" | "vialrgb";
 }
 
 export interface KeymapKeyProperties {
