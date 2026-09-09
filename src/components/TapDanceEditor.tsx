@@ -164,38 +164,41 @@ function TapDanceEntry(props: {
             </Fragment>
           );
         })}
-        <Grid item xs={5}>
-          <Box className="editor-field-label" alignContent={"center"} textAlign={"right"} height={"100%"}>
-            Tapping term [ms]
-          </Box>
-        </Grid>
-        <Grid item xs={7}>
-          <TextField
-            value={tappingTerm}
-            onChange={(event) => {
-              setTappingTerm(event.target.value);
-              const time = parseInt(event.target.value);
-              if (0 <= time && time <= 0xffff) {
-                setCandidateTapdance({ ...candidateTapdance, tappingTerm: time });
-              }
-            }}
-            sx={{ maxWidth: 150 }}
-            size="small"
-            type="number"
-            InputLabelProps={{
-              shrink: true,
-            }}
-          ></TextField>
-        </Grid>
       </Grid>
-      <Box sx={{ position: "absolute", right: 0, bottom: 0, display: "flex", gap: 1 }}>
-        <Button
-          variant="outlined"
-          onClick={() => setCandidateTapdance(props.td)}
-          sx={{ color: "#e2e8f0", borderColor: "#64748b", backgroundColor: "#334155" }}
-        >
-          Revert
-        </Button>
+      <Box sx={{ position: "relative", maxWidth: 480, mx: "auto", mt: 1 }}>
+        <Grid container spacing={1}>
+          <Grid item xs={5}>
+            <Box className="editor-field-label" alignContent={"center"} textAlign={"right"} height={"100%"}>
+              Tapping term [ms]
+            </Box>
+          </Grid>
+          <Grid item xs={7}>
+            <TextField
+              value={tappingTerm}
+              onChange={(event) => {
+                setTappingTerm(event.target.value);
+                const time = parseInt(event.target.value);
+                if (0 <= time && time <= 0xffff) {
+                  setCandidateTapdance({ ...candidateTapdance, tappingTerm: time });
+                }
+              }}
+              sx={{ maxWidth: 150 }}
+              size="small"
+              type="number"
+              InputLabelProps={{
+                shrink: true,
+              }}
+            />
+          </Grid>
+        </Grid>
+        <Box sx={{ position: "absolute", left: "calc(100% + 8px)", top: 4, display: "flex", gap: 1 }}>
+          <Button
+            variant="outlined"
+            onClick={() => setCandidateTapdance(props.td)}
+            sx={{ color: "#e2e8f0", borderColor: "#64748b", backgroundColor: "#334155" }}
+          >
+            Revert
+          </Button>
           <Button
             variant="outlined"
             onClick={() => props.onSave?.(candidateTapdance)}
@@ -203,6 +206,7 @@ function TapDanceEntry(props: {
           >
             Save
           </Button>
+        </Box>
       </Box>
       {selectedKeyIndex !== undefined && (
         <Box sx={{ maxHeight: 360, overflowY: "auto", mt: 2 }}>
