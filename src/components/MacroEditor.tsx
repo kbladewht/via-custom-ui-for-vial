@@ -10,7 +10,6 @@ export function MacroEditor(props: {
   keycodeConverter: KeycodeConverter;
   macroIndex: number;
   macroCount: number;
-  onBack: () => void;
 }) {
   const [macroData, setMacroData] = useState<{ [id: number]: number[] }>({});
   const boundaryRef = useRef<HTMLDivElement>(null);
@@ -130,7 +129,6 @@ export function MacroEditor(props: {
         keycodeConverter={props.keycodeConverter}
         boundaryRef={boundaryRef}
         onSave={(actions: number[][]) => saveMacros(actions, props.macroIndex)}
-        onBack={props.onBack}
       ></MacroEntry>
     </Box>
   );
@@ -141,7 +139,6 @@ function MacroEntry(props: {
   keycodeConverter: KeycodeConverter;
   boundaryRef?: React.RefObject<HTMLDivElement>;
   onSave: (actions: number[][]) => void;
-  onBack: () => void;
 }) {
   const [actions, setActions] = useState<number[][]>([[]]);
   const [popupOpen, setpopupOpen] = useState(false);
@@ -328,7 +325,6 @@ function MacroEntry(props: {
       </div>
       <div>
         <Button onClick={() => setActions(getActions(props.buffer))}>Revert</Button>
-        <Button onClick={() => props.onBack()}>BACK</Button>
         <Button onClick={() => props.onSave(actions)} variant="outlined">
           SAVE
         </Button>

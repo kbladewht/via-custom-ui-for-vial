@@ -368,7 +368,6 @@ export function QuantumSettingsEditor(props: {
                     keycodeConverter={keycodeConverter}
                     macroIndex={selectedMacroIndex}
                     macroCount={props.macroCount ?? 0}
-                    onBack={() => {}}
                   />
                 </>
               ) : (
