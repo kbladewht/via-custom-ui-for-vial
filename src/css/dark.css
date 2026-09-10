@@ -270,16 +270,21 @@ body:not(.theme-light) .combo-candidate-panel {
 
 body:not(.theme-light) .entry-tabs,
 body:not(.theme-light) .entry-tabs .MuiTabs-scroller,
-body:not(.theme-light) .entry-tabs .MuiTabs-flexContainer {
+body:not(.theme-light) .entry-tabs .MuiTabs-flexContainer,
+body:not(.theme-light) .combo-tabs,
+body:not(.theme-light) .combo-tabs .MuiTabs-scroller,
+body:not(.theme-light) .combo-tabs .MuiTabs-flexContainer {
   min-height: 30px !important;
   height: 30px !important;
 }
 
-body:not(.theme-light) .entry-tabs .MuiTabs-flexContainer::after {
+body:not(.theme-light) .entry-tabs .MuiTabs-flexContainer::after,
+body:not(.theme-light) .combo-tabs .MuiTabs-flexContainer::after {
   content: "";
   flex: 1 1 auto;
   min-width: 28px;
   height: 30px;
+  margin-right: 10px;
   border-bottom: 1px solid rgba(148, 163, 184, 0.28);
   pointer-events: none;
 }
