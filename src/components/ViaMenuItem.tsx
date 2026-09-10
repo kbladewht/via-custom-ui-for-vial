@@ -11,7 +11,6 @@ import {
   SelectChangeEvent,
   Slider,
   Switch,
-  TextField,
   Typography,
 } from "@mui/material";
 import { MuiColorInput, MuiColorInputColors } from "mui-color-input";
@@ -467,8 +466,13 @@ function ViaNumber(props: NumberElement) {
   const min = props.options?.[0] ?? 0;
   const max = props.options?.[1] ?? 65535;
 
+  const handleStep = (step: number) => {
+    const current = Number(props.value ?? 0);
+    props.onChange(Math.max(min, Math.min(max, current + step)));
+  };
+
   return (
-    <Grid item xs={12}>
+    <Grid item xs={12} sx={{ py: 0.1 }}>
       <Box
         sx={{
           display: "flex",
@@ -477,7 +481,8 @@ function ViaNumber(props: NumberElement) {
           gap: 2,
           maxWidth: 480,
           mx: "auto",
-          py: 0.15,
+          minHeight: 28,
+          py: 0.1,
           px: 0.75,
         }}
       >
@@ -492,37 +497,113 @@ function ViaNumber(props: NumberElement) {
         >
           {translateLabel(props.label, props.language)}
         </Typography>
-        <TextField
-          size="small"
-          type="number"
-          value={props.value ?? 0}
-          onChange={(e) => {
-            const val = parseInt(e.target.value, 10);
-            if (!isNaN(val)) {
-              props.onChange(Math.max(min, Math.min(max, val)));
-            }
-          }}
-          inputProps={{
-            min,
-            max,
-            style: {
-              textAlign: "right",
-              padding: "3px 6px",
-              fontSize: "0.84rem",
-              color: "#e2e8f0",
-            },
-          }}
+        <Box
           sx={{
-            width: 78,
-            "& .MuiOutlinedInput-root": {
-              backgroundColor: "#1e2227",
-              borderRadius: "4px",
-              "& fieldset": { borderColor: "#484f5c" },
-              "&:hover fieldset": { borderColor: "#64748b" },
-              "&.Mui-focused fieldset": { borderColor: "#38bdf8" },
-            },
+            display: "flex",
+            alignItems: "stretch",
+            width: 80,
+            height: 26,
+            backgroundColor: "#1e2227",
+            border: "1px solid #484f5c",
+            borderRadius: "4px",
+            overflow: "hidden",
+            "&:hover": { borderColor: "#64748b" },
+            "&:focus-within": { borderColor: "#38bdf8" },
           }}
-        />
+        >
+          <input
+            type="number"
+            min={min}
+            max={max}
+            value={props.value ?? 0}
+            onChange={(e) => {
+              const val = parseInt(e.target.value, 10);
+              if (!isNaN(val)) {
+                props.onChange(Math.max(min, Math.min(max, val)));
+              }
+            }}
+            style={{
+              flex: 1,
+              width: "100%",
+              minWidth: 0,
+              backgroundColor: "transparent",
+              border: "none",
+              outline: "none",
+              color: "#e2e8f0",
+              fontSize: "0.82rem",
+              textAlign: "right",
+              padding: "0 6px",
+              MozAppearance: "textfield",
+            }}
+          />
+          <Box
+            sx={{
+              display: "flex",
+              flexDirection: "column",
+              width: 18,
+              borderLeft: "1px solid #333842",
+              backgroundColor: "#2a2f38",
+            }}
+          >
+            <Box
+              component="button"
+              type="button"
+              tabIndex={-1}
+              onClick={() => handleStep(1)}
+              sx={{
+                flex: 1,
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                border: "none",
+                background: "transparent",
+                color: "#94a3b8",
+                cursor: "pointer",
+                p: 0,
+                fontSize: "8px",
+                lineHeight: 1,
+                "&:hover": {
+                  backgroundColor: "#3b4252",
+                  color: "#f8fafc",
+                },
+                "&:active": {
+                  backgroundColor: "#485265",
+                },
+              }}
+            >
+              ▲
+            </Box>
+            <Box
+              component="button"
+              type="button"
+              tabIndex={-1}
+              onClick={() => handleStep(-1)}
+              sx={{
+                flex: 1,
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                border: "none",
+                borderTop: "1px solid #383f4d",
+                background: "transparent",
+                color: "#94a3b8",
+                cursor: "pointer",
+                p: 0,
+                fontSize: "8px",
+                lineHeight: 1,
+                "&:hover": {
+                  backgroundColor: "#3b4252",
+                  color: "#f8fafc",
+                },
+                "&:active": {
+                  backgroundColor: "#485265",
+                },
+              }}
+            >
+              ▼
+            </Box>
+          </Box>
+        </Box>
       </Box>
     </Grid>
   );
@@ -532,7 +613,7 @@ function ViaBoolean(props: BooleanElement) {
   const isChecked = (props.value ?? 0) !== 0;
 
   return (
-    <Grid item xs={12}>
+    <Grid item xs={12} sx={{ py: 0.1 }}>
       <Box
         onClick={() => props.onChange(isChecked ? 0 : 1)}
         sx={{
@@ -542,6 +623,7 @@ function ViaBoolean(props: BooleanElement) {
           gap: 2,
           maxWidth: 480,
           mx: "auto",
+          minHeight: 28,
           py: 0.1,
           px: 0.75,
           cursor: "pointer",
@@ -563,16 +645,18 @@ function ViaBoolean(props: BooleanElement) {
         >
           {translateLabel(props.label, props.language)}
         </Typography>
-        <Checkbox
-          size="small"
-          checked={isChecked}
-          onChange={() => {}}
-          sx={{
-            color: "#64748b",
-            "&.Mui-checked": { color: "#38bdf8" },
-            p: "2px",
-          }}
-        />
+        <Box sx={{ width: 78, display: "flex", justifyContent: "flex-end", pr: "2px" }}>
+          <Checkbox
+            size="small"
+            checked={isChecked}
+            onChange={() => {}}
+            sx={{
+              color: "#64748b",
+              "&.Mui-checked": { color: "#38bdf8" },
+              p: 0,
+            }}
+          />
+        </Box>
       </Box>
     </Grid>
   );
@@ -582,7 +666,7 @@ function ViaBitCheckbox(props: BitCheckboxElement) {
   const isChecked = (props.value & (1 << (props.bit ?? 0))) !== 0;
 
   return (
-    <Grid item xs={12}>
+    <Grid item xs={12} sx={{ py: 0.1 }}>
       <Box
         onClick={() => props.onChange(props.value ^ (1 << (props.bit ?? 0)))}
         sx={{
@@ -592,6 +676,7 @@ function ViaBitCheckbox(props: BitCheckboxElement) {
           gap: 2,
           maxWidth: 480,
           mx: "auto",
+          minHeight: 28,
           py: 0.1,
           px: 0.75,
           cursor: "pointer",
@@ -613,16 +698,18 @@ function ViaBitCheckbox(props: BitCheckboxElement) {
         >
           {translateLabel(props.label, props.language)}
         </Typography>
-        <Checkbox
-          size="small"
-          checked={isChecked}
-          onChange={() => {}}
-          sx={{
-            color: "#64748b",
-            "&.Mui-checked": { color: "#38bdf8" },
-            p: "2px",
-          }}
-        />
+        <Box sx={{ width: 78, display: "flex", justifyContent: "flex-end", pr: "2px" }}>
+          <Checkbox
+            size="small"
+            checked={isChecked}
+            onChange={() => {}}
+            sx={{
+              color: "#64748b",
+              "&.Mui-checked": { color: "#38bdf8" },
+              p: 0,
+            }}
+          />
+        </Box>
       </Box>
     </Grid>
   );
@@ -740,6 +827,12 @@ function MenuElement(props: MenuSectionProperties, elem: MenuElementProperties, 
 }
 
 function ViaMenuItem(props: MenuSectionProperties) {
+  const isCompactList = props.content.every(
+    (elem) =>
+      "type" in elem &&
+      ["checkbox-list", "number", "boolean", "bit-checkbox"].includes(elem.type),
+  );
+
   const renderedContent = props.content.flatMap((elem, index) => {
     if ("showIf" in elem) {
       const show = evaluate(props.customValues, elem.showIf.replace(/({|})/g, ""));
@@ -766,8 +859,13 @@ function ViaMenuItem(props: MenuSectionProperties) {
   });
 
   return (
-    <Grid container alignItems="center" spacing={2}>
-      <Grid item xs={12}></Grid>
+    <Grid
+      container
+      alignItems="center"
+      spacing={isCompactList ? 0.5 : 2}
+      sx={isCompactList ? { mt: 0, mb: 0 } : undefined}
+    >
+      {!isCompactList && <Grid item xs={12}></Grid>}
       {renderedContent}
     </Grid>
   );
