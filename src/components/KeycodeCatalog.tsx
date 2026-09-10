@@ -418,7 +418,7 @@ export function KeycodeCatalog(props: {
               height: 340,
               overflowY: "auto",
               overflowX: "hidden",
-              borderRadius: "0 0 12px 12px",
+              borderRadius: "0 12px 12px 12px",
               scrollbarColor: "#64748b transparent",
               "&::-webkit-scrollbar": {
                 width: 10,
