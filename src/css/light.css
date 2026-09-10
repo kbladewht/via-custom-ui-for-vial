@@ -136,3 +136,74 @@ body.theme-light .MuiDialogContent-root {
 body.theme-light .theme-toggle-button {
   color: #c47b17 !important;
 }
+
+/* Light workspace: keep the keymap editor readable instead of leaving a dark canvas inside the light shell. */
+.app-shell.theme-light .app-main-panel > div[style*="background-color: rgb(15, 23, 42)"],
+.app-shell.theme-light .app-main-panel > div[style*="background-color: #0f172a"] {
+  background-color: #f1f5f8 !important;
+}
+
+.app-shell.theme-light .keymap-surface {
+  background: #f8fafc;
+  border: 1px solid #d7e0e8;
+  border-radius: 10px;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.85);
+}
+
+.app-shell.theme-light .keymap-key {
+  outline-color: #aebdca;
+  background: linear-gradient(180deg, #ffffff 0%, #edf3f7 100%) !important;
+  border-color: #aebdca !important;
+  color: #334b61 !important;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.95), 0 2px 5px rgba(71, 85, 105, 0.14) !important;
+}
+
+.app-shell.theme-light .keymap-key:hover {
+  background: linear-gradient(180deg, #ffffff 0%, #e3edf4 100%) !important;
+  border-color: #7895ab !important;
+}
+
+.app-shell.theme-light .keymap-key .main-legend,
+.app-shell.theme-light .keymap-key .key-legend-centered {
+  color: #334b61 !important;
+  text-shadow: none;
+}
+
+.app-shell.theme-light .keymap-key .mod-legend,
+.app-shell.theme-light .keymap-key .hold-legend {
+  color: #688096 !important;
+}
+
+.app-shell.theme-light .keymap-key.keymap-key-focused {
+  border-color: #4f86b0 !important;
+  box-shadow: 0 0 0 2px rgba(79, 134, 176, 0.16), 0 2px 5px rgba(71, 85, 105, 0.14) !important;
+}
+
+.app-shell.theme-light .keymap-key.drag-over {
+  background: #d9ebf7 !important;
+  border-color: #4f86b0 !important;
+}
+
+.app-shell.theme-light .keymap-encoder,
+.app-shell.theme-light .keymap-encoder:hover,
+.app-shell.theme-light .keymap-encoder:active {
+  background: linear-gradient(180deg, #ffffff 0%, #edf3f7 100%) !important;
+  border-color: #aebdca !important;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.95), 0 2px 5px rgba(71, 85, 105, 0.14) !important;
+}
+
+.app-shell.theme-light .keymap-encoder.keymap-key-focused {
+  border-color: #4f86b0 !important;
+}
+
+.app-shell.theme-light .app-main-panel .MuiButton-outlined {
+  color: #48667e !important;
+  border-color: #aebdca !important;
+  background-color: #f3f7fa !important;
+}
+
+.app-shell.theme-light .app-main-panel .MuiButton-outlined:hover {
+  color: #29445d !important;
+  border-color: #7895ab !important;
+  background-color: #e3edf4 !important;
+}
