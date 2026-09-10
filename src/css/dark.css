@@ -141,7 +141,7 @@ body:not(.theme-light) .battery-meter-fill {
 }
 
 .app-shell:not(.theme-light) .keymap-surface {
-  background: #0f172a;
+  background: #1e293b;
   border: 0;
   border-radius: 0;
   box-shadow: none;
