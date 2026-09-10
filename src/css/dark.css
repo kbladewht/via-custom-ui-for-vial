@@ -257,6 +257,8 @@ body:not(.theme-light) .combo-candidate-panel {
 body:not(.theme-light) .combo-editor-panel {
   flex: 1;
   min-height: 0;
+  border-top: 0;
+  border-radius: 0 0 12px 12px;
 }
 
 body:not(.theme-light) .combo-candidate-panel {
