@@ -123,6 +123,13 @@ body:not(.theme-light) .battery-meter-fill {
   background: #0f172a;
 }
 
+.app-shell:not(.theme-light) .keymap-surface {
+  background: #0f172a;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+}
+
 .app-shell:not(.theme-light) .app-main-panel h4,
 .app-shell:not(.theme-light) .app-main-panel .MuiGrid-item > h4 {
   color: #e5eefb;
