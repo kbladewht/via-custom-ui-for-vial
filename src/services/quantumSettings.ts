@@ -168,10 +168,10 @@ export const QuantumSettingDefinition: {
     label: "Combo",
     content: [
       {
-        type: "range",
-        label: "Combo term [ms]",
+        type: "number",
+        label: "Time out period for combos",
         content: ["id-combo-term", 2, 2],
-        options: [0, 500],
+        options: [0, 10000],
       },
     ],
   },
@@ -179,16 +179,16 @@ export const QuantumSettingDefinition: {
     label: "One Shot Keys",
     content: [
       {
-        type: "range",
-        label: "Tap toggle count",
+        type: "number",
+        label: "Tapping this number of times holds the key until tapped once again",
         content: ["id-osk-tap-toggle", 5, 1],
         options: [0, 50],
       },
       {
-        type: "range",
-        label: "One shot key timeout [ms]",
+        type: "number",
+        label: "Time (in ms) before the one shot key is released",
         content: ["id-osk-tap-timeout", 6, 2],
-        options: [0, 65535],
+        options: [0, 60000],
       },
     ],
   },
