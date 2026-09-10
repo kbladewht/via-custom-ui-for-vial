@@ -170,6 +170,31 @@ body.theme-light .key-select-popup .MuiAutocomplete-option[aria-selected="true"]
 .app-shell.theme-light .keymap-editor-surface,
 .app-shell.theme-light .keycatalog-surface {
   background: #f1f5f8;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+}
+
+.app-shell.theme-light .app-main-panel > .keymap-editor-surface,
+.app-shell.theme-light .app-main-panel > .keycatalog-surface {
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+}
+
+.app-shell.theme-light .app-main-panel .keymap-editor-surface,
+.app-shell.theme-light .app-main-panel .keycatalog-surface,
+.app-shell.theme-light .app-main-panel .keymap-surface {
+  border: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+}
+
+.app-shell.theme-light .app-main-panel > .keymap-tab-panel {
+  border: 0 !important;
+  border-radius: 0 !important;
+  padding: 0 !important;
+  box-shadow: none !important;
 }
 
 .app-shell.theme-light .MuiTab-root {
@@ -192,17 +217,17 @@ body.theme-light .key-select-popup .MuiAutocomplete-option[aria-selected="true"]
 
 .app-shell.theme-light .keymap-surface {
   background: #f8fafc;
-  border: 1px solid #d7e0e8;
+  border: 0;
   border-radius: 10px;
-  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.85);
+  box-shadow: none;
 }
 
 .app-shell.theme-light .keymap-key {
   outline-color: #aebdca;
   background: linear-gradient(180deg, #ffffff 0%, #edf3f7 100%) !important;
-  border-color: #aebdca !important;
+  border-color: transparent !important;
   color: #334b61 !important;
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.95), 0 2px 5px rgba(71, 85, 105, 0.14) !important;
+  box-shadow: 0 2px 5px rgba(71, 85, 105, 0.16) !important;
 }
 
 .app-shell.theme-light .keymap-key:hover {
@@ -223,15 +248,15 @@ body.theme-light .key-select-popup .MuiAutocomplete-option[aria-selected="true"]
 
 .app-shell.theme-light .keymap-key.keymap-key-focused {
   background: linear-gradient(180deg, #eaf3f8 0%, #dbe9f1 100%) !important;
-  border-color: #4f86b0 !important;
-  box-shadow: 0 0 0 2px rgba(79, 134, 176, 0.16), 0 2px 5px rgba(71, 85, 105, 0.14) !important;
+  border-color: transparent !important;
+  box-shadow: 0 0 0 2px rgba(79, 134, 176, 0.22), 0 2px 5px rgba(71, 85, 105, 0.16) !important;
 }
 
 .app-shell.theme-light .keymap-key:active,
 .app-shell.theme-light .keymap-key:focus,
 .app-shell.theme-light .keymap-key:focus-visible {
   background: linear-gradient(180deg, #eaf3f8 0%, #dbe9f1 100%) !important;
-  border-color: #4f86b0 !important;
+  border-color: transparent !important;
   color: #29445d !important;
 }
 
@@ -243,19 +268,20 @@ body.theme-light .key-select-popup .MuiAutocomplete-option[aria-selected="true"]
 
 .app-shell.theme-light .keymap-key.drag-over {
   background: #d9ebf7 !important;
-  border-color: #4f86b0 !important;
+  border-color: transparent !important;
 }
 
 .app-shell.theme-light .keymap-encoder,
 .app-shell.theme-light .keymap-encoder:hover,
 .app-shell.theme-light .keymap-encoder:active {
   background: linear-gradient(180deg, #ffffff 0%, #edf3f7 100%) !important;
-  border-color: #aebdca !important;
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.95), 0 2px 5px rgba(71, 85, 105, 0.14) !important;
+  border-color: transparent !important;
+  box-shadow: 0 2px 5px rgba(71, 85, 105, 0.16) !important;
 }
 
 .app-shell.theme-light .keymap-encoder.keymap-key-focused {
-  border-color: #4f86b0 !important;
+  border-color: transparent !important;
+  box-shadow: 0 0 0 2px rgba(79, 134, 176, 0.22), 0 2px 5px rgba(71, 85, 105, 0.16) !important;
 }
 
 .app-shell.theme-light .app-main-panel .MuiButton-outlined {
