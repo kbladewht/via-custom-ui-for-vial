@@ -225,3 +225,38 @@ body.theme-light .theme-toggle-button {
   border-color: #7895ab !important;
   background-color: #e3edf4 !important;
 }
+
+.app-shell.theme-light .keycatalog-surface {
+  background: #f7f9fb;
+  color: #334b61;
+}
+
+.app-shell.theme-light .keycatalog-key {
+  outline-color: #aebdca;
+  background: linear-gradient(180deg, #ffffff 0%, #edf3f7 100%) !important;
+  border: 1px solid #aebdca;
+  border-radius: 7px;
+  color: #334b61;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.95), 0 2px 4px rgba(71, 85, 105, 0.14);
+}
+
+.app-shell.theme-light .keycode-catalog-tab {
+  color: #60788e !important;
+  border-color: #b8c7d3 !important;
+  background-color: #e8eef3 !important;
+}
+
+.app-shell.theme-light .keycode-catalog-tab.Mui-selected {
+  color: #29445d !important;
+  border-color: #8da8bc !important;
+  background-color: #ffffff !important;
+}
+
+.app-shell.theme-light .keycode-group {
+  background-color: #eef3f7 !important;
+}
+
+.app-shell.theme-light .keycode-group-title {
+  color: #49667d !important;
+  background: #e2eaf0 !important;
+}
