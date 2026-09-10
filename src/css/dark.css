@@ -176,7 +176,7 @@ body:not(.theme-light) .keymap-main-tab.Mui-selected {
 }
 
 body:not(.theme-light) .keycode-catalog-tab.Mui-selected {
-  background-color: #2a2e37 !important;
+  background-color: #13192998 !important;
   border-bottom: 0 !important;
   box-shadow: none;
 }
