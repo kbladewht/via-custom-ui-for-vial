@@ -126,6 +126,10 @@ body:not(.theme-light) .battery-meter-fill {
   background: #1e293b;
 }
 
+.app-shell:not(.theme-light) .keycode-catalog-scroll {
+  background: #0e121a;
+}
+
 .app-shell:not(.theme-light) .keycatalog-surface {
   border-radius: 0 0 12px 12px;
   clip-path: inset(0 0 0 0 round 0 0 12px 12px);
