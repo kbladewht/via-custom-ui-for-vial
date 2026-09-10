@@ -243,14 +243,25 @@ body:not(.theme-light) .combo-entry-tab.Mui-selected {
 }
 
 body:not(.theme-light) .combo-content-panel {
-  flex: 1;
-  min-height: 0;
-  background: #13192998;
-  border: 1px solid rgba(148, 163, 184, 0.28);
-  border-top: 0;
-  border-radius: 0 0 12px 12px;
+  display: none;
 }
 
+body:not(.theme-light) .combo-editor-panel,
+body:not(.theme-light) .combo-candidate-panel {
+  width: 100%;
+  background: #13192998;
+  border: 1px solid rgba(148, 163, 184, 0.28);
+  border-radius: 12px;
+}
+
+body:not(.theme-light) .combo-editor-panel {
+  flex: 1;
+  min-height: 0;
+}
+
+body:not(.theme-light) .combo-candidate-panel {
+  margin-top: 8px;
+}
 body:not(.theme-light) .keycode-catalog-scroll .keycode-group:first-child {
   border-top: 0 !important;
 }

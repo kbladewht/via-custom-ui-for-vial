@@ -38,14 +38,12 @@ export function ComboOverrideEditor(props: {
         ))}
       </Tabs>
       {props.dynamicEntryCount.combo > 0 && (
-        <Box className="combo-content-panel">
-          <ComboEditor
-            via={props.via}
-            keycodeConverter={keycodeConverter}
-            comboIndex={comboIndex}
-            language={props.language}
-          />
-        </Box>
+        <ComboEditor
+          via={props.via}
+          keycodeConverter={keycodeConverter}
+          comboIndex={comboIndex}
+          language={props.language}
+        />
       )}
     </Box>
   );

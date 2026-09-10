@@ -131,7 +131,8 @@ function ComboEntry(props: {
         },
       }}
     >
-      <Box sx={{ flex: 1, position: "relative" }}>
+      <Box sx={{ flex: 1, position: "relative", display: "flex", flexDirection: "column" }}>
+      <Box className="combo-editor-panel">
       <Grid container spacing={1} sx={{ maxWidth: 480, mx: "auto", mt: 0 }}>
         {candidateCombo.keys.map((k, idx) => {
           return (
@@ -169,8 +170,9 @@ function ComboEntry(props: {
           );
         })}
       </Grid>
+      </Box>
       {selectedKeyIndex !== undefined && (
-        <Box sx={{ maxHeight: 360, overflowY: "auto", mt: 2 }}>
+        <Box className="combo-candidate-panel" sx={{ maxHeight: 360, overflowY: "auto", mt: 2 }}>
           <KeycodeCatalog
             keycodeConverter={props.keycodeconverter}
             tab={[
