@@ -127,7 +127,7 @@ body:not(.theme-light) .battery-meter-fill {
 }
 
 .app-shell:not(.theme-light) .keycode-catalog-scroll {
-  background: #0e121a;
+  background: #333333;
 }
 
 .app-shell:not(.theme-light) .keycatalog-surface {
