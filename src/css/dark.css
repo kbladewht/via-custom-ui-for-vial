@@ -162,6 +162,13 @@ body:not(.theme-light) .MuiTab-root {
   color: #b8c7dc !important;
 }
 
+body:not(.theme-light) .quantum-main-tabs,
+body:not(.theme-light) .quantum-main-tabs .MuiTabs-scroller,
+body:not(.theme-light) .quantum-main-tabs .MuiTabs-flexContainer {
+  min-height: 30px !important;
+  height: 30px;
+}
+
 body:not(.theme-light) .MuiTab-root.Mui-selected {
   color: #c3d0e0 !important;
   background-color: #1e293b !important;
@@ -179,6 +186,16 @@ body:not(.theme-light) .keymap-main-tab.Mui-selected {
 
 body:not(.theme-light) .keycode-catalog-tab {
   border-radius: 8px 8px 0 0 !important;
+}
+
+body:not(.theme-light) .keycode-catalog-tabs {
+  min-height: 30px !important;
+}
+
+body:not(.theme-light) .keycode-catalog-tabs .MuiTabs-scroller,
+body:not(.theme-light) .keycode-catalog-tabs .MuiTabs-flexContainer {
+  min-height: 30px !important;
+  height: 30px;
 }
 
 body:not(.theme-light) .keycode-catalog-tab.Mui-selected {

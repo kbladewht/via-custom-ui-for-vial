@@ -367,6 +367,7 @@ export function KeycodeCatalog(props: {
       {props.tab && (
         <Box>
           <Tabs
+            className="keycode-catalog-tabs"
             value={tabValue}
             onChange={(_event, newValue: number) => {
               setTabValue(newValue);

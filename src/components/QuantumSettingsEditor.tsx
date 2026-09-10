@@ -124,6 +124,7 @@ export function QuantumSettingsEditor(props: {
   return (
     <>
       <Tabs
+        className="quantum-main-tabs"
         value={tabValue}
         onChange={(_event, value) => setTabValue(value)}
         variant="scrollable"
