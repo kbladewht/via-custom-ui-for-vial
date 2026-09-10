@@ -186,6 +186,7 @@ body:not(.theme-light) .keymap-main-tab.Mui-selected {
 
 body:not(.theme-light) .keycode-catalog-tab {
   border-radius: 8px 8px 0 0 !important;
+  border: 1px solid #334155 !important;
 }
 
 body:not(.theme-light) .keycode-catalog-tabs {
@@ -200,8 +201,18 @@ body:not(.theme-light) .keycode-catalog-tabs .MuiTabs-flexContainer {
 
 body:not(.theme-light) .keycode-catalog-tab.Mui-selected {
   background-color: #13192998 !important;
+  border-color: #475569 !important;
   border-bottom: 0 !important;
   box-shadow: none;
+}
+
+body:not(.theme-light) .tapdance-entry-tab {
+  border: 1px solid #334155 !important;
+  border-radius: 8px 8px 0 0 !important;
+}
+
+body:not(.theme-light) .tapdance-entry-tab.Mui-selected {
+  border-color: #475569 !important;
 }
 
 body:not(.theme-light) .keycode-catalog-scroll .keycode-group:first-child {

@@ -91,6 +91,7 @@ export function TapDanceSelector(props: {
         {Array.from({ length: props.dynamicEntryCount.tapdance }, (_, index) => (
           <Tab
             key={index}
+            className="tapdance-entry-tab"
             label={index}
             value={index}
             sx={{
