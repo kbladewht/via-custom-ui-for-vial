@@ -216,9 +216,9 @@ body.theme-light .key-select-popup .MuiAutocomplete-option[aria-selected="true"]
 }
 
 .app-shell.theme-light .keymap-surface {
-  background: #f8fafc;
+  background: #f1f5f8;
   border: 0;
-  border-radius: 10px;
+  border-radius: 0;
   box-shadow: none;
 }
 
