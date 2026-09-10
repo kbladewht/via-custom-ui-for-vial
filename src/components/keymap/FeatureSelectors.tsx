@@ -157,7 +157,7 @@ export function KeyOverrideSelector(props: {
         variant="scrollable"
         scrollButtons="auto"
         aria-label="Key Overrides entries"
-        className="tapdance-tabs"
+        className="entry-tabs key-override-tabs"
         sx={{
           py: 0,
           "& .MuiTabs-flexContainer": {
@@ -168,6 +168,7 @@ export function KeyOverrideSelector(props: {
         {Array.from({ length: props.dynamicEntryCount.override }, (_, index) => (
           <Tab
             key={index}
+            className="entry-tab key-override-entry-tab"
             label={index + 1}
             value={index}
             sx={{
@@ -191,7 +192,7 @@ export function KeyOverrideSelector(props: {
         ))}
       </Tabs>
       {props.dynamicEntryCount.override > 0 && (
-        <Box className="entry-content-panel key-override-content-panel" sx={{ width: "100%", flex: 1, mt: 2, display: "flex" }}>
+        <Box className="entry-content-panel key-override-content-panel" sx={{ width: "100%", flex: 1, mt: 0, display: "flex" }}>
           <OverrideEditor
             via={props.via}
             keycodeConverter={keycodeConverter}
