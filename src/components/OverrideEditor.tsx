@@ -170,7 +170,8 @@ function OverrideEntry(props: {
         },
       }}
     >
-      <Box sx={{ flex: 1, position: "relative" }}>
+      <Box sx={{ flex: 1, position: "relative", display: "flex", flexDirection: "column" }}>
+        <Box className="entry-editor-panel">
         <Grid container spacing={2} sx={{ maxWidth: 840, mx: "auto", mt: 0 }}>
           {/* Enable */}
           <Grid item xs={3}>
@@ -387,10 +388,11 @@ function OverrideEntry(props: {
             </Box>
           </Grid>
         </Grid>
+        </Box>
 
         {/* Keycode catalog for selecting trigger / replacement */}
         {selectedKeyIndex !== undefined && (
-          <Box sx={{ maxHeight: 360, overflowY: "auto", mt: 2 }}>
+          <Box className="entry-candidate-panel" sx={{ maxHeight: 360, overflowY: "auto", mt: 2 }}>
             <KeycodeCatalog
               keycodeConverter={props.keycodeconverter}
               tab={[
