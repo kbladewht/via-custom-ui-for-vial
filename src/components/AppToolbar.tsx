@@ -17,10 +17,8 @@ import { LanguageSelector } from "./LanguageSelector";
 
 export type KeymapStyle =
   | "classic"
-  | "3d"
   | "mx"
   | "sculpted"
-  | "matrix"
   | "matrix-tester";
 
 type AppToolbarProps = {
@@ -179,10 +177,8 @@ export function AppToolbar(props: AppToolbarProps) {
           }}
         >
           <MenuItem value="classic" sx={{ fontSize: "11px" }}>Default</MenuItem>
-          <MenuItem value="3d" sx={{ fontSize: "11px" }}>3D</MenuItem>
           <MenuItem value="mx" sx={{ fontSize: "11px" }}>MX</MenuItem>
           <MenuItem value="sculpted" sx={{ fontSize: "11px" }}>Sculpted</MenuItem>
-          <MenuItem value="matrix" sx={{ fontSize: "11px" }}>Matrix</MenuItem>
           <MenuItem value="matrix-tester" sx={{ fontSize: "11px" }}>Matrix Tester</MenuItem>
         </Select>
         <Tooltip title="BLE 快捷键">
