@@ -118,6 +118,11 @@ body:not(.theme-light) .battery-meter-fill {
   box-shadow: 0 20px 40px rgba(15, 23, 42, 0.25);
 }
 
+.app-shell:not(.theme-light) .keymap-editor-surface,
+.app-shell:not(.theme-light) .keycatalog-surface {
+  background: #0f172a;
+}
+
 .app-shell:not(.theme-light) .app-main-panel h4,
 .app-shell:not(.theme-light) .app-main-panel .MuiGrid-item > h4 {
   color: #e5eefb;

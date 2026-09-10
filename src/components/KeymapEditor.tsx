@@ -113,12 +113,12 @@ export function KeymapEditor(props: {
       value={{ focusedKey, setFocusedKey, onKeycodeChange: focusedKey?.onKeycodeChange }}
     >
       <Box
+        className="keymap-editor-surface"
         sx={{
           width: "100%",
           overflowX: "auto",
           pl: 1,
           pr: 1,
-          backgroundColor: "#0f172a",
         }}
       >
         <LayerEditor
@@ -130,7 +130,7 @@ export function KeymapEditor(props: {
 
       <Box
         aria-hidden={!focusedKey}
-        className={focusedKey ? "keycatalog-surface-loaded" : ""}
+        className={`keycatalog-surface ${focusedKey ? "keycatalog-surface-loaded" : ""}`}
         sx={{
           position: "relative",
           mt: focusedKey ? 2 : 0,
@@ -139,7 +139,6 @@ export function KeymapEditor(props: {
           transform: focusedKey ? "translateY(0)" : "translateY(-8px)",
           visibility: focusedKey ? "visible" : "hidden",
           pointerEvents: focusedKey ? "auto" : "none",
-          backgroundColor: "#0f172a",
           width: "100%",
           maxWidth: "100%",
           overflowX: "auto",
