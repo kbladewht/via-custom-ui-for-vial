@@ -1,5 +1,7 @@
 import DownloadIcon from "@mui/icons-material/Download";
+import DarkModeIcon from "@mui/icons-material/DarkMode";
 import HelpOutlineIcon from "@mui/icons-material/HelpOutline";
+import LightModeIcon from "@mui/icons-material/LightMode";
 import UploadIcon from "@mui/icons-material/Upload";
 import {
   Box,
@@ -24,6 +26,8 @@ export type KeymapStyle =
 type AppToolbarProps = {
   keymapStyle: KeymapStyle;
   onKeymapStyleChange: (style: KeymapStyle) => void;
+  lightTheme: boolean;
+  onThemeToggle: () => void;
   deviceIndex: number | undefined;
   deviceList: Array<{ index: number; name: string; connection: "usb" | "ble" }>;
   onDeviceChange: (index: number | undefined) => void;
@@ -181,6 +185,17 @@ export function AppToolbar(props: AppToolbarProps) {
           <MenuItem value="sculpted" sx={{ fontSize: "11px" }}>Sculpted</MenuItem>
           <MenuItem value="matrix-tester" sx={{ fontSize: "11px" }}>Matrix Tester</MenuItem>
         </Select>
+        <Tooltip title={props.lightTheme ? "切换暗色主题" : "切换亮色主题"}>
+          <IconButton
+            className="vial-action-button theme-toggle-button"
+            size="small"
+            aria-label={props.lightTheme ? "切换暗色主题" : "切换亮色主题"}
+            onClick={props.onThemeToggle}
+            sx={{ p: 0.5 }}
+          >
+            {props.lightTheme ? <DarkModeIcon sx={{ fontSize: 18 }} /> : <LightModeIcon sx={{ fontSize: 18 }} />}
+          </IconButton>
+        </Tooltip>
         <Tooltip title="BLE 快捷键">
           <IconButton
             className="vial-action-button"

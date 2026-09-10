@@ -1,0 +1,138 @@
+body.theme-light {
+  background: linear-gradient(135deg, #eef3f8 0%, #f7f9fb 48%, #e6edf4 100%);
+  color: #243447;
+}
+
+body.theme-light,
+body.theme-light #root {
+  color-scheme: light;
+}
+
+body.theme-light html {
+  scrollbar-color: #aebdca #edf2f6;
+}
+
+body.theme-light *::-webkit-scrollbar-track {
+  background: #edf2f6;
+}
+
+body.theme-light *::-webkit-scrollbar-thumb {
+  background: #aebdca;
+  border-color: #edf2f6;
+}
+
+body.theme-light *::-webkit-scrollbar-thumb:hover {
+  background: #879baa;
+}
+
+.app-shell.theme-light {
+  background: rgba(247, 249, 251, 0.78);
+}
+
+.app-shell.theme-light .app-sidebar {
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.96), rgba(239, 244, 248, 0.96)) !important;
+  border-color: #cbd5df;
+  box-shadow: 0 16px 32px rgba(71, 85, 105, 0.14);
+}
+
+.app-shell.theme-light .nav-section .MuiListSubheader-root,
+.app-shell.theme-light .custom-menu-group .custom-menu-subheader {
+  color: #315b83;
+  background: #e7f0f8;
+  border-left-color: #5d8db6;
+}
+
+.app-shell.theme-light .MuiList-root .MuiListItemButton-root {
+  color: #334155;
+}
+
+.app-shell.theme-light .MuiListItemText-root .MuiTypography-root {
+  color: #334155;
+}
+
+.app-shell.theme-light .MuiList-root .MuiListItemButton-root:hover {
+  background: #e7f0f8;
+}
+
+.app-shell.theme-light .app-main-panel > * {
+  background: rgba(255, 255, 255, 0.92);
+  border-color: #cbd5df;
+  box-shadow: 0 16px 32px rgba(71, 85, 105, 0.12);
+}
+
+.app-shell.theme-light .app-main-panel h4,
+.app-shell.theme-light .app-main-panel .MuiGrid-item > h4 {
+  color: #243447 !important;
+}
+
+.app-shell.theme-light .MuiButton-containedPrimary,
+.app-shell.theme-light .vial-action-button {
+  background: #e5edf4 !important;
+  border-color: #aebdca !important;
+  color: #29445d !important;
+}
+
+.app-shell.theme-light .MuiButton-containedPrimary:hover,
+.app-shell.theme-light .vial-action-button:hover {
+  background: #d5e3ee !important;
+  border-color: #7f9ab1 !important;
+}
+
+.app-shell.theme-light .battery-status-button {
+  color: #26845d !important;
+}
+
+.app-shell.theme-light .battery-meter {
+  border-color: #587184;
+}
+
+.app-shell.theme-light .battery-meter::after {
+  background: #587184;
+}
+
+.app-shell.theme-light .battery-meter-fill {
+  background: #3da875;
+  box-shadow: inset 0 0 0 1px rgba(51, 93, 76, 0.28);
+}
+
+.app-shell.theme-light .MuiTab-root {
+  color: #587086 !important;
+}
+
+.app-shell.theme-light .MuiTab-root.Mui-selected {
+  color: #29445d !important;
+  background-color: #e1ebf3 !important;
+  box-shadow: inset 0 -1px 0 #9eb5c7;
+}
+
+.app-shell.theme-light .MuiTab-root:hover {
+  background: #edf4f8 !important;
+}
+
+body.theme-light .MuiMenuItem-root,
+body.theme-light .MuiSelect-select,
+body.theme-light .MuiInputBase-root,
+body.theme-light .MuiPaper-root {
+  background-color: #ffffff !important;
+  color: #243447 !important;
+}
+
+body.theme-light .MuiInputBase-input,
+body.theme-light .MuiInputLabel-root,
+body.theme-light .MuiFormLabel-root,
+body.theme-light .MuiFormControlLabel-label {
+  color: #243447 !important;
+}
+
+body.theme-light .MuiDialog-paper {
+  background: #ffffff !important;
+  color: #243447 !important;
+}
+
+body.theme-light .MuiDialogContent-root {
+  color: #243447 !important;
+}
+
+body.theme-light .theme-toggle-button {
+  color: #c47b17 !important;
+}

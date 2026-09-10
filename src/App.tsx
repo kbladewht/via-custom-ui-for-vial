@@ -6,7 +6,7 @@ import {
   Grid,
 } from "@mui/material";
 import { match, P } from "ts-pattern";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./App.css";
 import { AppToolbar, KeymapStyle } from "./components/AppToolbar";
 import {
@@ -19,6 +19,12 @@ import { useAppController, via } from "./useAppController";
 
 function App() {
   const [keymapStyle, setKeymapStyle] = useState<KeymapStyle>("classic");
+  const [lightTheme, setLightTheme] = useState(false);
+
+  useEffect(() => {
+    document.body.classList.toggle("theme-light", lightTheme);
+    return () => document.body.classList.remove("theme-light");
+  }, [lightTheme]);
 
   const {
     vialJson,
@@ -72,7 +78,7 @@ function App() {
         container
         spacing={2}
         id="menu"
-        className={`app-shell keymap-style-${keymapStyle}`}
+        className={`app-shell keymap-style-${keymapStyle} ${lightTheme ? "theme-light" : ""}`}
         sx={{ pl: 1 }}
         style={{ position: "relative", minWidth: "100vw" }}
       >
@@ -80,6 +86,8 @@ function App() {
           <AppToolbar
             keymapStyle={keymapStyle}
             onKeymapStyleChange={setKeymapStyle}
+            lightTheme={lightTheme}
+            onThemeToggle={() => setLightTheme((isLight) => !isLight)}
             deviceIndex={deviceIndex}
             deviceList={deviceList}
             onDeviceChange={setDeviceIndex}
