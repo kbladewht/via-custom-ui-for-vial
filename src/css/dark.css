@@ -263,6 +263,7 @@ body:not(.theme-light) .combo-editor-panel {
 
 body:not(.theme-light) .combo-candidate-panel {
   margin-top: 8px;
+  background: transparent;
 }
 
 body:not(.theme-light) .entry-tabs,
