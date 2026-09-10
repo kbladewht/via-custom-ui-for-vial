@@ -1,0 +1,52 @@
+.keymap-style-matrix-tester .keymap-key {
+  background: #2b3038;
+  border: 1px solid #46505c;
+  border-radius: 6px;
+  color: #8faed0;
+  box-shadow: none;
+  transition: background-color 100ms ease, border-color 100ms ease, color 100ms ease;
+}
+
+.keymap-style-matrix-tester .keymap-key .main-legend,
+.keymap-style-matrix-tester .keymap-key .key-legend-centered {
+  color: #8faed0;
+  text-shadow: none;
+}
+
+.keymap-style-matrix-tester .keymap-key .mod-legend,
+.keymap-style-matrix-tester .keymap-key .hold-legend {
+  color: #718aa8;
+}
+
+.keymap-style-matrix-tester .keymap-key:hover {
+  background: #313740;
+  border-color: #5b6878;
+}
+
+.keymap-style-matrix-tester .keymap-key:hover .main-legend,
+.keymap-style-matrix-tester .keymap-key:hover .key-legend-centered {
+  color: #b3cdec;
+}
+
+.keymap-style-matrix-tester .keymap-key:active,
+.keymap-style-matrix-tester .keymap-key.keymap-key-focused {
+  background: #3b4654;
+  border-color: #86a8ce;
+  color: #d5e5f8;
+  box-shadow: 0 0 0 1px rgba(134, 168, 206, 0.15);
+}
+
+.keymap-style-matrix-tester .keymap-key:active .main-legend,
+.keymap-style-matrix-tester .keymap-key:active .key-legend-centered,
+.keymap-style-matrix-tester .keymap-key.keymap-key-focused .main-legend,
+.keymap-style-matrix-tester .keymap-key.keymap-key-focused .key-legend-centered {
+  color: #d5e5f8;
+}
+
+.keymap-style-matrix-tester .keymap-key.keymap-encoder {
+  border-radius: 50%;
+}
+
+.keymap-style-matrix-tester .keymap-key.keymap-encoder::before {
+  display: none;
+}
