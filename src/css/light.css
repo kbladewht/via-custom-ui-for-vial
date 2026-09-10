@@ -175,10 +175,15 @@ body.theme-light .key-select-popup .MuiAutocomplete-option[aria-selected="true"]
   box-shadow: none;
 }
 
+.app-shell.theme-light .keycatalog-surface {
+  border-radius: 0 0 12px 12px;
+  clip-path: inset(0 round 0 0 12px 12px);
+}
+
 .app-shell.theme-light .app-main-panel > .keymap-editor-surface,
 .app-shell.theme-light .app-main-panel > .keycatalog-surface {
   border: 0;
-  border-radius: 0;
+  border-radius: 0 0 12px 12px;
   box-shadow: none;
 }
 
@@ -186,7 +191,7 @@ body.theme-light .key-select-popup .MuiAutocomplete-option[aria-selected="true"]
 .app-shell.theme-light .app-main-panel .keycatalog-surface,
 .app-shell.theme-light .app-main-panel .keymap-surface {
   border: 0 !important;
-  border-radius: 0 !important;
+  border-radius: 0 0 12px 12px !important;
   box-shadow: none !important;
 }
 
@@ -195,6 +200,10 @@ body.theme-light .key-select-popup .MuiAutocomplete-option[aria-selected="true"]
   border-radius: 0 !important;
   padding: 0 !important;
   box-shadow: none !important;
+}
+
+.app-shell.theme-light .keymap-tab-panel {
+  border-radius: 0 0 12px 12px !important;
 }
 
 .app-shell.theme-light .MuiTab-root {

@@ -123,6 +123,15 @@ body:not(.theme-light) .battery-meter-fill {
   background: #0f172a;
 }
 
+.app-shell:not(.theme-light) .keycatalog-surface {
+  border-radius: 0 0 12px 12px;
+  clip-path: inset(0 round 0 0 12px 12px);
+}
+
+.app-shell:not(.theme-light) .keymap-tab-panel {
+  border-radius: 0 0 12px 12px !important;
+}
+
 .app-shell:not(.theme-light) .keymap-surface {
   background: #0f172a;
   border: 0;
