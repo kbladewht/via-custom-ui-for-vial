@@ -128,6 +128,8 @@ body:not(.theme-light) .battery-meter-fill {
 
 .app-shell:not(.theme-light) .keycode-catalog-scroll {
   background: #13192998;
+  border: 1px solid rgba(148, 163, 184, 0.28);
+  border-top: 0;
 }
 
 .app-shell:not(.theme-light) .keycatalog-surface {
