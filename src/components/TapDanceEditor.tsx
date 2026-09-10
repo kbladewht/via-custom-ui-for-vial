@@ -144,7 +144,7 @@ function TapDanceEntry(props: {
       }}
     >
     <Box sx={{ flex: 1, position: "relative", display: "flex", flexDirection: "column" }}>
-      <Box className="entry-editor-panel">
+      <Box className={`entry-editor-panel ${selectedKeyIndex !== undefined ? "entry-editor-panel-with-candidates" : ""}`}>
       <Grid container spacing={1} sx={{ maxWidth: 480, mx: "auto", mt: 0 }}>
         {tapDanceFields.map((k, idx) => {
           return (

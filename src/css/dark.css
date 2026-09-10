@@ -146,6 +146,12 @@ body:not(.theme-light) .battery-meter-fill {
   overflow: hidden;
 }
 
+.app-shell:not(.theme-light) .keymap-tab-panel {
+  max-height: calc(100vh - 180px);
+  overflow-y: auto;
+  scrollbar-color: #475569 #0f172a;
+}
+
 .app-shell:not(.theme-light) .keymap-surface {
   background: #1e293b;
   border: 0;
@@ -321,6 +327,7 @@ body:not(.theme-light) .entry-tab.Mui-selected {
 body:not(.theme-light) .entry-content-panel {
   flex: 1;
   min-height: 0;
+  overflow: visible;
   margin-top: 0 !important;
   background: #13192998;
   border: 1px solid rgba(148, 163, 184, 0.28);
@@ -346,10 +353,35 @@ body:not(.theme-light) .entry-candidate-panel {
 body:not(.theme-light) .entry-editor-panel {
   flex: 1;
   min-height: 0;
+  max-height: 400px;
+  overflow-y: auto;
+  scrollbar-color: #475569 #0f172a;
   border-top: 0;
   border-radius: 0 12px 12px 12px;
   margin-bottom: 8px;
   padding-bottom: 8px;
+}
+
+body:not(.theme-light) .entry-editor-panel::-webkit-scrollbar {
+  width: 10px;
+}
+
+body:not(.theme-light) .entry-editor-panel::-webkit-scrollbar-track {
+  background: #0f172a;
+}
+
+body:not(.theme-light) .entry-editor-panel::-webkit-scrollbar-thumb {
+  background: #475569;
+  border: 2px solid #0f172a;
+  border-radius: 8px;
+}
+
+body:not(.theme-light) .entry-editor-panel::-webkit-scrollbar-thumb:hover {
+  background: #64748b;
+}
+
+body:not(.theme-light) .entry-editor-panel-with-candidates {
+  flex: 0 0 auto;
 }
 
 body:not(.theme-light) .entry-candidate-panel {

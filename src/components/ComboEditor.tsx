@@ -132,7 +132,7 @@ function ComboEntry(props: {
       }}
     >
       <Box sx={{ flex: 1, position: "relative", display: "flex", flexDirection: "column" }}>
-      <Box className="entry-editor-panel combo-editor-panel">
+      <Box className={`entry-editor-panel combo-editor-panel ${selectedKeyIndex !== undefined ? "entry-editor-panel-with-candidates" : ""}`}>
       <Grid container spacing={1} sx={{ maxWidth: 480, mx: "auto", mt: 0 }}>
         {candidateCombo.keys.map((k, idx) => {
           return (
