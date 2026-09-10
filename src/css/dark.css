@@ -118,7 +118,10 @@ body:not(.theme-light) .battery-meter-fill {
   box-shadow: 0 20px 40px rgba(15, 23, 42, 0.25);
 }
 
-.app-shell:not(.theme-light) .keymap-editor-surface,
+.app-shell:not(.theme-light) .keymap-editor-surface {
+  background: #1e293b;
+}
+
 .app-shell:not(.theme-light) .keycatalog-surface {
   background: #0f172a;
 }
@@ -129,7 +132,7 @@ body:not(.theme-light) .battery-meter-fill {
 }
 
 .app-shell:not(.theme-light) .keymap-tab-panel {
-  background: #0f172a !important;
+  background: #1e293b !important;
   border-radius: 0 0 12px 12px !important;
   clip-path: inset(0 0 0 0 round 0 0 12px 12px);
   overflow: hidden;
