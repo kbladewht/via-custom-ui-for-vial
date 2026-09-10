@@ -313,10 +313,23 @@ body:not(.theme-light) .entry-candidate-panel {
 body:not(.theme-light) .entry-editor-panel {
   flex: 1;
   min-height: 0;
+  border-top: 0;
+  border-radius: 0 0 12px 12px;
 }
 
 body:not(.theme-light) .entry-candidate-panel {
   margin-top: 8px !important;
+}
+
+body:not(.theme-light) .tapdance-selector-entry-tab {
+  border: 1px solid #334155 !important;
+  border-radius: 8px 8px 0 0 !important;
+}
+
+body:not(.theme-light) .tapdance-selector-entry-tab.Mui-selected {
+  background-color: #13192998 !important;
+  border-color: #475569 !important;
+  border-bottom-color: transparent !important;
 }
 
 body:not(.theme-light) .keycode-catalog-scroll .keycode-group:first-child {

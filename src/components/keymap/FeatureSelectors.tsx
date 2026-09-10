@@ -80,7 +80,7 @@ export function TapDanceSelector(props: {
         variant="scrollable"
         scrollButtons="auto"
         aria-label="Tap Dance entries"
-        className="entry-tabs key-override-tabs"
+        className="entry-tabs tapdance-entry-tabs"
         sx={{
           py: 0,
           "& .MuiTabs-flexContainer": {
@@ -91,7 +91,7 @@ export function TapDanceSelector(props: {
         {Array.from({ length: props.dynamicEntryCount.tapdance }, (_, index) => (
           <Tab
             key={index}
-            className="entry-tab key-override-entry-tab"
+            className="entry-tab tapdance-selector-entry-tab"
             label={index}
             value={index}
             sx={{
@@ -115,14 +115,12 @@ export function TapDanceSelector(props: {
         ))}
       </Tabs>
       {props.dynamicEntryCount.tapdance > 0 && (
-        <Box sx={{ width: "100%", flex: 1, mt: 2, display: "flex" }}>
-          <TapDanceEditor
-            via={props.via}
-            keycodeConverter={keycodeConverter}
-            tapdanceIndex={editorIndex}
-            language={props.language}
-          />
-        </Box>
+        <TapDanceEditor
+          via={props.via}
+          keycodeConverter={keycodeConverter}
+          tapdanceIndex={editorIndex}
+          language={props.language}
+        />
       )}
     </Box>
   );
