@@ -215,6 +215,42 @@ body:not(.theme-light) .tapdance-entry-tab.Mui-selected {
   border-color: #475569 !important;
 }
 
+body:not(.theme-light) .combo-tabs,
+body:not(.theme-light) .combo-tabs .MuiTabs-scroller,
+body:not(.theme-light) .combo-tabs .MuiTabs-flexContainer {
+  min-height: 30px !important;
+  height: 30px !important;
+}
+
+body:not(.theme-light) .combo-entry-tab {
+  border: 1px solid #334155 !important;
+  border-radius: 8px 8px 0 0 !important;
+  min-height: 30px !important;
+  height: 30px !important;
+  min-width: 28px !important;
+  width: 28px !important;
+  padding: 0 !important;
+}
+
+body:not(.theme-light) .combo-entry-tab + .combo-entry-tab {
+  border-left: 0 !important;
+}
+
+body:not(.theme-light) .combo-entry-tab.Mui-selected {
+  background-color: #13192998 !important;
+  border-color: #475569 !important;
+  border-bottom-color: transparent !important;
+}
+
+body:not(.theme-light) .combo-content-panel {
+  flex: 1;
+  min-height: 0;
+  background: #13192998;
+  border: 1px solid rgba(148, 163, 184, 0.28);
+  border-top: 0;
+  border-radius: 0 0 12px 12px;
+}
+
 body:not(.theme-light) .keycode-catalog-scroll .keycode-group:first-child {
   border-top: 0 !important;
 }

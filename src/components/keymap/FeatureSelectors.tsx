@@ -32,18 +32,20 @@ export function ComboOverrideEditor(props: {
 
   return (
     <Box sx={{ width: "100%", minHeight: "calc(100vh - 180px)", p: 1, display: "flex", flexDirection: "column" }}>
-      <Tabs value={comboIndex} onChange={(_event, index: number) => setComboIndex(index)} variant="scrollable" scrollButtons="auto" className="tapdance-tabs" sx={{ py: 0 }}>
+      <Tabs value={comboIndex} onChange={(_event, index: number) => setComboIndex(index)} variant="scrollable" scrollButtons="auto" className="combo-tabs" sx={{ py: 0 }}>
         {Array.from({ length: props.dynamicEntryCount.combo }, (_, index) => (
-          <Tab key={index} label={index + 1} value={index} sx={{ width: 28, minWidth: 28, minHeight: 28, px: 0, color: "#b8c7dc", fontWeight: 600, textTransform: "none", border: "1px solid #334155", borderRadius: "8px 8px 0 0", backgroundColor: "rgba(30, 41, 59, 0.7)", "&.Mui-selected": { color: "#f8fafc", borderColor: "#475569", backgroundColor: "#334155" } }} />
+          <Tab key={index} className="combo-entry-tab" label={index + 1} value={index} sx={{ width: 28, minWidth: 28, minHeight: 28, px: 0, color: "#b8c7dc", fontWeight: 600, textTransform: "none", border: "1px solid #334155", borderRadius: "8px 8px 0 0", backgroundColor: "rgba(30, 41, 59, 0.7)", "&.Mui-selected": { color: "#f8fafc", borderColor: "#475569", backgroundColor: "#334155" } }} />
         ))}
       </Tabs>
       {props.dynamicEntryCount.combo > 0 && (
-        <ComboEditor
-          via={props.via}
-          keycodeConverter={keycodeConverter}
-          comboIndex={comboIndex}
-          language={props.language}
-        />
+        <Box className="combo-content-panel">
+          <ComboEditor
+            via={props.via}
+            keycodeConverter={keycodeConverter}
+            comboIndex={comboIndex}
+            language={props.language}
+          />
+        </Box>
       )}
     </Box>
   );
