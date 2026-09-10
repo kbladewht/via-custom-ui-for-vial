@@ -1,4 +1,5 @@
 import {
+  Box,
   Button,
   Checkbox,
   FormControl,
@@ -10,6 +11,7 @@ import {
   SelectChangeEvent,
   Slider,
   Switch,
+  Typography,
 } from "@mui/material";
 import { MuiColorInput, MuiColorInputColors } from "mui-color-input";
 import { ChangeEvent, SyntheticEvent } from "react";
@@ -80,6 +82,16 @@ type MultipleCheckboxElement = {
   onChange: (value: number) => void;
 };
 
+type CheckboxListElement = {
+  type: "checkbox-list";
+  label: string;
+  content: [string, number, number, number?];
+  options: Array<[string, number]> | Array<string>;
+  value: number;
+  language?: "zh" | "en";
+  onChange: (value: number) => void;
+};
+
 type ShowIfElement =
   | {
       showIf: string;
@@ -93,7 +105,8 @@ type MenuElementProperties =
   | ColorElement
   | ToggleElement
   | ButtonElement
-  | MultipleCheckboxElement;
+  | MultipleCheckboxElement
+  | CheckboxListElement;
 
 type MenuSectionProperties = {
   label: string;
@@ -184,7 +197,9 @@ function ViaRange(props: RangeElement) {
   );
 }
 
-function getDropDownLabels(elem: DropdownElement | MultipleCheckboxElement): [string, number][] {
+function getDropDownLabels(
+  elem: DropdownElement | MultipleCheckboxElement | CheckboxListElement,
+): [string, number][] {
   return elem.options.map((o, index) => {
     if (Array.isArray(o)) {
       return [o[0], o[1]];
@@ -349,6 +364,72 @@ function ViaMultipleCheckbox(props: MultipleCheckboxElement) {
   );
 }
 
+function ViaCheckboxList(props: CheckboxListElement) {
+  const labels = getDropDownLabels(props);
+
+  return (
+    <Grid item xs={12}>
+      <Box
+        sx={{
+          display: "flex",
+          flexDirection: "column",
+          gap: 0.25,
+          maxWidth: 480,
+          mx: "auto",
+          mt: 0.5,
+          mb: 1,
+        }}
+      >
+        {labels.map(([optLabel, bit]) => {
+          const isChecked = (props.value & (1 << bit)) !== 0;
+          return (
+            <Box
+              key={`${props.label}-${optLabel}-${bit}`}
+              onClick={() => props.onChange(props.value ^ (1 << bit))}
+              sx={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "space-between",
+                gap: 2,
+                cursor: "pointer",
+                userSelect: "none",
+                py: 0.1,
+                px: 0.75,
+                borderRadius: 1,
+                "&:hover": {
+                  backgroundColor: "rgba(51, 65, 85, 0.35)",
+                },
+              }}
+            >
+              <Typography
+                sx={{
+                  color: "#cbd5e1",
+                  fontSize: "0.84rem",
+                  fontWeight: 500,
+                  flex: 1,
+                  textAlign: "left",
+                }}
+              >
+                {translateOption(String(optLabel), props.language)}
+              </Typography>
+              <Checkbox
+                size="small"
+                checked={isChecked}
+                onChange={() => {}}
+                sx={{
+                  color: "#64748b",
+                  "&.Mui-checked": { color: "#38bdf8" },
+                  p: "2px",
+                }}
+              />
+            </Box>
+          );
+        })}
+      </Box>
+    </Grid>
+  );
+}
+
 function MenuElement(props: MenuSectionProperties, elem: MenuElementProperties, key: string) {
   if ("type" in elem) {
     switch (elem.type) {
@@ -405,6 +486,16 @@ function MenuElement(props: MenuSectionProperties, elem: MenuElementProperties, 
       case "multiple-checkbox":
         return (
           <ViaMultipleCheckbox
+            key={key}
+            {...elem}
+            language={props.language}
+            value={props.customValues[elem.content[0]] ?? 0}
+            onChange={(value) => props.onChange(elem.content, value)}
+          />
+        );
+      case "checkbox-list":
+        return (
+          <ViaCheckboxList
             key={key}
             {...elem}
             language={props.language}
