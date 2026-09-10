@@ -167,9 +167,15 @@ body.theme-light .key-select-popup .MuiAutocomplete-option[aria-selected="true"]
 }
 
 /* Light workspace: keep the keymap editor readable instead of leaving a dark canvas inside the light shell. */
-.app-shell.theme-light .keymap-editor-surface,
+.app-shell.theme-light .keymap-editor-surface {
+  background: #f7f9fb;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+}
+
 .app-shell.theme-light .keycatalog-surface {
-  background: #f1f5f8;
+  background: #eef3f7;
   border: 0;
   border-radius: 0;
   box-shadow: none;
@@ -203,7 +209,7 @@ body.theme-light .key-select-popup .MuiAutocomplete-option[aria-selected="true"]
 }
 
 .app-shell.theme-light .keymap-tab-panel {
-  background: #f1f5f8 !important;
+  background: #f7f9fb !important;
   border-radius: 0 0 12px 12px !important;
   clip-path: inset(0 0 0 0 round 0 0 12px 12px);
   overflow: hidden;
@@ -309,8 +315,12 @@ body.theme-light .key-select-popup .MuiAutocomplete-option[aria-selected="true"]
 }
 
 .app-shell.theme-light .keycatalog-surface {
-  background: #f7f9fb;
+  background: #eef3f7;
   color: #334b61;
+}
+
+.app-shell.theme-light .keycode-catalog-scroll {
+  background: #eef3f7;
 }
 
 .app-shell.theme-light .keycatalog-key {
