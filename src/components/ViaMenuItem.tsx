@@ -11,6 +11,7 @@ import {
   SelectChangeEvent,
   Slider,
   Switch,
+  TextField,
   Typography,
 } from "@mui/material";
 import { MuiColorInput, MuiColorInputColors } from "mui-color-input";
@@ -92,6 +93,26 @@ type CheckboxListElement = {
   onChange: (value: number) => void;
 };
 
+type NumberElement = {
+  type: "number";
+  label: string;
+  options?: [number, number];
+  content: [string, number, number, number?];
+  value: number;
+  language?: "zh" | "en";
+  onChange: (value: number) => void;
+};
+
+type BitCheckboxElement = {
+  type: "bit-checkbox";
+  label: string;
+  bit?: number;
+  content: [string, number, number, number?];
+  value: number;
+  language?: "zh" | "en";
+  onChange: (value: number) => void;
+};
+
 type ShowIfElement =
   | {
       showIf: string;
@@ -106,7 +127,9 @@ type MenuElementProperties =
   | ToggleElement
   | ButtonElement
   | MultipleCheckboxElement
-  | CheckboxListElement;
+  | CheckboxListElement
+  | NumberElement
+  | BitCheckboxElement;
 
 type MenuSectionProperties = {
   label: string;
@@ -430,6 +453,121 @@ function ViaCheckboxList(props: CheckboxListElement) {
   );
 }
 
+function ViaNumber(props: NumberElement) {
+  const min = props.options?.[0] ?? 0;
+  const max = props.options?.[1] ?? 65535;
+
+  return (
+    <Grid item xs={12}>
+      <Box
+        sx={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "space-between",
+          gap: 2,
+          maxWidth: 480,
+          mx: "auto",
+          py: 0.15,
+          px: 0.75,
+        }}
+      >
+        <Typography
+          sx={{
+            color: "#cbd5e1",
+            fontSize: "0.84rem",
+            fontWeight: 500,
+            flex: 1,
+            textAlign: "left",
+          }}
+        >
+          {translateLabel(props.label, props.language)}
+        </Typography>
+        <TextField
+          size="small"
+          type="number"
+          value={props.value ?? 0}
+          onChange={(e) => {
+            const val = parseInt(e.target.value, 10);
+            if (!isNaN(val)) {
+              props.onChange(Math.max(min, Math.min(max, val)));
+            }
+          }}
+          inputProps={{
+            min,
+            max,
+            style: {
+              textAlign: "right",
+              padding: "3px 6px",
+              fontSize: "0.84rem",
+              color: "#e2e8f0",
+            },
+          }}
+          sx={{
+            width: 78,
+            "& .MuiOutlinedInput-root": {
+              backgroundColor: "#1e2227",
+              borderRadius: "4px",
+              "& fieldset": { borderColor: "#484f5c" },
+              "&:hover fieldset": { borderColor: "#64748b" },
+              "&.Mui-focused fieldset": { borderColor: "#38bdf8" },
+            },
+          }}
+        />
+      </Box>
+    </Grid>
+  );
+}
+
+function ViaBitCheckbox(props: BitCheckboxElement) {
+  const isChecked = (props.value & (1 << (props.bit ?? 0))) !== 0;
+
+  return (
+    <Grid item xs={12}>
+      <Box
+        onClick={() => props.onChange(props.value ^ (1 << (props.bit ?? 0)))}
+        sx={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "space-between",
+          gap: 2,
+          maxWidth: 480,
+          mx: "auto",
+          py: 0.1,
+          px: 0.75,
+          cursor: "pointer",
+          userSelect: "none",
+          borderRadius: 1,
+          "&:hover": {
+            backgroundColor: "rgba(51, 65, 85, 0.35)",
+          },
+        }}
+      >
+        <Typography
+          sx={{
+            color: "#cbd5e1",
+            fontSize: "0.84rem",
+            fontWeight: 500,
+            flex: 1,
+            textAlign: "left",
+          }}
+        >
+          {translateLabel(props.label, props.language)}
+        </Typography>
+        <Checkbox
+          size="small"
+          checked={isChecked}
+          onChange={() => {}}
+          sx={{
+            color: "#64748b",
+            "&.Mui-checked": { color: "#38bdf8" },
+            p: "2px",
+          }}
+        />
+      </Box>
+    </Grid>
+  );
+}
+
 function MenuElement(props: MenuSectionProperties, elem: MenuElementProperties, key: string) {
   if ("type" in elem) {
     switch (elem.type) {
@@ -496,6 +634,26 @@ function MenuElement(props: MenuSectionProperties, elem: MenuElementProperties, 
       case "checkbox-list":
         return (
           <ViaCheckboxList
+            key={key}
+            {...elem}
+            language={props.language}
+            value={props.customValues[elem.content[0]] ?? 0}
+            onChange={(value) => props.onChange(elem.content, value)}
+          />
+        );
+      case "number":
+        return (
+          <ViaNumber
+            key={key}
+            {...elem}
+            language={props.language}
+            value={props.customValues[elem.content[0]] ?? 0}
+            onChange={(value) => props.onChange(elem.content, value)}
+          />
+        );
+      case "bit-checkbox":
+        return (
+          <ViaBitCheckbox
             key={key}
             {...elem}
             language={props.language}

@@ -73,15 +73,20 @@ export function QuantumSettingsEditor(props: {
     console.log("read quantum values");
 
     const currentTab = QuantumSettingDefinition[quantumTabValue] ?? QuantumSettingDefinition[0];
-    const undefinedIds = currentTab.content
-      .filter((v) => quantumValue[v.content[0]] === undefined)
-      .map((v) => v.content[1] as number);
+    const uniqueIds = Array.from(new Set(currentTab.content.map((v) => v.content[1] as number)));
+    const undefinedIds = uniqueIds.filter((id) => {
+      const entry = currentTab.content.find((v) => v.content[1] === id);
+      return entry && quantumValue[entry.content[0]] === undefined;
+    });
     const newValue = { ...quantumValue };
     const newSaved = { ...savedQuantumValue };
     undefinedIds.forEach((id) => {
-      newValue[id] = 0;
-      if (newSaved[id] === undefined) {
-        newSaved[id] = 0;
+      const entry = currentTab.content.find((v) => v.content[1] === id);
+      if (entry) {
+        newValue[entry.content[0]] = 0;
+        if (newSaved[entry.content[0]] === undefined) {
+          newSaved[entry.content[0]] = 0;
+        }
       }
     });
     props.onChange(newValue);

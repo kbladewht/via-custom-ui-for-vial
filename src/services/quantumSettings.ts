@@ -5,6 +5,7 @@ export const QuantumSettingDefinition: {
   content: {
     type: string;
     label: string;
+    bit?: number;
     content: (string | number)[];
     options?: (string | number)[] | (string | number)[][];
   }[];
@@ -52,38 +53,64 @@ export const QuantumSettingDefinition: {
     label: "Tap-Hold",
     content: [
       {
-        type: "range",
-        label: "Tapping term [ms]",
+        type: "number",
+        label: "Tapping Term",
         content: ["id-tapping-term", 7, 2],
+        options: [0, 5000],
       },
       {
-        type: "multiple-checkbox",
-        label: "Tapping options",
+        type: "bit-checkbox",
+        label: "Permissive Hold",
+        bit: 0,
         content: ["id-tapping", 8, 1],
-        options: [
-          "Permissive hold",
-          "Ignore Mod Tap interrupt",
-          "Tapping force hold",
-          "Retro tapping",
-        ],
       },
       {
-        type: "range",
-        label: "Tap code delay [ms]",
+        type: "bit-checkbox",
+        label: "Hold On Other Key Press",
+        bit: 1,
+        content: ["id-tapping", 8, 1],
+      },
+      {
+        type: "bit-checkbox",
+        label: "Retro Tapping",
+        bit: 3,
+        content: ["id-tapping", 8, 1],
+      },
+      {
+        type: "number",
+        label: "Quick Tap Term",
+        content: ["id-quick-tap-term", 22, 2],
+        options: [0, 5000],
+      },
+      {
+        type: "number",
+        label: "Tap Code Delay",
         content: ["id-tap-code-delay", 18, 2],
         options: [0, 500],
       },
       {
-        type: "range",
-        label: "Tap hold Caps delay [ms]",
+        type: "number",
+        label: "Tap Hold Caps Delay",
         content: ["id-tap-hold-caps-delay", 19, 2],
         options: [0, 500],
       },
       {
-        type: "range",
-        label: "Tapping toggle",
+        type: "number",
+        label: "Tapping Toggle",
         content: ["id-tapping-toggle", 20, 1],
         options: [0, 99],
+      },
+      {
+        type: "bit-checkbox",
+        label: "Chordal Hold",
+        bit: 4,
+        content: ["id-tapping", 8, 1],
+      },
+      {
+        type: "number",
+        label: "Flow Tap",
+        content: ["id-flow-tap", 23, 2],
+        options: [0, 5000],
       },
     ],
   },
