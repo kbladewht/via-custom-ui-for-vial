@@ -296,6 +296,10 @@ textarea {
   box-shadow: inset 0 -1px 0 #596777;
 }
 
+.entry-tab.Mui-selected {
+  box-shadow: none !important;
+}
+
 /* Hover / active feedback for tabs */
 .MuiTab-root:hover {
   background: rgba(96, 165, 250, 0.06) !important;
@@ -307,7 +311,7 @@ textarea {
 }
 
 .MuiTabs-indicator {
-  display: none;
+  display: none !important;
 }
 
 .tapdance-tabs .MuiTabs-scroller {

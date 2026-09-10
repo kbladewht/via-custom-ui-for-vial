@@ -295,6 +295,14 @@ body:not(.theme-light) .entry-tab.Mui-selected {
   border-bottom-color: transparent !important;
 }
 
+body:not(.theme-light) .entry-tab + .entry-tab.Mui-selected {
+  border-left: 0 !important;
+}
+
+body:not(.theme-light) .entry-tab.Mui-selected {
+  box-shadow: none !important;
+}
+
 body:not(.theme-light) .entry-content-panel {
   flex: 1;
   min-height: 0;
