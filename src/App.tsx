@@ -9,7 +9,9 @@ import {
   DialogContent,
   Grid,
   IconButton,
+  MenuItem,
   Popover,
+  Select,
   Tooltip,
   Typography,
 } from "@mui/material";
@@ -24,8 +26,11 @@ import {
 import { QuantumSettingsEditor } from "./components/QuantumSettingsEditor";
 import { ViaMenuItem } from "./components/ViaMenuItem";
 import { useAppController, via } from "./useAppController";
+import { useState } from "react";
 
 function App() {
+  const [keymapStyle, setKeymapStyle] = useState<"classic" | "3d" | "mx" | "sculpted" | "matrix">("classic");
+
   const {
     vialJson,
     dynamicEntryCount,
@@ -78,7 +83,7 @@ function App() {
         container
         spacing={2}
         id="menu"
-        className="app-shell"
+        className={`app-shell keymap-style-${keymapStyle}`}
         sx={{ pl: 1 }}
         style={{ position: "relative", minWidth: "100vw" }}
       >
@@ -208,6 +213,45 @@ function App() {
                 whiteSpace: "nowrap",
               }}
             >
+              <Select
+                size="small"
+                value={keymapStyle}
+                onChange={(event) => setKeymapStyle(event.target.value as "classic" | "3d" | "mx" | "sculpted" | "matrix")}
+                sx={{
+                  minWidth: 140,
+                  height: 32,
+                  fontSize: "11px",
+                  color: "#e2e8f0",
+                  background: "rgba(15, 23, 42, 0.85)",
+                  borderRadius: 1.5,
+                  "& .MuiOutlinedInput-notchedOutline": {
+                    borderColor: "rgba(148, 163, 184, 0.28)",
+                  },
+                  "&:hover .MuiOutlinedInput-notchedOutline": {
+                    borderColor: "rgba(148, 163, 184, 0.45)",
+                  },
+                  "& .MuiSelect-select": {
+                    py: 0.5,
+                    pr: 2,
+                  },
+                }}
+                MenuProps={{
+                  PaperProps: {
+                    sx: {
+                      background: "#0f172a",
+                      color: "#e2e8f0",
+                      border: "1px solid rgba(148, 163, 184, 0.2)",
+                      mt: 0.5,
+                    },
+                  },
+                }}
+              >
+                <MenuItem value="classic" sx={{ fontSize: "11px" }}>Default</MenuItem>
+                <MenuItem value="3d" sx={{ fontSize: "11px" }}>3D</MenuItem>
+                <MenuItem value="mx" sx={{ fontSize: "11px" }}>MX</MenuItem>
+                <MenuItem value="sculpted" sx={{ fontSize: "11px" }}>Sculpted</MenuItem>
+                <MenuItem value="matrix" sx={{ fontSize: "11px" }}>Matrix</MenuItem>
+              </Select>
               <Tooltip title="BLE 快捷键">
                 <IconButton
                   className="vial-action-button"

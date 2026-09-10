@@ -1,0 +1,434 @@
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background: linear-gradient(135deg, #08111f 0%, #0e1728 40%, #111827 100%);
+  color: #e5eefb;
+}
+
+#root {
+  min-height: 100vh;
+  background: transparent;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scrollbar-color: #475569 #0f172a;
+  scrollbar-width: thin;
+}
+
+*::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+*::-webkit-scrollbar-track {
+  background: #0f172a;
+}
+
+*::-webkit-scrollbar-thumb {
+  background: #475569;
+  border: 2px solid #0f172a;
+  border-radius: 8px;
+}
+
+*::-webkit-scrollbar-thumb:hover {
+  background: #64748b;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
+
+.app-shell {
+  min-height: 100vh;
+  padding: 18px 16px 16px !important;
+  background: rgba(8, 14, 24, 0.72);
+}
+
+.app-sidebar {
+  background: linear-gradient(180deg, rgba(15, 23, 42, 0.96), rgba(17, 24, 39, 0.92)) !important;
+  border: 1px solid rgba(148, 163, 184, 0.18);
+  border-radius: 18px;
+  padding: 16px 14px 18px !important;
+  box-shadow: 0 20px 40px rgba(15, 23, 42, 0.35);
+  backdrop-filter: blur(12px);
+  margin-top: 8px;
+}
+
+.menu-header {
+  padding: 4px 6px 12px;
+  border-bottom: 1px solid rgba(148, 163, 184, 0.15);
+  margin-bottom: 8px;
+}
+
+.menu-list {
+  padding-top: 8px !important;
+}
+
+.nav-section {
+  border-radius: 12px;
+  padding: 6px 0;
+}
+
+.nav-section .MuiListSubheader-root,
+.custom-menu-group .custom-menu-subheader {
+  color: #bfdbfe;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  background: rgba(96, 165, 250, 0.08);
+  border-left: 3px solid #60a5fa;
+  border-radius: 4px;
+  line-height: 1.6;
+  padding-left: 9px;
+  padding-right: 10px;
+  margin: 4px 0 6px;
+}
+
+.MuiList-root .MuiListItemButton-root {
+  border-radius: 10px;
+  margin: 4px 0;
+  width: calc(100% - 12px);
+  color: #edf2ff;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.MuiList-root .MuiListItemButton-root:hover {
+  background: rgba(96, 165, 250, 0.12);
+  transform: translateX(2px);
+}
+
+.MuiListItemText-root .MuiTypography-root {
+  color: #edf2ff;
+  font-weight: 500;
+}
+
+.custom-menu-group {
+  padding-left: 10px !important;
+}
+
+.custom-menu-section {
+  padding: 6px 0;
+}
+
+.action-panel {
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px solid rgba(148, 163, 184, 0.15);
+}
+
+.action-grid .MuiGrid-item {
+  min-width: 0;
+}
+
+.MuiButton-root {
+  border-radius: 10px !important;
+  text-transform: none !important;
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+  box-shadow: none !important;
+  font-weight: 600 !important;
+}
+
+.app-sidebar .MuiButton-root {
+  padding-left: 8px;
+  padding-right: 8px;
+  font-size: 0.78rem;
+}
+
+.MuiButton-containedPrimary {
+  background: #334155 !important;
+  border: 1px solid #64748b !important;
+  color: #e5eefb !important;
+}
+
+.MuiButton-containedPrimary:hover {
+  background: #475569 !important;
+  border-color: #94a3b8 !important;
+}
+
+.MuiButton-containedError {
+  background: linear-gradient(135deg, #f87171 0%, #dc2626 100%) !important;
+}
+
+.quantum-setting-save {
+  background: #334155 !important;
+  color: #e5eefb !important;
+}
+
+.quantum-setting-save:hover {
+  background: #475569 !important;
+}
+
+.quantum-setting-erase {
+  background: #4a3035 !important;
+  color: #f1d7da !important;
+}
+
+.quantum-setting-erase:hover {
+  background: #604047 !important;
+}
+
+.vial-action-button {
+  background: #334155 !important;
+  color: #c3d0e0 !important;
+}
+
+.vial-action-button:hover {
+  background: #475569 !important;
+}
+
+.battery-status-button {
+  color: #4ade80 !important;
+}
+
+.battery-status-button:hover {
+  color: #86efac !important;
+}
+
+.battery-meter {
+  position: relative;
+  box-sizing: border-box;
+  width: 24px;
+  height: 14px;
+  border: 2px solid #cbd5e1;
+  border-radius: 3px;
+  overflow: visible;
+}
+
+.battery-meter::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  right: -5px;
+  width: 4px;
+  height: 6px;
+  border-radius: 0 2px 2px 0;
+  background: #cbd5e1;
+  transform: translateY(-50%);
+}
+
+.battery-meter-fill {
+  height: 100%;
+  background: #4ade80;
+  border-radius: 1px;
+  box-shadow: inset 0 0 0 1px rgba(15, 23, 42, 0.35);
+  transition: width 180ms ease;
+}
+
+.battery-waiting-icon .battery-meter-fill {
+  animation: battery-status-pulse 1.8s ease-in-out infinite;
+}
+
+@keyframes battery-status-pulse {
+  0%,
+  100% {
+    opacity: 0.55;
+  }
+
+  50% {
+    opacity: 1;
+  }
+}
+
+.app-main-panel {
+  padding-top: 8px !important;
+  min-height: 100%;
+}
+
+.app-main-panel > * {
+  background: rgba(15, 23, 42, 0.92);
+  border: 1px solid rgba(148, 163, 184, 0.2);
+  border-radius: 18px;
+  padding: 18px;
+  box-shadow: 0 20px 40px rgba(15, 23, 42, 0.25);
+}
+
+.app-main-panel > .MuiTabs-root {
+  padding: 0;
+  background: transparent;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+}
+
+.app-main-panel h4 {
+  color: #e5eefb;
+  font-weight: 600;
+  margin: 0;
+}
+
+.app-main-panel .MuiGrid-item > h4 {
+  color: #e5eefb !important;
+}
+
+.MuiTabs-root {
+  min-height: 36px !important;
+  background: transparent;
+  border-bottom: 0;
+  border-radius: 0;
+}
+
+.MuiTab-root {
+  min-width: 64px !important;
+  min-height: 36px !important;
+  padding: 6px 12px !important;
+  color: #b8c7dc !important;
+  font-size: 0.8rem !important;
+  font-weight: 600 !important;
+  text-transform: none !important;
+}
+
+.MuiTab-root.Mui-selected {
+  color: #c3d0e0 !important;
+  background-color: #3f4b5a !important;
+  border-radius: 8px 8px 0 0;
+  box-shadow: inset 0 -1px 0 #596777;
+}
+
+.MuiTab-root:hover {
+  background: rgba(96, 165, 250, 0.06) !important;
+  box-shadow: 0 6px 14px rgba(2,6,23,0.12);
+}
+
+.MuiTab-root:active {
+  box-shadow: 0 4px 10px rgba(2,6,23,0.08);
+}
+
+.MuiTabs-indicator {
+  display: none;
+}
+
+.tapdance-tabs .MuiTabs-scroller {
+  margin-left: 0 !important;
+}
+
+.tapdance-tabs .MuiTabs-flexContainer {
+  justify-content: flex-start !important;
+}
+
+.tapdance-tabs .MuiTab-root {
+  width: 28px !important;
+  min-width: 28px !important;
+  min-height: 28px !important;
+  padding: 0 !important;
+}
+
+.MuiLink-root {
+  color: #93c5fd !important;
+  text-decoration: none !important;
+  display: inline-block;
+  padding: 8px 10px 2px;
+}
+
+.MuiDialog-paper {
+  border-radius: 16px !important;
+  background: #111827 !important;
+  color: #e5eefb !important;
+}
+
+.MuiDialogContent-root {
+  color: #e5eefb !important;
+}
+
+.MuiMenuItem-root,
+.MuiSelect-select,
+.MuiInputBase-root,
+.MuiPaper-root {
+  background-color: rgba(15, 23, 42, 0.9) !important;
+  color: #e5eefb !important;
+}
+
+.MuiInputBase-input,
+.MuiInputLabel-root,
+.MuiFormLabel-root,
+.MuiFormControlLabel-label {
+  color: #e5eefb !important;
+}
+
+.MuiSelect-root {
+  border: 1px solid rgba(148, 163, 184, 0.7);
+  border-radius: 8px;
+}
+
+.MuiSelect-root::before,
+.MuiSelect-root::after {
+  display: none;
+}
+
+.MuiSelect-root:hover {
+  border-color: #93c5fd;
+}
+
+.MuiSelect-root.Mui-focused {
+  border: 2px solid #60a5fa;
+}
+
+.MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline {
+  border-color: rgba(148, 163, 184, 0.7);
+}
+
+.MuiOutlinedInput-root:hover .MuiOutlinedInput-notchedOutline {
+  border-color: #93c5fd;
+}
+
+.MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline {
+  border-color: #60a5fa;
+}
+
+.quantum-multiple-select .MuiOutlinedInput-notchedOutline {
+  border: 1px solid rgba(148, 163, 184, 0.7) !important;
+}
+
+.quantum-multiple-select:hover .MuiOutlinedInput-notchedOutline {
+  border-color: #93c5fd !important;
+}
+
+.MuiCheckbox-root {
+  color: #b8c7dc !important;
+}
+
+.MuiCheckbox-root.Mui-checked {
+  color: #60a5fa !important;
+}
+
+.MuiCheckbox-root:hover {
+  background-color: rgba(96, 165, 250, 0.15) !important;
+}
+
+.MuiDivider-root {
+  border-color: rgba(148, 163, 184, 0.15) !important;
+}
+
+@media (max-width: 899px) {
+  .app-shell {
+    padding: 12px 10px 10px !important;
+  }
+
+  .app-sidebar {
+    width: min(100%, 360px) !important;
+    min-height: auto;
+    border-radius: 18px;
+  }
+
+  .MuiList-root .MuiListItemButton-root {
+    width: 100%;
+  }
+
+  .menu-button {
+    background: rgba(15, 23, 42, 0.9) !important;
+    border: 1px solid rgba(148, 163, 184, 0.2);
+    border-radius: 12px !important;
+    color: #fff !important;
+  }
+}

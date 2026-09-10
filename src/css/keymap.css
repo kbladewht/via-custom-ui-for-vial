@@ -1,0 +1,264 @@
+.keymap-key {
+  outline: solid;
+  outline-width: 1px;
+  outline-color: rgba(148, 163, 184, 0.7);
+  user-select: none;
+  border-radius: 8px;
+  background: linear-gradient(180deg, #1e293b 0%, #0f172a 100%);
+  color: #f8fafc;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06), 0 3px 8px rgba(15, 23, 42, 0.28);
+}
+
+.keymap-key .legend-container {
+  width: 100%;
+  height: 100%;
+}
+
+.keymap-key:hover {
+  background: linear-gradient(180deg, #243244 0%, #111827 100%);
+}
+
+.keymap-key .mod-legend {
+  font-size: 11px;
+  text-align: center;
+  height: 100%;
+  color: #a8bad1;
+}
+
+.keymap-key .main-legend {
+  font-size: 14px;
+  text-align: center;
+  align-items: center;
+  height: 100%;
+  color: #c3d0e0;
+}
+
+.keymap-key .hold-legend {
+  font-size: 11px;
+  text-align: center;
+  height: 100%;
+  color: #a8bad1;
+}
+
+.keymap-key.keymap-encoder {
+  outline: none !important;
+  -webkit-outline: none !important;
+  border-radius: 50% !important;
+  overflow: hidden;
+  border: 2px solid rgba(148, 163, 184, 0.18);
+}
+
+.keymap-key.keymap-encoder:hover {
+  background: linear-gradient(180deg, #243244 0%, #111827 100%) !important;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.06), 0 3px 8px rgba(15,23,42,0.28), 0 0 6px rgba(96,165,250,0.08) !important;
+  border-radius: 50% !important;
+}
+
+.keymap-surface {
+  opacity: 0.72;
+  transform: translateY(4px);
+  perspective: 1000px;
+  transform-style: preserve-3d;
+  transition: opacity 180ms ease, transform 180ms ease;
+}
+
+.keymap-surface-loaded {
+  opacity: 1;
+  transform: translateY(0);
+  box-shadow: 0 10px 26px rgba(2, 6, 23, 0.24);
+  animation: keymap-frame-in 320ms ease-out both;
+}
+
+.keymap-surface-loaded .keymap-key {
+  transform-origin: center bottom;
+  transform-style: preserve-3d;
+  will-change: transform, opacity, filter;
+  animation: keycap-drop 480ms cubic-bezier(0.2, 0.85, 0.32, 1.12) both;
+}
+
+@keyframes keymap-frame-in {
+  from {
+    opacity: 0.72;
+    transform: translateY(4px);
+    box-shadow: none;
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+    box-shadow: 0 10px 26px rgba(2, 6, 23, 0.24);
+  }
+}
+
+@keyframes keycap-drop {
+  from {
+    opacity: 0.1;
+    transform: var(--keymap-rotation) translate3d(-72px, 0, 120px) rotateY(-38deg) scale(0.86);
+    filter: brightness(1.35) drop-shadow(22px 8px 16px rgba(2, 6, 23, 0.42));
+  }
+
+  78% {
+    opacity: 1;
+    transform: var(--keymap-rotation) translate3d(0, 0, 0) rotateY(0deg) scale(1);
+    filter: brightness(1.02) drop-shadow(0 5px 8px rgba(2, 6, 23, 0.3));
+  }
+
+  to {
+    opacity: 1;
+    transform: var(--keymap-rotation) translate3d(0, 0, 0) rotateX(0deg) scale(1);
+    filter: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .keymap-surface,
+  .keymap-surface-loaded {
+    animation: none;
+    transition: none;
+  }
+}
+
+.keycatalog-surface-loaded .keycatalog-key {
+  animation: keycatalog-key-drop-in 420ms cubic-bezier(0.2, 0.85, 0.32, 1.12) both;
+}
+
+@keyframes keycatalog-key-drop-in {
+  from {
+    opacity: 0.1;
+    transform: translate3d(0, -48px, 0) scale(0.9);
+    filter: brightness(1.3) drop-shadow(0 -10px 12px rgba(2, 6, 23, 0.4));
+  }
+
+  78% {
+    opacity: 1;
+    transform: translate3d(0, 3px, 0) scale(1);
+    filter: brightness(1.02);
+  }
+
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1);
+    filter: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .keycatalog-surface-loaded .keycatalog-key {
+    animation: none;
+  }
+}
+
+.key-legend-centered {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-size: 14px;
+  color: #c3d0e0;
+}
+
+.key-legend-symbol {
+  font-size: 10px;
+}
+
+.editor-field-label {
+  color: #e5eefb;
+  font-weight: 500;
+}
+
+.editor-title {
+  color: #e5eefb;
+  font-weight: 600;
+}
+
+.macro-delete-button {
+  padding: 6px !important;
+}
+
+.macro-action-button {
+  width: 36px;
+  height: 36px;
+  padding: 6px !important;
+}
+
+.macro-delete-button .MuiSvgIcon-root {
+  font-size: 20px;
+}
+
+.keymap-key.keymap-key-focused {
+  border: 1px solid rgba(96, 165, 250, 0.9) !important;
+  box-shadow: 0 0 0 2px rgba(96, 165, 250, 0.08), 0 0 6px rgba(96, 165, 250, 0.12);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.keymap-key.keymap-encoder.keymap-key-focused {
+  border-radius: 50% !important;
+  overflow: hidden;
+}
+
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 0 0px rgba(76, 175, 80, 0.4);
+  }
+
+  100% {
+    box-shadow: 0 0 0 10px rgba(76, 175, 80, 0);
+  }
+}
+
+.keymap-key.drag-over {
+  background: linear-gradient(180deg, #1d4ed8 0%, #0f172a 100%);
+}
+
+.keymap-encoder {
+  border-radius: 50%;
+}
+
+.keymap-encoder,
+.keymap-encoder:hover,
+.keymap-encoder:active,
+.keymap-encoder.keymap-key-focused,
+.keymap-encoder.drag-over {
+  outline: none !important;
+  -webkit-outline: none !important;
+}
+
+.keymap-encoder:hover {
+  background: linear-gradient(180deg, #243244 0%, #111827 100%);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.06), 0 3px 8px rgba(15,23,42,0.28), 0 0 6px rgba(96,165,250,0.08);
+}
+
+.keymap-encoder:active,
+.keymap-encoder.keymap-key-focused:active {
+  transform: translateY(1px) scale(0.995);
+  box-shadow: inset 0 2px 8px rgba(0,0,0,0.6), 0 0 10px rgba(96,165,250,0.12);
+  background: linear-gradient(180deg, #1b2840 0%, #0b1220 100%);
+  border-radius: 50% !important;
+}
+
+.keymap-encoder.drag-over {
+  border-radius: 50% !important;
+  box-shadow: 0 0 0 6px rgba(96,165,250,0.08);
+}
+
+.catalog-key {
+  outline: solid;
+  outline-width: 1px;
+  outline-color: rgba(148, 163, 184, 0.7);
+  user-select: none;
+  background: linear-gradient(180deg, #1e293b 0%, #0f172a 100%);
+  color: #f8fafc;
+}
+
+.key-select-popup {
+  width: 300px;
+  border: solid;
+  border-width: 1px;
+  padding: 8px;
+  background-color: #0f172a;
+  color: #f8fafc;
+  border-color: rgba(148, 163, 184, 0.5);
+}
