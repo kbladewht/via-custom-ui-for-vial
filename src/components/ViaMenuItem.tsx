@@ -103,6 +103,15 @@ type NumberElement = {
   onChange: (value: number) => void;
 };
 
+type BooleanElement = {
+  type: "boolean";
+  label: string;
+  content: [string, number, number, number?];
+  value: number;
+  language?: "zh" | "en";
+  onChange: (value: number) => void;
+};
+
 type BitCheckboxElement = {
   type: "bit-checkbox";
   label: string;
@@ -129,6 +138,7 @@ type MenuElementProperties =
   | MultipleCheckboxElement
   | CheckboxListElement
   | NumberElement
+  | BooleanElement
   | BitCheckboxElement;
 
 type MenuSectionProperties = {
@@ -518,6 +528,56 @@ function ViaNumber(props: NumberElement) {
   );
 }
 
+function ViaBoolean(props: BooleanElement) {
+  const isChecked = (props.value ?? 0) !== 0;
+
+  return (
+    <Grid item xs={12}>
+      <Box
+        onClick={() => props.onChange(isChecked ? 0 : 1)}
+        sx={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "space-between",
+          gap: 2,
+          maxWidth: 480,
+          mx: "auto",
+          py: 0.1,
+          px: 0.75,
+          cursor: "pointer",
+          userSelect: "none",
+          borderRadius: 1,
+          "&:hover": {
+            backgroundColor: "rgba(51, 65, 85, 0.35)",
+          },
+        }}
+      >
+        <Typography
+          sx={{
+            color: "#cbd5e1",
+            fontSize: "0.84rem",
+            fontWeight: 500,
+            flex: 1,
+            textAlign: "left",
+          }}
+        >
+          {translateLabel(props.label, props.language)}
+        </Typography>
+        <Checkbox
+          size="small"
+          checked={isChecked}
+          onChange={() => {}}
+          sx={{
+            color: "#64748b",
+            "&.Mui-checked": { color: "#38bdf8" },
+            p: "2px",
+          }}
+        />
+      </Box>
+    </Grid>
+  );
+}
+
 function ViaBitCheckbox(props: BitCheckboxElement) {
   const isChecked = (props.value & (1 << (props.bit ?? 0))) !== 0;
 
@@ -644,6 +704,16 @@ function MenuElement(props: MenuSectionProperties, elem: MenuElementProperties, 
       case "number":
         return (
           <ViaNumber
+            key={key}
+            {...elem}
+            language={props.language}
+            value={props.customValues[elem.content[0]] ?? 0}
+            onChange={(value) => props.onChange(elem.content, value)}
+          />
+        );
+      case "boolean":
+        return (
+          <ViaBoolean
             key={key}
             {...elem}
             language={props.language}

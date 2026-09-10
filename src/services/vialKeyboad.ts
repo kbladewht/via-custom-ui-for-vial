@@ -859,7 +859,8 @@ class VialKeyboard {
     );
 
     return values.reduce((acc, res, idx) => {
-      return { ...acc, [id[idx]]: res[1] | (res[2] << 8) | (res[3] << 16) | (res[4] << 24) };
+      if (!res || res[0] !== 0) return acc;
+      return { ...acc, [id[idx]]: (res[1] | (res[2] << 8) | (res[3] << 16) | (res[4] << 24)) >>> 0 };
     }, {});
   }
 

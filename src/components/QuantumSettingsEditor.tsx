@@ -103,8 +103,9 @@ export function QuantumSettingsEditor(props: {
           return c.content[1].toString() === v[0];
         });
         if (id) {
-          loadedUpdates[id.content[0]] =
-            v[1] & ((1 << (8 * ((id.content[2] as number) ?? 2))) - 1);
+          const width = (id.content[2] as number) ?? 2;
+          const mask = width === 4 ? 0xffffffff : (1 << (8 * width)) - 1;
+          loadedUpdates[id.content[0]] = (v[1] & mask) >>> 0;
         }
       });
       setQuantumValue((prev) => ({ ...prev, ...loadedUpdates }));
