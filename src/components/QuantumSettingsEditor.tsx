@@ -135,6 +135,7 @@ export function QuantumSettingsEditor(props: {
         {tabs.map((menu) => (
           <Tab
             key={menu.id}
+            className={menu.id === "Keymap" ? "keymap-main-tab" : undefined}
             label={
               (quantumTranslations[props.language].tabs as Record<string, string>)[menu.id] ??
               menu.label
