@@ -353,13 +353,20 @@ body:not(.theme-light) .entry-candidate-panel {
 body:not(.theme-light) .entry-editor-panel {
   flex: 1;
   min-height: 0;
-  max-height: 400px;
-  overflow-y: auto;
-  scrollbar-color: #475569 #0f172a;
+  max-height: none;
+  overflow: visible;
   border-top: 0;
   border-radius: 0 12px 12px 12px;
   margin-bottom: 8px;
   padding-bottom: 8px;
+}
+
+body:not(.theme-light) .entry-editor-panel-with-candidates {
+  flex: 0 0 400px;
+  height: 400px;
+  max-height: 400px;
+  overflow-y: auto;
+  scrollbar-color: #475569 #0f172a;
 }
 
 body:not(.theme-light) .entry-editor-panel::-webkit-scrollbar {
@@ -378,10 +385,6 @@ body:not(.theme-light) .entry-editor-panel::-webkit-scrollbar-thumb {
 
 body:not(.theme-light) .entry-editor-panel::-webkit-scrollbar-thumb:hover {
   background: #64748b;
-}
-
-body:not(.theme-light) .entry-editor-panel-with-candidates {
-  flex: 0 0 auto;
 }
 
 body:not(.theme-light) .entry-candidate-panel {
