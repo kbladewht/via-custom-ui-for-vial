@@ -446,7 +446,6 @@ export function KeycodeCatalog(props: {
                   boxSizing: "border-box",
                   border: "0",
                   borderRadius: 0,
-                  backgroundColor: "rgba(30, 41, 59, 0.45)",
                   overflowX: "auto",
                   display: "flex",
                   flexDirection: "column",

@@ -127,7 +127,7 @@ body:not(.theme-light) .battery-meter-fill {
 }
 
 .app-shell:not(.theme-light) .keycode-catalog-scroll {
-  background: #333333;
+  background: #2a2e37;
 }
 
 .app-shell:not(.theme-light) .keycatalog-surface {
@@ -176,9 +176,13 @@ body:not(.theme-light) .keymap-main-tab.Mui-selected {
 }
 
 body:not(.theme-light) .keycode-catalog-tab.Mui-selected {
-  background-color: #0e121a !important;
-  border-bottom-color: transparent !important;
+  background-color: #2a2e37 !important;
+  border-bottom: 0 !important;
   box-shadow: none;
+}
+
+body:not(.theme-light) .keycode-catalog-scroll .keycode-group:first-child {
+  border-top: 0 !important;
 }
 
 body:not(.theme-light) .MuiTab-root:hover {
