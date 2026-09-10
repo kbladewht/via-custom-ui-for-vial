@@ -210,8 +210,8 @@ body.theme-light .key-select-popup .MuiAutocomplete-option[aria-selected="true"]
 
 .app-shell.theme-light .keymap-tab-panel {
   background: #f7f9fb !important;
-  border-radius: 0 0 12px 12px !important;
-  clip-path: inset(0 0 0 0 round 0 0 12px 12px);
+  border-radius: 0 12px 12px 12px !important;
+  clip-path: inset(0 0 0 0 round 0 12px 12px 12px);
   overflow: hidden;
 }
 
