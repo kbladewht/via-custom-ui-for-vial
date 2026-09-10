@@ -406,7 +406,8 @@ function ViaCheckboxList(props: CheckboxListElement) {
           display: "flex",
           flexDirection: "column",
           gap: 0.25,
-          maxWidth: 480,
+          maxWidth: 620,
+          width: "100%",
           mx: "auto",
           mt: 0.5,
           mb: 1,
@@ -440,6 +441,7 @@ function ViaCheckboxList(props: CheckboxListElement) {
                   fontWeight: 500,
                   flex: 1,
                   textAlign: "left",
+                  whiteSpace: "nowrap",
                 }}
               >
                 {translateOption(String(optLabel), props.language)}
@@ -479,7 +481,8 @@ function ViaNumber(props: NumberElement) {
           alignItems: "center",
           justifyContent: "space-between",
           gap: 2,
-          maxWidth: 480,
+          maxWidth: 620,
+          width: "100%",
           mx: "auto",
           minHeight: 28,
           py: 0.1,
@@ -493,6 +496,7 @@ function ViaNumber(props: NumberElement) {
             fontWeight: 500,
             flex: 1,
             textAlign: "left",
+            whiteSpace: "nowrap",
           }}
         >
           {translateLabel(props.label, props.language)}
@@ -621,7 +625,8 @@ function ViaBoolean(props: BooleanElement) {
           alignItems: "center",
           justifyContent: "space-between",
           gap: 2,
-          maxWidth: 480,
+          maxWidth: 620,
+          width: "100%",
           mx: "auto",
           minHeight: 28,
           py: 0.1,
@@ -641,6 +646,7 @@ function ViaBoolean(props: BooleanElement) {
             fontWeight: 500,
             flex: 1,
             textAlign: "left",
+            whiteSpace: "nowrap",
           }}
         >
           {translateLabel(props.label, props.language)}
@@ -674,7 +680,8 @@ function ViaBitCheckbox(props: BitCheckboxElement) {
           alignItems: "center",
           justifyContent: "space-between",
           gap: 2,
-          maxWidth: 480,
+          maxWidth: 620,
+          width: "100%",
           mx: "auto",
           minHeight: 28,
           py: 0.1,
@@ -694,6 +701,7 @@ function ViaBitCheckbox(props: BitCheckboxElement) {
             fontWeight: 500,
             flex: 1,
             textAlign: "left",
+            whiteSpace: "nowrap",
           }}
         >
           {translateLabel(props.label, props.language)}
