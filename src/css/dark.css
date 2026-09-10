@@ -264,6 +264,44 @@ body:not(.theme-light) .combo-editor-panel {
 body:not(.theme-light) .combo-candidate-panel {
   margin-top: 8px;
 }
+
+body:not(.theme-light) .entry-tabs,
+body:not(.theme-light) .entry-tabs .MuiTabs-scroller,
+body:not(.theme-light) .entry-tabs .MuiTabs-flexContainer {
+  min-height: 30px !important;
+  height: 30px !important;
+}
+
+body:not(.theme-light) .entry-tab {
+  border: 1px solid #334155 !important;
+  border-radius: 8px 8px 0 0 !important;
+  min-height: 30px !important;
+  height: 30px !important;
+  min-width: 28px !important;
+  width: 28px !important;
+  padding: 0 !important;
+}
+
+body:not(.theme-light) .entry-tab + .entry-tab {
+  border-left: 0 !important;
+}
+
+body:not(.theme-light) .entry-tab.Mui-selected {
+  background-color: #13192998 !important;
+  border-color: #475569 !important;
+  border-bottom-color: transparent !important;
+}
+
+body:not(.theme-light) .entry-content-panel {
+  flex: 1;
+  min-height: 0;
+  margin-top: 0 !important;
+  background: #13192998;
+  border: 1px solid rgba(148, 163, 184, 0.28);
+  border-top: 0;
+  border-radius: 0 0 12px 12px;
+}
+
 body:not(.theme-light) .keycode-catalog-scroll .keycode-group:first-child {
   border-top: 0 !important;
 }

@@ -80,7 +80,7 @@ export function TapDanceSelector(props: {
         variant="scrollable"
         scrollButtons="auto"
         aria-label="Tap Dance entries"
-        className="tapdance-tabs"
+        className="entry-tabs key-override-tabs"
         sx={{
           py: 0,
           "& .MuiTabs-flexContainer": {
@@ -91,7 +91,7 @@ export function TapDanceSelector(props: {
         {Array.from({ length: props.dynamicEntryCount.tapdance }, (_, index) => (
           <Tab
             key={index}
-            className="tapdance-entry-tab"
+            className="entry-tab key-override-entry-tab"
             label={index}
             value={index}
             sx={{
@@ -193,7 +193,7 @@ export function KeyOverrideSelector(props: {
         ))}
       </Tabs>
       {props.dynamicEntryCount.override > 0 && (
-        <Box sx={{ width: "100%", flex: 1, mt: 2, display: "flex" }}>
+        <Box className="entry-content-panel key-override-content-panel" sx={{ width: "100%", flex: 1, mt: 2, display: "flex" }}>
           <OverrideEditor
             via={props.via}
             keycodeConverter={keycodeConverter}
@@ -239,7 +239,7 @@ export function AltRepeatKeySelector(props: {
         variant="scrollable"
         scrollButtons="auto"
         aria-label="Alt Repeat Key entries"
-        className="tapdance-tabs"
+        className="entry-tabs alt-repeat-tabs"
         sx={{
           py: 0,
           "& .MuiTabs-flexContainer": {
@@ -250,6 +250,7 @@ export function AltRepeatKeySelector(props: {
         {Array.from({ length: repeatCount }, (_, index) => (
           <Tab
             key={index}
+            className="entry-tab alt-repeat-entry-tab"
             label={index + 1}
             value={index}
             sx={{
@@ -272,7 +273,7 @@ export function AltRepeatKeySelector(props: {
           />
         ))}
       </Tabs>
-      <Box sx={{ width: "100%", flex: 1, mt: 2, display: "flex" }}>
+      <Box className="entry-content-panel alt-repeat-content-panel" sx={{ width: "100%", flex: 1, mt: 2, display: "flex" }}>
         <AltRepeatKeyEditor
           via={props.via}
           keycodeConverter={keycodeConverter}
