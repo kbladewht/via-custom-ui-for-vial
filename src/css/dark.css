@@ -332,7 +332,7 @@ body:not(.theme-light) .entry-editor-panel {
   flex: 1;
   min-height: 0;
   border-top: 0;
-  border-radius: 0 0 12px 12px;
+  border-radius: 0 12px 12px 12px;
 }
 
 body:not(.theme-light) .entry-candidate-panel {
