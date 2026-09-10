@@ -1,5 +1,5 @@
 import { Box } from "@mui/material";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { ViaKeyboard } from "../../services/vialKeyboad";
 import { buildBluetoothShortcuts } from "./keymapLogic";
 import { KeymapLayer } from "./KeymapLayer";
@@ -25,6 +25,7 @@ export function LayerEditor(props: {
   const [encodermap, setEncodermap] = useState<{ [layer: number]: number[][] }>({});
   const [keymapReloadToken, setKeymapReloadToken] = useState(0);
   const [keymapAnimationToken, setKeymapAnimationToken] = useState(0);
+  const hasInitializedLayer = useRef(false);
   const shortcutByKeycode: { [keycode: number]: string } = {};
 
   useEffect(() => {
@@ -75,7 +76,8 @@ export function LayerEditor(props: {
 
     navigator.locks.request("load-layout", async () => {
       const refreshOnly = keymapReloadToken > 0;
-      if (!refreshOnly) {
+      if (!refreshOnly && !hasInitializedLayer.current) {
+        hasInitializedLayer.current = true;
         const layout = await props.via.GetLayoutOption();
         setLayoutOption({ 0: layout });
         setLayer(0);
@@ -140,22 +142,7 @@ export function LayerEditor(props: {
         <LayerSelector
           layerCount={props.layerCount}
           currentLayer={layer}
-          onChange={async (targetLayer) => {
-            if (!Object.keys(keymap).includes(targetLayer.toString())) {
-              const matrixDefinition = {
-                rows: props.keymap.matrix.rows,
-                cols: props.keymap.matrix.cols,
-              };
-              const layerKeys = await props.via.GetLayer(targetLayer, matrixDefinition);
-              const newKeymap = { ...keymap };
-              newKeymap[targetLayer] = layerKeys;
-              setKeymap(newKeymap);
-              console.log(`load keymap ${targetLayer}`);
-              console.log(layerKeys.map((keycode) => keycode.toString(16)).join(" "));
-
-              const layerEncoders = await props.via.GetEncoder(targetLayer, encoderCount);
-              setEncodermap({ ...encodermap, [targetLayer]: layerEncoders });
-            }
+          onChange={(targetLayer) => {
             setLayer(targetLayer);
           }}
         ></LayerSelector>
