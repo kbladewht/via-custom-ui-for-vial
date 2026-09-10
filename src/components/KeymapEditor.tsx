@@ -1,6 +1,5 @@
 import { Box } from "@mui/material";
 import { useEffect, useRef, useState } from "react";
-import "../App.css";
 import quantumTranslations from "../locales/quantum.json";
 import { ViaKeyboard } from "../services/vialKeyboad";
 import { KeycodeCatalog } from "./KeycodeCatalog";

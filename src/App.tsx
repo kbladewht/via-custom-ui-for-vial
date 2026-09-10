@@ -7,7 +7,6 @@ import {
 } from "@mui/material";
 import { match, P } from "ts-pattern";
 import { useEffect, useState } from "react";
-import "./App.css";
 import { AppToolbar, KeymapStyle } from "./components/AppToolbar";
 import {
   discardPendingKeycapAudio,

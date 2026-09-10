@@ -137,6 +137,35 @@ body.theme-light .theme-toggle-button {
   color: #c47b17 !important;
 }
 
+body.theme-light .key-select-popup {
+  background: #ffffff;
+  color: #243447;
+  border-color: #b8c7d3;
+  box-shadow: 0 12px 28px rgba(71, 85, 105, 0.18);
+}
+
+body.theme-light .key-select-popup .MuiInputBase-root,
+body.theme-light .key-select-popup .MuiAutocomplete-paper,
+body.theme-light .key-select-popup .MuiAutocomplete-listbox,
+body.theme-light .key-select-popup .MuiPaper-root {
+  background: #ffffff !important;
+  color: #243447 !important;
+}
+
+body.theme-light .key-select-popup .MuiOutlinedInput-notchedOutline {
+  border-color: #aebdca !important;
+}
+
+body.theme-light .key-select-popup .MuiInputBase-input,
+body.theme-light .key-select-popup .MuiInputLabel-root {
+  color: #243447 !important;
+}
+
+body.theme-light .key-select-popup .MuiAutocomplete-option:hover,
+body.theme-light .key-select-popup .MuiAutocomplete-option[aria-selected="true"] {
+  background: #e7f0f6 !important;
+}
+
 /* Light workspace: keep the keymap editor readable instead of leaving a dark canvas inside the light shell. */
 .app-shell.theme-light .keymap-editor-surface,
 .app-shell.theme-light .keycatalog-surface {
@@ -193,8 +222,23 @@ body.theme-light .theme-toggle-button {
 }
 
 .app-shell.theme-light .keymap-key.keymap-key-focused {
+  background: linear-gradient(180deg, #eaf3f8 0%, #dbe9f1 100%) !important;
   border-color: #4f86b0 !important;
   box-shadow: 0 0 0 2px rgba(79, 134, 176, 0.16), 0 2px 5px rgba(71, 85, 105, 0.14) !important;
+}
+
+.app-shell.theme-light .keymap-key:active,
+.app-shell.theme-light .keymap-key:focus,
+.app-shell.theme-light .keymap-key:focus-visible {
+  background: linear-gradient(180deg, #eaf3f8 0%, #dbe9f1 100%) !important;
+  border-color: #4f86b0 !important;
+  color: #29445d !important;
+}
+
+.app-shell.theme-light .keymap-key.keymap-key-focused .main-legend,
+.app-shell.theme-light .keymap-key.keymap-key-focused .key-legend-centered {
+  color: #29445d !important;
+  text-shadow: none;
 }
 
 .app-shell.theme-light .keymap-key.drag-over {
