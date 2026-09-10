@@ -202,7 +202,7 @@ function TapDanceEntry(props: {
       </Box>
       </Box>
       {selectedKeyIndex !== undefined && (
-        <Box className="entry-candidate-panel" sx={{ maxHeight: 360, overflowY: "auto", mt: 2 }}>
+        <Box className="entry-candidate-panel" sx={{ mt: 2 }}>
           <KeycodeCatalog
             keycodeConverter={props.keycodeconverter}
             tab={[

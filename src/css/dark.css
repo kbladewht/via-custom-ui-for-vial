@@ -305,6 +305,13 @@ body:not(.theme-light) .entry-content-panel {
   border-radius: 0 0 12px 12px;
 }
 
+body:not(.theme-light) .key-override-content-panel,
+body:not(.theme-light) .alt-repeat-content-panel {
+  background: transparent;
+  border: 0;
+  border-radius: 0;
+}
+
 body:not(.theme-light) .entry-editor-panel,
 body:not(.theme-light) .entry-candidate-panel {
   width: 100%;
@@ -322,6 +329,9 @@ body:not(.theme-light) .entry-editor-panel {
 
 body:not(.theme-light) .entry-candidate-panel {
   margin-top: 8px !important;
+  background: transparent;
+  border: 0;
+  border-radius: 0;
 }
 
 body:not(.theme-light) .tapdance-selector-entry-tab {
