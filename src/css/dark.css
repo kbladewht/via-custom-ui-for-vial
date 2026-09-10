@@ -131,9 +131,10 @@ body:not(.theme-light) .battery-meter-fill {
   clip-path: inset(0 0 0 0 round 0 0 12px 12px);
 }
 
-.app-shell:not(.theme-light) .keymap-tab-panel {
+.app-shell:not(.theme-light) .quantum-tab-panel {
   background: #1e293b !important;
   border-top: 0 !important;
+  padding: 0 !important;
   border-radius: 0 0 12px 12px !important;
   clip-path: inset(0 0 0 0 round 0 0 12px 12px);
   overflow: hidden;

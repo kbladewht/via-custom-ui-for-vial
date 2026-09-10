@@ -160,7 +160,7 @@ export function QuantumSettingsEditor(props: {
       {tabs.map((menu, idx) => (
         <Box
           key={idx}
-          className={menu.id === "Keymap" ? "keymap-tab-panel" : undefined}
+          className={`quantum-tab-panel${menu.id === "Keymap" ? " keymap-tab-panel" : ""}`}
           sx={{
             display: tabValue === idx ? "block" : "none",
           }}
