@@ -412,10 +412,12 @@ export function KeycodeCatalog(props: {
       {contentTabs.map((tab, index) => (
         <CustomTabPanel key={index} value={tabValue} index={index}>
           <Box
+            className="keycode-catalog-scroll"
             sx={{
               height: 340,
               overflowY: "auto",
               overflowX: "hidden",
+              borderRadius: "0 0 12px 12px",
               scrollbarColor: "#64748b transparent",
               "&::-webkit-scrollbar": {
                 width: 10,

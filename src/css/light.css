@@ -177,7 +177,7 @@ body.theme-light .key-select-popup .MuiAutocomplete-option[aria-selected="true"]
 
 .app-shell.theme-light .keycatalog-surface {
   border-radius: 0 0 12px 12px;
-  clip-path: inset(0 round 0 0 12px 12px);
+  clip-path: inset(0 0 0 0 round 0 0 12px 12px);
 }
 
 .app-shell.theme-light .app-main-panel > .keymap-editor-surface,
@@ -203,7 +203,10 @@ body.theme-light .key-select-popup .MuiAutocomplete-option[aria-selected="true"]
 }
 
 .app-shell.theme-light .keymap-tab-panel {
+  background: #f1f5f8 !important;
   border-radius: 0 0 12px 12px !important;
+  clip-path: inset(0 0 0 0 round 0 0 12px 12px);
+  overflow: hidden;
 }
 
 .app-shell.theme-light .MuiTab-root {
