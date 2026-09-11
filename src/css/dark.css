@@ -118,6 +118,16 @@ body:not(.theme-light) .battery-meter-fill {
   box-shadow: 0 20px 40px rgba(15, 23, 42, 0.25);
 }
 
+.app-shell:not(.theme-light) .app-main-panel {
+  padding-bottom: 0 !important;
+  margin-bottom: 0 !important;
+}
+
+.app-shell:not(.theme-light) {
+  box-sizing: border-box;
+  padding-bottom: 24px !important;
+}
+
 .app-shell:not(.theme-light) .keymap-editor-surface {
   background: #1e293b;
 }
@@ -141,15 +151,44 @@ body:not(.theme-light) .battery-meter-fill {
   background: #1e293b !important;
   border-top: 0 !important;
   padding: 0 !important;
+  margin-bottom: 8px;
   border-radius: 0 12px 12px 12px !important;
   clip-path: inset(0 0 0 0 round 0 12px 12px 12px);
   overflow: hidden;
 }
 
 .app-shell:not(.theme-light) .keymap-tab-panel {
-  max-height: calc(100vh - 180px);
+  max-height: none;
+  overflow: visible;
+  min-height: 0;
+  height: auto;
+  margin-bottom: 8px;
+  padding-bottom: 8px !important;
+}
+
+/* Bound the whole Keymap tab content, so it scrolls as one unit instead of growing the page */
+.app-shell:not(.theme-light) .keymap-tab-panel:has(.keycatalog-surface-loaded) {
+  max-height: calc(100vh - 100px);
   overflow-y: auto;
   scrollbar-color: #475569 #0f172a;
+}
+
+.app-shell:not(.theme-light) .keymap-tab-panel:has(.keycatalog-surface-loaded)::-webkit-scrollbar {
+  width: 10px;
+}
+
+.app-shell:not(.theme-light) .keymap-tab-panel:has(.keycatalog-surface-loaded)::-webkit-scrollbar-track {
+  background: #0f172a;
+}
+
+.app-shell:not(.theme-light) .keymap-tab-panel:has(.keycatalog-surface-loaded)::-webkit-scrollbar-thumb {
+  background: #475569;
+  border: 2px solid #0f172a;
+  border-radius: 8px;
+}
+
+.app-shell:not(.theme-light) .keymap-tab-panel:has(.keycatalog-surface-loaded)::-webkit-scrollbar-thumb:hover {
+  background: #64748b;
 }
 
 .app-shell:not(.theme-light) .keymap-surface {
@@ -280,8 +319,8 @@ body:not(.theme-light) .entry-tabs .MuiTabs-flexContainer,
 body:not(.theme-light) .combo-tabs,
 body:not(.theme-light) .combo-tabs .MuiTabs-scroller,
 body:not(.theme-light) .combo-tabs .MuiTabs-flexContainer {
-  min-height: 30px !important;
-  height: 30px !important;
+  min-height: 26px !important;
+  height: 26px !important;
 }
 
 body:not(.theme-light) .entry-tabs .MuiTabs-flexContainer::after,
@@ -289,7 +328,7 @@ body:not(.theme-light) .combo-tabs .MuiTabs-flexContainer::after {
   content: "";
   flex: 1 1 auto;
   min-width: 28px;
-  height: 30px;
+  height: 26px;
   margin-right: 10px;
   border-bottom: 1px solid rgba(148, 163, 184, 0.28);
   pointer-events: none;
@@ -299,8 +338,8 @@ body:not(.theme-light) .entry-tab {
   border: 1px solid #334155 !important;
   background-color: transparent !important;
   border-radius: 8px 8px 0 0 !important;
-  min-height: 30px !important;
-  height: 30px !important;
+  min-height: 26px !important;
+  height: 26px !important;
   min-width: 28px !important;
   width: 28px !important;
   padding: 0 !important;
@@ -322,6 +361,19 @@ body:not(.theme-light) .entry-tab + .entry-tab.Mui-selected {
 
 body:not(.theme-light) .entry-tab.Mui-selected {
   box-shadow: none !important;
+}
+
+body:not(.theme-light) .keycode-catalog-tabs,
+body:not(.theme-light) .keycode-catalog-tabs .MuiTabs-scroller,
+body:not(.theme-light) .keycode-catalog-tabs .MuiTabs-flexContainer {
+  min-height: 26px !important;
+  height: 26px !important;
+}
+
+body:not(.theme-light) .keycode-catalog-tab {
+  min-height: 26px !important;
+  height: 26px !important;
+  padding: 2px 8px !important;
 }
 
 body:not(.theme-light) .entry-content-panel {

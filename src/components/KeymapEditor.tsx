@@ -165,6 +165,9 @@ export function KeymapEditor(props: {
           overrideCount={props.dynamicEntryCount.override}
         ></KeycodeCatalog>
       </Box>
+
+      {/* Reserved spacer so the panel never touches the bottom edge, even when the candidate area is scrolled */}
+      <Box aria-hidden="true" sx={{ flexShrink: 0, height: 12 }} />
     </FocusedKeyContext.Provider>
   );
 }
