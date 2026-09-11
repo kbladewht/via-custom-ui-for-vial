@@ -368,3 +368,181 @@ body.theme-light .key-select-popup .MuiAutocomplete-option[aria-selected="true"]
   color: #49667d !important;
   background: #e2eaf0 !important;
 }
+
+/* --- Parity with dark.css: shared tab-panel chrome for every Quantum Settings tab --- */
+.app-shell.theme-light .quantum-tab-panel {
+  background: #f7f9fb !important;
+  border-top: 0 !important;
+  padding: 0 !important;
+  margin-bottom: 8px;
+  border-radius: 0 12px 12px 12px !important;
+  clip-path: inset(0 0 0 0 round 0 12px 12px 12px);
+  overflow: hidden;
+}
+
+.app-shell.theme-light .app-main-panel {
+  padding-bottom: 0 !important;
+  margin-bottom: 0 !important;
+}
+
+.app-shell.theme-light {
+  box-sizing: border-box;
+  padding-bottom: 24px !important;
+}
+
+.app-shell.theme-light .keymap-main-tab.Mui-selected {
+  background-color: #ffffff !important;
+  border-color: #8da8bc !important;
+  border-bottom-color: transparent !important;
+  box-shadow: inset 0 -1px 0 #ffffff;
+}
+
+/* --- Parity with dark.css: shared numbered entry-tab strip used by Combos / Key Overrides / Alt Repeat / Tap Dance --- */
+.app-shell.theme-light .entry-tabs,
+.app-shell.theme-light .entry-tabs .MuiTabs-scroller,
+.app-shell.theme-light .entry-tabs .MuiTabs-flexContainer,
+.app-shell.theme-light .combo-tabs,
+.app-shell.theme-light .combo-tabs .MuiTabs-scroller,
+.app-shell.theme-light .combo-tabs .MuiTabs-flexContainer {
+  min-height: 26px !important;
+  height: 26px !important;
+}
+
+.app-shell.theme-light .entry-tabs .MuiTabs-flexContainer::after,
+.app-shell.theme-light .combo-tabs .MuiTabs-flexContainer::after {
+  content: "";
+  flex: 1 1 auto;
+  min-width: 28px;
+  height: 26px;
+  margin-right: 10px;
+  border-bottom: 1px solid #b8c7d3;
+  pointer-events: none;
+}
+
+.app-shell.theme-light .entry-tab {
+  border: 1px solid #b8c7d3 !important;
+  background-color: transparent !important;
+  border-radius: 8px 8px 0 0 !important;
+  min-height: 26px !important;
+  height: 26px !important;
+  min-width: 28px !important;
+  width: 28px !important;
+  padding: 0 !important;
+  color: #60788e !important;
+}
+
+.app-shell.theme-light .entry-tab + .entry-tab {
+  border-left: 0 !important;
+}
+
+.app-shell.theme-light .entry-tab.Mui-selected {
+  color: #29445d !important;
+  background-color: transparent !important;
+  border-color: #8da8bc !important;
+  border-bottom-color: transparent !important;
+  box-shadow: none !important;
+}
+
+.app-shell.theme-light .entry-tab + .entry-tab.Mui-selected {
+  border-left: 0 !important;
+}
+
+.app-shell.theme-light .keycode-catalog-tabs,
+.app-shell.theme-light .keycode-catalog-tabs .MuiTabs-scroller,
+.app-shell.theme-light .keycode-catalog-tabs .MuiTabs-flexContainer {
+  min-height: 26px !important;
+  height: 26px !important;
+}
+
+.app-shell.theme-light .keycode-catalog-tab {
+  min-height: 26px !important;
+  height: 26px !important;
+  padding: 2px 8px !important;
+}
+
+/* --- Parity with dark.css: shared child-tab content chrome (Combos / Key Overrides / Alt Repeat / Tap Dance) --- */
+.app-shell.theme-light .entry-content-panel {
+  flex: 1;
+  min-height: 0;
+  overflow: visible;
+  margin-top: 0 !important;
+  background: #eef3f7;
+  border: 1px solid #cbd5df;
+  border-top: 0;
+  border-radius: 0 0 12px 12px;
+}
+
+.app-shell.theme-light .key-override-content-panel,
+.app-shell.theme-light .alt-repeat-content-panel {
+  background: transparent;
+  border: 0;
+  border-radius: 0;
+}
+
+.app-shell.theme-light .entry-editor-panel,
+.app-shell.theme-light .entry-candidate-panel {
+  width: 100%;
+  background: transparent;
+  border: 1px solid #cbd5df;
+  border-radius: 12px;
+}
+
+.app-shell.theme-light .entry-editor-panel {
+  flex: 1;
+  min-height: 0;
+  max-height: none;
+  overflow: visible;
+  border-top: 0;
+  border-radius: 0 12px 12px 12px;
+  margin-bottom: 8px;
+  padding-bottom: 8px;
+}
+
+.app-shell.theme-light .entry-editor-panel-with-candidates {
+  flex: 0 0 400px;
+  height: 400px;
+  max-height: 400px;
+  overflow-y: auto;
+  scrollbar-color: #aebdca #edf2f6;
+}
+
+.app-shell.theme-light .entry-editor-panel::-webkit-scrollbar {
+  width: 10px;
+}
+
+.app-shell.theme-light .entry-editor-panel::-webkit-scrollbar-track {
+  background: #edf2f6;
+}
+
+.app-shell.theme-light .entry-editor-panel::-webkit-scrollbar-thumb {
+  background: #aebdca;
+  border: 2px solid #edf2f6;
+  border-radius: 8px;
+}
+
+.app-shell.theme-light .entry-editor-panel::-webkit-scrollbar-thumb:hover {
+  background: #879baa;
+}
+
+.app-shell.theme-light .entry-candidate-panel {
+  margin-top: 8px !important;
+  background: transparent;
+  border: 0;
+  border-radius: 0;
+}
+
+.app-shell.theme-light .tapdance-selector-entry-tab {
+  border: 1px solid #b8c7d3 !important;
+  border-radius: 8px 8px 0 0 !important;
+}
+
+.app-shell.theme-light .tapdance-selector-entry-tab.Mui-selected {
+  background-color: #ffffff !important;
+  border-color: #8da8bc !important;
+  border-bottom-color: transparent !important;
+}
+
+.app-shell.theme-light .keycode-catalog-scroll .keycode-group:first-child {
+  border-top: 0 !important;
+}
+
