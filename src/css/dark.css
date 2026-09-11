@@ -1,9 +1,66 @@
 body:not(.theme-light) {
+  --theme-surface-deep: #0f172a;
+  --theme-surface-shell: #111827;
+  --theme-surface-panel: #1e293b;
+  --theme-control: #1e2227;
+  --theme-control-addon: #2a2f38;
+  --theme-action: #243042;
+  --theme-surface-raised: #334155;
+  --theme-control-hover: #3b4252;
+  --theme-selected-surface: #3f4b5a;
+  --theme-surface-hover: #475569;
+  --theme-control-active: #485265;
+  --theme-divider: #333842;
+  --theme-control-border: #484f5c;
+  --theme-selected-border: #596777;
+  --theme-border: #64748b;
+  --theme-inactive-border: #294b70;
+  --theme-inactive-surface: #111d2d;
+  --theme-inactive-hover: #2d3d4f;
+  --theme-text-muted: #94a3b8;
+  --theme-text-subtle: #8fa4bd;
+  --theme-tab-text: #b8c7dc;
+  --theme-text-secondary: #cbd5e1;
+  --theme-text-action: #c3d0e0;
+  --theme-text-primary: #e5eefb;
+  --theme-text-emphasis: #e2e8f0;
+  --theme-text-strong: #f8fafc;
+  --theme-accent: #38bdf8;
+  --theme-accent-soft: #bfdbfe;
+  --theme-success: #4ade80;
+  --theme-success-emphasis: #86efac;
+  --theme-warning: #fbbf24;
+  --theme-error: #f87171;
+  --theme-danger-text: #fecaca;
+  --theme-danger-text-hover: #fff1f2;
+  --theme-danger-border: #fca5a5;
+  --theme-danger-surface: rgba(220, 38, 38, 0.22);
+  --theme-danger-surface-hover: rgba(220, 38, 38, 0.42);
+  --theme-key-idle: rgba(45, 50, 58, 0.9);
+  --theme-active-key-shadow: rgba(255, 255, 255, 0.6);
+  --theme-swatch-border: rgba(255, 255, 255, 0.45);
+  --theme-surface-deep-85: rgba(15, 23, 42, 0.85);
+  --theme-surface-deep-50: rgba(15, 23, 42, 0.5);
+  --theme-surface-panel-72: rgba(30, 41, 59, 0.72);
+  --theme-surface-panel-70: rgba(30, 41, 59, 0.7);
+  --theme-surface-panel-40: rgba(30, 41, 59, 0.4);
+  --theme-surface-panel-30: rgba(30, 41, 59, 0.3);
+  --theme-surface-raised-35: rgba(51, 65, 85, 0.35);
+  --theme-border-50: rgba(148, 163, 184, 0.5);
+  --theme-border-45: rgba(148, 163, 184, 0.45);
+  --theme-border-35: rgba(148, 163, 184, 0.35);
+  --theme-border-28: rgba(148, 163, 184, 0.28);
+  --theme-border-20: rgba(148, 163, 184, 0.2);
+  --theme-border-12: rgba(148, 163, 184, 0.12);
+  --theme-accent-14: rgba(96, 165, 250, 0.14);
+  --theme-shadow: rgba(15, 23, 42, 0.35);
+  --theme-success-surface: rgba(30, 64, 52, 0.78);
   background: linear-gradient(135deg, #08111f 0%, #0e1728 40%, #111827 100%);
   color: #e5eefb;
 }
 
-body:not(.theme-light) html {
+html:has(body:not(.theme-light)) {
+  color-scheme: dark;
   scrollbar-color: #475569 #0f172a;
 }
 

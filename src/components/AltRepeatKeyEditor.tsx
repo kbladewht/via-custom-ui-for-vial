@@ -188,7 +188,7 @@ function AltRepeatKeyEntry(props: {
                   options: (candidate.options & ~(1 << 7)) | (checked ? 1 << 7 : 0),
                 });
               }}
-              sx={{ color: "#64748b", "&.Mui-checked": { color: "#38bdf8" }, p: 0.5 }}
+              sx={{ color: "var(--theme-border)", "&.Mui-checked": { color: "var(--theme-accent)" }, p: 0.5 }}
             />
           </Grid>
 
@@ -258,7 +258,7 @@ function AltRepeatKeyEntry(props: {
               {MODIFIERS.map((mod) => (
                 <FormControlLabel
                   key={mod.label}
-                  label={<Typography sx={{ fontSize: "0.82rem", color: "#cbd5e1" }}>{mod.label}</Typography>}
+                  label={<Typography sx={{ fontSize: "0.82rem", color: "var(--theme-text-secondary)" }}>{mod.label}</Typography>}
                   control={
                     <Checkbox
                       size="small"
@@ -269,7 +269,7 @@ function AltRepeatKeyEntry(props: {
                           allowedMods: (candidate.allowedMods & ~(1 << mod.bit)) | (checked ? 1 << mod.bit : 0),
                         });
                       }}
-                      sx={{ color: "#64748b", "&.Mui-checked": { color: "#38bdf8" }, p: "2px" }}
+                      sx={{ color: "var(--theme-border)", "&.Mui-checked": { color: "var(--theme-accent)" }, p: "2px" }}
                     />
                   }
                   sx={{ m: 0 }}
@@ -290,7 +290,7 @@ function AltRepeatKeyEntry(props: {
                 <FormControlLabel
                   key={opt.bit}
                   label={
-                    <Typography sx={{ fontSize: "0.82rem", color: "#cbd5e1", whiteSpace: "nowrap" }}>
+                    <Typography sx={{ fontSize: "0.82rem", color: "var(--theme-text-secondary)", whiteSpace: "nowrap" }}>
                       {labels.optionLabels[opt.index]}
                     </Typography>
                   }
@@ -304,7 +304,7 @@ function AltRepeatKeyEntry(props: {
                           options: (candidate.options & ~(1 << opt.bit)) | (checked ? 1 << opt.bit : 0),
                         });
                       }}
-                      sx={{ color: "#64748b", "&.Mui-checked": { color: "#38bdf8" }, p: "2px" }}
+                      sx={{ color: "var(--theme-border)", "&.Mui-checked": { color: "var(--theme-accent)" }, p: "2px" }}
                     />
                   }
                   sx={{ m: 0 }}

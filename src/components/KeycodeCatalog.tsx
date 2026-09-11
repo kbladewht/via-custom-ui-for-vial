@@ -387,12 +387,12 @@ export function KeycodeCatalog(props: {
                 label={tab.label}
                 className="keycode-catalog-tab"
                 sx={{
-                  color: "#b8c7dc",
+                  color: "var(--theme-tab-text)",
                   fontWeight: 600,
                   textTransform: "none",
-                  border: "1px solid #334155",
+                  border: "1px solid var(--theme-surface-raised)",
                   borderRadius: 0,
-                  backgroundColor: "rgba(30, 41, 59, 0.7)",
+                  backgroundColor: "var(--theme-surface-panel-70)",
                   "&:first-of-type": {
                     borderRadius: "8px 0 0 0",
                   },
@@ -400,9 +400,9 @@ export function KeycodeCatalog(props: {
                     borderRadius: "0 8px 0 0",
                   },
                   "&.Mui-selected": {
-                    color: "#f8fafc",
-                    borderColor: "#475569",
-                    backgroundColor: "#334155",
+                    color: "var(--theme-text-strong)",
+                    borderColor: "var(--theme-surface-hover)",
+                    backgroundColor: "var(--theme-surface-raised)",
                   },
                 }}
               />
@@ -419,21 +419,21 @@ export function KeycodeCatalog(props: {
               overflowY: "auto",
               overflowX: "hidden",
               borderRadius: "0 12px 12px 12px",
-              scrollbarColor: "#64748b transparent",
+              scrollbarColor: "var(--theme-border) transparent",
               "&::-webkit-scrollbar": {
                 width: 10,
               },
               "&::-webkit-scrollbar-track": {
-                background: "rgba(15, 23, 42, 0.5)",
+                background: "var(--theme-surface-deep-50)",
                 borderRadius: 8,
               },
               "&::-webkit-scrollbar-thumb": {
-                background: "#64748b",
+                background: "var(--theme-border)",
                 borderRadius: 8,
-                border: "2px solid rgba(15, 23, 42, 0.5)",
+                border: "2px solid var(--theme-surface-deep-50)",
               },
               "&::-webkit-scrollbar-thumb:hover": {
-                background: "#94a3b8",
+                background: "var(--theme-text-muted)",
               },
             }}
           >

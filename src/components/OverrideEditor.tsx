@@ -189,7 +189,7 @@ function OverrideEntry(props: {
                   options: (candidateOverride.options & ~(1 << 7)) | (checked ? 1 << 7 : 0),
                 });
               }}
-              sx={{ color: "#64748b", "&.Mui-checked": { color: "#38bdf8" }, p: 0.5 }}
+              sx={{ color: "var(--theme-border)", "&.Mui-checked": { color: "var(--theme-accent)" }, p: 0.5 }}
             />
           </Grid>
 
@@ -212,7 +212,7 @@ function OverrideEntry(props: {
               {[...Array(16)].map((_, idx) => (
                 <FormControlLabel
                   key={idx}
-                  label={<Typography sx={{ fontSize: "0.82rem", color: "#cbd5e1" }}>{idx}</Typography>}
+                  label={<Typography sx={{ fontSize: "0.82rem", color: "var(--theme-text-secondary)" }}>{idx}</Typography>}
                   control={
                     <Checkbox
                       size="small"
@@ -223,7 +223,7 @@ function OverrideEntry(props: {
                           layers: (candidateOverride.layers & ~(1 << idx)) | (checked ? 1 << idx : 0),
                         });
                       }}
-                      sx={{ color: "#64748b", "&.Mui-checked": { color: "#38bdf8" }, p: "2px" }}
+                      sx={{ color: "var(--theme-border)", "&.Mui-checked": { color: "var(--theme-accent)" }, p: "2px" }}
                     />
                   }
                   sx={{ m: 0 }}
@@ -236,9 +236,9 @@ function OverrideEntry(props: {
                 variant="outlined"
                 onClick={() => updateCandidate({ ...candidateOverride, layers: 0xffff })}
                 sx={{
-                  color: "#cbd5e1",
-                  borderColor: "#475569",
-                  backgroundColor: "#1e293b",
+                  color: "var(--theme-text-secondary)",
+                  borderColor: "var(--theme-surface-hover)",
+                  backgroundColor: "var(--theme-surface-panel)",
                   textTransform: "none",
                   py: 0.25,
                   px: 1,
@@ -252,9 +252,9 @@ function OverrideEntry(props: {
                 variant="outlined"
                 onClick={() => updateCandidate({ ...candidateOverride, layers: 0x0000 })}
                 sx={{
-                  color: "#cbd5e1",
-                  borderColor: "#475569",
-                  backgroundColor: "#1e293b",
+                  color: "var(--theme-text-secondary)",
+                  borderColor: "var(--theme-surface-hover)",
+                  backgroundColor: "var(--theme-surface-panel)",
                   textTransform: "none",
                   py: 0.25,
                   px: 1,
@@ -365,7 +365,7 @@ function OverrideEntry(props: {
                 <FormControlLabel
                   key={opt.bit}
                   label={
-                    <Typography sx={{ fontSize: "0.82rem", color: "#cbd5e1", whiteSpace: "nowrap" }}>
+                    <Typography sx={{ fontSize: "0.82rem", color: "var(--theme-text-secondary)", whiteSpace: "nowrap" }}>
                       {labels.optionLabels[opt.index]}
                     </Typography>
                   }
@@ -379,7 +379,7 @@ function OverrideEntry(props: {
                           options: (candidateOverride.options & ~(1 << opt.bit)) | (checked ? 1 << opt.bit : 0),
                         });
                       }}
-                      sx={{ color: "#64748b", "&.Mui-checked": { color: "#38bdf8" }, p: "2px" }}
+                      sx={{ color: "var(--theme-border)", "&.Mui-checked": { color: "var(--theme-accent)" }, p: "2px" }}
                     />
                   }
                   sx={{ m: 0 }}
@@ -444,7 +444,7 @@ function ModifierCheckbox(props: { value: number; onChange: (value: number) => v
       {MODIFIERS.map((mod) => (
         <FormControlLabel
           key={mod.label}
-          label={<Typography sx={{ fontSize: "0.82rem", color: "#cbd5e1" }}>{mod.label}</Typography>}
+          label={<Typography sx={{ fontSize: "0.82rem", color: "var(--theme-text-secondary)" }}>{mod.label}</Typography>}
           control={
             <Checkbox
               size="small"
@@ -452,7 +452,7 @@ function ModifierCheckbox(props: { value: number; onChange: (value: number) => v
               onChange={(_event, checked) => {
                 props.onChange((props.value & ~(1 << mod.bit)) | (checked ? 1 << mod.bit : 0));
               }}
-              sx={{ color: "#64748b", "&.Mui-checked": { color: "#38bdf8" }, p: "2px" }}
+              sx={{ color: "var(--theme-border)", "&.Mui-checked": { color: "var(--theme-accent)" }, p: "2px" }}
             />
           }
           sx={{ m: 0 }}

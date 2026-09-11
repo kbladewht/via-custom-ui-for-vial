@@ -6,7 +6,7 @@ import {
   Grid,
 } from "@mui/material";
 import { match, P } from "ts-pattern";
-import { useEffect, useState } from "react";
+import { useLayoutEffect, useState } from "react";
 import { AppToolbar, KeymapStyle } from "./components/AppToolbar";
 import {
   discardPendingKeycapAudio,
@@ -20,7 +20,7 @@ function App() {
   const [keymapStyle, setKeymapStyle] = useState<KeymapStyle>("classic");
   const [lightTheme, setLightTheme] = useState(false);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     document.body.classList.toggle("theme-light", lightTheme);
     return () => document.body.classList.remove("theme-light");
   }, [lightTheme]);

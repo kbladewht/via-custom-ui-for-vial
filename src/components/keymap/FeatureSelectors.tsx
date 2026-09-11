@@ -34,7 +34,7 @@ export function ComboOverrideEditor(props: {
     <Box sx={{ width: "100%", minHeight: "calc(100vh - 180px)", p: 1, display: "flex", flexDirection: "column" }}>
       <Tabs value={comboIndex} onChange={(_event, index: number) => setComboIndex(index)} variant="scrollable" scrollButtons="auto" className="combo-tabs" sx={{ py: 0 }}>
         {Array.from({ length: props.dynamicEntryCount.combo }, (_, index) => (
-          <Tab key={index} className="entry-tab combo-entry-tab" label={index + 1} value={index} sx={{ width: 28, minWidth: 28, minHeight: 28, px: 0, color: "#b8c7dc", fontWeight: 600, textTransform: "none", border: "1px solid #334155", borderRadius: "8px 8px 0 0", backgroundColor: "rgba(30, 41, 59, 0.7)", "&.Mui-selected": { color: "#f8fafc", borderColor: "#475569", backgroundColor: "#334155" } }} />
+          <Tab key={index} className="entry-tab combo-entry-tab" label={index + 1} value={index} sx={{ width: 28, minWidth: 28, minHeight: 28, px: 0, color: "var(--theme-tab-text)", fontWeight: 600, textTransform: "none", border: "1px solid var(--theme-surface-raised)", borderRadius: "8px 8px 0 0", backgroundColor: "var(--theme-surface-panel-70)", "&.Mui-selected": { color: "var(--theme-text-strong)", borderColor: "var(--theme-surface-hover)", backgroundColor: "var(--theme-surface-raised)" } }} />
         ))}
       </Tabs>
       {props.dynamicEntryCount.combo > 0 && (
@@ -99,16 +99,16 @@ export function TapDanceSelector(props: {
               minWidth: 28,
               minHeight: 28,
               px: 0,
-              color: "#b8c7dc",
+              color: "var(--theme-tab-text)",
               fontWeight: 600,
               textTransform: "none",
-              border: "1px solid #334155",
+              border: "1px solid var(--theme-surface-raised)",
               borderRadius: "8px 8px 0 0",
-              backgroundColor: "rgba(30, 41, 59, 0.7)",
+              backgroundColor: "var(--theme-surface-panel-70)",
               "&.Mui-selected": {
-                color: "#f8fafc",
-                borderColor: "#475569",
-                backgroundColor: "#334155",
+                color: "var(--theme-text-strong)",
+                borderColor: "var(--theme-surface-hover)",
+                backgroundColor: "var(--theme-surface-raised)",
               },
             }}
           />
@@ -176,16 +176,16 @@ export function KeyOverrideSelector(props: {
               minWidth: 28,
               minHeight: 28,
               px: 0,
-              color: "#b8c7dc",
+              color: "var(--theme-tab-text)",
               fontWeight: 600,
               textTransform: "none",
-              border: "1px solid #334155",
+              border: "1px solid var(--theme-surface-raised)",
               borderRadius: "8px 8px 0 0",
-              backgroundColor: "rgba(30, 41, 59, 0.7)",
+              backgroundColor: "var(--theme-surface-panel-70)",
               "&.Mui-selected": {
-                color: "#f8fafc",
-                borderColor: "#475569",
-                backgroundColor: "#334155",
+                color: "var(--theme-text-strong)",
+                borderColor: "var(--theme-surface-hover)",
+                backgroundColor: "var(--theme-surface-raised)",
               },
             }}
           />
@@ -257,16 +257,16 @@ export function AltRepeatKeySelector(props: {
               minWidth: 28,
               minHeight: 28,
               px: 0,
-              color: "#b8c7dc",
+              color: "var(--theme-tab-text)",
               fontWeight: 600,
               textTransform: "none",
-              border: "1px solid #334155",
+              border: "1px solid var(--theme-surface-raised)",
               borderRadius: "8px 8px 0 0",
-              backgroundColor: "rgba(30, 41, 59, 0.7)",
+              backgroundColor: "var(--theme-surface-panel-70)",
               "&.Mui-selected": {
-                color: "#f8fafc",
-                borderColor: "#475569",
-                backgroundColor: "#334155",
+                color: "var(--theme-text-strong)",
+                borderColor: "var(--theme-surface-hover)",
+                backgroundColor: "var(--theme-surface-raised)",
               },
             }}
           />
