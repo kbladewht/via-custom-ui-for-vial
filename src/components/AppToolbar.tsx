@@ -111,7 +111,7 @@ export function AppToolbar(props: AppToolbarProps) {
           left: "50%",
           transform: "translateX(-50%)",
           fontSize: "11px",
-          color: "rgba(203, 213, 225, 0.9)",
+          color: "var(--theme-text-secondary)",
           whiteSpace: "nowrap",
           cursor: "pointer",
           display: "inline-flex",
@@ -119,20 +119,20 @@ export function AppToolbar(props: AppToolbarProps) {
           gap: 0.75,
           px: 1,
           py: 0.45,
-          border: "1px solid rgba(148, 163, 184, 0.28)",
+          border: "1px solid var(--theme-border-28)",
           borderRadius: 1.5,
-          background: "rgba(30, 41, 59, 0.72)",
+          background: "var(--theme-surface-panel-72)",
           transition: "border-color 160ms ease, background 160ms ease",
           "&:hover": {
             borderColor: "rgba(134, 239, 172, 0.65)",
-            background: "rgba(30, 64, 52, 0.78)",
+            background: "var(--theme-success-surface)",
           },
         }}
         onClick={props.onRefreshLayer}
         title="Refresh current layer"
       >
         <span style={{ opacity: 0.68 }}>Current Layer</span>
-        <span style={{ color: "#86efac", fontWeight: 700 }}>
+        <span style={{ color: "var(--theme-success-emphasis)", fontWeight: 700 }}>
           L{props.currentLayer ?? "--"}
         </span>
       </Typography>
@@ -155,14 +155,14 @@ export function AppToolbar(props: AppToolbarProps) {
             minWidth: 140,
             height: 32,
             fontSize: "11px",
-            color: "#e2e8f0",
-            background: "rgba(15, 23, 42, 0.85)",
+            color: "var(--theme-text-emphasis)",
+            background: "var(--theme-surface-deep-85)",
             borderRadius: 1.5,
             "& .MuiOutlinedInput-notchedOutline": {
-              borderColor: "rgba(148, 163, 184, 0.28)",
+              borderColor: "var(--theme-border-28)",
             },
             "&:hover .MuiOutlinedInput-notchedOutline": {
-              borderColor: "rgba(148, 163, 184, 0.45)",
+              borderColor: "var(--theme-border-45)",
             },
             "& .MuiSelect-select": {
               py: 0.5,
@@ -172,9 +172,9 @@ export function AppToolbar(props: AppToolbarProps) {
           MenuProps={{
             PaperProps: {
               sx: {
-                background: "#0f172a",
-                color: "#e2e8f0",
-                border: "1px solid rgba(148, 163, 184, 0.2)",
+                background: "var(--theme-surface-deep)",
+                color: "var(--theme-text-emphasis)",
+                border: "1px solid var(--theme-border-20)",
                 mt: 0.5,
               },
             },
@@ -223,17 +223,17 @@ export function AppToolbar(props: AppToolbarProps) {
           anchorOrigin={{ vertical: "bottom", horizontal: "left" }}
           transformOrigin={{ vertical: "top", horizontal: "left" }}
         >
-          <Box sx={{ p: 1.5, minWidth: 230, background: "#0f172a" }}>
+          <Box sx={{ p: 1.5, minWidth: 230, background: "var(--theme-surface-deep)" }}>
             <Typography sx={{ mb: 0.75, fontSize: "12px", fontWeight: 700 }}>
               BLE 快捷键
             </Typography>
             {props.shortcutHelp.length === 0 ? (
-              <Typography sx={{ fontSize: "11px", color: "#94a3b8" }}>
+              <Typography sx={{ fontSize: "11px", color: "var(--theme-text-muted)" }}>
                 暂未找到快捷键
               </Typography>
             ) : (
               props.shortcutHelp.map((item) => (
-                <Typography key={item.name} sx={{ fontSize: "11px", color: "#cbd5e1" }}>
+                <Typography key={item.name} sx={{ fontSize: "11px", color: "var(--theme-text-secondary)" }}>
                   {item.label}: {item.shortcut}
                 </Typography>
               ))

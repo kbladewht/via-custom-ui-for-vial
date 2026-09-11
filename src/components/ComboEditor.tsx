@@ -142,7 +142,7 @@ function ComboEntry(props: {
                   alignContent={"center"}
                   textAlign={"right"}
                   height={"100%"}
-                  sx={{ color: "#e5eefb", fontWeight: 500 }}
+                  sx={{ color: "var(--theme-text-primary)", fontWeight: 500 }}
                 >
                   {keyLabels[idx]}
                 </Box>

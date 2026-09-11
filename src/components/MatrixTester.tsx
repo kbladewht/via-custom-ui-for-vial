@@ -226,15 +226,15 @@ export function MatrixTester(props: {
             size="small"
             onClick={handleReset}
             sx={{
-              color: "#e2e8f0",
-              borderColor: "#64748b",
-              backgroundColor: "#334155",
+              color: "var(--theme-text-emphasis)",
+              borderColor: "var(--theme-border)",
+              backgroundColor: "var(--theme-surface-raised)",
               textTransform: "none",
               px: 2,
               py: 0.5,
               "&:hover": {
-                backgroundColor: "#475569",
-                borderColor: "#94a3b8",
+                backgroundColor: "var(--theme-surface-hover)",
+                borderColor: "var(--theme-text-muted)",
               },
             }}
           >
@@ -247,9 +247,9 @@ export function MatrixTester(props: {
               variant="outlined"
               value={layoutOption[0] ?? 0}
               sx={{
-                color: "#e2e8f0",
+                color: "var(--theme-text-emphasis)",
                 fontSize: "0.82rem",
-                "& .MuiOutlinedInput-notchedOutline": { borderColor: "#475569" },
+                "& .MuiOutlinedInput-notchedOutline": { borderColor: "var(--theme-surface-hover)" },
               }}
               onChange={(event) => {
                 setLayoutOption({ 0: Number(event.target.value) });
@@ -265,11 +265,11 @@ export function MatrixTester(props: {
         </Box>
 
         <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
-          <Typography sx={{ fontSize: "0.85rem", color: "#94a3b8" }}>
+          <Typography sx={{ fontSize: "0.85rem", color: "var(--theme-text-muted)" }}>
             {isZh ? `已测试: ${testedCount} / ${totalKeys} 键` : `Tested: ${testedCount} / ${totalKeys} keys`}
           </Typography>
           {testedCount === totalKeys && totalKeys > 0 && (
-            <Typography sx={{ fontSize: "0.85rem", color: "#4ade80", fontWeight: 600 }}>
+            <Typography sx={{ fontSize: "0.85rem", color: "var(--theme-success)", fontWeight: 600 }}>
               {isZh ? "✓ 全部通过" : "✓ All Passed"}
             </Typography>
           )}
@@ -283,8 +283,8 @@ export function MatrixTester(props: {
           overflowX: "auto",
           p: 2,
           borderRadius: 2,
-          backgroundColor: "#1e2227",
-          border: "1px solid #333842",
+          backgroundColor: "var(--theme-control)",
+          border: "1px solid var(--theme-divider)",
           minHeight: maxRowHeight + 20,
         }}
       >
@@ -301,20 +301,20 @@ export function MatrixTester(props: {
             const isActive = activeMatrixKeys.has(keyId);
             const isTested = testedMatrixKeys.has(keyId);
 
-            let bg = "rgba(45, 50, 58, 0.9)";
-            let borderColor = "#484f5c";
-            let textColor = "#8fa4bd";
+            let bg = "var(--theme-key-idle)";
+            let borderColor = "var(--theme-control-border)";
+            let textColor = "var(--theme-text-subtle)";
             let boxShadow = "none";
 
             if (isActive) {
-              bg = "#e2e8f0";
+              bg = "var(--theme-text-emphasis)";
               borderColor = "#ffffff";
-              textColor = "#0f172a";
-              boxShadow = "0 0 14px rgba(255, 255, 255, 0.6)";
+              textColor = "var(--theme-surface-deep)";
+              boxShadow = "0 0 14px var(--theme-active-key-shadow)";
             } else if (isTested) {
-              bg = "#475569";
-              borderColor = "#64748b";
-              textColor = "#f8fafc";
+              bg = "var(--theme-surface-hover)";
+              borderColor = "var(--theme-border)";
+              textColor = "var(--theme-text-strong)";
             }
 
             const labelText = p.keycode.label || p.keycode.key || "";

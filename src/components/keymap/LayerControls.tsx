@@ -67,7 +67,7 @@ export function LayerSelector(props: {
           display: "flex",
           alignItems: "center",
           flexShrink: 0,
-          color: "#b8c7dc",
+          color: "var(--theme-tab-text)",
           fontSize: "0.8rem",
           fontWeight: 600,
         }}
@@ -85,12 +85,12 @@ export function LayerSelector(props: {
             sx={{
               minWidth: "36px",
               flexShrink: 0,
-              color: isActive ? "#e5eefb" : "#8fa4bd",
-              borderColor: isActive ? "#596777" : "#294b70",
-              backgroundColor: isActive ? "#3f4b5a" : "#111d2d",
+              color: isActive ? "var(--theme-text-primary)" : "var(--theme-text-subtle)",
+              borderColor: isActive ? "var(--theme-selected-border)" : "var(--theme-inactive-border)",
+              backgroundColor: isActive ? "var(--theme-selected-surface)" : "var(--theme-inactive-surface)",
               "&:hover": {
-                borderColor: "#596777",
-                backgroundColor: "#2d3d4f",
+                borderColor: "var(--theme-selected-border)",
+                backgroundColor: "var(--theme-inactive-hover)",
               },
             }}
             onClick={() => {

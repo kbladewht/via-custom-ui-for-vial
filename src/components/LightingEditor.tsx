@@ -245,13 +245,13 @@ export function LightingEditor(props: { via: ViaKeyboard; lighting?: string; lan
   return (
     <Box sx={{ width: "100%", maxWidth: 560, p: 2 }}>
       {props.lighting === undefined && (
-        <Box sx={{ color: "#fbbf24", mb: 1 }}>
+        <Box sx={{ color: "var(--theme-warning)", mb: 1 }}>
           {t.lighting.notSupported}
         </Box>
       )}
-      {error && <Box sx={{ color: "#f87171", mb: 1 }}>{error}</Box>}
+      {error && <Box sx={{ color: "var(--theme-error)", mb: 1 }}>{error}</Box>}
       <Box sx={{ display: "grid", gridTemplateColumns: "110px minmax(180px, 1fr)", alignItems: "center", rowGap: 1.25 }}>
-        <Box component="label" htmlFor="lighting-effect" sx={{ color: "#e5eefb", fontSize: "0.9rem" }}>
+        <Box component="label" htmlFor="lighting-effect" sx={{ color: "var(--theme-text-primary)", fontSize: "0.9rem" }}>
           {t.lighting.effect}
         </Box>
         <FormControl size="small" fullWidth>
@@ -275,7 +275,7 @@ export function LightingEditor(props: { via: ViaKeyboard; lighting?: string; lan
           </Select>
         </FormControl>
 
-        <Box component="label" htmlFor="lighting-color" sx={{ color: "#e5eefb", fontSize: "0.9rem" }}>
+        <Box component="label" htmlFor="lighting-color" sx={{ color: "var(--theme-text-primary)", fontSize: "0.9rem" }}>
           {t.lighting.color}
         </Box>
         <>
@@ -288,7 +288,7 @@ export function LightingEditor(props: { via: ViaKeyboard; lighting?: string; lan
               borderRadius: 1,
               backgroundColor: color,
               border: "1px solid rgba(226, 232, 240, 0.7)",
-              boxShadow: "inset 0 0 0 1px rgba(15, 23, 42, 0.35)",
+              boxShadow: "inset 0 0 0 1px var(--theme-shadow)",
             }}
           />
           <LightingColorPicker
@@ -304,7 +304,7 @@ export function LightingEditor(props: { via: ViaKeyboard; lighting?: string; lan
           />
         </>
 
-        <Box component="label" htmlFor="lighting-brightness" sx={{ color: "#e5eefb", fontSize: "0.9rem" }}>
+        <Box component="label" htmlFor="lighting-brightness" sx={{ color: "var(--theme-text-primary)", fontSize: "0.9rem" }}>
           {t.lighting.brightness}
         </Box>
         <Slider
@@ -321,7 +321,7 @@ export function LightingEditor(props: { via: ViaKeyboard; lighting?: string; lan
           size="small"
         />
 
-        <Box component="label" htmlFor="lighting-speed" sx={{ color: "#e5eefb", fontSize: "0.9rem" }}>
+        <Box component="label" htmlFor="lighting-speed" sx={{ color: "var(--theme-text-primary)", fontSize: "0.9rem" }}>
           {t.lighting.speed}
         </Box>
         <Slider
