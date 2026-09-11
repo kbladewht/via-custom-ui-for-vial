@@ -215,13 +215,20 @@ body.theme-light .key-select-popup .MuiAutocomplete-option[aria-selected="true"]
   min-height: 0;
   height: auto;
   margin-bottom: 8px;
+  padding-bottom: 8px !important;
   border-radius: 0 12px 12px 12px !important;
   clip-path: inset(0 0 0 0 round 0 12px 12px 12px);
-  overflow: hidden;
 }
 
+/* Bound the whole Keymap tab content, so it scrolls as one unit instead of growing the page */
 .app-shell.theme-light .keymap-tab-panel:has(.keycatalog-surface-loaded) {
-  min-height: calc(100vh - 100px);
+  max-height: calc(100vh - 100px);
+  overflow-y: auto;
+  scrollbar-width: none;
+}
+
+.app-shell.theme-light .keymap-tab-panel:has(.keycatalog-surface-loaded)::-webkit-scrollbar {
+  display: none;
 }
 
 .app-shell.theme-light .MuiTab-root {
