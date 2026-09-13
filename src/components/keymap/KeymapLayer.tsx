@@ -35,7 +35,7 @@ export function KeymapLayer(props: {
   const keycapSoundPlayed = useRef(false);
   const focusContext = useContext(FocusedKeyContext);
 
-  const keymapkeys = convertToKeymapKeys(
+  const layoutKeys = convertToKeymapKeys(
     props.keymapProps,
     props.layoutOption,
     props.keymap,
@@ -43,6 +43,23 @@ export function KeymapLayer(props: {
     props.keycodeconverter,
     props.shortcutByKeycode,
   );
+  const topmostPos = layoutKeys.length === 0 ? 0 : Math.min(
+    ...layoutKeys.map((key) => {
+      if (key.r === 0) return key.y;
+      const radians = key.r * Math.PI / 180;
+      const sine = Math.sin(radians);
+      const cosine = Math.cos(radians);
+      const width = (key.w * WIDTH_1U - 4 + (key.w - 1) * KEY_GAP) / (WIDTH_1U + KEY_GAP);
+      const height = (key.h * WIDTH_1U - 4) / (WIDTH_1U + KEY_GAP);
+      return key.ry + key.offsetx * sine + key.offsety * cosine
+        + Math.min(0, width * sine) + Math.min(0, height * cosine);
+    }),
+  );
+  const keymapkeys = layoutKeys.map((key) => ({
+    ...key,
+    y: key.y - topmostPos,
+    ry: key.ry - topmostPos,
+  }));
 
   useEffect(() => {
     if (!props.keymapReady || keycapSoundPlayed.current) return;
