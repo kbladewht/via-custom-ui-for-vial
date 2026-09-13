@@ -82,9 +82,17 @@ export function KeymapLayer(props: {
   const rightmostPos =
     Math.max(...keymapkeys.map((key) => key.x + key.w)) * (WIDTH_1U + KEY_GAP) + WIDTH_1U;
   const bottommostPos = Math.max(
-    ...keymapkeys.map((key) =>
-      key.r !== 0 ? key.ry + key.offsety + key.h : key.y + key.h,
-    ),
+    0,
+    ...keymapkeys.map((key) => {
+      const height = (key.h * WIDTH_1U - 4) / (WIDTH_1U + KEY_GAP);
+      if (key.r === 0) return key.y + height;
+      const radians = key.r * Math.PI / 180;
+      const sine = Math.sin(radians);
+      const cosine = Math.cos(radians);
+      const width = (key.w * WIDTH_1U - 4 + (key.w - 1) * KEY_GAP) / (WIDTH_1U + KEY_GAP);
+      return key.ry + key.offsetx * sine + key.offsety * cosine
+        + Math.max(0, width * sine) + Math.max(0, height * cosine);
+    }),
   );
 
   const focusNextKeyAfter = (current: KeymapKeyProperties) => {
@@ -129,7 +137,7 @@ export function KeymapLayer(props: {
         sx={{
           position: "relative",
           mt: 1,
-          height: `${bottommostPos * (WIDTH_1U + KEY_GAP) + KEY_GAP}px`,
+          height: `${Math.ceil(bottommostPos * (WIDTH_1U + KEY_GAP)) + 8}px`,
           width: `${rightmostPos}px`,
           minWidth: "100%",
         }}
