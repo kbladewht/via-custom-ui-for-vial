@@ -23,7 +23,6 @@ export function convertToKeymapKeys(
   };
 
   const keys: KeymapKeyProperties[] = [];
-  let firstKey = true;
   for (const row of props.layouts.keymap) {
     for (const col of row) {
       match(col)
@@ -47,10 +46,6 @@ export function convertToKeymapKeys(
             hasMatrixPosition &&
             ((layout?.length ?? 0) < 2 || layoutOptions[layout[0]] == layout[1])
           ) {
-            if (firstKey) {
-              firstKey = false;
-              current.y = 0;
-            }
             const keycode = keycodeconverter.convertIntToKeycode(
               isEncoder
                 ? (encodermap?.[keyPos[0]]?.[keyPos[1]] ?? 0)

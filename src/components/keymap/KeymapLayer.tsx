@@ -64,6 +64,11 @@ export function KeymapLayer(props: {
 
   const rightmostPos =
     Math.max(...keymapkeys.map((key) => key.x + key.w)) * (WIDTH_1U + KEY_GAP) + WIDTH_1U;
+  const bottommostPos = Math.max(
+    ...keymapkeys.map((key) =>
+      key.r !== 0 ? key.ry + key.offsety + key.h : key.y + key.h,
+    ),
+  );
 
   const focusNextKeyAfter = (current: KeymapKeyProperties) => {
     const nextIdx = parseInt(current.reactKey, 10) + 1;
@@ -107,7 +112,7 @@ export function KeymapLayer(props: {
         sx={{
           position: "relative",
           mt: 1,
-          height: `${(Math.max(...keymapkeys.map((k) => k.y)) + 1) * (WIDTH_1U + KEY_GAP)}px`,
+          height: `${bottommostPos * (WIDTH_1U + KEY_GAP) + KEY_GAP}px`,
           width: `${rightmostPos}px`,
           minWidth: "100%",
         }}
