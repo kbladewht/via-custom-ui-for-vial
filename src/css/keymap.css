@@ -45,7 +45,7 @@
   -webkit-outline: none !important;
   border-radius: 50% !important;
   overflow: hidden;
-  border: 2px solid rgba(148, 163, 184, 0.18);
+  border: 1px solid rgba(148, 163, 184, 0.7);
 }
 
 .keymap-key.keymap-encoder:hover {
@@ -247,7 +247,7 @@
 .catalog-key {
   outline: solid;
   outline-width: 1px;
-  outline-color: rgba(148, 163, 184, 0.7);
+  outline-color: rgba(148, 163, 184, 0.2);
   user-select: none;
   background: linear-gradient(180deg, #1e293b 0%, #0f172a 100%);
   color: #f8fafc;
@@ -277,7 +277,7 @@
 .keycatalog-key {
   outline: solid;
   outline-width: 1px;
-  outline-color: rgba(148, 163, 184, 0.7);
+  outline-color: rgba(148, 163, 184, 0.2);
   user-select: none;
   font-size: 12px;
   text-align: center;
