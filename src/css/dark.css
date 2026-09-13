@@ -201,7 +201,8 @@ body:not(.theme-light) .quantum-main-tabs .MuiTabs-flexContainer {
 }
 
 body:not(.theme-light) .MuiTab-root.Mui-selected {
-  color: #c3d0e0 !important;
+  color: #c3cde0 !important;
+  font-weight: 800 !important;
   background-color: #1e293b !important;
   border-color: #475569 !important;
   border-bottom-color: transparent !important;
