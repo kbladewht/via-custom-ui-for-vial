@@ -1,0 +1,29 @@
+name: Build Windows executable
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: windows-build-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  build-windows:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 24
+          cache: 'npm'
+      - uses: dtolnay/rust-toolchain@stable
+      - run: npm install
+      - run: npx tauri build --no-bundle
+      - uses: actions/upload-artifact@v4
+        with:
+          name: via-custom-ui-for-vial-exe
+          path: src-tauri/target/release/via-custom-ui-for-vial.exe
+          if-no-files-found: error

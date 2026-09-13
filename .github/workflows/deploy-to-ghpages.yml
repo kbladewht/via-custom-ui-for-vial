@@ -3,7 +3,6 @@ name: Deploy static content to Pages
 on:
   push:
     branches: ['main']
-  workflow_dispatch:
 
 permissions:
   contents: read
@@ -16,8 +15,6 @@ concurrency:
 
 jobs:
   deploy:
-    # 只在 push 到 main 时部署 Pages
-    if: github.event_name == 'push'
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
@@ -36,22 +33,3 @@ jobs:
           path: './dist'
       - id: deployment
         uses: actions/deploy-pages@v5
-
-  build-windows:
-    # 只在手动触发时构建 Windows exe
-    if: github.event_name == 'workflow_dispatch'
-    runs-on: windows-latest
-    steps:
-      - uses: actions/checkout@v5
-      - uses: actions/setup-node@v5
-        with:
-          node-version: 24
-          cache: 'npm'
-      - uses: dtolnay/rust-toolchain@stable
-      - run: npm install
-      - run: npx tauri build --no-bundle
-      - uses: actions/upload-artifact@v4
-        with:
-          name: via-custom-ui-for-vial-exe
-          path: src-tauri/target/release/via-custom-ui-for-vial.exe
-          if-no-files-found: error
