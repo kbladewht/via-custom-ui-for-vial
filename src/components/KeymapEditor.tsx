@@ -120,6 +120,7 @@ export function KeymapEditor(props: {
           pr: 1,
         }}
       >
+        
         <LayerEditor
           {...props}
           layerCount={props.dynamicEntryCount.layer}
