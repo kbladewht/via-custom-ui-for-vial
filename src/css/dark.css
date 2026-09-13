@@ -193,6 +193,11 @@ body:not(.theme-light) .MuiTab-root {
   color: #b8c7dc !important;
 }
 
+body:not(.theme-light) .MuiTab-root:not(.Mui-selected):not(:hover) {
+  background-color: #162631 !important;
+  color: #94a3b8 !important;
+}
+
 body:not(.theme-light) .quantum-main-tabs,
 body:not(.theme-light) .quantum-main-tabs .MuiTabs-scroller,
 body:not(.theme-light) .quantum-main-tabs .MuiTabs-flexContainer {
