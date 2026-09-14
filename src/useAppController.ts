@@ -61,6 +61,7 @@ export function useAppController() {
   const [keymapLanguage, setKeymapLanguage] = useState("US");
   const [uiLanguage, setUiLanguage] = useState<"zh" | "en">("en");
   const [batteryLevel, setBatteryLevel] = useState<number | null>(null);
+  const [batteryLevels, setBatteryLevels] = useState<[number | null, number | null] | null>(null);
   const [currentLayer, setCurrentLayer] = useState<number | null>(null);
   const [shortcutHelpAnchor, setShortcutHelpAnchor] = useState<HTMLElement | null>(null);
   const [shortcutHelp, setShortcutHelp] = useState<
@@ -232,7 +233,7 @@ export function useAppController() {
     if (!connected) return;
     let cancelled = false;
     const refreshDeviceStatus = async () => {
-      let level: number | null = null;
+      let level: number | [number, number] | null = null;
       try {
         level = await via.GetBatteryLevel();
       } catch (error) {
@@ -246,7 +247,15 @@ export function useAppController() {
           console.warn("Could not read Tauri battery level", error);
         }
       }
-      if (!cancelled && level !== null) setBatteryLevel(level);
+      if (!cancelled) {
+        if (Array.isArray(level)) {
+          setBatteryLevels(level);
+          setBatteryLevel(level[0]);
+        } else {
+          setBatteryLevels(null);
+          setBatteryLevel(level);
+        }
+      }
       try {
         const layer = await via.GetCurrentLayer();
         if (!cancelled && layer !== null) setCurrentLayer(layer);
@@ -390,6 +399,8 @@ export function useAppController() {
     setUiLanguage,
     batteryLevel,
     setBatteryLevel,
+    batteryLevels,
+    setBatteryLevels,
     currentLayer,
     setCurrentLayer,
     shortcutHelpAnchor,

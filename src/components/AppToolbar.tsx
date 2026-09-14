@@ -44,6 +44,7 @@ type AppToolbarProps = {
   shortcutHelp: Array<{ name: string; label: string; shortcut: string }>;
   onDfu: () => void;
   batteryLevel: number | null;
+  batteryLevels?: [number | null, number | null] | null;
   onRefreshBattery: () => void;
   keymapLanguage: string;
   onLanguageChange: (language: string) => void;
@@ -55,6 +56,9 @@ type AppToolbarProps = {
 };
 
 export function AppToolbar(props: AppToolbarProps) {
+  const splitBattery = Array.isArray(props.batteryLevels) && props.batteryLevels.length === 2;
+  const singleBatteryLevel = props.batteryLevel;
+
   return (
     <Box
       sx={{
@@ -240,30 +244,61 @@ export function AppToolbar(props: AppToolbarProps) {
             )}
           </Box>
         </Popover>
-        <Tooltip title="刷新电量">
+        <Tooltip title={
+          splitBattery
+            ? `左右电池 ${props.batteryLevels?.[0] ?? "--"}% / ${props.batteryLevels?.[1] ?? "--"}%`
+            : singleBatteryLevel === null
+              ? "正在获取电量"
+              : `电量 ${singleBatteryLevel}%，当前层 ${props.currentLayer ?? "--"}`
+        }>
           <IconButton
             className="battery-status-button"
             size="small"
             aria-label={
-              props.batteryLevel === null
-                ? "正在获取电量"
-                : `电量 ${props.batteryLevel}%，当前层 ${props.currentLayer ?? "--"}`
+              splitBattery
+                ? `左右电池 ${props.batteryLevels?.[0] ?? "--"}% / ${props.batteryLevels?.[1] ?? "--"}%`
+                : singleBatteryLevel === null
+                  ? "正在获取电量"
+                  : `电量 ${singleBatteryLevel}%，当前层 ${props.currentLayer ?? "--"}`
             }
             onClick={props.onRefreshBattery}
-            sx={{ display: "inline-flex", alignItems: "center", gap: 0.25, p: 0.5 }}
+            sx={{ display: "inline-flex", alignItems: "center", gap: splitBattery ? 0.5 : 0.25, p: 0.5 }}
           >
-            <Box
-              className={props.batteryLevel === null ? "battery-meter battery-waiting-icon" : "battery-meter"}
-              aria-hidden="true"
-            >
-              <Box
-                className="battery-meter-fill"
-                sx={{ width: `${props.batteryLevel === null ? 35 : Math.max(0, Math.min(100, props.batteryLevel))}%` }}
-              />
-            </Box>
-            <Typography sx={{ ml: 0.25, fontSize: "10px", color: "inherit" }}>
-              {props.batteryLevel === null ? "..." : `${props.batteryLevel}%`}
-            </Typography>
+            {splitBattery ? (
+              <Box sx={{ display: "flex", alignItems: "center", gap: 0.5 }}>
+                {props.batteryLevels?.map((level, index) => (
+                  <Box key={index} sx={{ display: "inline-flex", alignItems: "center", gap: 0.25 }}>
+                    <Box
+                      className={level === null ? "battery-meter battery-waiting-icon" : "battery-meter"}
+                      aria-hidden="true"
+                    >
+                      <Box
+                        className="battery-meter-fill"
+                        sx={{ width: `${level === null ? 35 : Math.max(0, Math.min(100, level))}%` }}
+                      />
+                    </Box>
+                    <Typography sx={{ fontSize: "10px", color: "inherit" }}>
+                      {level === null ? "..." : `${level}%`}
+                    </Typography>
+                  </Box>
+                ))}
+              </Box>
+            ) : (
+              <Box sx={{ display: "inline-flex", alignItems: "center", gap: 0.25 }}>
+                <Box
+                  className={singleBatteryLevel === null ? "battery-meter battery-waiting-icon" : "battery-meter"}
+                  aria-hidden="true"
+                >
+                  <Box
+                    className="battery-meter-fill"
+                    sx={{ width: `${singleBatteryLevel === null ? 35 : Math.max(0, Math.min(100, singleBatteryLevel))}%` }}
+                  />
+                </Box>
+                <Typography sx={{ ml: 0.25, fontSize: "10px", color: "inherit" }}>
+                  {singleBatteryLevel === null ? "..." : `${singleBatteryLevel}%`}
+                </Typography>
+              </Box>
+            )}
           </IconButton>
         </Tooltip>
         <LanguageSelector

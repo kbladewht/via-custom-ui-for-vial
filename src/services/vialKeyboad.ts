@@ -926,15 +926,17 @@ class VialKeyboard {
     return this.comm.getName();
   }
 
-  async GetBatteryLevel(): Promise<number | null> {
+  async GetBatteryLevel(): Promise<number | [number, number] | null> {
     const packet = new Uint8Array(32);
     packet[0] = via_command_id.id_battery;
     const res = await this.Command(packet);
-    return res.length > 3 &&
-      res[0] === via_command_id.id_battery &&
-        res[1] === 0xaa
-      ? res[2]
-      : null;
+    if (res.length > 2 && res[0] === via_command_id.id_battery && res[1] === 0xaa) {
+      return res[2];
+    }
+    if (res.length > 4 && res[0] === via_command_id.id_battery && res[1] === 0xab) {
+      return [res[2], res[3]];
+    }
+    return null;
   }
 
   async GetCurrentLayer(): Promise<number | null> {

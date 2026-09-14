@@ -50,6 +50,8 @@ function App() {
     setUiLanguage,
     batteryLevel,
     setBatteryLevel,
+    batteryLevels,
+    setBatteryLevels,
     currentLayer,
     setCurrentLayer,
     shortcutHelpAnchor,
@@ -129,11 +131,21 @@ function App() {
             shortcutHelp={shortcutHelp}
             onDfu={onDfuClick}
             batteryLevel={batteryLevel}
+            batteryLevels={batteryLevels}
             onRefreshBattery={() => {
               void via
                 .GetBatteryLevel()
                 .then((level) => {
-                  if (level !== null) setBatteryLevel(level);
+                  if (Array.isArray(level)) {
+                    setBatteryLevels(level);
+                    setBatteryLevel(level[0]);
+                  } else if (level !== null) {
+                    setBatteryLevels(null);
+                    setBatteryLevel(level);
+                  } else {
+                    setBatteryLevels(null);
+                    setBatteryLevel(null);
+                  }
                 })
                 .catch((error) => {
                   console.warn("Could not read Bluetooth battery level", error);
