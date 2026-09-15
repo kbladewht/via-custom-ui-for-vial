@@ -142,16 +142,16 @@ export function QuantumSettingsEditor(props: {
               menu.label
             }
             sx={{
-              color: "#b8c7dc",
+              color: "var(--theme-tab-text)",
               fontWeight: 600,
               textTransform: "none",
-              border: "1px solid #334155",
+              border: "1px solid var(--theme-surface-raised)",
               borderRadius: "8px 8px 0 0",
-              backgroundColor: "rgba(30, 41, 59, 0.7)",
+              backgroundColor: "var(--theme-surface-panel-70)",
               "&.Mui-selected": {
-                color: "#f8fafc",
-                borderColor: "#475569",
-                backgroundColor: "#334155",
+                color: "var(--theme-text-strong)",
+                borderColor: "var(--theme-surface-hover)",
+                backgroundColor: "var(--theme-surface-raised)",
               },
             }}
           />
@@ -220,16 +220,16 @@ export function QuantumSettingsEditor(props: {
                       quantumTab.label
                     }
                     sx={{
-                      color: "#b8c7dc",
+                      color: "var(--theme-tab-text)",
                       fontWeight: 600,
                       textTransform: "none",
-                      border: "1px solid #334155",
+                      border: "1px solid var(--theme-surface-raised)",
                       borderRadius: "8px 8px 0 0",
-                      backgroundColor: "rgba(30, 41, 59, 0.7)",
+                      backgroundColor: "var(--theme-surface-panel-70)",
                       "&.Mui-selected": {
-                        color: "#f8fafc",
-                        borderColor: "#475569",
-                        backgroundColor: "#334155",
+                        color: "var(--theme-text-strong)",
+                        borderColor: "var(--theme-surface-hover)",
+                        backgroundColor: "var(--theme-surface-raised)",
                       },
                     }}
                   />
@@ -262,17 +262,17 @@ export function QuantumSettingsEditor(props: {
                       fontSize: "0.85rem",
                       textTransform: "none",
                       borderRadius: "4px",
-                      border: "1px solid #475569",
-                      color: isDirty ? "#f8fafc" : "#64748b",
-                      backgroundColor: isDirty ? "#243042" : "rgba(30, 41, 59, 0.4)",
+                      border: "1px solid var(--theme-surface-hover)",
+                      color: isDirty ? "var(--theme-text-strong)" : "var(--theme-border)",
+                      backgroundColor: isDirty ? "var(--theme-action)" : "var(--theme-surface-panel-40)",
                       "&:hover": {
-                        borderColor: isDirty ? "#64748b" : "#475569",
-                        backgroundColor: isDirty ? "#334155" : "rgba(30, 41, 59, 0.4)",
+                        borderColor: isDirty ? "var(--theme-border)" : "var(--theme-surface-hover)",
+                        backgroundColor: isDirty ? "var(--theme-surface-raised)" : "var(--theme-surface-panel-40)",
                       },
                       "&.Mui-disabled": {
-                        color: "#64748b",
-                        borderColor: "#334155",
-                        backgroundColor: "rgba(30, 41, 59, 0.3)",
+                        color: "var(--theme-border)",
+                        borderColor: "var(--theme-surface-raised)",
+                        backgroundColor: "var(--theme-surface-panel-30)",
                       },
                     }}
                   >
@@ -292,17 +292,17 @@ export function QuantumSettingsEditor(props: {
                       fontSize: "0.85rem",
                       textTransform: "none",
                       borderRadius: "4px",
-                      border: "1px solid #475569",
-                      color: isDirty ? "#f8fafc" : "#64748b",
-                      backgroundColor: isDirty ? "#243042" : "rgba(30, 41, 59, 0.4)",
+                      border: "1px solid var(--theme-surface-hover)",
+                      color: isDirty ? "var(--theme-text-strong)" : "var(--theme-border)",
+                      backgroundColor: isDirty ? "var(--theme-action)" : "var(--theme-surface-panel-40)",
                       "&:hover": {
-                        borderColor: isDirty ? "#64748b" : "#475569",
-                        backgroundColor: isDirty ? "#334155" : "rgba(30, 41, 59, 0.4)",
+                        borderColor: isDirty ? "var(--theme-border)" : "var(--theme-surface-hover)",
+                        backgroundColor: isDirty ? "var(--theme-surface-raised)" : "var(--theme-surface-panel-40)",
                       },
                       "&.Mui-disabled": {
-                        color: "#64748b",
-                        borderColor: "#334155",
-                        backgroundColor: "rgba(30, 41, 59, 0.3)",
+                        color: "var(--theme-border)",
+                        borderColor: "var(--theme-surface-raised)",
+                        backgroundColor: "var(--theme-surface-panel-30)",
                       },
                     }}
                   >
@@ -318,12 +318,12 @@ export function QuantumSettingsEditor(props: {
                       fontSize: "0.85rem",
                       textTransform: "none",
                       borderRadius: "4px",
-                      border: "1px solid #475569",
-                      color: "#f8fafc",
-                      backgroundColor: "#243042",
+                      border: "1px solid var(--theme-surface-hover)",
+                      color: "var(--theme-text-strong)",
+                      backgroundColor: "var(--theme-action)",
                       "&:hover": {
-                        borderColor: "#64748b",
-                        backgroundColor: "#334155",
+                        borderColor: "var(--theme-border)",
+                        backgroundColor: "var(--theme-surface-raised)",
                       },
                     }}
                   >
@@ -356,8 +356,8 @@ export function QuantumSettingsEditor(props: {
                           minWidth: 50,
                           minHeight: 44,
                           px: 0,
-                          color: selectedMacroIndex === index ? "#f8fafc" : "#cbd5e1",
-                          borderColor: "rgba(148, 163, 184, 0.5)",
+                          color: selectedMacroIndex === index ? "var(--theme-text-strong)" : "var(--theme-text-secondary)",
+                          borderColor: "var(--theme-border-50)",
                           backgroundColor:
                             selectedMacroIndex === index ? "rgba(59, 130, 246, 0.32)" : "transparent",
                         }}
@@ -374,7 +374,7 @@ export function QuantumSettingsEditor(props: {
                   />
                 </>
               ) : (
-                <Box sx={{ color: "#cbd5e1" }}>No macros available.</Box>
+                <Box sx={{ color: "var(--theme-text-secondary)" }}>No macros available.</Box>
               )}
             </Box>
           ) : menu.id === "Lighting" ? (

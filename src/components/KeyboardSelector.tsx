@@ -23,8 +23,8 @@ export function KeyboardSelector(props: {
           maxWidth: "100%",
           height: "30px",
           borderRadius: "10px",
-          backgroundColor: "#111827",
-          color: "#f8fafc",
+          backgroundColor: "var(--theme-surface-shell)",
+          color: "var(--theme-text-strong)",
           fontSize: "13px",
           padding: "0 8px",
           boxSizing: "border-box",
@@ -33,28 +33,28 @@ export function KeyboardSelector(props: {
           borderRadius: "10px",
           "&:hover": {
             "& .MuiOutlinedInput-notchedOutline": {
-              borderColor: "#cbd5e1",
+              borderColor: "var(--theme-text-secondary)",
             },
           },
           "&.Mui-focused": {
             "& .MuiOutlinedInput-notchedOutline": {
-              borderColor: "#4f8588",
+              borderColor: "var(--theme-accent)",
               borderWidth: "1px",
             },
           },
         },
         ".MuiOutlinedInput-notchedOutline": {
-          borderColor: "#64748b",
+          borderColor: "var(--theme-border)",
           borderWidth: "1px",
         },
         ".MuiInputLabel-root": {
-          color: "#cbd5e1",
+          color: "var(--theme-text-secondary)",
         },
         ".MuiInputLabel-root.Mui-focused": {
-          color: "#94a3b8",
+          color: "var(--theme-text-muted)",
         },
         ".MuiSelect-select": {
-          color: "#f8fafc",
+          color: "var(--theme-text-strong)",
           backgroundColor: "transparent",
           minHeight: "unset",
           fontSize: "13px !important",
@@ -66,7 +66,7 @@ export function KeyboardSelector(props: {
           fontSize: "13px !important",
         },
         ".MuiSvgIcon-root": {
-          color: "#cbd5e1",
+          color: "var(--theme-text-secondary)",
         },
       }}
     >
@@ -95,10 +95,10 @@ export function KeyboardSelector(props: {
         MenuProps={{
           PaperProps: {
             sx: {
-              backgroundColor: "#0f172a",
-              color: "#f8fafc",
-              border: "1px solid rgba(148, 163, 184, 0.35)",
-              boxShadow: "0 14px 28px rgba(15, 23, 42, 0.35)",
+              backgroundColor: "var(--theme-surface-deep)",
+              color: "var(--theme-text-strong)",
+              border: "1px solid var(--theme-border-35)",
+              boxShadow: "0 14px 28px var(--theme-shadow)",
             },
           },
         }}
@@ -110,10 +110,10 @@ export function KeyboardSelector(props: {
             sx={{
               whiteSpace: "normal",
               wordBreak: "break-word",
-              color: "#c3d0e0",
-              backgroundColor: "#0f172a",
+              color: "var(--theme-text-action)",
+              backgroundColor: "var(--theme-surface-deep)",
               fontSize: "13px",
-              "&:hover": { backgroundColor: "#334155" },
+              "&:hover": { backgroundColor: "var(--theme-surface-raised)" },
             }}
           >
             <Typography
@@ -138,10 +138,10 @@ export function KeyboardSelector(props: {
             value={-1}
             sx={{
               display: isTauri ? "none" : "block",
-              color: "#c3d0e0",
-              backgroundColor: "#0f172a",
+              color: "var(--theme-text-action)",
+              backgroundColor: "var(--theme-surface-deep)",
               fontSize: "13px",
-              "&:hover": { backgroundColor: "#334155" },
+              "&:hover": { backgroundColor: "var(--theme-surface-raised)" },
             }}
           >
             Add New Keyboard

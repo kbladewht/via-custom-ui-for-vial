@@ -193,13 +193,13 @@ function MacroEntry(props: {
             <IconButton
               className="macro-action-button macro-delete-button"
               sx={{
-                color: "#fecaca",
-                backgroundColor: "rgba(220, 38, 38, 0.22)",
-                border: "1px solid rgba(248, 113, 113, 0.7)",
+                color: "var(--theme-danger-text)",
+                backgroundColor: "var(--theme-danger-surface)",
+                border: "1px solid var(--theme-danger-border)",
                 "&:hover": {
-                  color: "#fff1f2",
-                  backgroundColor: "rgba(220, 38, 38, 0.42)",
-                  borderColor: "#fca5a5",
+                  color: "var(--theme-danger-text-hover)",
+                  backgroundColor: "var(--theme-danger-surface-hover)",
+                  borderColor: "var(--theme-danger-border)",
                 },
               }}
               onClick={() => setActions(actions.filter((_, id) => id !== idx))}
@@ -208,8 +208,8 @@ function MacroEntry(props: {
             </IconButton>
             <IconButton className="macro-action-button"
               sx={{
-                color: "#bfdbfe",
-                "&:hover": { backgroundColor: "rgba(96, 165, 250, 0.14)" },
+                color: "var(--theme-accent-soft)",
+                "&:hover": { backgroundColor: "var(--theme-accent-14)" },
               }}
               onClick={() => {
                 if (idx > 0) {
@@ -225,8 +225,8 @@ function MacroEntry(props: {
             </IconButton>
             <IconButton className="macro-action-button"
               sx={{
-                color: "#bfdbfe",
-                "&:hover": { backgroundColor: "rgba(96, 165, 250, 0.14)" },
+                color: "var(--theme-accent-soft)",
+                "&:hover": { backgroundColor: "var(--theme-accent-14)" },
               }}
               onClick={() => {
                 if (idx < actions.length - 1) {
