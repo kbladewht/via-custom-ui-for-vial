@@ -3,8 +3,37 @@ import { useState } from "react";
 import { QmkKeycode } from "../keycodes/keycodeConverter";
 import { KEY_GAP, KeymapKeyProperties, WIDTH_1U } from "./keymapTypes";
 
-export function KeyLegend(props: { keycode: QmkKeycode }) {
+export function KeyLegend(props: {
+  keycode: QmkKeycode;
+  isTapFocused?: boolean;
+  onTapClick?: (target: HTMLElement, ctrlKey: boolean) => void;
+}) {
   const { keycode } = props;
+  if (keycode.key.startsWith("LT(") && keycode.hold !== undefined) {
+    return (
+      <div className="layer-tap-legend">
+        <div className="layer-tap-hold hold-legend">LT {keycode.hold & 0xf}</div>
+        {props.onTapClick ? (
+          <button
+            type="button"
+            className="layer-tap-tap main-legend"
+            aria-label={`LT ${keycode.hold & 0xf} tap key`}
+            aria-pressed={props.isTapFocused ?? false}
+            title="Tap key (basic keycodes only)"
+            onClick={(event) => {
+              event.stopPropagation();
+              props.onTapClick?.(event.currentTarget, event.ctrlKey);
+            }}
+          >
+            {keycode.tap === 0 ? "" : keycode.label}
+          </button>
+        ) : (
+          <div className="layer-tap-tap main-legend">{keycode.tap === 0 ? "" : keycode.label}</div>
+        )}
+      </div>
+    );
+  }
+
   if (!keycode.modLabel && !keycode.holdLabel) {
     return (
       <div className={`key-legend-centered ${keycode.label === "▽" ? "key-legend-symbol" : ""}`}>
@@ -62,7 +91,11 @@ export function EditableKey(props: {
   );
 }
 
-export function KeymapKey(props: KeymapKeyProperties & { isFocused?: boolean }) {
+export function KeymapKey(props: KeymapKeyProperties & {
+  isFocused?: boolean;
+  isTapFocused?: boolean;
+  onTapClick?: (target: HTMLElement, ctrlKey: boolean) => void;
+}) {
   const [isDragOver, setIsDragOver] = useState(false);
   return (
     <div
@@ -114,7 +147,11 @@ export function KeymapKey(props: KeymapKeyProperties & { isFocused?: boolean }) 
       onClick={(event) => props.onClick?.(event.currentTarget, event.ctrlKey)}
       title={props.shortcut}
     >
-      <KeyLegend keycode={props.keycode} />
+      <KeyLegend
+        keycode={props.keycode}
+        isTapFocused={props.isTapFocused}
+        onTapClick={props.onTapClick}
+      />
     </div>
   );
 }

@@ -31,9 +31,12 @@ export function KeymapLayer(props: {
   const [anchorEl, setAnchorEl] = useState<HTMLElement | undefined>(undefined);
   const boundaryEl = useRef<HTMLElement>(null);
   const [focusedKey, setFocusedKey] = useState<KeymapKeyProperties | undefined>(undefined);
+  const [isTapFocused, setIsTapFocused] = useState(false);
   const [candidateKeycode, setCandidateKeycode] = useState<QmkKeycode>(DefaultQmkKeycode);
   const keycapSoundPlayed = useRef(false);
-  const focusContext = useContext(FocusedKeyContext);
+  const { setFocusedKey: setContextFocusedKey } = useContext(FocusedKeyContext);
+  const onKeycodeChangeRef = useRef(props.onKeycodeChange);
+  onKeycodeChangeRef.current = props.onKeycodeChange;
 
   const layoutKeys = convertToKeymapKeys(
     props.keymapProps,
@@ -108,21 +111,34 @@ export function KeymapLayer(props: {
 
   useEffect(() => {
     if (focusedKey) {
-      focusContext.setFocusedKey({
+      setContextFocusedKey({
         ...focusedKey,
         onKeycodeChange: (target, newKeycode) => {
-          props.onKeycodeChange?.(target, newKeycode);
+          if (isTapFocused) {
+            if (!Number.isInteger(newKeycode.value) || newKeycode.value < 0 || newKeycode.value > 0xff) return;
+            const combined = props.keycodeconverter.combineKeycodes(
+              newKeycode,
+              props.keycodeconverter.getHoldKeycode(focusedKey.keycode),
+            );
+            if (!combined) return;
+            onKeycodeChangeRef.current?.(target, combined);
+            setCandidateKeycode(combined);
+            setFocusedKey({ ...focusedKey, keycode: combined });
+            return;
+          }
+          onKeycodeChangeRef.current?.(target, newKeycode);
           focusNextKeyAfter(target);
         },
       });
     } else {
-      focusContext.setFocusedKey(null);
+      setContextFocusedKey(null);
     }
-  }, [focusedKey, props.onKeycodeChange, focusContext]);
+  }, [focusedKey, isTapFocused, props.keycodeconverter, setContextFocusedKey]);
 
   useEffect(() => {
     const clearFocusedKey = () => {
       setFocusedKey(undefined);
+      setIsTapFocused(false);
       setpopupOpen(false);
       setAnchorEl(undefined);
     };
@@ -153,10 +169,19 @@ export function KeymapLayer(props: {
             key={idx}
             {...p}
             isFocused={focusedKey?.reactKey === idx.toString()}
+            isTapFocused={isTapFocused && focusedKey?.reactKey === idx.toString()}
+            onTapClick={(target, ctrlKey) => {
+              setIsTapFocused(true);
+              setCandidateKeycode(p.keycode);
+              setFocusedKey({ ...p, reactKey: idx.toString() });
+              setAnchorEl(target);
+              setpopupOpen(ctrlKey);
+            }}
             onKeycodeChange={props.onKeycodeChange}
             animationDelay={Math.min(1000, Math.pow(Math.max(0, p.x), 1.35) * 27)}
             onClick={(target, ctrlKey) => {
-              if (focusedKey?.reactKey === idx.toString()) {
+              setIsTapFocused(false);
+              if (!isTapFocused && focusedKey?.reactKey === idx.toString()) {
                 setpopupOpen(false);
                 setAnchorEl(undefined);
                 setFocusedKey(undefined);
@@ -166,9 +191,7 @@ export function KeymapLayer(props: {
               setCandidateKeycode(p.keycode);
               setFocusedKey({ ...p, reactKey: idx.toString() });
               setAnchorEl(target);
-              if (ctrlKey) {
-                setpopupOpen(true);
-              }
+              setpopupOpen(ctrlKey);
             }}
             reactKey={idx.toString()}
           />

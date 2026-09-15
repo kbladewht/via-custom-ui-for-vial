@@ -268,6 +268,18 @@ export class KeycodeConverter {
         }),
       );
       this.tapKeycodeList.push(
+        ...[...Array(Math.min(layer, 16))].map((_, idx) => {
+          return {
+            group: "layer",
+            value: keycode_range.QK_LAYER_TAP.start + (idx << 8),
+            key: `LT(${idx},KC_NO)`,
+            hold: (keycode_range.QK_LAYER_TAP.start >> 8) + idx,
+            tap: 0,
+            label: `LT${idx}`,
+          };
+        }),
+      );
+      this.tapKeycodeList.push(
         ...[...Array(layer)].map((_, idx) => {
           return {
             group: "layer",
@@ -439,7 +451,10 @@ export class KeycodeConverter {
       return DefaultQmkKeycode;
     }
 
-    if (this.tapKeycodeMap[value] !== undefined) return this.tapKeycodeMap[value];
+    if (
+      this.tapKeycodeMap[value] !== undefined &&
+      !(value >= this.keycode_range.QK_LAYER_TAP.start && value <= this.keycode_range.QK_LAYER_TAP.end)
+    ) return this.tapKeycodeMap[value];
 
     return match(value)
       .with(
