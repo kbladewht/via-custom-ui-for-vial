@@ -373,11 +373,19 @@ body.theme-light .key-select-popup .MuiAutocomplete-option[aria-selected="true"]
 .app-shell.theme-light .quantum-tab-panel {
   background: #f7f9fb !important;
   border-top: 0 !important;
-  min-height: calc(100vh - 100px);
   padding: 0 !important;
   margin-bottom: 8px;
   border-radius: 0 12px 12px 12px !important;
   clip-path: inset(0 0 0 0 round 0 12px 12px 12px);
+}
+
+.app-shell.theme-light .quantum-settings-tab-panel {
+  min-height: calc(100vh - 100px);
+}
+
+.app-shell.theme-light .macro-tab-panel {
+  min-height: calc(100vh - 100px) !important;
+  height: calc(100vh - 100px) !important;
 }
 
 .app-shell.theme-light .app-main-panel {

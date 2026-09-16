@@ -243,6 +243,7 @@ function MacroEntry(props: {
             {action.length < 1 || action[0] != 1 || action[1] > 7 ? (
               <TextField
                 value={new TextDecoder("ascii").decode(Uint8Array.from(action))}
+                size="small"
                 fullWidth
                 onChange={(event) => {
                   const asciiArray = [...Array(event.target.value.length)].reduce((acc, _, idx) => {
@@ -256,6 +257,7 @@ function MacroEntry(props: {
             ) : action[1] == 4 ? (
               <TextField
                 type="number"
+                size="small"
                 label="Delay[ms]"
                 InputLabelProps={{ shrink: true }}
                 value={action[2]}

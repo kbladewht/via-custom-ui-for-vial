@@ -194,7 +194,7 @@ export function QuantumSettingsEditor(props: {
       {tabs.map((menu, idx) => (
         <Box
           key={idx}
-          className={`quantum-tab-panel${menu.id === "Keymap" ? " keymap-tab-panel" : ""}`}
+          className={`quantum-tab-panel${menu.id === "Keymap" ? " keymap-tab-panel" : ""}${menu.id === "Quantum" ? " quantum-settings-tab-panel" : ""}${menu.id === "Macro" ? " macro-tab-panel" : ""}`}
           sx={{
             display: tabValue === idx ? "block" : "none",
           }}
@@ -479,7 +479,17 @@ export function QuantumSettingsEditor(props: {
               )}
             </Box>
           ) : menu.id === "Lighting" ? (
-            <LightingEditor via={props.via} lighting={props.keymap?.lighting} language={props.language} />
+            <Box
+              sx={{
+                width: "100%",
+                minHeight: "calc(100vh - 100px)",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+              }}
+            >
+              <LightingEditor via={props.via} lighting={props.keymap?.lighting} language={props.language} />
+            </Box>
           ) : menu.id === "MatrixTester" && props.keymap ? (
             tabValue === idx ? (
               <MatrixTester

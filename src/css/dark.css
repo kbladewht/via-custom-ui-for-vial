@@ -150,12 +150,20 @@ body:not(.theme-light) .battery-meter-fill {
 .app-shell:not(.theme-light) .quantum-tab-panel {
   background: #1e293b !important;
   border-top: 0 !important;
-  min-height: calc(100vh - 100px);
   padding: 0 !important;
   margin-bottom: 8px;
   border-radius: 0 12px 12px 12px !important;
   clip-path: inset(0 0 0 0 round 0 12px 12px 12px);
   overflow: hidden;
+}
+
+.app-shell:not(.theme-light) .quantum-settings-tab-panel {
+  min-height: calc(100vh - 100px);
+}
+
+.app-shell:not(.theme-light) .macro-tab-panel {
+  min-height: calc(100vh - 100px) !important;
+  height: calc(100vh - 100px) !important;
 }
 
 .app-shell:not(.theme-light) .keymap-tab-panel {
