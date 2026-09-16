@@ -31,7 +31,7 @@ export function ComboOverrideEditor(props: {
   if (!keycodeConverter) return null;
 
   return (
-    <Box sx={{ width: "100%", minHeight: "calc(100vh - 180px)", p: 1, display: "flex", flexDirection: "column" }}>
+    <Box sx={{ width: "100%", minHeight: "calc(100vh - 100px)", p: 1, display: "flex", flexDirection: "column" }}>
       <Tabs value={comboIndex} onChange={(_event, index: number) => setComboIndex(index)} variant="scrollable" scrollButtons="auto" className="combo-tabs" sx={{ py: 0 }}>
         {Array.from({ length: props.dynamicEntryCount.combo }, (_, index) => (
           <Tab key={index} className="entry-tab combo-entry-tab" label={index + 1} value={index} sx={{ width: 28, minWidth: 28, minHeight: 28, px: 0, color: "#b8c7dc", fontWeight: 600, textTransform: "none", border: "1px solid #334155", borderRadius: "8px 8px 0 0", backgroundColor: "rgba(30, 41, 59, 0.7)", "&.Mui-selected": { color: "#f8fafc", borderColor: "#475569", backgroundColor: "#334155" } }} />
@@ -73,7 +73,7 @@ export function TapDanceSelector(props: {
   if (!keycodeConverter) return null;
 
   return (
-    <Box sx={{ width: "100%", minHeight: "calc(100vh - 180px)", p: 1, display: "flex", flexDirection: "column" }}>
+    <Box sx={{ width: "100%", minHeight: "calc(100vh - 100px)", p: 1, display: "flex", flexDirection: "column" }}>
       <Tabs
         value={editorIndex}
         onChange={(_event, index: number) => setEditorIndex(index)}
@@ -150,7 +150,7 @@ export function KeyOverrideSelector(props: {
   if (!keycodeConverter) return null;
 
   return (
-    <Box sx={{ width: "100%", minHeight: "calc(100vh - 180px)", p: 1, display: "flex", flexDirection: "column" }}>
+    <Box sx={{ width: "100%", minHeight: "calc(100vh - 100px)", p: 1, display: "flex", flexDirection: "column" }}>
       <Tabs
         value={editorIndex}
         onChange={(_event, index: number) => setEditorIndex(index)}
@@ -231,7 +231,7 @@ export function AltRepeatKeySelector(props: {
   if (!keycodeConverter) return null;
 
   return (
-    <Box sx={{ width: "100%", minHeight: "calc(100vh - 180px)", p: 1, display: "flex", flexDirection: "column" }}>
+    <Box sx={{ width: "100%", minHeight: "calc(100vh - 100px)", p: 1, display: "flex", flexDirection: "column" }}>
       <Tabs
         value={editorIndex}
         onChange={(_event, index: number) => setEditorIndex(index)}

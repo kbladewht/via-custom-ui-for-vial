@@ -240,7 +240,7 @@ export function QuantumSettingsEditor(props: {
             <Box
               sx={{
                 width: "100%",
-                minHeight: "calc(100vh - 180px)",
+                minHeight: "calc(100vh - 100px)",
                 p: 1,
                 display: "flex",
                 flexDirection: "column",

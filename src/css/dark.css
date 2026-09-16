@@ -150,6 +150,7 @@ body:not(.theme-light) .battery-meter-fill {
 .app-shell:not(.theme-light) .quantum-tab-panel {
   background: #1e293b !important;
   border-top: 0 !important;
+  min-height: calc(100vh - 100px);
   padding: 0 !important;
   margin-bottom: 8px;
   border-radius: 0 12px 12px 12px !important;
@@ -160,7 +161,7 @@ body:not(.theme-light) .battery-meter-fill {
 .app-shell:not(.theme-light) .keymap-tab-panel {
   max-height: none;
   overflow: visible;
-  min-height: 0;
+  min-height: calc(100vh - 100px);
   height: auto;
   margin-bottom: 8px;
   padding-bottom: 8px !important;
@@ -418,6 +419,12 @@ body:not(.theme-light) .entry-candidate-panel {
   background: transparent;
   border: 1px solid rgba(148, 163, 184, 0.28);
   border-radius: 12px;
+}
+
+body:not(.theme-light) .entry-editor-panel {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 body:not(.theme-light) .entry-editor-panel {

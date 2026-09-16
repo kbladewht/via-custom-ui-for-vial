@@ -212,7 +212,7 @@ body.theme-light .key-select-popup .MuiAutocomplete-option[aria-selected="true"]
   background: #f7f9fb !important;
   max-height: none;
   overflow: visible;
-  min-height: 0;
+  min-height: calc(100vh - 100px);
   height: auto;
   margin-bottom: 8px;
   padding-bottom: 8px !important;
@@ -373,6 +373,7 @@ body.theme-light .key-select-popup .MuiAutocomplete-option[aria-selected="true"]
 .app-shell.theme-light .quantum-tab-panel {
   background: #f7f9fb !important;
   border-top: 0 !important;
+  min-height: calc(100vh - 100px);
   padding: 0 !important;
   margin-bottom: 8px;
   border-radius: 0 12px 12px 12px !important;
@@ -516,6 +517,12 @@ body.theme-light .key-select-popup .MuiAutocomplete-option[aria-selected="true"]
   background: transparent;
   border: 1px solid #cbd5df;
   border-radius: 12px;
+}
+
+.app-shell.theme-light .entry-editor-panel {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .app-shell.theme-light .entry-editor-panel {
