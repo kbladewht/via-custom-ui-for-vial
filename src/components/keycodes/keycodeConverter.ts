@@ -496,6 +496,23 @@ export class KeycodeConverter {
     }
   }
 
+  /**
+   * Replaces only the base keycode of a tap-hold / modifier key (LT(...), LCTL(kc), MT(...), ...)
+   * while keeping its layer and modifiers. Used when the second legend line of a key is selected
+   * on its own. Returns null when the picked keycode cannot be used as a base key.
+   */
+  public combineBaseKeycode(original: QmkKeycode, base: QmkKeycode): QmkKeycode | null {
+    if (
+      !Number.isInteger(base.value) ||
+      base.value < this.keycode_range.QK_BASIC.start ||
+      base.value > this.keycode_range.QK_BASIC.end
+    ) {
+      return null;
+    }
+
+    return this.combineKeycodes(base, this.getHoldKeycode(original), this.getModifier(original));
+  }
+
   public convertIntToKeycode(value: number): QmkKeycode {
     if (value === undefined) {
       return DefaultQmkKeycode;

@@ -88,6 +88,7 @@ function TapDanceEntry(props: {
   const [tappingTerm, setTappingTerm] = useState(props.td.tappingTerm.toString());
   const [candidateTapdance, setCandidateTapdance] = useState<TapDanceValue>(props.td);
   const [selectedKeyIndex, setSelectedKeyIndex] = useState<number>();
+  const [isTapFocused, setIsTapFocused] = useState(false);
   const [popupOpen, setPopupOpen] = useState(false);
   const [popupAnchor, setPopupAnchor] = useState<HTMLElement>();
   const [popupKeycode, setPopupKeycode] = useState(DefaultQmkKeycode);
@@ -139,7 +140,14 @@ function TapDanceEntry(props: {
         focusedKey,
         setFocusedKey: () => {},
         onKeycodeChange: (_target, keycode) => {
-          if (selectedKeyIndex !== undefined) handleChange[selectedKeyIndex](keycode);
+          if (selectedKeyIndex === undefined) return;
+          // Like the keymap, the second legend line of a key only carries its base keycode: keep
+          // the modifier / layer of the key and replace the base part only.
+          const newKeycode = isTapFocused
+            ? props.keycodeconverter.combineBaseKeycode(tapDanceFields[selectedKeyIndex].key, keycode)
+            : keycode;
+          if (!newKeycode) return;
+          handleChange[selectedKeyIndex](newKeycode);
         },
       }}
     >
@@ -158,7 +166,18 @@ function TapDanceEntry(props: {
                 <EditableKey
                   keycode={k.key}
                   isFocused={selectedKeyIndex === idx}
+                  isTapFocused={isTapFocused && selectedKeyIndex === idx}
                   onClick={(target, ctrlKey) => {
+                    setIsTapFocused(false);
+                    setSelectedKeyIndex(idx);
+                    if (ctrlKey) {
+                      setPopupKeycode(k.key);
+                      setPopupAnchor(target);
+                      setPopupOpen(true);
+                    }
+                  }}
+                  onTapClick={(target, ctrlKey) => {
+                    setIsTapFocused(true);
                     setSelectedKeyIndex(idx);
                     if (ctrlKey) {
                       setPopupKeycode(k.key);

@@ -115,15 +115,10 @@ export function KeymapLayer(props: {
         ...focusedKey,
         onKeycodeChange: (target, newKeycode) => {
           if (isTapFocused) {
-            if (!Number.isInteger(newKeycode.value) || newKeycode.value < 0 || newKeycode.value > 0xff) return;
             // The second legend line only carries the base keycode, so keep the hold (layer) and
             // the modifier bits of the key: LCTL(kc) / MT(...) / LT(...) stay intact and only the
             // base keycode is replaced by the picked one.
-            const combined = props.keycodeconverter.combineKeycodes(
-              newKeycode,
-              props.keycodeconverter.getHoldKeycode(focusedKey.keycode),
-              props.keycodeconverter.getModifier(focusedKey.keycode),
-            );
+            const combined = props.keycodeconverter.combineBaseKeycode(focusedKey.keycode, newKeycode);
             if (!combined) return;
             onKeycodeChangeRef.current?.(target, combined);
             setCandidateKeycode(combined);

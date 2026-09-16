@@ -93,6 +93,7 @@ function ComboEntry(props: {
 }) {
   const [candidateCombo, setCandidateCombo] = useState<ComboValue>(props.combo);
   const [selectedKeyIndex, setSelectedKeyIndex] = useState<number>();
+  const [isTapFocused, setIsTapFocused] = useState(false);
   const [popupOpen, setPopupOpen] = useState(false);
   const [popupAnchor, setPopupAnchor] = useState<HTMLElement>();
   const [popupKeycode, setPopupKeycode] = useState(DefaultQmkKeycode);
@@ -123,11 +124,16 @@ function ComboEntry(props: {
         focusedKey,
         setFocusedKey: () => {},
         onKeycodeChange: (_target, keycode) => {
-          if (selectedKeyIndex !== undefined) {
-            updateCandidate({
-              keys: candidateCombo.keys.map((key, index) => (index === selectedKeyIndex ? keycode : key)),
-            } as ComboValue);
-          }
+          if (selectedKeyIndex === undefined) return;
+          // Like the keymap, the second legend line of a key only carries its base keycode: keep
+          // the modifier / layer of the key and replace the base part only.
+          const newKeycode = isTapFocused
+            ? props.keycodeconverter.combineBaseKeycode(candidateCombo.keys[selectedKeyIndex], keycode)
+            : keycode;
+          if (!newKeycode) return;
+          updateCandidate({
+            keys: candidateCombo.keys.map((key, index) => (index === selectedKeyIndex ? newKeycode : key)),
+          } as ComboValue);
         },
       }}
     >
@@ -151,7 +157,18 @@ function ComboEntry(props: {
                 <EditableKey
                   keycode={k}
                   isFocused={selectedKeyIndex === idx}
+                  isTapFocused={isTapFocused && selectedKeyIndex === idx}
                   onClick={(target, ctrlKey) => {
+                    setIsTapFocused(false);
+                    setSelectedKeyIndex(idx);
+                    if (ctrlKey) {
+                      setPopupKeycode(k);
+                      setPopupAnchor(target);
+                      setPopupOpen(true);
+                    }
+                  }}
+                  onTapClick={(target, ctrlKey) => {
+                    setIsTapFocused(true);
                     setSelectedKeyIndex(idx);
                     if (ctrlKey) {
                       setPopupKeycode(k);

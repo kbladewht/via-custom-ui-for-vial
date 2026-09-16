@@ -87,8 +87,10 @@ export function KeyLegend(props: {
 export function EditableKey(props: {
   keycode: QmkKeycode;
   isFocused?: boolean;
+  isTapFocused?: boolean;
   onKeycodeChange?: (newKeycode: QmkKeycode) => void;
   onClick?: (target: HTMLElement, ctrlKey: boolean) => void;
+  onTapClick?: (target: HTMLElement, ctrlKey: boolean) => void;
 }) {
   const [isDragOver, setIsDragOver] = useState(false);
   return (
@@ -113,7 +115,11 @@ export function EditableKey(props: {
       }}
       onClick={(event) => props.onClick?.(event.currentTarget, event.ctrlKey)}
     >
-      <KeyLegend keycode={props.keycode} />
+      <KeyLegend
+        keycode={props.keycode}
+        isTapFocused={props.isTapFocused}
+        onTapClick={props.onTapClick}
+      />
     </div>
   );
 }
