@@ -3,6 +3,7 @@ import { useContext, useEffect, useRef, useState } from "react";
 import { playKeycapLandingSound } from "../keycapAudio";
 import { convertToKeymapKeys } from "./keymapLogic";
 import { KeySettingHint } from "../KeySettingHint";
+import { KeySettingHintAreaContext, useKeySettingHint } from "../useKeySettingHint";
 import { KeymapKey } from "./KeymapItem";
 import {
   DefaultQmkKeycode,
@@ -27,8 +28,7 @@ export function KeymapLayer(props: {
   shortcutByKeycode: { [keycode: number]: string };
   onKeycodeChange?: (target: KeymapKeyProperties, newKeycode: QmkKeycode) => void;
 }) {
-  const [hintOpen, setHintOpen] = useState(false);
-  const [anchorEl, setAnchorEl] = useState<HTMLElement | undefined>(undefined);
+  const { hintTarget, hintClick, closeHint, hintAreaId } = useKeySettingHint();
   const boundaryEl = useRef<HTMLElement>(null);
   const [focusedKey, setFocusedKey] = useState<KeymapKeyProperties | undefined>(undefined);
   const [isTapFocused, setIsTapFocused] = useState(false);
@@ -135,14 +135,13 @@ export function KeymapLayer(props: {
     const clearFocusedKey = () => {
       setFocusedKey(undefined);
       setIsTapFocused(false);
-      setHintOpen(false);
-      setAnchorEl(undefined);
+      closeHint();
     };
     window.addEventListener("vial-clear-focused-key", clearFocusedKey);
     return () => window.removeEventListener("vial-clear-focused-key", clearFocusedKey);
-  }, []);
+  }, [closeHint]);
 
-  return (
+  const content = (
     <Box ref={boundaryEl}>
       <Box
         className={`keymap-surface ${props.keymapReady ? "keymap-surface-loaded" : ""}`}
@@ -155,8 +154,7 @@ export function KeymapLayer(props: {
         }}
         onClick={(event) => {
           if (event.target !== event.currentTarget) return;
-          setHintOpen(false);
-          setAnchorEl(undefined);
+          closeHint();
           setFocusedKey(undefined);
         }}
       >
@@ -169,23 +167,20 @@ export function KeymapLayer(props: {
             onTapClick={(target, ctrlKey) => {
               setIsTapFocused(true);
               setFocusedKey({ ...p, reactKey: idx.toString() });
-              setAnchorEl(target);
-              setHintOpen(ctrlKey);
+              if (ctrlKey) hintClick(p.keycode, target);
             }}
             onKeycodeChange={props.onKeycodeChange}
             animationDelay={Math.min(1000, Math.pow(Math.max(0, p.x), 1.35) * 27)}
             onClick={(target, ctrlKey) => {
               setIsTapFocused(false);
               if (!isTapFocused && focusedKey?.reactKey === idx.toString()) {
-                setHintOpen(false);
-                setAnchorEl(undefined);
+                closeHint();
                 setFocusedKey(undefined);
                 return;
               }
 
               setFocusedKey({ ...p, reactKey: idx.toString() });
-              setAnchorEl(target);
-              setHintOpen(ctrlKey);
+              if (ctrlKey) hintClick(p.keycode, target);
             }}
             reactKey={idx.toString()}
           />
@@ -193,13 +188,16 @@ export function KeymapLayer(props: {
       </Box>
       <KeySettingHint
         type="keymap"
-        open={hintOpen}
-        keycode={focusedKey?.keycode ?? DefaultQmkKeycode}
+        open={hintTarget !== null}
+        keycode={hintTarget?.keycode ?? DefaultQmkKeycode}
         keycodeconverter={props.keycodeconverter}
-        anchor={anchorEl}
+        anchor={hintTarget?.anchor}
         boundary={boundaryEl.current}
-        onClose={() => setHintOpen(false)}
+        onClose={closeHint}
       />
     </Box>
+  );
+  return (
+    <KeySettingHintAreaContext.Provider value={hintAreaId}>{content}</KeySettingHintAreaContext.Provider>
   );
 }

@@ -45,5 +45,11 @@
     ],
     "example": "示例：连按 Backspace 输出 Delete —— Last key 选 Backspace，Alt key 选 Delete。"
   },
+  "keycode": {
+    "title": "这个键值做什么用",
+    "steps": [],
+    "example": "",
+    "fallback": "按下时输出 {label}。"
+  },
   "stacked": "这个键值分上下两行：上半行 {hold} 是长按 / 修饰部分，下半行是按下时输出的键值。点整键改整个键值，点下半行只改下面那部分。"
 }

@@ -5,6 +5,7 @@ import { ViaKeyboard } from "../services/vialKeyboad";
 import { DefaultQmkKeycode, KeycodeConverter, QmkKeycode } from "./keycodes/keycodeConverter";
 import { EditableKey } from "./KeymapEditor";
 import { KeycodeCatalog } from "./KeycodeCatalog";
+import { useKeySettingHint, KeySettingHintAreaContext } from "./useKeySettingHint";
 import { KeySettingHint } from "./KeySettingHint";
 import { FocusedKeyContext, KeymapKeyProperties } from "./keymap/keymapTypes";
 
@@ -90,9 +91,7 @@ function TapDanceEntry(props: {
   const [candidateTapdance, setCandidateTapdance] = useState<TapDanceValue>(props.td);
   const [selectedKeyIndex, setSelectedKeyIndex] = useState<number>();
   const [isTapFocused, setIsTapFocused] = useState(false);
-  const [hintOpen, setHintOpen] = useState(false);
-  const [hintAnchor, setHintAnchor] = useState<HTMLElement>();
-  const [hintKeycode, setHintKeycode] = useState(DefaultQmkKeycode);
+  const { hintTarget, hintClick, closeHint, hintAreaId } = useKeySettingHint();
 
   const t = quantumTranslations[props.language ?? "en"];
   const labels = t.tapDance;
@@ -135,7 +134,7 @@ function TapDanceEntry(props: {
     { label: labels.onTapHold, key: candidateTapdance.onTapHold },
   ];
 
-  return (
+  const content = (
     <FocusedKeyContext.Provider
       value={{
         focusedKey,
@@ -172,18 +171,14 @@ function TapDanceEntry(props: {
                     setIsTapFocused(false);
                     setSelectedKeyIndex(idx);
                     if (ctrlKey) {
-                      setHintKeycode(k.key);
-                      setHintAnchor(target);
-                      setHintOpen(true);
+                      hintClick(k.key, target);
                     }
                   }}
                   onTapClick={(target, ctrlKey) => {
                     setIsTapFocused(true);
                     setSelectedKeyIndex(idx);
                     if (ctrlKey) {
-                      setHintKeycode(k.key);
-                      setHintAnchor(target);
-                      setHintOpen(true);
+                      hintClick(k.key, target);
                     }
                   }}
                   onKeycodeChange={handleChange[idx]}
@@ -239,17 +234,17 @@ function TapDanceEntry(props: {
       )}
       <KeySettingHint
         type="tapDance"
-        open={hintOpen}
-        keycode={hintKeycode}
+        open={hintTarget !== null}
+        keycode={hintTarget?.keycode ?? DefaultQmkKeycode}
         keycodeconverter={props.keycodeconverter}
-        anchor={hintAnchor}
+        anchor={hintTarget?.anchor}
         boundary={props.boundaryRef?.current ?? null}
-        onClose={() => {
-          setHintOpen(false);
-          setHintAnchor(undefined);
-        }}
+        onClose={closeHint}
       />
     </Box>
     </FocusedKeyContext.Provider>
+  );
+  return (
+    <KeySettingHintAreaContext.Provider value={hintAreaId}>{content}</KeySettingHintAreaContext.Provider>
   );
 }

@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useKeySettingHintHoverHandlers } from "../useKeySettingHint";
 import { QmkKeycode } from "../keycodes/keycodeConverter";
 import { KEY_GAP, KeymapKeyProperties, WIDTH_1U } from "./keymapTypes";
 
@@ -93,6 +94,7 @@ export function EditableKey(props: {
   onTapClick?: (target: HTMLElement, ctrlKey: boolean) => void;
 }) {
   const [isDragOver, setIsDragOver] = useState(false);
+  const hintHandlers = useKeySettingHintHoverHandlers(props.keycode);
   return (
     <div
       className={`keymap-key ${isDragOver && "drag-over"} ${props.isFocused && "keymap-key-focused"}`}
@@ -100,6 +102,7 @@ export function EditableKey(props: {
         width: WIDTH_1U,
         height: WIDTH_1U,
       }}
+      {...hintHandlers}
       onDragOver={(event) => {
         event.preventDefault();
         setIsDragOver(true);
@@ -130,6 +133,7 @@ export function KeymapKey(props: KeymapKeyProperties & {
   onTapClick?: (target: HTMLElement, ctrlKey: boolean) => void;
 }) {
   const [isDragOver, setIsDragOver] = useState(false);
+  const hintHandlers = useKeySettingHintHoverHandlers(props.keycode);
   return (
     <div
       key={props.reactKey}
@@ -164,6 +168,7 @@ export function KeymapKey(props: KeymapKeyProperties & {
                   : undefined,
             } as React.CSSProperties
       }
+      {...hintHandlers}
       onDragOver={(event) => {
         event.preventDefault();
         setIsDragOver(true);

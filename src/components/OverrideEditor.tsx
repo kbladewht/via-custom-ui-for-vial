@@ -5,6 +5,7 @@ import { ViaKeyboard } from "../services/vialKeyboad";
 import { DefaultQmkKeycode, KeycodeConverter, QmkKeycode } from "./keycodes/keycodeConverter";
 import { EditableKey } from "./KeymapEditor";
 import { KeycodeCatalog } from "./KeycodeCatalog";
+import { useKeySettingHint, KeySettingHintAreaContext } from "./useKeySettingHint";
 import { KeySettingHint } from "./KeySettingHint";
 import { FocusedKeyContext, KeymapKeyProperties } from "./keymap/keymapTypes";
 
@@ -123,9 +124,7 @@ function OverrideEntry(props: {
   const [candidateOverride, setCandidateOverride] = useState<OverrideValue>(props.override);
   const [selectedKeyIndex, setSelectedKeyIndex] = useState<number>(); // 0: trigger, 1: replacement
   const [isTapFocused, setIsTapFocused] = useState(false);
-  const [hintOpen, setHintOpen] = useState(false);
-  const [hintAnchor, setHintAnchor] = useState<HTMLElement>();
-  const [hintKeycode, setHintKeycode] = useState(DefaultQmkKeycode);
+  const { hintTarget, hintClick, closeHint, hintAreaId } = useKeySettingHint();
 
   const t = quantumTranslations[props.language ?? "en"];
   const labels = t.keyOverride;
@@ -158,7 +157,7 @@ function OverrideEntry(props: {
           reactKey: selectedKeyIndex.toString(),
         };
 
-  return (
+  const content = (
     <FocusedKeyContext.Provider
       value={{
         focusedKey,
@@ -291,18 +290,14 @@ function OverrideEntry(props: {
                 setIsTapFocused(false);
                 setSelectedKeyIndex(0);
                 if (ctrlKey) {
-                  setHintKeycode(candidateOverride.trigger);
-                  setHintAnchor(target);
-                  setHintOpen(true);
+                  hintClick(candidateOverride.trigger, target);
                 }
               }}
               onTapClick={(target, ctrlKey) => {
                 setIsTapFocused(true);
                 setSelectedKeyIndex(0);
                 if (ctrlKey) {
-                  setHintKeycode(candidateOverride.trigger);
-                  setHintAnchor(target);
-                  setHintOpen(true);
+                  hintClick(candidateOverride.trigger, target);
                 }
               }}
               onKeycodeChange={(keycode) => {
@@ -365,18 +360,14 @@ function OverrideEntry(props: {
                 setIsTapFocused(false);
                 setSelectedKeyIndex(1);
                 if (ctrlKey) {
-                  setHintKeycode(candidateOverride.replacement);
-                  setHintAnchor(target);
-                  setHintOpen(true);
+                  hintClick(candidateOverride.replacement, target);
                 }
               }}
               onTapClick={(target, ctrlKey) => {
                 setIsTapFocused(true);
                 setSelectedKeyIndex(1);
                 if (ctrlKey) {
-                  setHintKeycode(candidateOverride.replacement);
-                  setHintAnchor(target);
-                  setHintOpen(true);
+                  hintClick(candidateOverride.replacement, target);
                 }
               }}
               onKeycodeChange={(keycode) => {
@@ -442,18 +433,18 @@ function OverrideEntry(props: {
 
         <KeySettingHint
           type="keyOverride"
-          open={hintOpen}
-          keycode={hintKeycode}
+          open={hintTarget !== null}
+          keycode={hintTarget?.keycode ?? DefaultQmkKeycode}
           keycodeconverter={props.keycodeconverter}
-          anchor={hintAnchor}
+          anchor={hintTarget?.anchor}
           boundary={props.boundaryRef?.current ?? null}
-          onClose={() => {
-            setHintOpen(false);
-            setHintAnchor(undefined);
-          }}
+          onClose={closeHint}
         />
       </Box>
     </FocusedKeyContext.Provider>
+  );
+  return (
+    <KeySettingHintAreaContext.Provider value={hintAreaId}>{content}</KeySettingHintAreaContext.Provider>
   );
 }
 

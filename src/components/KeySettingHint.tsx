@@ -26,7 +26,6 @@ export function KeySettingHint(props: {
   onClose?: () => void;
 }) {
   const hint = keySettingHints[props.type];
-  const description = describeKeycode(props.keycode, props.keycodeconverter);
   // The example refers to the key that was clicked, so it mentions its current keycode (or an empty
   // key): "把当前的 Z 换成 X" / "当前还是空的，点 A 就能把它设成 A".
   const currentLabel = props.keycode.label.trim();
@@ -36,6 +35,11 @@ export function KeySettingHint(props: {
   const example = (isEmptyKeycode && emptyExample ? emptyExample : hint.example)
     .replace(/\{current\}/g, currentLabel)
     .replace(/\{target\}/g, exampleTarget);
+  // Keycodes without a description (plain basic keys) fall back to a generic sentence.
+  const fallback = (hint as { fallback?: string }).fallback;
+  const description =
+    describeKeycode(props.keycode, props.keycodeconverter) ??
+    fallback?.replace(/\{label\}/g, currentLabel || props.keycode.key);
   const holdLegend =
     props.keycode.modNameLabel ?? props.keycode.modLabel ?? props.keycode.holdLabel;
 
@@ -91,19 +95,21 @@ export function KeySettingHint(props: {
               {step}
             </Typography>
           ))}
-          <Typography
-            component="div"
-            sx={{
-              fontSize: "0.78rem",
-              lineHeight: 1.6,
-              mt: 0.75,
-              pt: 0.75,
-              opacity: 0.85,
-              borderTop: "1px solid rgba(148, 163, 184, 0.35)",
-            }}
-          >
-            {example}
-          </Typography>
+          {example !== "" && (
+            <Typography
+              component="div"
+              sx={{
+                fontSize: "0.78rem",
+                lineHeight: 1.6,
+                mt: 0.75,
+                pt: 0.75,
+                opacity: 0.85,
+                borderTop: "1px solid rgba(148, 163, 184, 0.35)",
+              }}
+            >
+              {example}
+            </Typography>
+          )}
         </Box>
       </Popper>
     </ClickAwayListener>

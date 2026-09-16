@@ -4,6 +4,12 @@ import { useContext, useState } from "react";
 import { match, P } from "ts-pattern";
 import { DefaultQmkKeycode, KeycodeConverter, QmkKeycode } from "./keycodes/keycodeConverter";
 import { FocusedKeyContext } from "./KeymapEditor";
+import { KeySettingHint } from "./KeySettingHint";
+import {
+  KeySettingHintAreaContext,
+  keySettingHintHover,
+  useKeySettingHint,
+} from "./useKeySettingHint";
 
 const WIDTH_1U = 50;
 const BASIC_KEYBOARD_ROWS: (string | null)[][] = [
@@ -145,6 +151,7 @@ function KeyListKey(props: {
   const [showToolTip, setShowToolTip] = useState(false);
 
   const focusContext = useContext(FocusedKeyContext);
+  const hintAreaId = useContext(KeySettingHintAreaContext);
 
   return (
     <Tooltip
@@ -198,8 +205,12 @@ function KeyListKey(props: {
             window.scrollBy(0, scrollSpeed);
           }
         }}
-        onMouseLeave={(_event) => {
+        onMouseEnter={(event) => {
+          if (hintAreaId) keySettingHintHover(hintAreaId, props.keycode, event.currentTarget);
+        }}
+        onMouseLeave={() => {
           setShowToolTip(false);
+          if (hintAreaId) keySettingHintHover(hintAreaId, props.keycode, null);
         }}
         onClick={() => {
           if (props.editOnClick && props.onClick) {
@@ -360,9 +371,11 @@ export function KeycodeCatalog(props: {
   onOverrideSelect?: (index: number) => void;
 }) {
   const [tabValue, setTabValue] = useState(0);
+  // Hover a keycode in the list and hold Ctrl to see what that keycode does.
+  const { hintTarget, closeHint, hintAreaId } = useKeySettingHint();
   const contentTabs = props.tab ??
     (props.directKeygroups ?? []).map((keygroup) => ({ label: keygroup, keygroup: [keygroup] }));
-  return (
+  const content = (
     <Box sx={{ width: "100%" }}>
       {props.tab && (
         <Box>
@@ -598,6 +611,18 @@ export function KeycodeCatalog(props: {
           </Box>
         </CustomTabPanel>
       ))}
+      <KeySettingHint
+        type="keycode"
+        open={hintTarget !== null}
+        keycode={hintTarget?.keycode ?? DefaultQmkKeycode}
+        keycodeconverter={props.keycodeConverter}
+        anchor={hintTarget?.anchor}
+        boundary={null}
+        onClose={closeHint}
+      />
     </Box>
+  );
+  return (
+    <KeySettingHintAreaContext.Provider value={hintAreaId}>{content}</KeySettingHintAreaContext.Provider>
   );
 }
