@@ -3,8 +3,9 @@ import { Fragment, useEffect, useRef, useState } from "react";
 import quantumTranslations from "../locales/quantum.json";
 import { ViaKeyboard } from "../services/vialKeyboad";
 import { DefaultQmkKeycode, KeycodeConverter, QmkKeycode } from "./keycodes/keycodeConverter";
-import { EditableKey, KeymapKeyPopUp } from "./KeymapEditor";
+import { EditableKey } from "./KeymapEditor";
 import { KeycodeCatalog } from "./KeycodeCatalog";
+import { KeySettingHint } from "./KeySettingHint";
 import { FocusedKeyContext, KeymapKeyProperties } from "./keymap/keymapTypes";
 
 export function TapDanceEditor(props: {
@@ -89,9 +90,9 @@ function TapDanceEntry(props: {
   const [candidateTapdance, setCandidateTapdance] = useState<TapDanceValue>(props.td);
   const [selectedKeyIndex, setSelectedKeyIndex] = useState<number>();
   const [isTapFocused, setIsTapFocused] = useState(false);
-  const [popupOpen, setPopupOpen] = useState(false);
-  const [popupAnchor, setPopupAnchor] = useState<HTMLElement>();
-  const [popupKeycode, setPopupKeycode] = useState(DefaultQmkKeycode);
+  const [hintOpen, setHintOpen] = useState(false);
+  const [hintAnchor, setHintAnchor] = useState<HTMLElement>();
+  const [hintKeycode, setHintKeycode] = useState(DefaultQmkKeycode);
 
   const t = quantumTranslations[props.language ?? "en"];
   const labels = t.tapDance;
@@ -171,18 +172,18 @@ function TapDanceEntry(props: {
                     setIsTapFocused(false);
                     setSelectedKeyIndex(idx);
                     if (ctrlKey) {
-                      setPopupKeycode(k.key);
-                      setPopupAnchor(target);
-                      setPopupOpen(true);
+                      setHintKeycode(k.key);
+                      setHintAnchor(target);
+                      setHintOpen(true);
                     }
                   }}
                   onTapClick={(target, ctrlKey) => {
                     setIsTapFocused(true);
                     setSelectedKeyIndex(idx);
                     if (ctrlKey) {
-                      setPopupKeycode(k.key);
-                      setPopupAnchor(target);
-                      setPopupOpen(true);
+                      setHintKeycode(k.key);
+                      setHintAnchor(target);
+                      setHintOpen(true);
                     }
                   }}
                   onKeycodeChange={handleChange[idx]}
@@ -236,19 +237,15 @@ function TapDanceEntry(props: {
           />
         </Box>
       )}
-      <KeymapKeyPopUp
-        open={popupOpen}
-        keycode={popupKeycode}
-        keycodeconverter={props.keycodeconverter}
-        anchor={popupAnchor}
+      <KeySettingHint
+        type="tapDance"
+        open={hintOpen}
+        keycode={hintKeycode}
+        anchor={hintAnchor}
         boundary={props.boundaryRef?.current ?? null}
-        onClickAway={() => {
-          setPopupOpen(false);
-          setPopupAnchor(undefined);
-        }}
-        onChange={(event) => {
-          setPopupKeycode(event.keycode);
-          if (selectedKeyIndex !== undefined) handleChange[selectedKeyIndex](event.keycode);
+        onClose={() => {
+          setHintOpen(false);
+          setHintAnchor(undefined);
         }}
       />
     </Box>

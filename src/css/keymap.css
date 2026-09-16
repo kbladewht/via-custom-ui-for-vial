@@ -304,6 +304,18 @@
   border-color: rgba(148, 163, 184, 0.5);
 }
 
+.key-set-hint {
+  width: 340px;
+  border: solid;
+  border-width: 1px;
+  border-radius: 8px;
+  padding: 10px 12px;
+  background-color: #0f172a;
+  color: #f8fafc;
+  border-color: rgba(148, 163, 184, 0.5);
+  box-shadow: 0 12px 28px rgba(2, 6, 23, 0.45);
+}
+
 .list-label {
   width: 200px;
   align-items: start;

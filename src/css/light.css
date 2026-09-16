@@ -151,6 +151,13 @@ body.theme-light .key-select-popup {
   box-shadow: 0 12px 28px rgba(71, 85, 105, 0.18);
 }
 
+body.theme-light .key-set-hint {
+  background: #ffffff;
+  color: #243447;
+  border-color: #b8c7d3;
+  box-shadow: 0 12px 28px rgba(71, 85, 105, 0.18);
+}
+
 body.theme-light .key-select-popup .MuiInputBase-root,
 body.theme-light .key-select-popup .MuiAutocomplete-paper,
 body.theme-light .key-select-popup .MuiAutocomplete-listbox,

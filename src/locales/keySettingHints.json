@@ -1,0 +1,48 @@
+{
+  "keymap": {
+    "title": "如何设置按键",
+    "steps": [
+      "1. 点击按键选中它，下方会展开键值列表。",
+      "2. 在列表里点击要设置的键值即可完成设置，也可以把键值直接拖到键盘的按键上。",
+      "3. 组合键分上下两行：点击下半行只设置基础键值，点击整键则设置整个键值。"
+    ],
+    "example": "示例：把 A 键变成 Ctrl+C —— 在「Quantum」分组里把 LCtrl (kc) 拖到 A 键上，再点它的下半行选 C。"
+  },
+  "combos": {
+    "title": "如何设置组合键",
+    "steps": [
+      "1. 列出的几个按键同时按下时触发，最后一项 output key 是触发后输出的键值。",
+      "2. 点击某一项选中它，然后在下方键值列表中点击要设置的键值。",
+      "3. 最多可以设置 4 个按键，用不到的项可以留空。"
+    ],
+    "example": "示例：J + K 输出 ESC —— key 1 设为 J，key 2 设为 K，output key 设为 ESC。"
+  },
+  "tapDance": {
+    "title": "如何设置 Tap Dance",
+    "steps": [
+      "1. 点击某一项选中它，然后在下方键值列表中点击要设置的键值。",
+      "2. 单击 / 长按 / 双击 / 点击并长按 分别对应 4 个键值，用不到的可以留空。",
+      "3. 按键判定时间（Tapping term）决定单击与长按的分界，单位毫秒。"
+    ],
+    "example": "示例：单击 A 输入 A、长按 A 输入 Ctrl —— On tap 设为 A，On hold 设为 LCtrl。"
+  },
+  "keyOverride": {
+    "title": "如何设置按键覆盖",
+    "steps": [
+      "1. 按键覆盖会把某个键（Trigger）替换成另一个键值（Replacement）。",
+      "2. 点击 Trigger 或 Replacement 选中它，然后在下方键值列表中点击要设置的键值。",
+      "3. 启用层决定在哪几层生效，下方的选项控制触发条件。"
+    ],
+    "example": "示例：把 CapsLock 变成 Ctrl —— Trigger 设为 CapsLock，Replacement 设为 LCtrl。"
+  },
+  "altRepeatKey": {
+    "title": "如何设置替代重复键",
+    "steps": [
+      "1. Last key 是实际按下的键，Alt key 是连续按它时输出的替代键值。",
+      "2. 点击 Last key 或 Alt key 选中它，然后在下方键值列表中点击要设置的键值。",
+      "3. 允许修饰键用来限制哪些修饰键按下时仍然触发替代。"
+    ],
+    "example": "示例：连按 Backspace 输出 Delete —— Last key 设为 Backspace，Alt key 设为 Delete。"
+  },
+  "stacked": "这是组合键：上半行 {hold} 是长按 / 修饰部分，下半行是按下时发送的键值，可以单独点击设置。"
+}

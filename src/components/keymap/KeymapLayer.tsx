@@ -2,7 +2,7 @@ import { Box } from "@mui/material";
 import { useContext, useEffect, useRef, useState } from "react";
 import { playKeycapLandingSound } from "../keycapAudio";
 import { convertToKeymapKeys } from "./keymapLogic";
-import { KeymapKeyPopUp } from "../KeymapKeyPopUp";
+import { KeySettingHint } from "../KeySettingHint";
 import { KeymapKey } from "./KeymapItem";
 import {
   DefaultQmkKeycode,
@@ -27,12 +27,11 @@ export function KeymapLayer(props: {
   shortcutByKeycode: { [keycode: number]: string };
   onKeycodeChange?: (target: KeymapKeyProperties, newKeycode: QmkKeycode) => void;
 }) {
-  const [popupOpen, setpopupOpen] = useState(false);
+  const [hintOpen, setHintOpen] = useState(false);
   const [anchorEl, setAnchorEl] = useState<HTMLElement | undefined>(undefined);
   const boundaryEl = useRef<HTMLElement>(null);
   const [focusedKey, setFocusedKey] = useState<KeymapKeyProperties | undefined>(undefined);
   const [isTapFocused, setIsTapFocused] = useState(false);
-  const [candidateKeycode, setCandidateKeycode] = useState<QmkKeycode>(DefaultQmkKeycode);
   const keycapSoundPlayed = useRef(false);
   const { setFocusedKey: setContextFocusedKey } = useContext(FocusedKeyContext);
   const onKeycodeChangeRef = useRef(props.onKeycodeChange);
@@ -103,7 +102,6 @@ export function KeymapLayer(props: {
     const next = keymapkeysRef.current[nextIdx];
     if (next) {
       setFocusedKey({ ...next, reactKey: nextIdx.toString() });
-      setCandidateKeycode(next.keycode);
     } else {
       setFocusedKey(undefined);
     }
@@ -121,7 +119,6 @@ export function KeymapLayer(props: {
             const combined = props.keycodeconverter.combineBaseKeycode(focusedKey.keycode, newKeycode);
             if (!combined) return;
             onKeycodeChangeRef.current?.(target, combined);
-            setCandidateKeycode(combined);
             setFocusedKey({ ...focusedKey, keycode: combined });
             return;
           }
@@ -138,7 +135,7 @@ export function KeymapLayer(props: {
     const clearFocusedKey = () => {
       setFocusedKey(undefined);
       setIsTapFocused(false);
-      setpopupOpen(false);
+      setHintOpen(false);
       setAnchorEl(undefined);
     };
     window.addEventListener("vial-clear-focused-key", clearFocusedKey);
@@ -158,7 +155,7 @@ export function KeymapLayer(props: {
         }}
         onClick={(event) => {
           if (event.target !== event.currentTarget) return;
-          setpopupOpen(false);
+          setHintOpen(false);
           setAnchorEl(undefined);
           setFocusedKey(undefined);
         }}
@@ -171,52 +168,37 @@ export function KeymapLayer(props: {
             isTapFocused={isTapFocused && focusedKey?.reactKey === idx.toString()}
             onTapClick={(target, ctrlKey) => {
               setIsTapFocused(true);
-              setCandidateKeycode(p.keycode);
               setFocusedKey({ ...p, reactKey: idx.toString() });
               setAnchorEl(target);
-              setpopupOpen(ctrlKey);
+              setHintOpen(ctrlKey);
             }}
             onKeycodeChange={props.onKeycodeChange}
             animationDelay={Math.min(1000, Math.pow(Math.max(0, p.x), 1.35) * 27)}
             onClick={(target, ctrlKey) => {
               setIsTapFocused(false);
               if (!isTapFocused && focusedKey?.reactKey === idx.toString()) {
-                setpopupOpen(false);
+                setHintOpen(false);
                 setAnchorEl(undefined);
                 setFocusedKey(undefined);
                 return;
               }
 
-              setCandidateKeycode(p.keycode);
               setFocusedKey({ ...p, reactKey: idx.toString() });
               setAnchorEl(target);
-              setpopupOpen(ctrlKey);
+              setHintOpen(ctrlKey);
             }}
             reactKey={idx.toString()}
           />
         ))}
       </Box>
-      <KeymapKeyPopUp
-        open={popupOpen}
-        keycodeconverter={props.keycodeconverter}
+      <KeySettingHint
+        type="keymap"
+        open={hintOpen}
         keycode={focusedKey?.keycode ?? DefaultQmkKeycode}
         anchor={anchorEl}
         boundary={boundaryEl.current}
-        keymapKey={focusedKey}
-        onClickAway={() => {
-          if (popupOpen) {
-            setpopupOpen(false);
-            setAnchorEl(undefined);
-            setFocusedKey(undefined);
-            if (focusedKey) {
-              props.onKeycodeChange?.(focusedKey!, candidateKeycode);
-            }
-          }
-        }}
-        onChange={(event) => {
-          setCandidateKeycode(event.keycode);
-        }}
-      ></KeymapKeyPopUp>
+        onClose={() => setHintOpen(false)}
+      />
     </Box>
   );
 }

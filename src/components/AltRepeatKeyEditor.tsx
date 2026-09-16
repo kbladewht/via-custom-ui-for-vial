@@ -3,8 +3,9 @@ import { useEffect, useRef, useState } from "react";
 import quantumTranslations from "../locales/quantum.json";
 import { ViaKeyboard } from "../services/vialKeyboad";
 import { DefaultQmkKeycode, KeycodeConverter, QmkKeycode } from "./keycodes/keycodeConverter";
-import { EditableKey, KeymapKeyPopUp } from "./KeymapEditor";
+import { EditableKey } from "./KeymapEditor";
 import { KeycodeCatalog } from "./KeycodeCatalog";
+import { KeySettingHint } from "./KeySettingHint";
 import { FocusedKeyContext, KeymapKeyProperties } from "./keymap/keymapTypes";
 
 export interface AltRepeatKeyValue {
@@ -121,9 +122,9 @@ function AltRepeatKeyEntry(props: {
   const [candidate, setCandidate] = useState<AltRepeatKeyValue>(props.altRepeat);
   const [selectedKeyIndex, setSelectedKeyIndex] = useState<number>(); // 0: lastKey, 1: altKey
   const [isTapFocused, setIsTapFocused] = useState(false);
-  const [popupOpen, setPopupOpen] = useState(false);
-  const [popupAnchor, setPopupAnchor] = useState<HTMLElement>();
-  const [popupKeycode, setPopupKeycode] = useState(DefaultQmkKeycode);
+  const [hintOpen, setHintOpen] = useState(false);
+  const [hintAnchor, setHintAnchor] = useState<HTMLElement>();
+  const [hintKeycode, setHintKeycode] = useState(DefaultQmkKeycode);
 
   const t = quantumTranslations[props.language ?? "en"];
   const labels = t.altRepeatKey;
@@ -216,18 +217,18 @@ function AltRepeatKeyEntry(props: {
                 setIsTapFocused(false);
                 setSelectedKeyIndex(0);
                 if (ctrlKey) {
-                  setPopupKeycode(candidate.lastKey);
-                  setPopupAnchor(target);
-                  setPopupOpen(true);
+                  setHintKeycode(candidate.lastKey);
+                  setHintAnchor(target);
+                  setHintOpen(true);
                 }
               }}
               onTapClick={(target, ctrlKey) => {
                 setIsTapFocused(true);
                 setSelectedKeyIndex(0);
                 if (ctrlKey) {
-                  setPopupKeycode(candidate.lastKey);
-                  setPopupAnchor(target);
-                  setPopupOpen(true);
+                  setHintKeycode(candidate.lastKey);
+                  setHintAnchor(target);
+                  setHintOpen(true);
                 }
               }}
               onKeycodeChange={(keycode) => {
@@ -251,18 +252,18 @@ function AltRepeatKeyEntry(props: {
                 setIsTapFocused(false);
                 setSelectedKeyIndex(1);
                 if (ctrlKey) {
-                  setPopupKeycode(candidate.altKey);
-                  setPopupAnchor(target);
-                  setPopupOpen(true);
+                  setHintKeycode(candidate.altKey);
+                  setHintAnchor(target);
+                  setHintOpen(true);
                 }
               }}
               onTapClick={(target, ctrlKey) => {
                 setIsTapFocused(true);
                 setSelectedKeyIndex(1);
                 if (ctrlKey) {
-                  setPopupKeycode(candidate.altKey);
-                  setPopupAnchor(target);
-                  setPopupOpen(true);
+                  setHintKeycode(candidate.altKey);
+                  setHintAnchor(target);
+                  setHintOpen(true);
                 }
               }}
               onKeycodeChange={(keycode) => {
@@ -364,23 +365,15 @@ function AltRepeatKeyEntry(props: {
           </Box>
         )}
 
-        <KeymapKeyPopUp
-          open={popupOpen}
-          keycode={popupKeycode}
-          keycodeconverter={props.keycodeconverter}
-          anchor={popupAnchor}
+        <KeySettingHint
+          type="altRepeatKey"
+          open={hintOpen}
+          keycode={hintKeycode}
+          anchor={hintAnchor}
           boundary={props.boundaryRef?.current ?? null}
-          onClickAway={() => {
-            setPopupOpen(false);
-            setPopupAnchor(undefined);
-          }}
-          onChange={(event) => {
-            setPopupKeycode(event.keycode);
-            if (selectedKeyIndex === 0) {
-              updateCandidate({ ...candidate, lastKey: event.keycode });
-            } else if (selectedKeyIndex === 1) {
-              updateCandidate({ ...candidate, altKey: event.keycode });
-            }
+          onClose={() => {
+            setHintOpen(false);
+            setHintAnchor(undefined);
           }}
         />
       </Box>

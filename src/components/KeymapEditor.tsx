@@ -77,7 +77,7 @@ export function KeymapEditor(props: {
       if (!(target instanceof Element)) return;
       if (
         target.closest(
-          ".keymap-key, .keycatalog-key, .keycode-catalog-tab, .key-select-popup, " +
+          ".keymap-key, .keycatalog-key, .keycode-catalog-tab, .key-select-popup, .key-set-hint, " +
             "button, input, textarea, select, [role='button'], [role='tab'], [role='option']",
         )
       ) {

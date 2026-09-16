@@ -3,8 +3,9 @@ import { useEffect, useRef, useState } from "react";
 import quantumTranslations from "../locales/quantum.json";
 import { ViaKeyboard } from "../services/vialKeyboad";
 import { DefaultQmkKeycode, KeycodeConverter, QmkKeycode } from "./keycodes/keycodeConverter";
-import { EditableKey, KeymapKeyPopUp } from "./KeymapEditor";
+import { EditableKey } from "./KeymapEditor";
 import { KeycodeCatalog } from "./KeycodeCatalog";
+import { KeySettingHint } from "./KeySettingHint";
 import { FocusedKeyContext, KeymapKeyProperties } from "./keymap/keymapTypes";
 
 export interface OverrideValue {
@@ -122,9 +123,9 @@ function OverrideEntry(props: {
   const [candidateOverride, setCandidateOverride] = useState<OverrideValue>(props.override);
   const [selectedKeyIndex, setSelectedKeyIndex] = useState<number>(); // 0: trigger, 1: replacement
   const [isTapFocused, setIsTapFocused] = useState(false);
-  const [popupOpen, setPopupOpen] = useState(false);
-  const [popupAnchor, setPopupAnchor] = useState<HTMLElement>();
-  const [popupKeycode, setPopupKeycode] = useState(DefaultQmkKeycode);
+  const [hintOpen, setHintOpen] = useState(false);
+  const [hintAnchor, setHintAnchor] = useState<HTMLElement>();
+  const [hintKeycode, setHintKeycode] = useState(DefaultQmkKeycode);
 
   const t = quantumTranslations[props.language ?? "en"];
   const labels = t.keyOverride;
@@ -290,18 +291,18 @@ function OverrideEntry(props: {
                 setIsTapFocused(false);
                 setSelectedKeyIndex(0);
                 if (ctrlKey) {
-                  setPopupKeycode(candidateOverride.trigger);
-                  setPopupAnchor(target);
-                  setPopupOpen(true);
+                  setHintKeycode(candidateOverride.trigger);
+                  setHintAnchor(target);
+                  setHintOpen(true);
                 }
               }}
               onTapClick={(target, ctrlKey) => {
                 setIsTapFocused(true);
                 setSelectedKeyIndex(0);
                 if (ctrlKey) {
-                  setPopupKeycode(candidateOverride.trigger);
-                  setPopupAnchor(target);
-                  setPopupOpen(true);
+                  setHintKeycode(candidateOverride.trigger);
+                  setHintAnchor(target);
+                  setHintOpen(true);
                 }
               }}
               onKeycodeChange={(keycode) => {
@@ -364,18 +365,18 @@ function OverrideEntry(props: {
                 setIsTapFocused(false);
                 setSelectedKeyIndex(1);
                 if (ctrlKey) {
-                  setPopupKeycode(candidateOverride.replacement);
-                  setPopupAnchor(target);
-                  setPopupOpen(true);
+                  setHintKeycode(candidateOverride.replacement);
+                  setHintAnchor(target);
+                  setHintOpen(true);
                 }
               }}
               onTapClick={(target, ctrlKey) => {
                 setIsTapFocused(true);
                 setSelectedKeyIndex(1);
                 if (ctrlKey) {
-                  setPopupKeycode(candidateOverride.replacement);
-                  setPopupAnchor(target);
-                  setPopupOpen(true);
+                  setHintKeycode(candidateOverride.replacement);
+                  setHintAnchor(target);
+                  setHintOpen(true);
                 }
               }}
               onKeycodeChange={(keycode) => {
@@ -439,23 +440,15 @@ function OverrideEntry(props: {
           </Box>
         )}
 
-        <KeymapKeyPopUp
-          open={popupOpen}
-          keycode={popupKeycode}
-          keycodeconverter={props.keycodeconverter}
-          anchor={popupAnchor}
+        <KeySettingHint
+          type="keyOverride"
+          open={hintOpen}
+          keycode={hintKeycode}
+          anchor={hintAnchor}
           boundary={props.boundaryRef?.current ?? null}
-          onClickAway={() => {
-            setPopupOpen(false);
-            setPopupAnchor(undefined);
-          }}
-          onChange={(event) => {
-            setPopupKeycode(event.keycode);
-            if (selectedKeyIndex === 0) {
-              updateCandidate({ ...candidateOverride, trigger: event.keycode });
-            } else if (selectedKeyIndex === 1) {
-              updateCandidate({ ...candidateOverride, replacement: event.keycode });
-            }
+          onClose={() => {
+            setHintOpen(false);
+            setHintAnchor(undefined);
           }}
         />
       </Box>
