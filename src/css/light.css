@@ -1,5 +1,6 @@
 body.theme-light {
-  background: linear-gradient(135deg, #eef3f8 0%, #f7f9fb 48%, #e6edf4 100%);
+  /* Slightly deeper than the elevated cards, so the workspace reads as raised surfaces. */
+  background: linear-gradient(135deg, #dfeaf3 0%, #eaf2f8 48%, #d8e4ef 100%);
   color: #243447;
 }
 
@@ -26,7 +27,8 @@ body.theme-light *::-webkit-scrollbar-thumb:hover {
 }
 
 .app-shell.theme-light {
-  background: rgba(247, 249, 251, 0.78);
+  /* Translucent tint over the gradient: the page stays clearly darker than the white cards. */
+  background: rgba(228, 238, 246, 0.6);
 }
 
 .app-shell.theme-light .app-sidebar {
@@ -55,9 +57,9 @@ body.theme-light *::-webkit-scrollbar-thumb:hover {
 }
 
 .app-shell.theme-light .app-main-panel > * {
-  background: rgba(255, 255, 255, 0.92);
+  background: #ffffff;
   border-color: #b8c7d3;
-  box-shadow: 0 16px 32px rgba(71, 85, 105, 0.12);
+  box-shadow: 0 18px 34px rgba(71, 85, 105, 0.16);
 }
 
 .app-shell.theme-light .app-main-panel h4,
@@ -180,9 +182,10 @@ body.theme-light .key-select-popup .MuiAutocomplete-option[aria-selected="true"]
   background: #e7f0f6 !important;
 }
 
-/* Light workspace: keep the keymap editor readable instead of leaving a dark canvas inside the light shell. */
+/* Light workspace card: every tab panel is white (raised) while the keyboard canvas keeps a light
+   tint, so it reads as a slightly recessed plate inside the card. */
 .app-shell.theme-light .keymap-editor-surface {
-  background: #f7f9fb;
+  background: #ffffff;
 }
 
 .app-shell.theme-light .keycatalog-surface {
@@ -209,7 +212,7 @@ body.theme-light .key-select-popup .MuiAutocomplete-option[aria-selected="true"]
    above), so the Keymap view no longer uses a border of its own. */
 
 .app-shell.theme-light .keymap-tab-panel {
-  background: #f7f9fb !important;
+  background: #ffffff !important;
   max-height: none;
   overflow: visible;
   min-height: calc(100vh - 100px);
@@ -235,21 +238,21 @@ body.theme-light .key-select-popup .MuiAutocomplete-option[aria-selected="true"]
 .app-shell.theme-light .MuiTab-root {
   color: #60788e !important;
   border-color: #b8c7d3 !important;
-  background-color: #e8eef3 !important;
+  background-color: #dde8f1 !important;
   box-shadow: none !important;
 }
 
 .app-shell.theme-light .MuiTab-root.Mui-selected {
   color: #29445d !important;
-  background-color: #f7f9fb !important;
+  background-color: #ffffff !important;
   border-color: #b8c7d3 !important;
   border-bottom-color: transparent !important;
-  box-shadow: inset 0 -1px 0 #f7f9fb;
+  box-shadow: inset 0 -1px 0 #ffffff;
 }
 
 .app-shell.theme-light .MuiTab-root:not(.Mui-selected):hover {
   color: #29445d !important;
-  background-color: #dbe7f0 !important;
+  background-color: #d3e3f0 !important;
 }
 
 .app-shell.theme-light .keymap-surface {
@@ -360,7 +363,7 @@ body.theme-light .keycode-catalog-tab {
   color: #60788e !important;
   border: 1px solid #b8c7d3 !important;
   border-radius: 8px 8px 0 0 !important;
-  background-color: #e8eef3 !important;
+  background-color: #dde8f1 !important;
 }
 
 body.theme-light .MuiTab-root.keycode-catalog-tab.Mui-selected {
@@ -407,7 +410,7 @@ body.theme-light .MuiTab-root.keycode-catalog-tab.Mui-selected {
 
 /* --- Parity with dark.css: every main tab panel keeps the dark theme's panel frame --- */
 .app-shell.theme-light .quantum-tab-panel {
-  background: #f7f9fb !important;
+  background: #ffffff !important;
   border-top: 0 !important;
   padding: 0 !important;
   margin-bottom: 8px;
@@ -455,10 +458,10 @@ body.theme-light .MuiTab-root.keycode-catalog-tab.Mui-selected {
 }
 
 .app-shell.theme-light .keymap-main-tab.Mui-selected {
-  background-color: #f7f9fb !important;
+  background-color: #ffffff !important;
   border-color: #b8c7d3 !important;
   border-bottom-color: transparent !important;
-  box-shadow: inset 0 -1px 0 #f7f9fb;
+  box-shadow: inset 0 -1px 0 #ffffff;
 }
 
 /* --- Parity with dark.css: shared numbered entry-tab strip used by Combos / Key Overrides / Alt Repeat / Tap Dance --- */
