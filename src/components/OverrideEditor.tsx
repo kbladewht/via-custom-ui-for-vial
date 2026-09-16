@@ -444,6 +444,7 @@ function OverrideEntry(props: {
           type="keyOverride"
           open={hintOpen}
           keycode={hintKeycode}
+          keycodeconverter={props.keycodeconverter}
           anchor={hintAnchor}
           boundary={props.boundaryRef?.current ?? null}
           onClose={() => {

@@ -1,6 +1,8 @@
 import { Box, ClickAwayListener, Popper, Typography } from "@mui/material";
+import keycodeDescriptions from "../locales/keycodeDescriptions.json";
 import keySettingHints from "../locales/keySettingHints.json";
-import { QmkKeycode } from "./keycodes/keycodeConverter";
+import { describeKeycode } from "./keycodeDescription";
+import { KeycodeConverter, QmkKeycode } from "./keycodes/keycodeConverter";
 
 /** Hint per view; adding an entry to locales/keySettingHints.json extends this union. */
 export type KeySettingHintType = Exclude<keyof typeof keySettingHints, "stacked">;
@@ -18,11 +20,13 @@ export function KeySettingHint(props: {
   type: KeySettingHintType;
   open: boolean;
   keycode: QmkKeycode;
+  keycodeconverter: KeycodeConverter;
   anchor?: HTMLElement;
   boundary: HTMLElement | null;
   onClose?: () => void;
 }) {
   const hint = keySettingHints[props.type];
+  const description = describeKeycode(props.keycode, props.keycodeconverter);
   const holdLegend =
     props.keycode.modNameLabel ?? props.keycode.modLabel ?? props.keycode.holdLabel;
 
@@ -59,6 +63,15 @@ export function KeySettingHint(props: {
           <Typography component="div" sx={{ fontWeight: 600, mb: 0.75 }}>
             {hint.title}
           </Typography>
+          {description && (
+            <Typography
+              component="div"
+              sx={{ fontSize: "0.8rem", lineHeight: 1.6, mb: 0.5, fontWeight: 500 }}
+            >
+              {keycodeDescriptions.labels.function}
+              {description}
+            </Typography>
+          )}
           {holdLegend && (
             <Typography component="div" sx={{ fontSize: "0.78rem", lineHeight: 1.6, mb: 0.5 }}>
               {keySettingHints.stacked.replace("{hold}", holdLegend)}

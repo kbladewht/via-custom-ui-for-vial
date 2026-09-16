@@ -195,6 +195,7 @@ export function KeymapLayer(props: {
         type="keymap"
         open={hintOpen}
         keycode={focusedKey?.keycode ?? DefaultQmkKeycode}
+        keycodeconverter={props.keycodeconverter}
         anchor={anchorEl}
         boundary={boundaryEl.current}
         onClose={() => setHintOpen(false)}

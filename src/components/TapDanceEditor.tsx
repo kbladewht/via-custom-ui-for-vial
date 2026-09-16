@@ -241,6 +241,7 @@ function TapDanceEntry(props: {
         type="tapDance"
         open={hintOpen}
         keycode={hintKeycode}
+        keycodeconverter={props.keycodeconverter}
         anchor={hintAnchor}
         boundary={props.boundaryRef?.current ?? null}
         onClose={() => {

@@ -88,7 +88,7 @@ function modStringLong(mod: number) {
  * Multiple modifiers fall back to the compact notation ("*C+S") so the label
  * still fits on a single keycap line.
  */
-function modStringName(mod: number) {
+export function modStringName(mod: number) {
   const MOD = ["Ctrl", "Shift", "Alt", "GUI"];
   const activeMod = [];
   for (let b = 0; b < 4; b++) {
@@ -121,7 +121,7 @@ type KeycodeDefinition = {
   };
 };
 
-type KeycodeRangeDefinition = { [range: string]: { start: number; end: number } };
+export type KeycodeRangeDefinition = { [range: string]: { start: number; end: number } };
 type KeycodeLocaleDefinition = { [key: string]: { [language: string]: string } };
 
 type StaticKeycodeData = {
@@ -403,6 +403,11 @@ export class KeycodeConverter {
 
   public getHoldKeycodeList(): QmkKeycode[] {
     return this.holdKeycodeList;
+  }
+
+  /** Keycode ranges of the loaded keycode data (used to describe what a keycode does). */
+  public getKeycodeRange(): KeycodeRangeDefinition {
+    return this.keycode_range;
   }
 
   public getTapKeycode(keycode?: QmkKeycode): QmkKeycode {

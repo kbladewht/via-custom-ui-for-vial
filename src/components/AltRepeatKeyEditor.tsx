@@ -369,6 +369,7 @@ function AltRepeatKeyEntry(props: {
           type="altRepeatKey"
           open={hintOpen}
           keycode={hintKeycode}
+          keycodeconverter={props.keycodeconverter}
           anchor={hintAnchor}
           boundary={props.boundaryRef?.current ?? null}
           onClose={() => {

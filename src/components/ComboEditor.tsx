@@ -209,6 +209,7 @@ function ComboEntry(props: {
         type="combos"
         open={hintOpen}
         keycode={hintKeycode}
+        keycodeconverter={props.keycodeconverter}
         anchor={hintAnchor}
         boundary={props.boundaryRef?.current ?? null}
         onClose={() => {
