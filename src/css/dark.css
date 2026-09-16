@@ -273,8 +273,6 @@ body:not(.theme-light) .combo-entry-tab {
   border-radius: 8px 8px 0 0 !important;
   min-height: 30px !important;
   height: 30px !important;
-  min-width: 28px !important;
-  width: 28px !important;
   padding: 0 !important;
 }
 
@@ -341,8 +339,8 @@ body:not(.theme-light) .entry-tab {
   border-radius: 8px 8px 0 0 !important;
   min-height: 26px !important;
   height: 26px !important;
-  min-width: 28px !important;
-  width: 28px !important;
+  min-width: 36px !important;
+  width: 36px !important;
   padding: 0 !important;
 }
 

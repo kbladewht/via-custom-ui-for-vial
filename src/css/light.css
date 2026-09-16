@@ -430,8 +430,8 @@ body.theme-light .key-select-popup .MuiAutocomplete-option[aria-selected="true"]
   border-radius: 8px 8px 0 0 !important;
   min-height: 26px !important;
   height: 26px !important;
-  min-width: 28px !important;
-  width: 28px !important;
+  min-width: 36px !important;
+  width: 36px !important;
   padding: 0 !important;
   color: #60788e !important;
 }
