@@ -282,9 +282,13 @@ export function QuantumSettingsEditor(props: {
                       border: "1px solid #334155",
                       borderRadius: "8px 8px 0 0",
                       backgroundColor: "rgba(30, 41, 59, 0.7)",
+                      "&:not(.Mui-selected)": {
+                        borderBottomColor: "#334155",
+                      },
                       "&.Mui-selected": {
                         color: "#f8fafc",
                         borderColor: "#475569",
+                        borderBottomColor: "transparent",
                         backgroundColor: "#334155",
                       },
                     }}
@@ -292,23 +296,25 @@ export function QuantumSettingsEditor(props: {
                 ))}
               </Tabs>
               <Box
-                className="entry-content-panel quantum-settings-content-panel"
+                className="entry-content-panel key-override-content-panel quantum-settings-content-panel"
                 sx={{
                   width: "100%",
                   flex: 1,
                   mt: 0,
                   display: "flex",
-                  flexDirection: "column",
-                  p: 2,
+                  p: 0,
                 }}
               >
                 <Box
+                  className="entry-editor-panel quantum-settings-editor-panel"
                   sx={{
                     width: "100%",
                     flex: 1,
                     display: "flex",
+                    flexDirection: "column",
                     alignItems: "center",
-                    justifyContent: "center",
+                    justifyContent: "flex-start",
+                    p: 2,
                   }}
                 >
                   <ViaMenuItem
@@ -322,7 +328,6 @@ export function QuantumSettingsEditor(props: {
                       props.onChange(newValues);
                     }}
                   />
-                </Box>
                 <Box
                   sx={{
                     display: "flex",
@@ -413,6 +418,7 @@ export function QuantumSettingsEditor(props: {
                   >
                     {t.common.reset}
                   </Button>
+                </Box>
                 </Box>
               </Box>
             </Box>
