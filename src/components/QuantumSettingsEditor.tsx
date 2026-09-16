@@ -318,17 +318,27 @@ export function QuantumSettingsEditor(props: {
                     p: 2,
                   }}
                 >
-                  <ViaMenuItem
-                    {...((visibleQuantumTabs[quantumTabValue] ?? visibleQuantumTabs[0] ?? QuantumSettingDefinition[0]) as MenuSectionProperties)}
-                    customValues={quantumValue}
-                    language={props.language}
-                    onChange={(id, value) => {
-                      console.log(`update ${id} to ${value}`);
-                      const newValues = { ...quantumValue, [id[0]]: value };
-                      setQuantumValue(newValues);
-                      props.onChange(newValues);
+                  <Box
+                    sx={{
+                      width: "100%",
+                      flex: 1,
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
                     }}
-                  />
+                  >
+                    <ViaMenuItem
+                      {...((visibleQuantumTabs[quantumTabValue] ?? visibleQuantumTabs[0] ?? QuantumSettingDefinition[0]) as MenuSectionProperties)}
+                      customValues={quantumValue}
+                      language={props.language}
+                      onChange={(id, value) => {
+                        console.log(`update ${id} to ${value}`);
+                        const newValues = { ...quantumValue, [id[0]]: value };
+                        setQuantumValue(newValues);
+                        props.onChange(newValues);
+                      }}
+                    />
+                  </Box>
                 <Box
                   sx={{
                     display: "flex",
