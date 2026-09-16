@@ -63,6 +63,7 @@ export function LayerSelector(props: {
       }}
     >
       <Box
+        className="layer-select-label"
         sx={{
           display: "flex",
           alignItems: "center",
@@ -82,6 +83,7 @@ export function LayerSelector(props: {
             value={idx}
             variant="outlined"
             size="small"
+            className={`layer-select-tab${isActive ? " layer-select-tab-active" : ""}`}
             sx={{
               minWidth: "36px",
               flexShrink: 0,

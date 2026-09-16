@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useKeySettingHintHoverHandlers } from "../useKeySettingHint";
-import { QmkKeycode } from "../keycodes/keycodeConverter";
+import { keycodeLegendLines, QmkKeycode } from "../keycodes/keycodeConverter";
 import { KEY_GAP, KeymapKeyProperties, WIDTH_1U } from "./keymapTypes";
 
 /**
@@ -64,6 +64,18 @@ export function KeyLegend(props: {
       <div className="layer-tap-legend">
         <div className="layer-tap-hold hold-legend">OSM</div>
         <div className="layer-tap-tap main-legend">{keycode.label}</div>
+      </div>
+    );
+  }
+
+  // Vial labels some keycodes on two lines ("LS\n(" for the space cadet keys, "~\nEsc" for grave
+  // escape): draw both lines as plain text, there is no base keycode to select on them.
+  if (keycode.label.includes("\n")) {
+    const legend = keycodeLegendLines(keycode);
+    return (
+      <div className="layer-tap-legend">
+        <div className="layer-tap-hold hold-legend">{legend.top}</div>
+        <div className="layer-tap-tap main-legend">{legend.bottom}</div>
       </div>
     );
   }

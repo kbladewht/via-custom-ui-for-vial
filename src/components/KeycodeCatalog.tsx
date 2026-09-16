@@ -5,6 +5,7 @@ import { match, P } from "ts-pattern";
 import {
   DefaultQmkKeycode,
   KeycodeConverter,
+  keycodeLegendLines,
   QmkKeycode,
   QuantumTemplateKeycap,
 } from "./keycodes/keycodeConverter";
@@ -157,6 +158,8 @@ function KeyListKey(props: {
 
   const focusContext = useContext(FocusedKeyContext);
   const hintAreaId = useContext(KeySettingHintAreaContext);
+  // Vial labels some keycodes on two lines ("LS\n("); those keycaps show both legend lines.
+  const legend = keycodeLegendLines(props.keycode);
 
   return (
     <Tooltip
@@ -229,9 +232,9 @@ function KeyListKey(props: {
           }
         }}
       >
-        <div>{props.keycode.shiftedLabel ?? ""}</div>
+        <div>{legend.top}</div>
         <div>
-          {props.keycode.label}
+          {legend.bottom}
           {props.showEditIndicator && (
             <EditOutlinedIcon
               onClick={(event) => {

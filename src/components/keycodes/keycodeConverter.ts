@@ -105,6 +105,21 @@ export function modStringName(mod: number) {
 }
 
 /**
+ * The two legend lines of a keycap. Vial labels some keycodes on two lines ("LS\n(" for the space
+ * cadet keys, "~\nEsc" for grave escape): the first line is the upper legend, the second one the
+ * lower one. Keycodes without an upper legend return an empty first line.
+ */
+export function keycodeLegendLines(keycode: QmkKeycode): { top: string; bottom: string } {
+  const label = keycode.label ?? "";
+  if (keycode.shiftedLabel !== undefined) {
+    return { top: keycode.shiftedLabel, bottom: label };
+  }
+
+  const [top, ...rest] = label.split("\n");
+  return rest.length === 0 ? { top: "", bottom: label } : { top: top, bottom: rest.join("\n") };
+}
+
+/**
  * Modifier templates of Vial's Quantum tab (the "mods" layout of its keycode picker): one-shot
  * modifiers ("OSM(mod)"), modifier keycodes ("mod(kc)") and mod-tap keycodes ("mod_T(kc)").
  * The order and the labels below are Vial's own, so the catalog keycaps look like the official ones.
