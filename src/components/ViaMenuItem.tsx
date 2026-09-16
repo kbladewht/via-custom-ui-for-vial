@@ -369,9 +369,9 @@ function ViaMultipleCheckbox(props: MultipleCheckboxElement) {
             value={valueToArray(props.value)}
             onChange={handleChange}
             sx={{
-              color: "#e5eefb",
+              color: "var(--theme-text-primary)",
               "& .quantum-select-value": {
-                color: "#e5eefb",
+                color: "var(--theme-text-primary)",
                 opacity: 1,
               },
             }}
@@ -430,13 +430,13 @@ function ViaCheckboxList(props: CheckboxListElement) {
                 px: 0.75,
                 borderRadius: 1,
                 "&:hover": {
-                  backgroundColor: "rgba(51, 65, 85, 0.35)",
+                  backgroundColor: "var(--theme-surface-raised-35)",
                 },
               }}
             >
               <Typography
                 sx={{
-                  color: "#cbd5e1",
+                  color: "var(--theme-text-secondary)",
                   fontSize: "0.84rem",
                   fontWeight: 500,
                   flex: 1,
@@ -451,8 +451,8 @@ function ViaCheckboxList(props: CheckboxListElement) {
                 checked={isChecked}
                 onChange={() => {}}
                 sx={{
-                  color: "#64748b",
-                  "&.Mui-checked": { color: "#38bdf8" },
+                  color: "var(--theme-border)",
+                  "&.Mui-checked": { color: "var(--theme-accent)" },
                   p: "2px",
                 }}
               />
@@ -491,7 +491,7 @@ function ViaNumber(props: NumberElement) {
       >
         <Typography
           sx={{
-            color: "#cbd5e1",
+            color: "var(--theme-text-secondary)",
             fontSize: "0.84rem",
             fontWeight: 500,
             flex: 1,
@@ -507,12 +507,12 @@ function ViaNumber(props: NumberElement) {
             alignItems: "stretch",
             width: 80,
             height: 26,
-            backgroundColor: "#1e2227",
-            border: "1px solid #484f5c",
+            backgroundColor: "var(--theme-control)",
+            border: "1px solid var(--theme-control-border)",
             borderRadius: "4px",
             overflow: "hidden",
-            "&:hover": { borderColor: "#64748b" },
-            "&:focus-within": { borderColor: "#38bdf8" },
+            "&:hover": { borderColor: "var(--theme-border)" },
+            "&:focus-within": { borderColor: "var(--theme-accent)" },
           }}
         >
           <input
@@ -533,7 +533,7 @@ function ViaNumber(props: NumberElement) {
               backgroundColor: "transparent",
               border: "none",
               outline: "none",
-              color: "#e2e8f0",
+              color: "var(--theme-text-emphasis)",
               fontSize: "0.82rem",
               textAlign: "right",
               padding: "0 6px",
@@ -545,8 +545,8 @@ function ViaNumber(props: NumberElement) {
               display: "flex",
               flexDirection: "column",
               width: 18,
-              borderLeft: "1px solid #333842",
-              backgroundColor: "#2a2f38",
+              borderLeft: "1px solid var(--theme-divider)",
+              backgroundColor: "var(--theme-control-addon)",
             }}
           >
             <Box
@@ -561,17 +561,17 @@ function ViaNumber(props: NumberElement) {
                 justifyContent: "center",
                 border: "none",
                 background: "transparent",
-                color: "#94a3b8",
+                color: "var(--theme-text-muted)",
                 cursor: "pointer",
                 p: 0,
                 fontSize: "8px",
                 lineHeight: 1,
                 "&:hover": {
-                  backgroundColor: "#3b4252",
-                  color: "#f8fafc",
+                  backgroundColor: "var(--theme-control-hover)",
+                  color: "var(--theme-text-strong)",
                 },
                 "&:active": {
-                  backgroundColor: "#485265",
+                  backgroundColor: "var(--theme-control-active)",
                 },
               }}
             >
@@ -588,19 +588,19 @@ function ViaNumber(props: NumberElement) {
                 alignItems: "center",
                 justifyContent: "center",
                 border: "none",
-                borderTop: "1px solid #383f4d",
+                borderTop: "1px solid var(--theme-divider)",
                 background: "transparent",
-                color: "#94a3b8",
+                color: "var(--theme-text-muted)",
                 cursor: "pointer",
                 p: 0,
                 fontSize: "8px",
                 lineHeight: 1,
                 "&:hover": {
-                  backgroundColor: "#3b4252",
-                  color: "#f8fafc",
+                  backgroundColor: "var(--theme-control-hover)",
+                  color: "var(--theme-text-strong)",
                 },
                 "&:active": {
-                  backgroundColor: "#485265",
+                  backgroundColor: "var(--theme-control-active)",
                 },
               }}
             >
@@ -635,13 +635,13 @@ function ViaBoolean(props: BooleanElement) {
           userSelect: "none",
           borderRadius: 1,
           "&:hover": {
-            backgroundColor: "rgba(51, 65, 85, 0.35)",
+            backgroundColor: "var(--theme-surface-raised-35)",
           },
         }}
       >
         <Typography
           sx={{
-            color: "#cbd5e1",
+            color: "var(--theme-text-secondary)",
             fontSize: "0.84rem",
             fontWeight: 500,
             flex: 1,
@@ -657,8 +657,8 @@ function ViaBoolean(props: BooleanElement) {
             checked={isChecked}
             onChange={() => {}}
             sx={{
-              color: "#64748b",
-              "&.Mui-checked": { color: "#38bdf8" },
+              color: "var(--theme-border)",
+              "&.Mui-checked": { color: "var(--theme-accent)" },
               p: 0,
             }}
           />
@@ -690,13 +690,13 @@ function ViaBitCheckbox(props: BitCheckboxElement) {
           userSelect: "none",
           borderRadius: 1,
           "&:hover": {
-            backgroundColor: "rgba(51, 65, 85, 0.35)",
+            backgroundColor: "var(--theme-surface-raised-35)",
           },
         }}
       >
         <Typography
           sx={{
-            color: "#cbd5e1",
+            color: "var(--theme-text-secondary)",
             fontSize: "0.84rem",
             fontWeight: 500,
             flex: 1,
@@ -712,8 +712,8 @@ function ViaBitCheckbox(props: BitCheckboxElement) {
             checked={isChecked}
             onChange={() => {}}
             sx={{
-              color: "#64748b",
-              "&.Mui-checked": { color: "#38bdf8" },
+              color: "var(--theme-border)",
+              "&.Mui-checked": { color: "var(--theme-accent)" },
               p: 0,
             }}
           />

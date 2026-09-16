@@ -95,7 +95,7 @@ export function LightingColorPicker(props: {
   };
 
   return (
-    <Dialog open={props.open} onClose={props.onCancel} maxWidth="sm" fullWidth PaperProps={{ sx: { backgroundColor: "#0f172a", color: "#e2e8f0", border: "1px solid #475569", borderRadius: 2 } }}>
+    <Dialog open={props.open} onClose={props.onCancel} maxWidth="sm" fullWidth PaperProps={{ sx: { backgroundColor: "var(--theme-surface-deep)", color: "var(--theme-text-emphasis)", border: "1px solid var(--theme-surface-hover)", borderRadius: 2 } }}>
       <DialogTitle sx={{ display: "none" }}>Select Color</DialogTitle>
       <DialogContent sx={{ p: 2 }}>
         <Box sx={{ display: "grid", gridTemplateColumns: "minmax(150px, 1fr) 28px 150px", gap: 2, alignItems: "start", mt: 1 }}>
@@ -103,14 +103,14 @@ export function LightingColorPicker(props: {
             <Box sx={{ color: "text.secondary", mb: 1 }}>{labels.basicColors}</Box>
             <Box sx={{ display: "grid", gridTemplateColumns: "repeat(8, 1fr)", gap: 0.75 }}>
               {PRESET_COLORS.map((preset) => (
-                <Box key={preset} onClick={() => updateRgb(hexToRgb(preset))} sx={{ aspectRatio: "1", cursor: "pointer", backgroundColor: preset, border: "1px solid rgba(255,255,255,.45)", borderRadius: 0.5 }} />
+                <Box key={preset} onClick={() => updateRgb(hexToRgb(preset))} sx={{ aspectRatio: "1", cursor: "pointer", backgroundColor: preset, border: "1px solid var(--theme-swatch-border)", borderRadius: 0.5 }} />
               ))}
             </Box>
           </Box>
-          <Box sx={{ height: 220, width: 20, cursor: "pointer", border: "1px solid rgba(255,255,255,.5)", background: `linear-gradient(to bottom, ${rgbToHex(hsvToRgb({ h: hsv.h, s: 100, v: 100 }))}, #000)` }} onClick={(event) => { const bounds = event.currentTarget.getBoundingClientRect(); updateHsv({ ...hsv, v: 100 - ((event.clientY - bounds.top) / bounds.height) * 100 }); }} />
+          <Box sx={{ height: 220, width: 20, cursor: "pointer", border: "1px solid var(--theme-swatch-border)", background: `linear-gradient(to bottom, ${rgbToHex(hsvToRgb({ h: hsv.h, s: 100, v: 100 }))}, #000)` }} onClick={(event) => { const bounds = event.currentTarget.getBoundingClientRect(); updateHsv({ ...hsv, v: 100 - ((event.clientY - bounds.top) / bounds.height) * 100 }); }} />
           <Box sx={{ display: "grid", gap: 1 }}>
             <Box sx={{ height: 220, cursor: "crosshair", position: "relative", background: `linear-gradient(to top, #000, transparent), linear-gradient(to right, #fff, transparent), hsl(${hsv.h} 100% 50%)` }} onClick={selectPoint}>
-              <Box sx={{ position: "absolute", width: 14, height: 14, border: "2px solid white", borderRadius: "50%", left: `calc(${hsv.s}% - 7px)`, top: `calc(${100 - hsv.v}% - 7px)`, boxShadow: "0 0 0 1px #111" }} />
+              <Box sx={{ position: "absolute", width: 14, height: 14, border: "2px solid white", borderRadius: "50%", left: `calc(${hsv.s}% - 7px)`, top: `calc(${100 - hsv.v}% - 7px)`, boxShadow: "0 0 0 1px var(--theme-surface-shell)" }} />
             </Box>
             <TextField size="small" label={labels.hex} value={draftHex} onChange={(event) => { setDraftHex(event.target.value); if (/^#[0-9a-f]{6}$/i.test(event.target.value)) updateRgb(hexToRgb(event.target.value)); }} />
           </Box>
@@ -133,7 +133,7 @@ export function LightingColorPicker(props: {
               onChange={(event) => key === "h" || key === "s" || key === "v"
                 ? updateHsv({ ...hsv, [key]: Number(event.target.value) })
                 : updateRgb({ ...rgb, [key]: Number(event.target.value) })}
-              sx={{ "& .MuiInputBase-root": { color: "#e2e8f0" }, "& .MuiInputLabel-root": { color: "#94a3b8" }, "& .MuiOutlinedInput-notchedOutline": { borderColor: "#64748b" } }}
+              sx={{ "& .MuiInputBase-root": { color: "var(--theme-text-emphasis)" }, "& .MuiInputLabel-root": { color: "var(--theme-text-muted)" }, "& .MuiOutlinedInput-notchedOutline": { borderColor: "var(--theme-border)" } }}
             />
           ))}
         </Box>
@@ -148,9 +148,9 @@ export function LightingColorPicker(props: {
             px: 1,
             py: 0.35,
             fontSize: "11px",
-            color: "#cbd5e1",
-            borderColor: "#64748b",
-            "&:hover": { borderColor: "#cbd5e1", backgroundColor: "rgba(148, 163, 184, 0.12)" },
+            color: "var(--theme-text-secondary)",
+            borderColor: "var(--theme-border)",
+            "&:hover": { borderColor: "var(--theme-text-secondary)", backgroundColor: "var(--theme-border-12)" },
           }}
         >
           {labels.cancel}
