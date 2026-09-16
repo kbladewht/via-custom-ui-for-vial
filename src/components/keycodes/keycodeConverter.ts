@@ -105,10 +105,155 @@ export function modStringName(mod: number) {
 }
 
 /**
- * Modifier masks of the "modifier + keycode" catalog templates, in the order VIA lists them:
- * LShift, LCtrl, LAlt, LGUI, RShift, RCtrl, RAlt, RGUI.
+ * Modifier templates of Vial's Quantum tab (the "mods" layout of its keycode picker): one-shot
+ * modifiers ("OSM(mod)"), modifier keycodes ("mod(kc)") and mod-tap keycodes ("mod_T(kc)").
+ * The order and the labels below are Vial's own, so the catalog keycaps look like the official ones.
  */
-const MOD_KEYCODE_TEMPLATE_MODIFIERS = [0x02, 0x01, 0x04, 0x08, 0x12, 0x11, 0x14, 0x18];
+type ModifierTemplate = { mod: number; label: string };
+
+const OSM_TEMPLATE_MODIFIERS: ModifierTemplate[] = [
+  { mod: ModifierBit.Shift, label: "LSft" },
+  { mod: ModifierBit.Ctrl, label: "LCtl" },
+  { mod: ModifierBit.Alt, label: "LAlt" },
+  { mod: ModifierBit.GUI, label: "LGui" },
+  { mod: ModifierBit.Shift | ModifierBit.UseRight, label: "RSft" },
+  { mod: ModifierBit.Ctrl | ModifierBit.UseRight, label: "RCtl" },
+  { mod: ModifierBit.Alt | ModifierBit.UseRight, label: "RAlt" },
+  { mod: ModifierBit.GUI | ModifierBit.UseRight, label: "RGui" },
+  { mod: ModifierBit.Ctrl | ModifierBit.Shift, label: "CS" },
+  { mod: ModifierBit.Ctrl | ModifierBit.Alt, label: "CA" },
+  { mod: ModifierBit.Ctrl | ModifierBit.GUI, label: "CG" },
+  { mod: ModifierBit.Ctrl | ModifierBit.Shift | ModifierBit.GUI, label: "CSG" },
+  { mod: ModifierBit.Shift | ModifierBit.Alt, label: "SA" },
+  { mod: ModifierBit.Shift | ModifierBit.GUI, label: "SG" },
+  { mod: ModifierBit.Shift | ModifierBit.Alt | ModifierBit.GUI, label: "SAG" },
+  { mod: ModifierBit.Ctrl | ModifierBit.Alt | ModifierBit.GUI, label: "CAG" },
+  { mod: ModifierBit.Alt | ModifierBit.GUI, label: "AG" },
+  { mod: ModifierBit.Ctrl | ModifierBit.Shift | ModifierBit.Alt, label: "Meh" },
+  { mod: ModifierBit.Ctrl | ModifierBit.Shift | ModifierBit.Alt | ModifierBit.GUI, label: "Hyper" },
+];
+
+const MODIFIER_TEMPLATE_MODIFIERS: ModifierTemplate[] = [
+  { mod: ModifierBit.Shift, label: "LSft" },
+  { mod: ModifierBit.Ctrl, label: "LCtl" },
+  { mod: ModifierBit.Alt, label: "LAlt" },
+  { mod: ModifierBit.GUI, label: "LGui" },
+  { mod: ModifierBit.Shift | ModifierBit.UseRight, label: "RSft" },
+  { mod: ModifierBit.Ctrl | ModifierBit.UseRight, label: "RCtl" },
+  { mod: ModifierBit.Alt | ModifierBit.UseRight, label: "RAlt" },
+  { mod: ModifierBit.GUI | ModifierBit.UseRight, label: "RGui" },
+  { mod: ModifierBit.Ctrl | ModifierBit.Shift, label: "C_S" },
+  { mod: ModifierBit.Ctrl | ModifierBit.Alt, label: "LCA" },
+  { mod: ModifierBit.Ctrl | ModifierBit.GUI, label: "LCG" },
+  { mod: ModifierBit.Ctrl | ModifierBit.GUI | ModifierBit.UseRight, label: "RCG" },
+  { mod: ModifierBit.Shift | ModifierBit.Alt, label: "LSA" },
+  { mod: ModifierBit.Shift | ModifierBit.GUI, label: "LSG" },
+  { mod: ModifierBit.Ctrl | ModifierBit.Alt | ModifierBit.GUI, label: "LCAG" },
+  { mod: ModifierBit.Ctrl | ModifierBit.Shift | ModifierBit.Alt, label: "MEH" },
+  { mod: ModifierBit.Ctrl | ModifierBit.Shift | ModifierBit.Alt | ModifierBit.GUI, label: "HYPR" },
+];
+
+const MOD_TAP_TEMPLATE_MODIFIERS: ModifierTemplate[] = [
+  { mod: ModifierBit.Shift, label: "LSFT_T" },
+  { mod: ModifierBit.Ctrl, label: "LCTL_T" },
+  { mod: ModifierBit.Alt, label: "LALT_T" },
+  { mod: ModifierBit.GUI, label: "LGUI_T" },
+  { mod: ModifierBit.Shift | ModifierBit.UseRight, label: "RSFT_T" },
+  { mod: ModifierBit.Ctrl | ModifierBit.UseRight, label: "RCTL_T" },
+  { mod: ModifierBit.Alt | ModifierBit.UseRight, label: "RALT_T" },
+  { mod: ModifierBit.GUI | ModifierBit.UseRight, label: "RGUI_T" },
+  { mod: ModifierBit.Ctrl | ModifierBit.Shift, label: "C_S_T" },
+  { mod: ModifierBit.Ctrl | ModifierBit.Alt, label: "LCA_T" },
+  { mod: ModifierBit.Ctrl | ModifierBit.GUI, label: "LCG_T" },
+  { mod: ModifierBit.Ctrl | ModifierBit.GUI | ModifierBit.UseRight, label: "RCG_T" },
+  { mod: ModifierBit.Shift | ModifierBit.Alt, label: "LSA_T" },
+  { mod: ModifierBit.Shift | ModifierBit.GUI, label: "LSG_T" },
+  { mod: ModifierBit.Ctrl | ModifierBit.Alt | ModifierBit.GUI, label: "LCAG_T" },
+  { mod: ModifierBit.Ctrl | ModifierBit.Alt | ModifierBit.GUI | ModifierBit.UseRight, label: "RCAG_T" },
+  { mod: ModifierBit.Ctrl | ModifierBit.Shift | ModifierBit.Alt, label: "Meh_T" },
+  { mod: ModifierBit.Ctrl | ModifierBit.Shift | ModifierBit.Alt | ModifierBit.GUI, label: "ALL_T" },
+];
+
+/** Vial's labels of the one-shot modifiers, also used when a stored OSM keycode is shown again. */
+const OSM_MODIFIER_LABELS = new Map(
+  OSM_TEMPLATE_MODIFIERS.map((template) => [template.mod, template.label]),
+);
+
+/** One keycap of the Quantum templates Vial draws on its Quantum tab. */
+type QuantumTemplateDefinition = {
+  /** QMK names of a keycode of the loaded keycode data, in order of preference. */
+  names?: string[];
+  /** Template of a keycode that Vial builds from a modifier mask instead of the keycode data. */
+  template?: { kind: "osm" | "mod" | "modTap"; mod: number; label: string };
+  /** Key width in 1u units, for the keys Vial draws wider than a normal key. */
+  widthMultiplier?: number;
+  /** Gap in 1u units before the key, taken from the x offsets of Vial's layout. */
+  gapBefore?: number;
+};
+
+/** Expands the modifier templates of a row, keeping the group gaps of Vial's layout. */
+function modifierTemplateRow(
+  kind: "osm" | "mod" | "modTap",
+  templates: ModifierTemplate[],
+  gaps: { [index: number]: number },
+): QuantumTemplateDefinition[] {
+  return templates.map((template, index) => ({
+    template: { kind: kind, mod: template.mod, label: template.label },
+    gapBefore: gaps[index],
+  }));
+}
+
+/**
+ * The four rows of Vial's Quantum templates, in Vial's order: the grave escape / space cadet keys,
+ * the one-shot modifiers, the modifier keycodes and the mod-tap keycodes.
+ */
+const QUANTUM_TEMPLATE_ROWS: QuantumTemplateDefinition[][] = [
+  [
+    { names: ["QK_GRAVE_ESCAPE", "QK_GESC", "KC_GESC"] },
+    {
+      names: ["QK_SPACE_CADET_LEFT_SHIFT_PARENTHESIS_OPEN", "SC_LSPO", "KC_LSPO"],
+      gapBefore: 0.75,
+      widthMultiplier: 1.25,
+    },
+    {
+      names: ["QK_SPACE_CADET_RIGHT_SHIFT_PARENTHESIS_CLOSE", "SC_RSPC", "KC_RSPC"],
+      widthMultiplier: 1.25,
+    },
+    {
+      names: ["QK_SPACE_CADET_LEFT_CTRL_PARENTHESIS_OPEN", "SC_LCPO", "KC_LCPO"],
+      gapBefore: 0.25,
+      widthMultiplier: 1.25,
+    },
+    {
+      names: ["QK_SPACE_CADET_RIGHT_CTRL_PARENTHESIS_CLOSE", "SC_RCPC", "KC_RCPC"],
+      widthMultiplier: 1.25,
+    },
+    {
+      names: ["QK_SPACE_CADET_LEFT_ALT_PARENTHESIS_OPEN", "SC_LAPO", "KC_LAPO"],
+      gapBefore: 0.25,
+      widthMultiplier: 1.25,
+    },
+    {
+      names: ["QK_SPACE_CADET_RIGHT_ALT_PARENTHESIS_CLOSE", "SC_RAPC", "KC_RAPC"],
+      widthMultiplier: 1.25,
+    },
+    {
+      names: ["QK_SPACE_CADET_RIGHT_SHIFT_ENTER", "SC_SENT", "KC_SFTENT"],
+      gapBefore: 0.5,
+      widthMultiplier: 2.25,
+    },
+  ],
+  modifierTemplateRow("osm", OSM_TEMPLATE_MODIFIERS, { 4: 0.25, 8: 0.25 }),
+  modifierTemplateRow("mod", MODIFIER_TEMPLATE_MODIFIERS, { 4: 0.25, 8: 0.25, 14: 1, 15: 1 }),
+  modifierTemplateRow("modTap", MOD_TAP_TEMPLATE_MODIFIERS, { 4: 0.25, 8: 0.25, 14: 1 }),
+];
+
+/** One keycap of the Quantum template rows, ready to be drawn by the keycode catalog. */
+export type QuantumTemplateKeycap = {
+  keycode: QmkKeycode;
+  widthMultiplier?: number;
+  gapBefore?: number;
+};
 
 type KeycodeDefinition = {
   [val: string]: {
@@ -350,26 +495,10 @@ export class KeycodeConverter {
       }),
     );
 
-    // "Modifier + keycode" templates (LCtl(kc), LSft(kc), ...) so a modifier can be picked
-    // directly from the Quantum catalog like VIA does. The base keycode is chosen afterwards
-    // through the modifier / Tap / Hold controls of the key popup (ctrl + click the key) or by
-    // clicking the second legend line of the key. Like the LT templates, no base key is set yet
-    // (tap === 0), so that line stays empty until a keycode is picked.
-    this.tapKeycodeList.push(
-      ...MOD_KEYCODE_TEMPLATE_MODIFIERS.map((mod) => {
-        return {
-          group: "quantum",
-          value: mod << 8,
-          key: `MODS(${modStringLong(mod)},KC_NO)`,
-          shiftedLabel: modStringName(mod),
-          aliases: [modStringName(mod)],
-          label: "",
-          tap: 0,
-          modLabel: modStringShort(mod),
-          modNameLabel: modStringName(mod),
-        };
-      }),
-    );
+    // "Modifier + keycode" templates (LCtl(kc), LSft(kc), ...) live on the Quantum tab of the
+    // keycode catalog instead of this list: Vial draws them as its own template keyboard, the base
+    // keycode is chosen afterwards by clicking the second legend line of the key (tap === 0, so
+    // that line stays empty until a keycode is picked).
 
     this.tapKeycodeList = this.tapKeycodeList.map((k) => {
       return { ...k, label: k.label.length > 2 ? k.label.replace(/_/g, " ") : k.label };
@@ -403,6 +532,66 @@ export class KeycodeConverter {
 
   public getHoldKeycodeList(): QmkKeycode[] {
     return this.holdKeycodeList;
+  }
+
+  /**
+   * Keycaps of Vial's Quantum templates in the four rows Vial draws them in. The first row uses the
+   * keycodes of the loaded keycode data (grave escape, space cadet), the other rows are the
+   * "modifier template" keycodes (OSM(mod), mod(kc), mod_T(kc)) without a base keycode yet.
+   */
+  public getQuantumTemplateRows(): QuantumTemplateKeycap[][] {
+    return QUANTUM_TEMPLATE_ROWS.map((row) =>
+      row.flatMap((definition) => {
+        const keycode =
+          definition.names === undefined
+            ? this.templateKeycode(definition)
+            : this.findKeycode(definition.names);
+        return keycode === undefined
+          ? []
+          : [
+              {
+                keycode: keycode,
+                widthMultiplier: definition.widthMultiplier,
+                gapBefore: definition.gapBefore,
+              },
+            ];
+      }),
+    );
+  }
+
+  /** Resolves a keycode of the loaded keycode data by its QMK name or one of its aliases. */
+  private findKeycode(names: string[]): QmkKeycode | undefined {
+    return this.tapKeycodeList.find(
+      (keycode) =>
+        names.includes(keycode.key) ||
+        names.some((name) => keycode.aliases?.includes(name) ?? false),
+    );
+  }
+
+  /**
+   * Builds one of Vial's "modifier template" keycodes: a modifier keycode without base key (as long
+   * as none is picked the second legend line of the key stays empty). Vial labels the keycaps with
+   * the modifier on the first line and the "(kc)" placeholder of the missing base key below it.
+   */
+  private templateKeycode(definition: QuantumTemplateDefinition): QmkKeycode | undefined {
+    if (definition.template === undefined) return undefined;
+    const template = definition.template;
+    if (template.kind === "osm") {
+      return this.convertIntToKeycode(this.keycode_range.QK_ONE_SHOT_MOD.start + template.mod);
+    }
+
+    const value =
+      template.kind === "mod"
+        ? template.mod << 8
+        : this.keycode_range.QK_MOD_TAP.start + (template.mod << 8);
+    return {
+      ...this.convertIntToKeycode(value),
+      shiftedLabel: template.label,
+      label: "(kc)",
+      tap: 0,
+      modLabel: template.label,
+      modNameLabel: template.label,
+    };
   }
 
   /** Keycode ranges of the loaded keycode data (used to describe what a keycode does). */
@@ -593,6 +782,22 @@ export class KeycodeConverter {
             value: val,
             key: `LM(${(val >> 5) & 0xf}, ${modLongLabel})`,
             label: `LM(${(val >> 5) & 0xf}, ${modLabel})`,
+          };
+        },
+      )
+      .with(
+        P.number.between(
+          this.keycode_range.QK_ONE_SHOT_MOD.start,
+          this.keycode_range.QK_ONE_SHOT_MOD.end,
+        ),
+        (val) => {
+          const mod = val & 0x1f;
+          return {
+            value: val,
+            key: `OSM(${modStringLong(mod)})`,
+            // Vial draws "OSM" above the modifier it applies ("LSft", "Meh", "Hyper", ...).
+            shiftedLabel: "OSM",
+            label: OSM_MODIFIER_LABELS.get(mod) ?? modStringName(mod),
           };
         },
       )

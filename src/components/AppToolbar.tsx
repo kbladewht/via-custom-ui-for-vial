@@ -14,6 +14,7 @@ import {
   Typography,
 } from "@mui/material";
 import { ChangeEvent, MouseEvent, RefObject } from "react";
+import quantumTranslations from "../locales/quantum.json";
 import { KeyboardSelector } from "./KeyboardSelector";
 import { LanguageSelector } from "./LanguageSelector";
 
@@ -48,6 +49,7 @@ type AppToolbarProps = {
   onRefreshBattery: () => void;
   keymapLanguage: string;
   onLanguageChange: (language: string) => void;
+  language?: "zh" | "en";
   connectedSettingsVisible: boolean;
   onDownloadSettings: () => void;
   onUploadSettings: () => void;
@@ -58,6 +60,16 @@ type AppToolbarProps = {
 export function AppToolbar(props: AppToolbarProps) {
   const splitBattery = Array.isArray(props.batteryLevels) && props.batteryLevels.length === 2;
   const singleBatteryLevel = props.batteryLevel;
+  const t = quantumTranslations[props.language ?? "en"].toolbar;
+  const batteryLabel = splitBattery
+    ? t.batteryBoth
+        .replace("{left}", String(props.batteryLevels?.[0] ?? "--"))
+        .replace("{right}", String(props.batteryLevels?.[1] ?? "--"))
+    : singleBatteryLevel === null
+      ? t.batteryLoading
+      : t.batterySingle
+          .replace("{level}", String(singleBatteryLevel))
+          .replace("{layer}", String(props.currentLayer ?? "--"));
 
   return (
     <Box
@@ -106,7 +118,7 @@ export function AppToolbar(props: AppToolbarProps) {
             fontSize: "11px",
           }}
         >
-          Load
+          {t.load}
         </Button>
       </Box>
       <Typography
@@ -133,9 +145,9 @@ export function AppToolbar(props: AppToolbarProps) {
           },
         }}
         onClick={props.onRefreshLayer}
-        title="Refresh current layer"
+        title={t.refreshCurrentLayer}
       >
-        <span style={{ opacity: 0.68 }}>Current Layer</span>
+        <span style={{ opacity: 0.68 }}>{t.currentLayer}</span>
         <span style={{ color: "#86efac", fontWeight: 700 }}>
           L{props.currentLayer ?? "--"}
         </span>
@@ -184,27 +196,27 @@ export function AppToolbar(props: AppToolbarProps) {
             },
           }}
         >
-          <MenuItem value="classic" sx={{ fontSize: "11px" }}>Default</MenuItem>
+          <MenuItem value="classic" sx={{ fontSize: "11px" }}>{t.styleDefault}</MenuItem>
           <MenuItem value="mx" sx={{ fontSize: "11px" }}>MX</MenuItem>
-          <MenuItem value="sculpted" sx={{ fontSize: "11px" }}>Sculpted</MenuItem>
-          <MenuItem value="matrix-tester" sx={{ fontSize: "11px" }}>Matrix Tester</MenuItem>
+          <MenuItem value="sculpted" sx={{ fontSize: "11px" }}>{t.styleSculpted}</MenuItem>
+          <MenuItem value="matrix-tester" sx={{ fontSize: "11px" }}>{t.styleMatrixTester}</MenuItem>
         </Select>
-        <Tooltip title={props.lightTheme ? "切换暗色主题" : "切换亮色主题"}>
+        <Tooltip title={props.lightTheme ? t.themeToDark : t.themeToLight}>
           <IconButton
             className="vial-action-button theme-toggle-button"
             size="small"
-            aria-label={props.lightTheme ? "切换暗色主题" : "切换亮色主题"}
+            aria-label={props.lightTheme ? t.themeToDark : t.themeToLight}
             onClick={props.onThemeToggle}
             sx={{ p: 0.5 }}
           >
             {props.lightTheme ? <DarkModeIcon sx={{ fontSize: 18 }} /> : <LightModeIcon sx={{ fontSize: 18 }} />}
           </IconButton>
         </Tooltip>
-        <Tooltip title="BLE 快捷键">
+        <Tooltip title={t.bleShortcuts}>
           <IconButton
             className="vial-action-button"
             size="small"
-            aria-label="BLE 快捷键"
+            aria-label={t.bleShortcuts}
             onClick={props.onShortcutHelpOpen}
             sx={{ p: 0.5 }}
           >
@@ -229,11 +241,11 @@ export function AppToolbar(props: AppToolbarProps) {
         >
           <Box sx={{ p: 1.5, minWidth: 230, background: "#0f172a" }}>
             <Typography sx={{ mb: 0.75, fontSize: "12px", fontWeight: 700 }}>
-              BLE 快捷键
+              {t.bleShortcuts}
             </Typography>
             {props.shortcutHelp.length === 0 ? (
               <Typography sx={{ fontSize: "11px", color: "#94a3b8" }}>
-                暂未找到快捷键
+                {t.noShortcuts}
               </Typography>
             ) : (
               props.shortcutHelp.map((item) => (
@@ -244,23 +256,11 @@ export function AppToolbar(props: AppToolbarProps) {
             )}
           </Box>
         </Popover>
-        <Tooltip title={
-          splitBattery
-            ? `左右电池 ${props.batteryLevels?.[0] ?? "--"}% / ${props.batteryLevels?.[1] ?? "--"}%`
-            : singleBatteryLevel === null
-              ? "正在获取电量"
-              : `电量 ${singleBatteryLevel}%，当前层 ${props.currentLayer ?? "--"}`
-        }>
+        <Tooltip title={batteryLabel}>
           <IconButton
             className="battery-status-button"
             size="small"
-            aria-label={
-              splitBattery
-                ? `左右电池 ${props.batteryLevels?.[0] ?? "--"}% / ${props.batteryLevels?.[1] ?? "--"}%`
-                : singleBatteryLevel === null
-                  ? "正在获取电量"
-                  : `电量 ${singleBatteryLevel}%，当前层 ${props.currentLayer ?? "--"}`
-            }
+            aria-label={batteryLabel}
             onClick={props.onRefreshBattery}
             sx={{ display: "inline-flex", alignItems: "center", gap: splitBattery ? 0.5 : 0.25, p: 0.5 }}
           >
@@ -304,13 +304,14 @@ export function AppToolbar(props: AppToolbarProps) {
         <LanguageSelector
           languageList={["US", "zh"]}
           lang={props.keymapLanguage}
+          language={props.language}
           onChange={props.onLanguageChange}
         />
         <Box sx={{ display: "flex", flexDirection: "row", flexWrap: "nowrap", gap: 1 }} hidden={!props.connectedSettingsVisible}>
-          <Tooltip title="下载设置">
+          <Tooltip title={t.downloadSettings}>
             <IconButton
               className="vial-action-button"
-              aria-label="下载设置"
+              aria-label={t.downloadSettings}
               color="primary"
               size="small"
               onClick={props.onDownloadSettings}
@@ -319,10 +320,10 @@ export function AppToolbar(props: AppToolbarProps) {
               <DownloadIcon sx={{ fontSize: 18 }} />
             </IconButton>
           </Tooltip>
-          <Tooltip title="上传设置">
+          <Tooltip title={t.uploadSettings}>
             <IconButton
               className="vial-action-button"
-              aria-label="上传设置"
+              aria-label={t.uploadSettings}
               color="primary"
               size="small"
               onClick={props.onUploadSettings}

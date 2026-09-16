@@ -472,10 +472,13 @@ export function QuantumSettingsEditor(props: {
                     keycodeConverter={keycodeConverter}
                     macroIndex={selectedMacroIndex}
                     macroCount={props.macroCount ?? 0}
+                    language={props.language}
                   />
                 </>
               ) : (
-                <Box sx={{ color: "#cbd5e1" }}>No macros available.</Box>
+                <Box sx={{ color: "#cbd5e1" }}>
+                  {quantumTranslations[props.language].macro.none}
+                </Box>
               )}
             </Box>
           ) : menu.id === "Lighting" ? (

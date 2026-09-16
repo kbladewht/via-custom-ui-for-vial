@@ -8,6 +8,7 @@ import {
 import { match, P } from "ts-pattern";
 import { useEffect, useState } from "react";
 import { AppToolbar, KeymapStyle } from "./components/AppToolbar";
+import quantumTranslations from "./locales/quantum.json";
 import {
   discardPendingKeycapAudio,
   prepareKeycapAudio,
@@ -152,6 +153,7 @@ function App() {
                 });
             }}
             keymapLanguage={keymapLanguage}
+            language={uiLanguage}
             onLanguageChange={(selectedLanguage) => {
               setKeymapLanguage(selectedLanguage);
               setUiLanguage(selectedLanguage === "zh" ? "zh" : "en");
@@ -198,20 +200,24 @@ function App() {
         </Grid>
       </Grid>
       <Dialog open={customEraseDialogOpen} onClose={onDialogClose}>
-        <DialogContent>Erase all custom settings?</DialogContent>
+        <DialogContent>{quantumTranslations[uiLanguage].dialog.eraseCustom}</DialogContent>
         <DialogActions>
-          <Button color="error" onClick={onDialogClose}>Cancel</Button>
-          <Button color="primary" onClick={onDialogOkClick}>OK</Button>
+          <Button color="error" onClick={onDialogClose}>
+            {quantumTranslations[uiLanguage].common.cancel}
+          </Button>
+          <Button color="primary" onClick={onDialogOkClick}>
+            {quantumTranslations[uiLanguage].common.ok}
+          </Button>
         </DialogActions>
       </Dialog>
       <Dialog
         open={quantumEraseDialogOpen}
         onClose={() => setQuantumEraseDialogOpen(false)}
       >
-        <DialogContent>Erase all quantum settings?</DialogContent>
+        <DialogContent>{quantumTranslations[uiLanguage].dialog.eraseQuantum}</DialogContent>
         <DialogActions>
           <Button color="error" onClick={() => setQuantumEraseDialogOpen(false)}>
-            Cancel
+            {quantumTranslations[uiLanguage].common.cancel}
           </Button>
           <Button
             color="primary"

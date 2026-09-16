@@ -1,8 +1,13 @@
 import { Box, Tab, Tabs, Tooltip } from "@mui/material";
 import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
-import { useContext, useState } from "react";
+import { Fragment, useContext, useState } from "react";
 import { match, P } from "ts-pattern";
-import { DefaultQmkKeycode, KeycodeConverter, QmkKeycode } from "./keycodes/keycodeConverter";
+import {
+  DefaultQmkKeycode,
+  KeycodeConverter,
+  QmkKeycode,
+  QuantumTemplateKeycap,
+} from "./keycodes/keycodeConverter";
 import { FocusedKeyContext } from "./KeymapEditor";
 import { KeySettingHint } from "./KeySettingHint";
 import {
@@ -341,6 +346,119 @@ function BasicKeyboardLayout(props: { keycodes: QmkKeycode[] }) {
   );
 }
 
+/** Width of one unit of Vial's key layouts, including the gap between two keycaps. */
+const WIDTH_GAP_UNIT = WIDTH_1U + 5;
+
+/**
+ * The Quantum templates of Vial's keycode picker: the keycaps of Vial's `mods` layout, i.e. the
+ * grave escape / space cadet keys and the modifier templates (OSM(mod), mod(kc), mod_T(kc)). They
+ * are drawn in Vial's four rows, with the same spacing between Vial's key groups.
+ */
+function QuantumModifiersLayout(props: { rows: QuantumTemplateKeycap[][] }) {
+  return (
+    <Box
+      className="quantum-modifier-layout"
+      sx={{
+        display: "flex",
+        flexDirection: "column",
+        gap: "8px",
+        width: "max-content",
+        minWidth: "min-content",
+        ml: "auto",
+        mr: "auto",
+        mt: 1,
+        mb: 1,
+      }}
+    >
+      {props.rows.map((row, rowIndex) => (
+        <Box key={rowIndex} sx={{ display: "flex", gap: "5px", alignItems: "center" }}>
+          {row.map((keycap, keyIndex) => (
+            <Fragment key={`${keycap.keycode.value}-${keyIndex}`}>
+              {keycap.gapBefore !== undefined && (
+                <Box sx={{ width: `${keycap.gapBefore * WIDTH_GAP_UNIT}px`, flexShrink: 0 }} />
+              )}
+              <KeyListKey
+                keycode={keycap.keycode}
+                draggable={true}
+                widthMultiplier={keycap.widthMultiplier}
+                animationDelay={Math.min(MAX_ANIMATION_DELAY_MS, rowIndex * ROW_ANIMATION_DELAY_MS)}
+              />
+            </Fragment>
+          ))}
+        </Box>
+      ))}
+    </Box>
+  );
+}
+
+/**
+ * The Quantum tab of the keycode catalog, arranged like the Quantum tab of Vial's keycode picker:
+ * the Quantum templates on top (Vial's `mods` layout) and below them the keycodes of the tab, which
+ * Vial lists without a group title. The template keycaps are skipped there, so none of them shows up
+ * twice.
+ */
+function QuantumCatalogTab(props: { keycodeConverter: KeycodeConverter; keygroups: string[] }) {
+  const templateRows = props.keycodeConverter.getQuantumTemplateRows();
+  const templateValues = new Set(templateRows.flat().map((keycap) => keycap.keycode.value));
+  const keycodes = props.keygroups
+    .flatMap((keygroup) =>
+      props.keycodeConverter.getTapKeycodeList().filter((keycode) => keycode.group === keygroup),
+    )
+    .filter((keycode) => !templateValues.has(keycode.value));
+
+  return (
+    <>
+      <QuantumModifiersLayout rows={templateRows} />
+      <Box
+        className="keycode-group"
+        sx={{
+          width: "100%",
+          maxWidth: "100%",
+          boxSizing: "border-box",
+          border: "0",
+          borderRadius: 0,
+          overflowX: "auto",
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "stretch",
+        }}
+      >
+        <Box
+          sx={{
+            display: "grid",
+            gridTemplateColumns: `repeat(auto-fit, ${WIDTH_1U}px)`,
+            justifyContent: "flex-start",
+            gap: "8px 5px",
+            ml: 1,
+            mb: 1,
+            minWidth: "min-content",
+          }}
+        >
+          {keycodes.map((keycode, index) => (
+            <KeyListKey
+              key={keycode.value}
+              keycode={keycode}
+              draggable={true}
+              animationDelay={Math.min(MAX_ANIMATION_DELAY_MS, index * 12)}
+            />
+          ))}
+        </Box>
+      </Box>
+    </>
+  );
+}
+
+/** A tab of the keycode catalog: the keycode groups it shows and the layout Vial draws them in. */
+type KeycodeCatalogTab = {
+  label: string;
+  keygroup: string[];
+  /**
+   * Set for the tabs Vial draws with its own key arrangement instead of the plain keycode grid.
+   * "quantumModifiers" is Vial's Quantum tab: its template keyboard above the keycodes.
+   */
+  layout?: "quantumModifiers";
+};
+
 interface TabPanelProps {
   children?: React.ReactNode;
   index: number;
@@ -359,7 +477,7 @@ function CustomTabPanel(props: TabPanelProps) {
 
 export function KeycodeCatalog(props: {
   keycodeConverter: KeycodeConverter;
-  tab?: { label: string; keygroup: string[] }[];
+  tab?: KeycodeCatalogTab[];
   directKeygroups?: string[];
   showTapDanceEditIndicator?: boolean;
   showComboOverrideEditIndicator?: boolean;
@@ -373,7 +491,8 @@ export function KeycodeCatalog(props: {
   const [tabValue, setTabValue] = useState(0);
   // Hover a keycode in the list and hold Ctrl to see what that keycode does.
   const { hintTarget, closeHint, hintAreaId } = useKeySettingHint();
-  const contentTabs = props.tab ??
+  const contentTabs: KeycodeCatalogTab[] =
+    props.tab ??
     (props.directKeygroups ?? []).map((keygroup) => ({ label: keygroup, keygroup: [keygroup] }));
   const content = (
     <Box sx={{ width: "100%" }}>
@@ -450,7 +569,13 @@ export function KeycodeCatalog(props: {
               },
             }}
           >
-            {tab.keygroup.map((keygroup) => (
+            {tab.layout === "quantumModifiers" ? (
+              <QuantumCatalogTab
+                keycodeConverter={props.keycodeConverter}
+                keygroups={tab.keygroup}
+              />
+            ) : (
+              tab.keygroup.map((keygroup) => (
               <Box
                 key={keygroup}
                 className="keycode-group"
@@ -607,7 +732,8 @@ export function KeycodeCatalog(props: {
                 <></>
               )}
               </Box>
-            ))}
+              ))
+            )}
           </Box>
         </CustomTabPanel>
       ))}

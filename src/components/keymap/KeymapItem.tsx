@@ -57,6 +57,17 @@ export function KeyLegend(props: {
     );
   }
 
+  // One-shot modifiers (OSM(mod)) only carry a modifier, so there is no base keycode that could be
+  // selected: both lines stay plain text, "OSM" above the modifier it applies.
+  if (keycode.key.startsWith("OSM(")) {
+    return (
+      <div className="layer-tap-legend">
+        <div className="layer-tap-hold hold-legend">OSM</div>
+        <div className="layer-tap-tap main-legend">{keycode.label}</div>
+      </div>
+    );
+  }
+
   // Modifier / hold keys (LCTL(kc), LSft(kc), MT(...), ...) use the same two-line layout as the
   // LT legend above: the modifier on the first line and the base keycode on the second one.
   // Like the LT tap key, that second line can be selected on its own to pick the base keycode,

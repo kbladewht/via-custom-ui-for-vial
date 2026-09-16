@@ -1,16 +1,14 @@
 import { FormControl, MenuItem, Select } from "@mui/material";
-
-/** Display names of the selectable keymap languages (the value stays the technical language code). */
-const LANGUAGE_LABELS: { [language: string]: string } = {
-  US: "US",
-  zh: "中文",
-};
+import quantumTranslations from "../locales/quantum.json";
 
 export function LanguageSelector(props: {
   languageList: string[];
   lang: string;
+  language?: "zh" | "en";
   onChange: (lang: string) => void;
 }) {
+  const languageNames: { [language: string]: string } =
+    quantumTranslations[props.language ?? "en"].languageNames;
   return (
     <FormControl variant="standard">
       <Select
@@ -20,7 +18,7 @@ export function LanguageSelector(props: {
       >
         {props.languageList.map((label) => (
           <MenuItem key={label} value={label}>
-            {LANGUAGE_LABELS[label] ?? label}
+            {languageNames[label] ?? label}
           </MenuItem>
         ))}
       </Select>

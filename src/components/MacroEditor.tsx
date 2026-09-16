@@ -2,6 +2,7 @@ import { ArrowDownward, ArrowUpward, Delete } from "@mui/icons-material";
 import { Box, Button, IconButton, Stack, TextField } from "@mui/material";
 import { useEffect, useRef, useState } from "react";
 import { ViaKeyboard } from "../services/vialKeyboad";
+import quantumTranslations from "../locales/quantum.json";
 import { DefaultQmkKeycode, KeycodeConverter } from "./keycodes/keycodeConverter";
 import { EditableKey, KeymapKeyPopUp } from "./KeymapEditor";
 
@@ -10,6 +11,7 @@ export function MacroEditor(props: {
   keycodeConverter: KeycodeConverter;
   macroIndex: number;
   macroCount: number;
+  language?: "zh" | "en";
 }) {
   const [macroData, setMacroData] = useState<{ [id: number]: number[] }>({});
   const boundaryRef = useRef<HTMLDivElement>(null);
@@ -123,11 +125,12 @@ export function MacroEditor(props: {
 
   return (
     <Box ref={boundaryRef}>
-      <Box className="editor-title">{`Edit macro${props.macroIndex}`}</Box>
+      <Box className="editor-title">{`${quantumTranslations[props.language ?? "en"].macro.title}${props.macroIndex}`}</Box>
       <MacroEntry
         buffer={macroData[props.macroIndex] ?? []}
         keycodeConverter={props.keycodeConverter}
         boundaryRef={boundaryRef}
+        language={props.language}
         onSave={(actions: number[][]) => saveMacros(actions, props.macroIndex)}
       ></MacroEntry>
     </Box>
@@ -138,8 +141,10 @@ function MacroEntry(props: {
   buffer: number[];
   keycodeConverter: KeycodeConverter;
   boundaryRef?: React.RefObject<HTMLDivElement>;
+  language?: "zh" | "en";
   onSave: (actions: number[][]) => void;
 }) {
+  const t = quantumTranslations[props.language ?? "en"];
   const [actions, setActions] = useState<number[][]>([[]]);
   const [popupOpen, setpopupOpen] = useState(false);
   const [anchorEl, setAnchorEl] = useState<HTMLElement | undefined>(undefined);
@@ -258,7 +263,7 @@ function MacroEntry(props: {
               <TextField
                 type="number"
                 size="small"
-                label="Delay[ms]"
+                label={t.macro.delay}
                 InputLabelProps={{ shrink: true }}
                 value={action[2]}
                 onChange={(event) => {
@@ -290,7 +295,16 @@ function MacroEntry(props: {
                   }}
                 ></EditableKey>
                 <div className="macro-item-label">
-                  {{ 1: "Tap", 2: "Down", 3: "Up", 5: "Tap", 6: "Down", 7: "Up" }[action[1]]}
+                  {
+                    {
+                      1: t.macro.tap,
+                      2: t.macro.down,
+                      3: t.macro.up,
+                      5: t.macro.tap,
+                      6: t.macro.down,
+                      7: t.macro.up,
+                    }[action[1]]
+                  }
                 </div>
               </>
             )}
@@ -303,6 +317,7 @@ function MacroEntry(props: {
         keycodeconverter={props.keycodeConverter}
         anchor={anchorEl}
         boundary={props.boundaryRef?.current ?? null}
+        language={props.language}
         onClickAway={() => {
           if (popupOpen) {
             setpopupOpen(false);
@@ -319,16 +334,16 @@ function MacroEntry(props: {
         }}
       ></KeymapKeyPopUp>
       <div>
-        <Button onClick={() => setActions([...actions, []])}>+TEXT</Button>
-        <Button onClick={() => setActions([...actions, [1, 1, 0]])}>+TAP</Button>
-        <Button onClick={() => setActions([...actions, [1, 2, 0]])}>+DOWN</Button>
-        <Button onClick={() => setActions([...actions, [1, 3, 0]])}>+UP</Button>
-        <Button onClick={() => setActions([...actions, [1, 4, 0]])}>+DELAY</Button>
+        <Button onClick={() => setActions([...actions, []])}>{t.macro.addText}</Button>
+        <Button onClick={() => setActions([...actions, [1, 1, 0]])}>{t.macro.addTap}</Button>
+        <Button onClick={() => setActions([...actions, [1, 2, 0]])}>{t.macro.addDown}</Button>
+        <Button onClick={() => setActions([...actions, [1, 3, 0]])}>{t.macro.addUp}</Button>
+        <Button onClick={() => setActions([...actions, [1, 4, 0]])}>{t.macro.addDelay}</Button>
       </div>
       <div>
-        <Button onClick={() => setActions(getActions(props.buffer))}>Revert</Button>
+        <Button onClick={() => setActions(getActions(props.buffer))}>{t.macro.revert}</Button>
         <Button onClick={() => props.onSave(actions)} variant="outlined">
-          SAVE
+          {t.macro.save}
         </Button>
       </div>
     </>

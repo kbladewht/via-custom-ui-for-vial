@@ -1425,18 +1425,18 @@
     "group": "magic",
     "key": "QK_MAGIC_SWAP_CONTROL_CAPS_LOCK",
     "aliases": [
-      "CL_SWAP"
+      "Swap\nCtrl\nCaps"
     ]
   },
   "0x7001": {
     "group": "magic",
     "key": "QK_MAGIC_UNSWAP_CONTROL_CAPS_LOCK",
     "aliases": [
-      "CL_NORM"
+      "UnSwap\nCtrl\nCaps"
     ]
   },
   "0x7002": {
-    "group": "magic",
+    "group": "magicna",
     "key": "QK_MAGIC_TOGGLE_CONTROL_CAPS_LOCK",
     "aliases": [
       "CL_TOGG"
@@ -1446,221 +1446,221 @@
     "group": "magic",
     "key": "QK_MAGIC_CAPS_LOCK_AS_CONTROL_OFF",
     "aliases": [
-      "CL_CAPS"
+      "Caps\nnot to\nCtrl"
     ]
   },
   "0x7004": {
     "group": "magic",
     "key": "QK_MAGIC_CAPS_LOCK_AS_CONTROL_ON",
     "aliases": [
-      "CL_CTRL"
+      "Caps\nnot to\nCtrl"
     ]
   },
   "0x7005": {
     "group": "magic",
     "key": "QK_MAGIC_SWAP_LALT_LGUI",
     "aliases": [
-      "AG_LSWP"
+      "Swap\nLAlt\nLGUI"
     ]
   },
   "0x7006": {
     "group": "magic",
     "key": "QK_MAGIC_UNSWAP_LALT_LGUI",
     "aliases": [
-      "AG_LNRM"
+      "Swap\nLAlt\nLGUI"
     ]
   },
   "0x7007": {
     "group": "magic",
     "key": "QK_MAGIC_SWAP_RALT_RGUI",
     "aliases": [
-      "AG_RSWP"
+      "Swap\nLAlt\nLGUI"
     ]
   },
   "0x7008": {
     "group": "magic",
     "key": "QK_MAGIC_UNSWAP_RALT_RGUI",
     "aliases": [
-      "AG_RNRM"
+      "Swap\nLAlt\nLGUI"
     ]
   },
   "0x7009": {
     "group": "magic",
     "key": "QK_MAGIC_GUI_ON",
     "aliases": [
-      "GU_ON"
+      "GUI\nOn"
     ]
   },
   "0x700A": {
     "group": "magic",
     "key": "QK_MAGIC_GUI_OFF",
     "aliases": [
-      "GU_OFF"
+      "GUI\nOff"
     ]
   },
   "0x700B": {
-    "group": "magic",
+    "group": "magicna",
     "key": "QK_MAGIC_TOGGLE_GUI",
     "aliases": [
-      "GU_TOGG"
+      "GUI\nToggle"
     ]
   },
   "0x700C": {
     "group": "magic",
     "key": "QK_MAGIC_SWAP_GRAVE_ESC",
     "aliases": [
-      "GE_SWAP"
+      "Swap\n~\nEsc"
     ]
   },
   "0x700D": {
     "group": "magic",
     "key": "QK_MAGIC_UNSWAP_GRAVE_ESC",
     "aliases": [
-      "GE_NORM"
+      "UnSwap\n~\nEsc"
     ]
   },
   "0x700E": {
     "group": "magic",
     "key": "QK_MAGIC_SWAP_BACKSLASH_BACKSPACE",
     "aliases": [
-      "BS_SWAP"
+      "Swap\n\\\nBackspace"
     ]
   },
   "0x700F": {
     "group": "magic",
     "key": "QK_MAGIC_UNSWAP_BACKSLASH_BACKSPACE",
     "aliases": [
-      "BS_NORM"
+      "UnSwap\n\\\nBackspace"
     ]
   },
   "0x7010": {
-    "group": "magic",
+    "group": "magicna",
     "key": "QK_MAGIC_TOGGLE_BACKSLASH_BACKSPACE",
     "aliases": [
-      "BS_TOGG"
+      "Toggle\n\\\nBackspace"
     ]
   },
   "0x7011": {
     "group": "magic",
     "key": "QK_MAGIC_NKRO_ON",
     "aliases": [
-      "NK_ON"
+      "NKRO\nOn"
     ]
   },
   "0x7012": {
     "group": "magic",
     "key": "QK_MAGIC_NKRO_OFF",
     "aliases": [
-      "NK_OFF"
+      "NKRO\nOff"
     ]
   },
   "0x7013": {
     "group": "magic",
     "key": "QK_MAGIC_TOGGLE_NKRO",
     "aliases": [
-      "NK_TOGG"
+      "NKRO\nToggle"
     ]
   },
   "0x7014": {
     "group": "magic",
     "key": "QK_MAGIC_SWAP_ALT_GUI",
     "aliases": [
-      "AG_SWAP"
+      "Swap\nLAlt\nLGUI"
     ]
   },
   "0x7015": {
     "group": "magic",
     "key": "QK_MAGIC_UNSWAP_ALT_GUI",
     "aliases": [
-      "AG_NORM"
+      "UnSwap\nLAlt\nLGUI"
     ]
   },
   "0x7016": {
     "group": "magic",
     "key": "QK_MAGIC_TOGGLE_ALT_GUI",
     "aliases": [
-      "AG_TOGG"
+      "Toggle\nLAlt\nLGUI"
     ]
   },
   "0x7017": {
     "group": "magic",
     "key": "QK_MAGIC_SWAP_LCTL_LGUI",
     "aliases": [
-      "CG_LSWP"
+      "Swap\nLCTL\nLGUI"
     ]
   },
   "0x7018": {
     "group": "magic",
     "key": "QK_MAGIC_UNSWAP_LCTL_LGUI",
     "aliases": [
-      "CG_LNRM"
+      "UnSwap\nLCTL\nLGUI"
     ]
   },
   "0x7019": {
     "group": "magic",
     "key": "QK_MAGIC_SWAP_RCTL_RGUI",
     "aliases": [
-      "CG_RSWP"
+      "Swap\nRCTL\nRGUI"
     ]
   },
   "0x701A": {
     "group": "magic",
     "key": "QK_MAGIC_UNSWAP_RCTL_RGUI",
     "aliases": [
-      "CG_RNRM"
+      "UnSwap\nRCTL\nRGUI"
     ]
   },
   "0x701B": {
     "group": "magic",
     "key": "QK_MAGIC_SWAP_CTL_GUI",
     "aliases": [
-      "CG_SWAP"
+      "Swap\nCTL\nGUI"
     ]
   },
   "0x701C": {
     "group": "magic",
     "key": "QK_MAGIC_UNSWAP_CTL_GUI",
     "aliases": [
-      "CG_NORM"
+      "UnSwap\nCTL\nGUI"
     ]
   },
   "0x701D": {
     "group": "magic",
     "key": "QK_MAGIC_TOGGLE_CTL_GUI",
     "aliases": [
-      "CG_TOGG"
+      "Toggle\nCTL\nGUI"
     ]
   },
   "0x701E": {
     "group": "magic",
     "key": "QK_MAGIC_EE_HANDS_LEFT",
     "aliases": [
-      "EH_LEFT"
+      "EEH\nLeft"
     ]
   },
   "0x701F": {
     "group": "magic",
     "key": "QK_MAGIC_EE_HANDS_RIGHT",
     "aliases": [
-      "EH_RGHT"
+      "EEH\nRight"
     ]
   },
   "0x7020": {
-    "group": "magic",
+    "group": "magicna",
     "key": "QK_MAGIC_SWAP_ESCAPE_CAPS_LOCK",
     "aliases": [
       "EC_SWAP"
     ]
   },
   "0x7021": {
-    "group": "magic",
+    "group": "magicna",
     "key": "QK_MAGIC_UNSWAP_ESCAPE_CAPS_LOCK",
     "aliases": [
       "EC_NORM"
     ]
   },
   "0x7022": {
-    "group": "magic",
+    "group": "magicna",
     "key": "QK_MAGIC_TOGGLE_ESCAPE_CAPS_LOCK",
     "aliases": [
       "EC_TOGG"
@@ -3921,11 +3921,11 @@
     "group": "quantum",
     "key": "QK_REBOOT",
     "aliases": [
-      "QK_RBT"
+      "Reboot"
     ]
   },
   "0x7C02": {
-    "group": "quantum",
+    "group": "quantumna",
     "key": "QK_DEBUG_TOGGLE",
     "aliases": [
       "DB_TOGG"
@@ -3935,29 +3935,29 @@
     "group": "quantum",
     "key": "QK_CLEAR_EEPROM",
     "aliases": [
-      "EE_CLR"
+      "Clear\nEEPROM"
     ]
   },
   "0x7C04": {
-    "group": "quantum",
+    "group": "quantumna",
     "key": "QK_MAKE"
   },
   "0x7C10": {
-    "group": "quantum",
+    "group": "quantumna",
     "key": "QK_AUTO_SHIFT_DOWN",
     "aliases": [
       "AS_DOWN"
     ]
   },
   "0x7C11": {
-    "group": "quantum",
+    "group": "quantumna",
     "key": "QK_AUTO_SHIFT_UP",
     "aliases": [
       "AS_UP"
     ]
   },
   "0x7C12": {
-    "group": "quantum",
+    "group": "quantumna",
     "key": "QK_AUTO_SHIFT_REPORT",
     "aliases": [
       "AS_RPT"
@@ -3967,32 +3967,32 @@
     "group": "quantum",
     "key": "QK_AUTO_SHIFT_ON",
     "aliases": [
-      "AS_ON"
+      "Auto-shift\nOn"
     ]
   },
   "0x7C14": {
     "group": "quantum",
     "key": "QK_AUTO_SHIFT_OFF",
     "aliases": [
-      "AS_OFF"
+      "Auto-shift\nOff"
     ]
   },
   "0x7C15": {
     "group": "quantum",
     "key": "QK_AUTO_SHIFT_TOGGLE",
     "aliases": [
-      "AS_TOGG"
+      "Auto-shift\nToggle"
     ]
   },
   "0x7C16": {
-    "group": "quantum",
+    "group": "quantumna",
     "key": "QK_GRAVE_ESCAPE",
     "aliases": [
       "QK_GESC"
     ]
   },
   "0x7C17": {
-    "group": "quantum",
+    "group": "quantumna",
     "key": "QK_VELOCIKEY_TOGGLE",
     "aliases": [
       "VK_TOGG"
@@ -4048,77 +4048,77 @@
     ]
   },
   "0x7C20": {
-    "group": "quantum",
+    "group": "quantumna",
     "key": "QK_OUTPUT_AUTO",
     "aliases": [
       "OU_AUTO"
     ]
   },
   "0x7C21": {
-    "group": "quantum",
+    "group": "quantumna",
     "key": "QK_OUTPUT_USB",
     "aliases": [
       "OU_USB"
     ]
   },
   "0x7C22": {
-    "group": "quantum",
+    "group": "quantumna",
     "key": "QK_OUTPUT_BLUETOOTH",
     "aliases": [
       "OU_BT"
     ]
   },
   "0x7C30": {
-    "group": "quantum",
+    "group": "quantumna",
     "key": "QK_UNICODE_MODE_NEXT",
     "aliases": [
       "UC_NEXT"
     ]
   },
   "0x7C31": {
-    "group": "quantum",
+    "group": "quantumna",
     "key": "QK_UNICODE_MODE_PREVIOUS",
     "aliases": [
       "UC_PREV"
     ]
   },
   "0x7C32": {
-    "group": "quantum",
+    "group": "quantumna",
     "key": "QK_UNICODE_MODE_MACOS",
     "aliases": [
       "UC_MAC"
     ]
   },
   "0x7C33": {
-    "group": "quantum",
+    "group": "quantumna",
     "key": "QK_UNICODE_MODE_LINUX",
     "aliases": [
       "UC_LINX"
     ]
   },
   "0x7C34": {
-    "group": "quantum",
+    "group": "quantumna",
     "key": "QK_UNICODE_MODE_WINDOWS",
     "aliases": [
       "UC_WIN"
     ]
   },
   "0x7C35": {
-    "group": "quantum",
+    "group": "quantumna",
     "key": "QK_UNICODE_MODE_BSD",
     "aliases": [
       "UC_BSD"
     ]
   },
   "0x7C36": {
-    "group": "quantum",
+    "group": "quantumna",
     "key": "QK_UNICODE_MODE_WINCOMPOSE",
     "aliases": [
       "UC_WINC"
     ]
   },
   "0x7C37": {
-    "group": "quantum",
+    "group": "quantumna",
     "key": "QK_UNICODE_MODE_EMACS",
     "aliases": [
       "UC_EMAC"
@@ -4209,7 +4209,7 @@
     ]
   },
   "0x7C4C": {
-    "group": "quantum",
+    "group": "quantum_na",
     "key": "QK_HAPTIC_DWELL_DOWN",
     "aliases": [
       "HF_DWLD"
@@ -4219,21 +4219,21 @@
     "group": "quantum",
     "key": "QK_COMBO_ON",
     "aliases": [
-      "CM_ON"
+      "Combo\nOn"
     ]
   },
   "0x7C51": {
     "group": "quantum",
     "key": "QK_COMBO_OFF",
     "aliases": [
-      "CM_OFF"
+      "Combo\nOff"
     ]
   },
   "0x7C52": {
     "group": "quantum",
     "key": "QK_COMBO_TOGGLE",
     "aliases": [
-      "CM_TOGG"
+      "Combo\nToggle"
     ]
   },
   "0x7C53": {
@@ -4272,102 +4272,102 @@
     ]
   },
   "0x7C58": {
-    "group": "quantum",
+    "group": "quantumna",
     "key": "QK_LEADER",
     "aliases": [
       "QK_LEAD"
     ]
   },
   "0x7C59": {
-    "group": "quantum",
+    "group": "quantumna",
     "key": "QK_LOCK"
   },
   "0x7C5A": {
-    "group": "quantum",
+    "group": "quantumna",
     "key": "QK_ONE_SHOT_ON",
     "aliases": [
       "OS_ON"
     ]
   },
   "0x7C5B": {
-    "group": "quantum",
+    "group": "quantumna",
     "key": "QK_ONE_SHOT_OFF",
     "aliases": [
       "OS_OFF"
     ]
   },
   "0x7C5C": {
-    "group": "quantum",
+    "group": "quantumna",
     "key": "QK_ONE_SHOT_TOGGLE",
     "aliases": [
       "OS_TOGG"
     ]
   },
   "0x7C5D": {
-    "group": "quantum",
+    "group": "quantumna",
     "key": "QK_KEY_OVERRIDE_TOGGLE",
     "aliases": [
       "KO_TOGG"
     ]
   },
   "0x7C5E": {
-    "group": "quantum",
+    "group": "quantumna",
     "key": "QK_KEY_OVERRIDE_ON",
     "aliases": [
       "KO_ON"
     ]
   },
   "0x7C5F": {
-    "group": "quantum",
+    "group": "quantumna",
     "key": "QK_KEY_OVERRIDE_OFF",
     "aliases": [
       "KO_OFF"
     ]
   },
   "0x7C60": {
-    "group": "quantum",
+    "group": "quantumna",
     "key": "QK_SECURE_LOCK",
     "aliases": [
       "SE_LOCK"
     ]
   },
   "0x7C61": {
-    "group": "quantum",
+    "group": "quantumna",
     "key": "QK_SECURE_UNLOCK",
     "aliases": [
       "SE_UNLK"
     ]
   },
   "0x7C62": {
-    "group": "quantum",
+    "group": "quantumna",
     "key": "QK_SECURE_TOGGLE",
     "aliases": [
       "SE_TOGG"
     ]
   },
   "0x7C63": {
-    "group": "quantum",
+    "group": "quantumna",
     "key": "QK_SECURE_REQUEST",
     "aliases": [
       "SE_REQ"
     ]
   },
   "0x7C70": {
-    "group": "quantum",
+    "group": "quantumna",
     "key": "QK_DYNAMIC_TAPPING_TERM_PRINT",
     "aliases": [
       "DT_PRNT"
     ]
   },
   "0x7C71": {
-    "group": "quantum",
+    "group": "quantumna",
     "key": "QK_DYNAMIC_TAPPING_TERM_UP",
     "aliases": [
       "DT_UP"
     ]
   },
   "0x7C72": {
-    "group": "quantum",
+    "group": "quantumna",
     "key": "QK_DYNAMIC_TAPPING_TERM_DOWN",
     "aliases": [
       "DT_DOWN"
@@ -4377,39 +4377,39 @@
     "group": "quantum",
     "key": "QK_CAPS_WORD_TOGGLE",
     "aliases": [
-      "CW_TOGG"
+      "Caps\nWord"
     ]
   },
   "0x7C74": {
-    "group": "quantum",
+    "group": "quantumna",
     "key": "QK_AUTOCORRECT_ON",
     "aliases": [
       "AC_ON"
     ]
   },
   "0x7C75": {
-    "group": "quantum",
+    "group": "quantumna",
     "key": "QK_AUTOCORRECT_OFF",
     "aliases": [
       "AC_OFF"
     ]
   },
   "0x7C76": {
-    "group": "quantum",
+    "group": "quantumna",
     "key": "QK_AUTOCORRECT_TOGGLE",
     "aliases": [
       "AC_TOGG"
     ]
   },
   "0x7C77": {
-    "group": "quantum",
+    "group": "quantumna",
     "key": "QK_TRI_LAYER_LOWER",
     "aliases": [
       "TL_LOWR"
     ]
   },
   "0x7C78": {
-    "group": "quantum",
+    "group": "quantumna",
     "key": "QK_TRI_LAYER_UPPER",
     "aliases": [
       "TL_UPPR"
@@ -4419,14 +4419,14 @@
     "group": "quantum",
     "key": "QK_REPEAT_KEY",
     "aliases": [
-      "QK_REP"
+      "Repeat"
     ]
   },
   "0x7C7A": {
     "group": "quantum",
     "key": "QK_ALT_REPEAT_KEY",
     "aliases": [
-      "QK_AREP"
+      "Alt\nRepeat"
     ]
   },
   "0x7E00": {

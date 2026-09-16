@@ -11,6 +11,7 @@ import {
 } from "@mui/material";
 import { matchSorter } from "match-sorter";
 import { useEffect, useRef, useState } from "react";
+import quantumTranslations from "../locales/quantum.json";
 import { DefaultQmkKeycode, KeycodeConverter, ModifierBit, ModifierBits, QmkKeycode } from "./keycodes/keycodeConverter";
 import { KeymapKeyProperties } from "./keymap/keymapTypes";
 
@@ -21,9 +22,11 @@ export function KeymapKeyPopUp(props: {
   anchor?: HTMLElement;
   boundary: HTMLElement | null;
   keymapKey?: KeymapKeyProperties;
+  language?: "zh" | "en";
   onClickAway?: () => void;
   onChange?: (event: { keymapkey?: KeymapKeyProperties; keycode: QmkKeycode }) => void;
 }) {
+  const t = quantumTranslations[props.language ?? "en"].keyPopup;
   const [tapValue, setTapValue] = useState<QmkKeycode>(
     props.keycodeconverter.getTapKeycode(props.keycode),
   );
@@ -105,7 +108,7 @@ export function KeymapKeyPopUp(props: {
             isOptionEqualToValue={(option, value) => option.value == value.value}
             getOptionKey={(option) => option.key}
             getOptionLabel={(option) => option.label}
-            renderInput={(params) => <TextField {...params} label="Base(Tap)" />}
+            renderInput={(params) => <TextField {...params} label={t.base} />}
             renderOption={(optionProps, option) => (
               <Box component="li" {...optionProps}>
                 <div className="list-label">{option.label}</div>
@@ -135,7 +138,7 @@ export function KeymapKeyPopUp(props: {
             isOptionEqualToValue={(option, value) => option.value == value.value}
             getOptionKey={(option) => option.key}
             getOptionLabel={(option) => option.label}
-            renderInput={(params) => <TextField {...params} label="Option(Hold)" />}
+            renderInput={(params) => <TextField {...params} label={t.hold} />}
             renderOption={(optionProps, option) => (
               <Box component="li" {...optionProps}>
                 <div className="list-label">{option.label}</div>
@@ -182,7 +185,7 @@ export function KeymapKeyPopUp(props: {
           </FormGroup>
 
           <TextField
-            label="Keycode(hex)"
+            label={t.hex}
             variant="outlined"
             value={keycodeValue}
             onChange={(event) => {

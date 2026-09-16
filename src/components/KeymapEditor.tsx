@@ -156,7 +156,7 @@ export function KeymapEditor(props: {
             { label: quantumTranslations[props.language].keycodeTabs.Mouse, keygroup: ["mouse"] },
             { label: quantumTranslations[props.language].keycodeTabs.UserWireless, keygroup: ["custom"] },
             { label: quantumTranslations[props.language].keycodeTabs.Media, keygroup: ["media"] },
-            { label: quantumTranslations[props.language].keycodeTabs.Quantum, keygroup: ["quantum", "magic"] },
+            { label: quantumTranslations[props.language].keycodeTabs.Quantum, keygroup: ["quantum", "magic"], layout: "quantumModifiers" },
             { label: quantumTranslations[props.language].keycodeTabs.RGB, keygroup: ["backlight", "rgb", "rgb_matrix"] },
             { label: quantumTranslations[props.language].keycodeTabs.Layer, keygroup: ["layer"] },
             { label: quantumTranslations[props.language].keycodeTabs.Macro, keygroup: ["macro"] },

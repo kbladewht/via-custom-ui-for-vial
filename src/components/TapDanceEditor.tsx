@@ -224,7 +224,7 @@ function TapDanceEntry(props: {
               { label: "Basic", keygroup: ["basic"] },
               { label: "Mouse", keygroup: ["mouse"] },
               { label: "Media", keygroup: ["media"] },
-              { label: "Quantum", keygroup: ["quantum", "magic"] },
+              { label: "Quantum", keygroup: ["quantum", "magic"], layout: "quantumModifiers" },
               { label: "Layer", keygroup: ["layer"] },
               { label: "Macro", keygroup: ["macro"] },
               { label: "Tap Dance", keygroup: ["tapdance"] },
