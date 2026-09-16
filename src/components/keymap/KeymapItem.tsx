@@ -59,14 +59,15 @@ export function KeyLegend(props: {
   // Modifier / hold keys (LCTL(kc), LSft(kc), MT(...), ...) use the same two-line layout as the
   // LT legend above: the modifier on the first line and the base keycode on the second one.
   // Like the LT tap key, that second line can be selected on its own to pick the base keycode,
-  // which lets a modifier stay attached to whatever key is chosen afterwards.
+  // which lets a modifier stay attached to whatever key is chosen afterwards. As long as no base
+  // keycode is set (tap === 0) the line stays empty instead of showing a placeholder.
   const holdLegend = keycode.modNameLabel ?? keycode.modLabel ?? keycode.holdLabel;
   if (holdLegend) {
     return (
       <div className="layer-tap-legend">
         <div className="layer-tap-hold hold-legend">{holdLegend}</div>
         <LegendLine
-          content={keycode.label}
+          content={keycode.tap === 0 ? "" : keycode.label}
           ariaLabel={`${holdLegend} base key`}
           title="Base keycode (basic keycodes only)"
           isFocused={props.isTapFocused}

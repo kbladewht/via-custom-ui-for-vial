@@ -352,9 +352,9 @@ export class KeycodeConverter {
 
     // "Modifier + keycode" templates (LCtl(kc), LSft(kc), ...) so a modifier can be picked
     // directly from the Quantum catalog like VIA does. The base keycode is chosen afterwards
-    // through the modifier / Tap / Hold controls of the key popup (ctrl + click the key).
-    // The first line shows the modifier and the second one the pending keycode, matching
-    // VIA's "LSft (kc)" keys.
+    // through the modifier / Tap / Hold controls of the key popup (ctrl + click the key) or by
+    // clicking the second legend line of the key. Like the LT templates, no base key is set yet
+    // (tap === 0), so that line stays empty until a keycode is picked.
     this.tapKeycodeList.push(
       ...MOD_KEYCODE_TEMPLATE_MODIFIERS.map((mod) => {
         return {
@@ -362,7 +362,9 @@ export class KeycodeConverter {
           value: mod << 8,
           key: `MODS(${modStringLong(mod)},KC_NO)`,
           shiftedLabel: modStringName(mod),
-          label: "(kc)",
+          aliases: [modStringName(mod)],
+          label: "",
+          tap: 0,
           modLabel: modStringShort(mod),
           modNameLabel: modStringName(mod),
         };
@@ -516,6 +518,7 @@ export class KeycodeConverter {
             key: `MODS(${modLongLabel},${baseKeycode.key})`,
             modLabel: modLabel,
             modNameLabel: modStringName((val >> 8) & 0x1f),
+            tap: val & 0xff,
             label: baseKeycode.label,
             shiftedLabel: baseKeycode.shiftedLabel,
           };
