@@ -229,6 +229,9 @@ body.theme-light .key-select-popup .MuiAutocomplete-option[aria-selected="true"]
   display: none;
 }
 
+/* One single frame colour for the whole light workspace: the tab borders and every content panel
+   border share "#b8c7d3", so the selected tab and the panel it opens into read as one frame
+   (no darker/lighter jump where the tab meets the content). */
 .app-shell.theme-light .MuiTab-root {
   color: #60788e !important;
   border-color: #b8c7d3 !important;
@@ -239,7 +242,7 @@ body.theme-light .key-select-popup .MuiAutocomplete-option[aria-selected="true"]
 .app-shell.theme-light .MuiTab-root.Mui-selected {
   color: #29445d !important;
   background-color: #f7f9fb !important;
-  border-color: #8da8bc !important;
+  border-color: #b8c7d3 !important;
   border-bottom-color: transparent !important;
   box-shadow: inset 0 -1px 0 #f7f9fb;
 }
@@ -362,7 +365,7 @@ body.theme-light .keycode-catalog-tab {
 
 body.theme-light .MuiTab-root.keycode-catalog-tab.Mui-selected {
   color: #29445d !important;
-  border-color: #8da8bc !important;
+  border-color: #b8c7d3 !important;
   border-bottom: 0 !important;
   background-color: #eef3f7 !important;
   box-shadow: none !important;
@@ -453,7 +456,7 @@ body.theme-light .MuiTab-root.keycode-catalog-tab.Mui-selected {
 
 .app-shell.theme-light .keymap-main-tab.Mui-selected {
   background-color: #f7f9fb !important;
-  border-color: #8da8bc !important;
+  border-color: #b8c7d3 !important;
   border-bottom-color: transparent !important;
   box-shadow: inset 0 -1px 0 #f7f9fb;
 }
@@ -499,7 +502,7 @@ body.theme-light .MuiTab-root.keycode-catalog-tab.Mui-selected {
 .app-shell.theme-light .entry-tab.Mui-selected {
   color: #29445d !important;
   background-color: transparent !important;
-  border-color: #8da8bc !important;
+  border-color: #b8c7d3 !important;
   border-bottom-color: transparent !important;
   box-shadow: none !important;
 }
@@ -526,7 +529,7 @@ body.theme-light .MuiTab-root.keycode-catalog-tab.Mui-selected {
 .app-shell.theme-light .quantum-settings-tab.Mui-selected {
   color: #29445d !important;
   background-color: transparent !important;
-  border-color: #8da8bc !important;
+  border-color: #b8c7d3 !important;
   border-bottom-color: transparent !important;
   box-shadow: none !important;
 }
@@ -632,7 +635,7 @@ body.theme-light .MuiTab-root.keycode-catalog-tab.Mui-selected {
 
 .app-shell.theme-light .tapdance-selector-entry-tab.Mui-selected {
   background-color: transparent !important;
-  border-color: #8da8bc !important;
+  border-color: #b8c7d3 !important;
   border-bottom-color: transparent !important;
 }
 
