@@ -355,6 +355,32 @@ body:not(.theme-light) .entry-tab.Mui-selected {
   box-shadow: none !important;
 }
 
+body:not(.theme-light) .quantum-settings-tab {
+  border: 1px solid #334155 !important;
+  background-color: transparent !important;
+  border-radius: 8px 8px 0 0 !important;
+  min-height: 26px !important;
+  height: 26px !important;
+  min-width: 64px !important;
+  width: auto !important;
+  padding: 0 10px !important;
+}
+
+body:not(.theme-light) .quantum-settings-tab + .quantum-settings-tab {
+  border-left: 0 !important;
+}
+
+body:not(.theme-light) .quantum-settings-tab.Mui-selected {
+  background-color: transparent !important;
+  border-color: #475569 !important;
+  border-bottom-color: transparent !important;
+  box-shadow: none !important;
+}
+
+body:not(.theme-light) .quantum-settings-tab + .quantum-settings-tab.Mui-selected {
+  border-left: 0 !important;
+}
+
 body:not(.theme-light) .keycode-catalog-tabs,
 body:not(.theme-light) .keycode-catalog-tabs .MuiTabs-scroller,
 body:not(.theme-light) .keycode-catalog-tabs .MuiTabs-flexContainer {

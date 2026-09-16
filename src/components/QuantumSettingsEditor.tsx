@@ -271,6 +271,7 @@ export function QuantumSettingsEditor(props: {
                 {visibleQuantumTabs.map((quantumTab) => (
                   <Tab
                     key={quantumTab.label}
+                    className="quantum-settings-tab"
                     label={
                       (quantumTranslations[props.language].tabs as Record<string, string>)[quantumTab.label] ??
                       quantumTab.label

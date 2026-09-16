@@ -451,6 +451,33 @@ body.theme-light .key-select-popup .MuiAutocomplete-option[aria-selected="true"]
   border-left: 0 !important;
 }
 
+.app-shell.theme-light .quantum-settings-tab {
+  border: 1px solid #b8c7d3 !important;
+  background-color: transparent !important;
+  border-radius: 8px 8px 0 0 !important;
+  min-height: 26px !important;
+  height: 26px !important;
+  min-width: 64px !important;
+  width: auto !important;
+  padding: 0 10px !important;
+}
+
+.app-shell.theme-light .quantum-settings-tab + .quantum-settings-tab {
+  border-left: 0 !important;
+}
+
+.app-shell.theme-light .quantum-settings-tab.Mui-selected {
+  color: #29445d !important;
+  background-color: transparent !important;
+  border-color: #8da8bc !important;
+  border-bottom-color: transparent !important;
+  box-shadow: none !important;
+}
+
+.app-shell.theme-light .quantum-settings-tab + .quantum-settings-tab.Mui-selected {
+  border-left: 0 !important;
+}
+
 .app-shell.theme-light .keycode-catalog-tabs,
 .app-shell.theme-light .keycode-catalog-tabs .MuiTabs-scroller,
 .app-shell.theme-light .keycode-catalog-tabs .MuiTabs-flexContainer {
