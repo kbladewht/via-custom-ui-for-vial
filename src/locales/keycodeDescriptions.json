@@ -19,7 +19,7 @@
     "OSM": "单次修饰键：按下后，下一个按键会带上{mod}。",
     "TD": "触发第{index}个 Tap Dance。",
     "MACRO": "执行第{index}个宏。",
-    "custom": "自定义键值 {label}：具体功能由你的键盘固件（Vial 定义）决定。"
+    "custom": "自定义键值 {label}"
   },
   "keycodes": {
     "QK_BOOTLOADER": "进入 Bootloader（刷固件模式），键盘会重新枚举成可刷写设备。",
@@ -329,12 +329,9 @@
     { "prefix": "QK_MIDI_CHANNEL_", "text": "MIDI：切换到第 {index} 号通道。" },
     { "prefix": "QK_MIDI_TRANSPOSE_", "text": "MIDI：移调 {index} 个半音。" },
     { "prefix": "QK_MIDI_", "text": "MIDI 控制：{name}。" },
-    {
-      "prefix": "QK_JOYSTICK_BUTTON_",
-      "text": "手柄按键 {index}：模拟按下手柄上的第 {index} 个按键。"
-    },
-    { "prefix": "QK_PROGRAMMABLE_BUTTON_", "text": "可编程按键 {index}：功能由键盘固件定义。" },
-    { "prefix": "QK_KB_", "text": "键盘自定义键值 {index}：功能由你的键盘固件定义。" },
-    { "prefix": "QK_USER_", "text": "用户自定义键值 {index}：功能由你的键盘固件定义。" }
+    { "prefix": "QK_JOYSTICK_BUTTON_", "text": "模拟手柄按键 {index}" },
+    { "prefix": "QK_PROGRAMMABLE_BUTTON_", "text": "可编程按键 {index}" },
+    { "prefix": "QK_KB_", "text": "键盘自定义键值 {index}" },
+    { "prefix": "QK_USER_", "text": "用户自定义键值 {index}" }
   ]
 }

@@ -27,6 +27,15 @@ export function KeySettingHint(props: {
 }) {
   const hint = keySettingHints[props.type];
   const description = describeKeycode(props.keycode, props.keycodeconverter);
+  // The example refers to the key that was clicked, so it mentions its current keycode (or an empty
+  // key): "把当前的 Z 换成 X" / "当前还是空的，点 A 就能把它设成 A".
+  const currentLabel = props.keycode.label.trim();
+  const isEmptyKeycode = props.keycode.value === 0 || currentLabel === "";
+  const exampleTarget = isEmptyKeycode ? "A" : currentLabel === "X" ? "Z" : "X";
+  const emptyExample = (hint as { exampleEmpty?: string }).exampleEmpty;
+  const example = (isEmptyKeycode && emptyExample ? emptyExample : hint.example)
+    .replace(/\{current\}/g, currentLabel)
+    .replace(/\{target\}/g, exampleTarget);
   const holdLegend =
     props.keycode.modNameLabel ?? props.keycode.modLabel ?? props.keycode.holdLabel;
 
@@ -93,7 +102,7 @@ export function KeySettingHint(props: {
               borderTop: "1px solid rgba(148, 163, 184, 0.35)",
             }}
           >
-            {hint.example}
+            {example}
           </Typography>
         </Box>
       </Popper>
