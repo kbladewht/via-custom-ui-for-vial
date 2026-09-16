@@ -3988,7 +3988,7 @@
     "group": "quantumna",
     "key": "QK_GRAVE_ESCAPE",
     "aliases": [
-      "QK_GESC"
+      "~\nEsc"
     ]
   },
   "0x7C17": {
@@ -4002,49 +4002,49 @@
     "group": "quantum",
     "key": "QK_SPACE_CADET_LEFT_CTRL_PARENTHESIS_OPEN",
     "aliases": [
-      "SC_LCPO"
+      "LC\n("
     ]
   },
   "0x7C19": {
     "group": "quantum",
     "key": "QK_SPACE_CADET_RIGHT_CTRL_PARENTHESIS_CLOSE",
     "aliases": [
-      "SC_RCPC"
+      "RC\n)"
     ]
   },
   "0x7C1A": {
     "group": "quantum",
     "key": "QK_SPACE_CADET_LEFT_SHIFT_PARENTHESIS_OPEN",
     "aliases": [
-      "SC_LSPO"
+      "LS\n("
     ]
   },
   "0x7C1B": {
     "group": "quantum",
     "key": "QK_SPACE_CADET_RIGHT_SHIFT_PARENTHESIS_CLOSE",
     "aliases": [
-      "SC_RSPC"
+      "RS\n)"
     ]
   },
   "0x7C1C": {
     "group": "quantum",
     "key": "QK_SPACE_CADET_LEFT_ALT_PARENTHESIS_OPEN",
     "aliases": [
-      "SC_LAPO"
+      "LA\n("
     ]
   },
   "0x7C1D": {
     "group": "quantum",
     "key": "QK_SPACE_CADET_RIGHT_ALT_PARENTHESIS_CLOSE",
     "aliases": [
-      "SC_RAPC"
+      "RA\n)"
     ]
   },
   "0x7C1E": {
     "group": "quantum",
     "key": "QK_SPACE_CADET_RIGHT_SHIFT_ENTER",
     "aliases": [
-      "SC_SENT"
+      "RS\nEnter"
     ]
   },
   "0x7C20": {
