@@ -33,8 +33,12 @@ export function QuantumSettingsEditor(props: {
   const [savedQuantumValue, setSavedQuantumValue] = useState<{ [id: string]: number }>({});
   const [selectedMacroIndex, setSelectedMacroIndex] = useState(0);
   const [keycodeConverter, setKeycodeConverter] = useState<KeycodeConverter>();
+  const [mouseKeysSupported, setMouseKeysSupported] = useState<boolean | null>(null);
 
   const t = quantumTranslations[props.language ?? "en"];
+  const visibleQuantumTabs = QuantumSettingDefinition.filter(
+    (quantumTab) => quantumTab.label !== "Mouse Keys" || mouseKeysSupported !== false,
+  );
 
   const isDirty = Object.keys(quantumValue).some(
     (key) => savedQuantumValue[key] !== undefined && quantumValue[key] !== savedQuantumValue[key]
@@ -70,9 +74,38 @@ export function QuantumSettingsEditor(props: {
   }, [props.customKeycodes, props.language, props.macroCount]);
 
   useEffect(() => {
+    if (mouseKeysSupported === false && QuantumSettingDefinition[quantumTabValue]?.label === "Mouse Keys") {
+      setQuantumTabValue(0);
+    }
+  }, [mouseKeysSupported, quantumTabValue]);
+
+  useEffect(() => {
+    let cancelled = false;
+
+    const loadMouseKeysCapability = async () => {
+      try {
+        const value = await props.via.GetQuantumSettingsValue([9, 10, 11, 12, 13, 14, 15, 16, 17]);
+        if (!cancelled) {
+          setMouseKeysSupported(Object.keys(value).length > 0);
+        }
+      } catch {
+        if (!cancelled) {
+          setMouseKeysSupported(false);
+        }
+      }
+    };
+
+    void loadMouseKeysCapability();
+
+    return () => {
+      cancelled = true;
+    };
+  }, [props.via]);
+
+  useEffect(() => {
     console.log("read quantum values");
 
-    const currentTab = QuantumSettingDefinition[quantumTabValue] ?? QuantumSettingDefinition[0];
+    const currentTab = visibleQuantumTabs[quantumTabValue] ?? visibleQuantumTabs[0] ?? QuantumSettingDefinition[0];
     const uniqueIds = Array.from(new Set(currentTab.content.map((v) => v.content[1] as number)));
     const undefinedIds = uniqueIds.filter((id) => {
       const entry = currentTab.content.find((v) => v.content[1] === id);
@@ -204,15 +237,38 @@ export function QuantumSettingsEditor(props: {
               dynamicEntryCount={props.dynamicEntryCount}
             />
           ) : menu.id === "Quantum" ? (
-            <Box>
+            <Box
+              sx={{
+                width: "100%",
+                minHeight: "calc(100vh - 180px)",
+                p: 1,
+                display: "flex",
+                flexDirection: "column",
+              }}
+            >
               <Tabs
+                className="entry-tabs quantum-settings-tabs"
                 value={quantumTabValue}
                 onChange={(_event, value) => setQuantumTabValue(value)}
                 variant="scrollable"
-                scrollButtons="auto"
-                sx={{ py: 0 }}
+                scrollButtons={false}
+                sx={{
+                  py: 0,
+                  "& .MuiTabs-flexContainer": {
+                    justifyContent: "flex-start",
+                    "&::after": {
+                      content: '""',
+                      flex: "1 1 auto",
+                      minWidth: 28,
+                      height: 26,
+                      marginRight: 10,
+                      borderBottom: "1px solid rgba(148, 163, 184, 0.28)",
+                      pointerEvents: "none",
+                    },
+                  },
+                }}
               >
-                {QuantumSettingDefinition.map((quantumTab) => (
+                {visibleQuantumTabs.map((quantumTab) => (
                   <Tab
                     key={quantumTab.label}
                     label={
@@ -235,19 +291,47 @@ export function QuantumSettingsEditor(props: {
                   />
                 ))}
               </Tabs>
-              <Box sx={{ p: 2 }}>
-                <ViaMenuItem
-                  {...(QuantumSettingDefinition[quantumTabValue] as MenuSectionProperties)}
-                  customValues={quantumValue}
-                  language={props.language}
-                  onChange={(id, value) => {
-                    console.log(`update ${id} to ${value}`);
-                    const newValues = { ...quantumValue, [id[0]]: value };
-                    setQuantumValue(newValues);
-                    props.onChange(newValues);
+              <Box
+                className="entry-content-panel quantum-settings-content-panel"
+                sx={{
+                  width: "100%",
+                  flex: 1,
+                  mt: 0,
+                  display: "flex",
+                  flexDirection: "column",
+                  p: 2,
+                }}
+              >
+                <Box
+                  sx={{
+                    width: "100%",
+                    flex: 1,
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
                   }}
-                />
-                <Box sx={{ display: "flex", gap: 1, mt: 2 }}>
+                >
+                  <ViaMenuItem
+                    {...((visibleQuantumTabs[quantumTabValue] ?? visibleQuantumTabs[0] ?? QuantumSettingDefinition[0]) as MenuSectionProperties)}
+                    customValues={quantumValue}
+                    language={props.language}
+                    onChange={(id, value) => {
+                      console.log(`update ${id} to ${value}`);
+                      const newValues = { ...quantumValue, [id[0]]: value };
+                      setQuantumValue(newValues);
+                      props.onChange(newValues);
+                    }}
+                  />
+                </Box>
+                <Box
+                  sx={{
+                    display: "flex",
+                    justifyContent: "flex-end",
+                    gap: 1,
+                    width: "100%",
+                    mt: "auto",
+                  }}
+                >
                   <Button
                     variant="outlined"
                     disabled={!isDirty}
