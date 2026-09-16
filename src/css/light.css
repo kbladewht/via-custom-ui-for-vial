@@ -198,8 +198,10 @@ body.theme-light .key-select-popup .MuiAutocomplete-option[aria-selected="true"]
   background: #d1dbe4;
 }
 
+/* The candidate area container keeps the same surface as the keymap content area (dark parity:
+   #1e293b); only the candidate panel inside it (keycode-catalog-scroll) is one step deeper. */
 .app-shell.theme-light .keycatalog-surface {
-  background: #c6d2dd;
+  background: #d1dbe4;
 }
 
 .app-shell.theme-light .keycatalog-surface {
@@ -361,7 +363,7 @@ body.theme-light .key-select-popup .MuiAutocomplete-option[aria-selected="true"]
 }
 
 .app-shell.theme-light .keycatalog-surface {
-  background: #c6d2dd;
+  background: #d1dbe4;
   color: #334b61;
 }
 
