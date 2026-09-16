@@ -186,11 +186,14 @@ body:not(.theme-light) .battery-meter-fill {
   display: none;
 }
 
+/* The keycap area has no background and no frame of its own (light theme parity): keymap.css keeps a
+   "box-shadow: 0 10px 26px" halo on the loaded state via the keymap-frame-in animation, and
+   animations outrank normal declarations, so it needs !important. */
 .app-shell:not(.theme-light) .keymap-surface {
-  background: #1e293b;
+  background: transparent;
   border: 0;
   border-radius: 0;
-  box-shadow: none;
+  box-shadow: none !important;
 }
 
 .app-shell:not(.theme-light) .app-main-panel h4,

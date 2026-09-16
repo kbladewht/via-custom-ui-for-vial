@@ -144,6 +144,7 @@ export function KeymapEditor(props: {
           overflowX: "auto",
           overflowY: focusedKey ? "auto" : "hidden",
           pl: 1,
+          pr: 1,
           pb: focusedKey ? 3 : 0,
           pt: 0,
           transition: "max-height 220ms ease, margin-top 220ms ease, opacity 180ms ease, transform 220ms ease, visibility 220ms ease, padding-bottom 220ms ease",
