@@ -11,6 +11,8 @@ export type QmkKeycode = {
   tap?: number;
   modLabel?: string;
   holdLabel?: string;
+  /** Readable modifier name (e.g. "LCtrl") used by the stacked keycap legend. */
+  modNameLabel?: string;
 };
 
 export type TapDance = {
@@ -80,6 +82,33 @@ function modStringLong(mod: number) {
     ? `${activeMod.map((m) => `MOD_R${m}`).join("|")}`
     : `${activeMod.map((m) => `MOD_L${m}`).join("|")}`;
 }
+
+/**
+ * Readable modifier name for the keycap legend, e.g. "LCtrl" or "RShift".
+ * Multiple modifiers fall back to the compact notation ("*C+S") so the label
+ * still fits on a single keycap line.
+ */
+function modStringName(mod: number) {
+  const MOD = ["Ctrl", "Shift", "Alt", "GUI"];
+  const activeMod = [];
+  for (let b = 0; b < 4; b++) {
+    if (mod & (1 << b)) {
+      activeMod.push(MOD[b]);
+    }
+  }
+
+  if (activeMod.length !== 1) {
+    return modStringShort(mod);
+  }
+
+  return `${mod & 0x10 ? "R" : "L"}${activeMod[0]}`;
+}
+
+/**
+ * Modifier masks of the "modifier + keycode" catalog templates, in the order VIA lists them:
+ * LShift, LCtrl, LAlt, LGUI, RShift, RCtrl, RAlt, RGUI.
+ */
+const MOD_KEYCODE_TEMPLATE_MODIFIERS = [0x02, 0x01, 0x04, 0x08, 0x12, 0x11, 0x14, 0x18];
 
 type KeycodeDefinition = {
   [val: string]: {
@@ -321,6 +350,25 @@ export class KeycodeConverter {
       }),
     );
 
+    // "Modifier + keycode" templates (LCtl(kc), LSft(kc), ...) so a modifier can be picked
+    // directly from the Quantum catalog like VIA does. The base keycode is chosen afterwards
+    // through the modifier / Tap / Hold controls of the key popup (ctrl + click the key).
+    // The first line shows the modifier and the second one the pending keycode, matching
+    // VIA's "LSft (kc)" keys.
+    this.tapKeycodeList.push(
+      ...MOD_KEYCODE_TEMPLATE_MODIFIERS.map((mod) => {
+        return {
+          group: "quantum",
+          value: mod << 8,
+          key: `MODS(${modStringLong(mod)},KC_NO)`,
+          shiftedLabel: modStringName(mod),
+          label: "(kc)",
+          modLabel: modStringShort(mod),
+          modNameLabel: modStringName(mod),
+        };
+      }),
+    );
+
     this.tapKeycodeList = this.tapKeycodeList.map((k) => {
       return { ...k, label: k.label.length > 2 ? k.label.replace(/_/g, " ") : k.label };
     });
@@ -467,6 +515,7 @@ export class KeycodeConverter {
             value: val,
             key: `MODS(${modLongLabel},${baseKeycode.key})`,
             modLabel: modLabel,
+            modNameLabel: modStringName((val >> 8) & 0x1f),
             label: baseKeycode.label,
             shiftedLabel: baseKeycode.shiftedLabel,
           };
@@ -482,6 +531,7 @@ export class KeycodeConverter {
             value: val,
             key: `MOD_TAP(${modLongLabel},${baseKeycode.key})`,
             holdLabel: modLabel,
+            modNameLabel: modStringName((val >> 8) & 0x1f),
             tap: val & 0xff,
             label: baseKeycode.label,
             shiftedLabel: baseKeycode.shiftedLabel,

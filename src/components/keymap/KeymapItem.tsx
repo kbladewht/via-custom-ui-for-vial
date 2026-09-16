@@ -1,7 +1,39 @@
-import { Grid } from "@mui/material";
 import { useState } from "react";
 import { QmkKeycode } from "../keycodes/keycodeConverter";
 import { KEY_GAP, KeymapKeyProperties, WIDTH_1U } from "./keymapTypes";
+
+/**
+ * Second line of a stacked legend (LT / modifier keys): the tap key or the base keycode of a
+ * modifier key. It becomes a button when the line can be selected on its own (props.onTapClick),
+ * so a click picks only that half of the key instead of the whole keycode.
+ */
+function LegendLine(props: {
+  content: string;
+  ariaLabel: string;
+  title: string;
+  isFocused?: boolean;
+  onTapClick?: (target: HTMLElement, ctrlKey: boolean) => void;
+}) {
+  if (!props.onTapClick) {
+    return <div className="layer-tap-tap main-legend">{props.content}</div>;
+  }
+
+  return (
+    <button
+      type="button"
+      className="layer-tap-tap main-legend"
+      aria-label={props.ariaLabel}
+      aria-pressed={props.isFocused ?? false}
+      title={props.title}
+      onClick={(event) => {
+        event.stopPropagation();
+        props.onTapClick?.(event.currentTarget, event.ctrlKey);
+      }}
+    >
+      {props.content}
+    </button>
+  );
+}
 
 export function KeyLegend(props: {
   keycode: QmkKeycode;
@@ -13,47 +45,41 @@ export function KeyLegend(props: {
     return (
       <div className="layer-tap-legend">
         <div className="layer-tap-hold hold-legend">LT {keycode.hold & 0xf}</div>
-        {props.onTapClick ? (
-          <button
-            type="button"
-            className="layer-tap-tap main-legend"
-            aria-label={`LT ${keycode.hold & 0xf} tap key`}
-            aria-pressed={props.isTapFocused ?? false}
-            title="Tap key (basic keycodes only)"
-            onClick={(event) => {
-              event.stopPropagation();
-              props.onTapClick?.(event.currentTarget, event.ctrlKey);
-            }}
-          >
-            {keycode.tap === 0 ? "" : keycode.label}
-          </button>
-        ) : (
-          <div className="layer-tap-tap main-legend">{keycode.tap === 0 ? "" : keycode.label}</div>
-        )}
+        <LegendLine
+          content={keycode.tap === 0 ? "" : keycode.label}
+          ariaLabel={`LT ${keycode.hold & 0xf} tap key`}
+          title="Tap key (basic keycodes only)"
+          isFocused={props.isTapFocused}
+          onTapClick={props.onTapClick}
+        />
       </div>
     );
   }
 
-  if (!keycode.modLabel && !keycode.holdLabel) {
+  // Modifier / hold keys (LCTL(kc), LSft(kc), MT(...), ...) use the same two-line layout as the
+  // LT legend above: the modifier on the first line and the base keycode on the second one.
+  // Like the LT tap key, that second line can be selected on its own to pick the base keycode,
+  // which lets a modifier stay attached to whatever key is chosen afterwards.
+  const holdLegend = keycode.modNameLabel ?? keycode.modLabel ?? keycode.holdLabel;
+  if (holdLegend) {
     return (
-      <div className={`key-legend-centered ${keycode.label === "▽" ? "key-legend-symbol" : ""}`}>
-        {keycode.label}
+      <div className="layer-tap-legend">
+        <div className="layer-tap-hold hold-legend">{holdLegend}</div>
+        <LegendLine
+          content={keycode.label}
+          ariaLabel={`${holdLegend} base key`}
+          title="Base keycode (basic keycodes only)"
+          isFocused={props.isTapFocused}
+          onTapClick={props.onTapClick}
+        />
       </div>
     );
   }
 
   return (
-    <Grid container direction="column" className="legend-container">
-      <Grid item xs={3.5}>
-        <div className="mod-legend">{keycode.modLabel ?? ""}</div>
-      </Grid>
-      <Grid item xs={5}>
-        <div className="main-legend">{keycode.label}</div>
-      </Grid>
-      <Grid item xs={3.5}>
-        <div className="hold-legend">{keycode.holdLabel ?? ""}</div>
-      </Grid>
-    </Grid>
+    <div className={`key-legend-centered ${keycode.label === "▽" ? "key-legend-symbol" : ""}`}>
+      {keycode.label}
+    </div>
   );
 }
 
