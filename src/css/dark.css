@@ -234,8 +234,8 @@ body:not(.theme-light) .keymap-main-tab.Mui-selected {
 }
 
 body:not(.theme-light) .quantum-main-tabs .MuiTab-root.Mui-selected {
-  padding: 6px 10px !important;
-  min-height: 34px !important;
+  padding: 3px 14px !important;
+  min-height: 30px !important;
   background: linear-gradient(
     180deg,
     #355f7c 0%,
@@ -246,7 +246,8 @@ body:not(.theme-light) .quantum-main-tabs .MuiTab-root.Mui-selected {
   ) !important;
   color: #eef5fb !important;
   font-weight: 800 !important;
-  box-shadow: inset 0 -1px 0 #1e293b !important;
+  border-bottom: 0 !important;
+  box-shadow: none !important;
 }
 
 body:not(.theme-light) .keycode-catalog-tab {
