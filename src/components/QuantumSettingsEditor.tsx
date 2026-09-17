@@ -161,7 +161,7 @@ export function QuantumSettingsEditor(props: {
         value={tabValue}
         onChange={(_event, value) => setTabValue(value)}
         variant="scrollable"
-        scrollButtons="auto"
+        scrollButtons={false}
         sx={{
           py: 0,
         }}

@@ -291,7 +291,22 @@ body.theme-light .key-select-popup .MuiAutocomplete-option[aria-selected="true"]
   background-color: #d1dbe4 !important;
   border-color: #b8c7d3 !important;
   border-bottom-color: transparent !important;
-  box-shadow: inset 0 -1px 0 #d1dbe4;
+  box-shadow: inset 0 -1px 0 #d1dbe4 !important;
+}
+
+.app-shell.theme-light .quantum-main-tabs .MuiTab-root.Mui-selected {
+  padding: 6px 10px !important;
+  min-height: 34px !important;
+  background: linear-gradient(
+    180deg,
+    #557991 0%,
+    #7895a8 28%,
+    #b6c5cf 47%,
+    #d1dbe4 60%,
+    #d1dbe4 100%
+  ) !important;
+  color: #f3f7fa !important;
+  font-weight: 700 !important;
 }
 
 /* Inactive tabs that live inside a panel (candidate tabs, entry tabs, settings tabs). */
