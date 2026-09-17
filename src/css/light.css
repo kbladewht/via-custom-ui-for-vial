@@ -299,9 +299,9 @@ body.theme-light .key-select-popup .MuiAutocomplete-option[aria-selected="true"]
   min-height: 34px !important;
   background: linear-gradient(
     180deg,
-    #557991 0%,
-    #7895a8 28%,
-    #b6c5cf 47%,
+    #4f7894 0%,
+    #7393a9 28%,
+    #b4c5d0 47%,
     #d1dbe4 60%,
     #d1dbe4 100%
   ) !important;
