@@ -299,13 +299,13 @@ body.theme-light .key-select-popup .MuiAutocomplete-option[aria-selected="true"]
   min-height: 34px !important;
   background: linear-gradient(
     180deg,
-    #4f7894 0%,
-    #7393a9 28%,
-    #b4c5d0 47%,
+    #91b9cf 10%,
+    #b7ceda 28%,
+    #c7d5dc 47%,
     #d1dbe4 60%,
     #d1dbe4 100%
   ) !important;
-  color: #f3f7fa !important;
+  color: #29445d !important;
   font-weight: 700 !important;
 }
 
