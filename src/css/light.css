@@ -1,7 +1,7 @@
 body.theme-light {
   /* v2 "inner work surface": the page is the light chrome, the content areas are the deeper
      surfaces, so the Keymap / tab panels read as a recessed work area instead of a raised card. */
-  background: linear-gradient(135deg, #f2f5f9 0%, #eef3f7 48%, #e7edf3 100%);
+  background: #ffffff;
   color: #243447;
 }
 
@@ -30,7 +30,7 @@ body.theme-light *::-webkit-scrollbar-thumb:hover {
 .app-shell.theme-light {
   /* The page stays light; the tab panels below are deeper, so the content reads as a recessed
      work surface (the reverse relationship of the earlier "raised card" version). */
-  background: rgba(236, 241, 246, 0.74);
+  background: #ffffff;
 }
 
 .app-shell.theme-light .app-sidebar {
