@@ -73,6 +73,7 @@ export function AppToolbar(props: AppToolbarProps) {
 
   return (
     <Box
+      className="app-toolbar"
       sx={{
         display: "flex",
         alignItems: "center",

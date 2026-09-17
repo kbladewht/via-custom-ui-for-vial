@@ -86,7 +86,8 @@ body.theme-light *::-webkit-scrollbar-thumb:hover {
 .app-shell.theme-light .MuiButton-containedPrimary,
 .app-shell.theme-light .vial-action-button {
   background: #e5edf4 !important;
-  border-color: #aebdca !important;
+  border: 1px solid #aebdca !important;
+  box-shadow: 0 1px 2px rgba(71, 85, 105, 0.18) !important;
   color: #29445d !important;
 }
 
@@ -94,6 +95,15 @@ body.theme-light *::-webkit-scrollbar-thumb:hover {
 .app-shell.theme-light .vial-action-button:hover {
   background: #d5e3ee !important;
   border-color: #7f9ab1 !important;
+  box-shadow: 0 2px 4px rgba(71, 85, 105, 0.22) !important;
+}
+
+.app-shell.theme-light .MuiButton-containedPrimary.Mui-disabled,
+.app-shell.theme-light .vial-action-button.Mui-disabled {
+  background: #eef2f6 !important;
+  border-color: #c8d4de !important;
+  box-shadow: none !important;
+  color: #8a9bab !important;
 }
 
 .app-shell.theme-light .battery-status-button {
@@ -674,10 +684,6 @@ body.theme-light .MuiTab-root.keycode-catalog-tab.Mui-selected {
 
 /* --- Parity with dark.css: the Quantum settings / custom-menu renderer (ViaMenuItem.tsx) hard-codes
    dark-theme colours, so the labels and the number input need light equivalents. --- */
-.app-shell.theme-light .quantum-settings-tab-panel .MuiTypography-root {
-  color: #334b61 !important;
-}
-
 .app-shell.theme-light .quantum-settings-tab-panel .quantum-select-value {
   color: #243447 !important;
 }
@@ -728,13 +734,8 @@ body.theme-light .MuiTab-root.keycode-catalog-tab.Mui-selected {
 
 /* --- Parity with dark.css: the Combos / Key Overrides / Alt Repeat / Tap Dance editors hard-code the
    dark-theme label colour (#cbd5e1) for their FormControlLabel texts, and ComboEditor now uses the
-   shared "editor-field-label" class (light.css already maps it to a dark colour). --- */
-.app-shell.theme-light .entry-editor-panel .MuiFormControlLabel-label,
-.app-shell.theme-light .entry-editor-panel .MuiFormControlLabel-label .MuiTypography-root,
-.app-shell.theme-light .entry-candidate-panel .MuiFormControlLabel-label,
-.app-shell.theme-light .entry-candidate-panel .MuiFormControlLabel-label .MuiTypography-root {
-  color: #334b61 !important;
-}
+   shared "editor-field-label" class (light.css already maps it to a dark colour). The safety net at
+   the end of this file keeps every Typography in those panels dark as well. --- */
 
 /* --- Parity with dark.css: the Lighting tab labels (#e5eefb) and the Macro action buttons (#bfdbfe)
    are hard-coded for the dark theme as well. --- */
@@ -763,5 +764,82 @@ body.theme-light .MuiTab-root.keycode-catalog-tab.Mui-selected {
 }
 
 .app-shell.theme-light .matrix-tester .matrix-tester-success {
+  color: #26845d !important;
+}
+
+/* --- Safety net: whatever label the entry editors / candidate panels / quantum setting controls
+   render, it must stay readable in light. Only the Slider's own value bubble is excluded because it
+   paints its own dark background. --- */
+.app-shell.theme-light .entry-editor-panel,
+.app-shell.theme-light .entry-candidate-panel {
+  color: #243447;
+}
+
+.app-shell.theme-light .entry-editor-panel .MuiTypography-root:not(.MuiSlider-valueLabelLabel),
+.app-shell.theme-light .entry-candidate-panel .MuiTypography-root:not(.MuiSlider-valueLabelLabel),
+.app-shell.theme-light
+  .quantum-settings-tab-panel
+  .MuiTypography-root:not(.MuiSlider-valueLabelLabel) {
+  color: #334b61 !important;
+}
+
+/* The candidate catalog scrollbar is hard-coded dark in KeycodeCatalog, so it needs a light version. */
+.app-shell.theme-light .keycode-catalog-scroll::-webkit-scrollbar-track {
+  background: #edf2f6 !important;
+  border-radius: 8px;
+}
+
+.app-shell.theme-light .keycode-catalog-scroll::-webkit-scrollbar-thumb {
+  background: #aebdca !important;
+  border: 2px solid #edf2f6 !important;
+}
+
+.app-shell.theme-light .keycode-catalog-scroll::-webkit-scrollbar-thumb:hover {
+  background: #879baa !important;
+}
+
+/* --- Parity with dark.css: the toolbar chrome (device picker, current layer pill, keymap style
+   select, Load button) is built from translucent dark colours, so its outlines vanish on light
+   backgrounds. --- */
+.app-shell.theme-light .app-toolbar .MuiInputBase-root {
+  background-color: #ffffff !important;
+  color: #243447 !important;
+}
+
+.app-shell.theme-light .app-toolbar .MuiOutlinedInput-notchedOutline {
+  border-color: #b8c7d3 !important;
+}
+
+.app-shell.theme-light .app-toolbar .MuiOutlinedInput-root:hover .MuiOutlinedInput-notchedOutline,
+.app-shell.theme-light
+  .app-toolbar
+  .MuiOutlinedInput-root.Mui-focused
+  .MuiOutlinedInput-notchedOutline {
+  border-color: #7895ab !important;
+}
+
+.app-shell.theme-light .app-toolbar .MuiSelect-select,
+.app-shell.theme-light .app-toolbar .MuiSelect-icon,
+.app-shell.theme-light .app-toolbar .MuiSvgIcon-root {
+  color: #48667e !important;
+}
+
+/* The "current layer" pill. */
+.app-shell.theme-light .app-toolbar > .MuiTypography-root {
+  color: #48667e !important;
+  border-color: #b8c7d3 !important;
+  background: #eef3f7 !important;
+}
+
+.app-shell.theme-light .app-toolbar > .MuiTypography-root:hover {
+  border-color: #6f8ea6 !important;
+  background: #e1ebf3 !important;
+}
+
+.app-shell.theme-light .app-toolbar > .MuiTypography-root > span:first-child {
+  color: #48667e !important;
+}
+
+.app-shell.theme-light .app-toolbar > .MuiTypography-root > span:last-child {
   color: #26845d !important;
 }
