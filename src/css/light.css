@@ -537,6 +537,7 @@ body.theme-light .MuiTab-root.keycode-catalog-tab.Mui-selected {
 .app-shell.theme-light .combo-tabs .MuiTabs-flexContainer {
   min-height: 26px !important;
   height: 26px !important;
+  border-bottom: 0 !important;
 }
 
 .app-shell.theme-light .entry-tabs .MuiTabs-flexContainer::after,
@@ -546,7 +547,7 @@ body.theme-light .MuiTab-root.keycode-catalog-tab.Mui-selected {
   min-width: 28px;
   height: 26px;
   margin-right: 10px;
-  border-bottom: 1px solid #b8c7d3;
+  border-bottom: 0;
   pointer-events: none;
 }
 
@@ -576,7 +577,7 @@ body.theme-light .MuiTab-root.keycode-catalog-tab.Mui-selected {
     #d1dbe4 100%
   ) !important;
   border-color: #b8c7d3 !important;
-  border-bottom-color: transparent !important;
+  border-bottom: 0 !important;
   box-shadow: none !important;
 }
 
@@ -609,7 +610,7 @@ body.theme-light .MuiTab-root.keycode-catalog-tab.Mui-selected {
     #d1dbe4 100%
   ) !important;
   border-color: #b8c7d3 !important;
-  border-bottom-color: transparent !important;
+  border-bottom: 0 !important;
   box-shadow: none !important;
 }
 
@@ -721,7 +722,7 @@ body.theme-light .MuiTab-root.keycode-catalog-tab.Mui-selected {
     #d1dbe4 100%
   ) !important;
   border-color: #b8c7d3 !important;
-  border-bottom-color: transparent !important;
+  border-bottom: 0 !important;
 }
 
 .app-shell.theme-light .keycode-catalog-scroll .keycode-group:first-child {
