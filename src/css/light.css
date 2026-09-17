@@ -295,9 +295,10 @@ body.theme-light .key-select-popup .MuiAutocomplete-option[aria-selected="true"]
 }
 
 .app-shell.theme-light .quantum-main-tabs .MuiTab-root.Mui-selected {
-  padding: 3px 10px !important;
+  padding: 6px 10px 1px !important;
   min-height: 30px !important;
   height: 30px !important;
+  justify-content: flex-start !important;
   line-height: 1.25 !important;
   background: linear-gradient(
     180deg,
