@@ -83,27 +83,39 @@ body.theme-light *::-webkit-scrollbar-thumb:hover {
   color: #243447 !important;
 }
 
-.app-shell.theme-light .MuiButton-containedPrimary,
-.app-shell.theme-light .vial-action-button {
+.app-shell.theme-light .MuiButton-containedPrimary:not(.MuiIconButton-root),
+.app-shell.theme-light .vial-action-button:not(.MuiIconButton-root) {
   background: #e5edf4 !important;
   border: 1px solid #aebdca !important;
   box-shadow: 0 1px 2px rgba(71, 85, 105, 0.18) !important;
   color: #29445d !important;
 }
 
-.app-shell.theme-light .MuiButton-containedPrimary:hover,
-.app-shell.theme-light .vial-action-button:hover {
+.app-shell.theme-light .MuiButton-containedPrimary:not(.MuiIconButton-root):hover,
+.app-shell.theme-light .vial-action-button:not(.MuiIconButton-root):hover {
   background: #d5e3ee !important;
   border-color: #7f9ab1 !important;
   box-shadow: 0 2px 4px rgba(71, 85, 105, 0.22) !important;
 }
 
-.app-shell.theme-light .MuiButton-containedPrimary.Mui-disabled,
-.app-shell.theme-light .vial-action-button.Mui-disabled {
+.app-shell.theme-light .MuiButton-containedPrimary:not(.MuiIconButton-root).Mui-disabled,
+.app-shell.theme-light .vial-action-button:not(.MuiIconButton-root).Mui-disabled {
   background: #eef2f6 !important;
   border-color: #c8d4de !important;
   box-shadow: none !important;
   color: #8a9bab !important;
+}
+
+/* Icon-only action buttons (theme toggle / shortcut help / download & upload settings) keep their
+   previous look: a tinted square without any border or shadow. */
+.app-shell.theme-light .app-toolbar .vial-action-button.MuiIconButton-root {
+  background: #e5edf4 !important;
+  border: 0 !important;
+  box-shadow: none !important;
+}
+
+.app-shell.theme-light .app-toolbar .vial-action-button.MuiIconButton-root:hover {
+  background: #d5e3ee !important;
 }
 
 .app-shell.theme-light .battery-status-button {
