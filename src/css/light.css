@@ -568,7 +568,13 @@ body.theme-light .MuiTab-root.keycode-catalog-tab.Mui-selected {
 
 .app-shell.theme-light .entry-tab.Mui-selected {
   color: #29445d !important;
-  background-color: transparent !important;
+  background: linear-gradient(
+    180deg,
+    #b4cedb 0%,
+    #c6dbe4 28%,
+    #d1dbe4 50%,
+    #d1dbe4 100%
+  ) !important;
   border-color: #b8c7d3 !important;
   border-bottom-color: transparent !important;
   box-shadow: none !important;
@@ -595,7 +601,13 @@ body.theme-light .MuiTab-root.keycode-catalog-tab.Mui-selected {
 
 .app-shell.theme-light .quantum-settings-tab.Mui-selected {
   color: #29445d !important;
-  background-color: transparent !important;
+  background: linear-gradient(
+    180deg,
+    #b4cedb 0%,
+    #c6dbe4 28%,
+    #d1dbe4 50%,
+    #d1dbe4 100%
+  ) !important;
   border-color: #b8c7d3 !important;
   border-bottom-color: transparent !important;
   box-shadow: none !important;
@@ -624,7 +636,7 @@ body.theme-light .MuiTab-root.keycode-catalog-tab.Mui-selected {
   min-height: 0;
   overflow: visible;
   margin-top: 0 !important;
-  background: #eef3f7;
+  background: #d1dbe4;
   border: 1px solid #b8c7d3;
   border-top: 0;
   border-radius: 0 0 12px 12px;
@@ -701,7 +713,13 @@ body.theme-light .MuiTab-root.keycode-catalog-tab.Mui-selected {
 }
 
 .app-shell.theme-light .tapdance-selector-entry-tab.Mui-selected {
-  background-color: transparent !important;
+  background: linear-gradient(
+    180deg,
+    #b4cedb 0%,
+    #c6dbe4 28%,
+    #d1dbe4 50%,
+    #d1dbe4 100%
+  ) !important;
   border-color: #b8c7d3 !important;
   border-bottom-color: transparent !important;
 }
