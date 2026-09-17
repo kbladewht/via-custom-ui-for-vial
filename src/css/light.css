@@ -672,3 +672,96 @@ body.theme-light .MuiTab-root.keycode-catalog-tab.Mui-selected {
   border-top: 0 !important;
 }
 
+/* --- Parity with dark.css: the Quantum settings / custom-menu renderer (ViaMenuItem.tsx) hard-codes
+   dark-theme colours, so the labels and the number input need light equivalents. --- */
+.app-shell.theme-light .quantum-settings-tab-panel .MuiTypography-root {
+  color: #334b61 !important;
+}
+
+.app-shell.theme-light .quantum-settings-tab-panel .quantum-select-value {
+  color: #243447 !important;
+}
+
+/* Number input used by the Quantum settings (e.g. Mouse Keys) and its stepper box. */
+.app-shell.theme-light .quantum-settings-tab-panel div:has(> input[type="number"]) {
+  background-color: #ffffff !important;
+  border-color: #b8c7d3 !important;
+}
+
+.app-shell.theme-light .quantum-settings-tab-panel div:has(> input[type="number"]) > input {
+  color: #29445d !important;
+}
+
+.app-shell.theme-light .quantum-settings-tab-panel div:has(> input[type="number"]) > div {
+  background-color: #eef3f7 !important;
+  border-left-color: #b8c7d3 !important;
+}
+
+.app-shell.theme-light .quantum-settings-tab-panel div:has(> input[type="number"]) > div > button {
+  color: #48667e !important;
+  border-top-color: #b8c7d3 !important;
+}
+
+.app-shell.theme-light
+  .quantum-settings-tab-panel
+  div:has(> input[type="number"])
+  > div
+  > button:hover {
+  background-color: #dbe7f0 !important;
+  color: #29445d !important;
+}
+
+.app-shell.theme-light .quantum-settings-tab-panel div:has(> input[type="number"]):hover {
+  border-color: #a9b8c6 !important;
+}
+
+.app-shell.theme-light .quantum-settings-tab-panel div:has(> input[type="number"]):focus-within {
+  border-color: #7895ab !important;
+}
+
+/* Checkbox / boolean / bit rows (their dark translucent hover would read as a grey block in light). */
+.app-shell.theme-light
+  .quantum-settings-tab-panel
+  div:has(> .MuiTypography-root):has(.MuiCheckbox-root):hover {
+  background-color: #dbe7f0 !important;
+}
+
+/* --- Parity with dark.css: the Combos / Key Overrides / Alt Repeat / Tap Dance editors hard-code the
+   dark-theme label colour (#cbd5e1) for their FormControlLabel texts, and ComboEditor now uses the
+   shared "editor-field-label" class (light.css already maps it to a dark colour). --- */
+.app-shell.theme-light .entry-editor-panel .MuiFormControlLabel-label,
+.app-shell.theme-light .entry-editor-panel .MuiFormControlLabel-label .MuiTypography-root,
+.app-shell.theme-light .entry-candidate-panel .MuiFormControlLabel-label,
+.app-shell.theme-light .entry-candidate-panel .MuiFormControlLabel-label .MuiTypography-root {
+  color: #334b61 !important;
+}
+
+/* --- Parity with dark.css: the Lighting tab labels (#e5eefb) and the Macro action buttons (#bfdbfe)
+   are hard-coded for the dark theme as well. --- */
+.app-shell.theme-light .lighting-editor label {
+  color: #334b61 !important;
+}
+
+.app-shell.theme-light .macro-action-button {
+  color: #48667e !important;
+}
+
+.app-shell.theme-light .macro-action-button:hover {
+  background-color: rgba(79, 134, 176, 0.14) !important;
+}
+
+.app-shell.theme-light .macro-action-button.macro-delete-button,
+.app-shell.theme-light .macro-action-button.macro-delete-button:hover {
+  color: #b42318 !important;
+  background-color: rgba(220, 38, 38, 0.12) !important;
+  border-color: rgba(220, 38, 38, 0.45) !important;
+}
+
+/* Matrix Tester status texts (its matrix grid stays a self-contained dark panel for now). */
+.app-shell.theme-light .matrix-tester .matrix-tester-hint {
+  color: #48667e !important;
+}
+
+.app-shell.theme-light .matrix-tester .matrix-tester-success {
+  color: #26845d !important;
+}

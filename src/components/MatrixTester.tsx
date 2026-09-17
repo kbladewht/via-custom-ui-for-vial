@@ -217,7 +217,10 @@ export function MatrixTester(props: {
   }).length;
 
   return (
-    <Box sx={{ width: "100%", p: 2, display: "flex", flexDirection: "column", gap: 2 }}>
+    <Box
+      className="matrix-tester"
+      sx={{ width: "100%", p: 2, display: "flex", flexDirection: "column", gap: 2 }}
+    >
       {/* Control Bar */}
       <Box sx={{ display: "flex", alignItems: "center", justifyContent: "space-between", flexWrap: "wrap", gap: 1 }}>
         <Box sx={{ display: "flex", alignItems: "center", gap: 2 }}>
@@ -265,11 +268,16 @@ export function MatrixTester(props: {
         </Box>
 
         <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
-          <Typography sx={{ fontSize: "0.85rem", color: "#94a3b8" }}>
-            {isZh ? `已测试: ${testedCount} / ${totalKeys} 键` : `Tested: ${testedCount} / ${totalKeys} keys`}
+          <Typography className="matrix-tester-hint" sx={{ fontSize: "0.85rem", color: "#94a3b8" }}>
+            {isZh
+              ? `已测试: ${testedCount} / ${totalKeys} 键`
+              : `Tested: ${testedCount} / ${totalKeys} keys`}
           </Typography>
           {testedCount === totalKeys && totalKeys > 0 && (
-            <Typography sx={{ fontSize: "0.85rem", color: "#4ade80", fontWeight: 600 }}>
+            <Typography
+              className="matrix-tester-success"
+              sx={{ fontSize: "0.85rem", color: "#4ade80", fontWeight: 600 }}
+            >
               {isZh ? "✓ 全部通过" : "✓ All Passed"}
             </Typography>
           )}

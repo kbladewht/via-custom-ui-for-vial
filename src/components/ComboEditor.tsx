@@ -145,10 +145,10 @@ function ComboEntry(props: {
             <Fragment key={idx}>
               <Grid item xs={5}>
                 <Box
+                  className="editor-field-label"
                   alignContent={"center"}
                   textAlign={"right"}
                   height={"100%"}
-                  sx={{ color: "#e5eefb", fontWeight: 500 }}
                 >
                   {keyLabels[idx]}
                 </Box>

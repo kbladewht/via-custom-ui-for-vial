@@ -243,7 +243,7 @@ export function LightingEditor(props: { via: ViaKeyboard; lighting?: string; lan
   const t = quantumTranslations[props.language ?? "en"];
 
   return (
-    <Box sx={{ width: "100%", maxWidth: 560, p: 2 }}>
+    <Box className="lighting-editor" sx={{ width: "100%", maxWidth: 560, p: 2 }}>
       {props.lighting === undefined && (
         <Box sx={{ color: "#fbbf24", mb: 1 }}>
           {t.lighting.notSupported}
