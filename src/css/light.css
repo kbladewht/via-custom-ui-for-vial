@@ -295,7 +295,7 @@ body.theme-light .key-select-popup .MuiAutocomplete-option[aria-selected="true"]
 }
 
 .app-shell.theme-light .quantum-main-tabs .MuiTab-root.Mui-selected {
-  padding: 6px 10px !important;
+  padding: 6px 14px !important;
   min-height: 34px !important;
   background: linear-gradient(
     180deg,
@@ -569,6 +569,8 @@ body.theme-light .MuiTab-root.keycode-catalog-tab.Mui-selected {
 
 .app-shell.theme-light .entry-tab.Mui-selected {
   color: #29445d !important;
+  min-width: 44px !important;
+  width: 44px !important;
   background: linear-gradient(
     180deg,
     #b4cedb 0%,
@@ -602,6 +604,8 @@ body.theme-light .MuiTab-root.keycode-catalog-tab.Mui-selected {
 
 .app-shell.theme-light .quantum-settings-tab.Mui-selected {
   color: #29445d !important;
+  padding-left: 14px !important;
+  padding-right: 14px !important;
   background: linear-gradient(
     180deg,
     #b4cedb 0%,
