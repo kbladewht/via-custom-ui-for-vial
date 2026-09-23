@@ -303,6 +303,19 @@ export function useAppController() {
       setLoading(false);
     }
   };
+  const onResetClick = async () => {
+    try {
+      setLoading(true);
+      await via.RebootKeyboard();
+    } catch (error) {
+      console.error("Failed to reboot the keyboard:", error);
+      alert(
+        `Failed to reboot the keyboard: ${error instanceof Error ? error.message : String(error)}`,
+      );
+    } finally {
+      setLoading(false);
+    }
+  };
   const onVialJsonUploaded = async (json: string) => {
     try {
       if (!vialJson) return;
@@ -411,6 +424,7 @@ export function useAppController() {
     onVialSaveClick,
     onVialUploadJsonClick,
     onDfuClick,
+    onResetClick,
     onVialJsonUploaded,
     onQuantumSaveClick,
     onCustomSaveClick,

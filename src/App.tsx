@@ -63,6 +63,7 @@ function App() {
     onVialSaveClick,
     onVialUploadJsonClick,
     onDfuClick,
+    onResetClick,
     onVialJsonUploaded,
     onQuantumSaveClick,
     onCustomSaveClick,
@@ -131,6 +132,7 @@ function App() {
             onShortcutHelpClose={() => setShortcutHelpAnchor(null)}
             shortcutHelp={shortcutHelp}
             onDfu={onDfuClick}
+            onReset={onResetClick}
             batteryLevel={batteryLevel}
             batteryLevels={batteryLevels}
             onRefreshBattery={() => {

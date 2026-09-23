@@ -64,6 +64,7 @@ enum via_command_id {
   id_dynamic_keymap_set_encoder = 0x15,
   id_battery = 0xbb,
   id_current_layer = 0xbc,
+  id_reboot = 0xbd,
   id_vial = 0xfe,
   id_unhandled = 0xff,
 }
@@ -920,6 +921,23 @@ class VialKeyboard {
 
   async GoToBootloader(): Promise<void> {
     await this.Command([via_command_id.id_bootloader_jump]);
+  }
+
+  /**
+   * 请求键盘重启（0xbd，设备端执行 sys_reboot(SYS_REBOOT_WARM)）。
+   * 设备收到后会立刻重启，不会返回任何响应，所以这里的超时属于正常现象；
+   * 其它错误（例如写入失败）仍然向上抛出。
+   */
+  async RebootKeyboard(): Promise<void> {
+    const packet = new Uint8Array(32);
+    packet[0] = via_command_id.id_reboot;
+    try {
+      await this.Command(packet);
+    } catch (error) {
+      if (!(error instanceof Error) || error.message !== "via command timeout") {
+        throw error;
+      }
+    }
   }
 
   GetHidName() {

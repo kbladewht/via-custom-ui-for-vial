@@ -230,7 +230,8 @@
       "batteryLoading": "正在获取电量",
       "batterySingle": "电量 {level}%，当前层 {layer}",
       "downloadSettings": "下载设置",
-      "uploadSettings": "上传设置"
+      "uploadSettings": "上传设置",
+      "resetKeyboard": "重启键盘"
     },
     "languageNames": {
       "US": "US",
@@ -468,7 +469,8 @@
       "batteryLoading": "Reading battery level",
       "batterySingle": "Battery {level}%, layer {layer}",
       "downloadSettings": "Download settings",
-      "uploadSettings": "Upload settings"
+      "uploadSettings": "Upload settings",
+      "resetKeyboard": "Reset"
     },
     "languageNames": {
       "US": "US",
