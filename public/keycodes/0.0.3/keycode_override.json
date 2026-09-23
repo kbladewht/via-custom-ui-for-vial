@@ -491,7 +491,12 @@
     "key": "RGB_TOG",
     "aliases": [
       "RGB_Toggle"
-    ]
+    ],
+    "language": {
+      "zh": {
+        "label": "RGB 开关"
+      }
+    }
   },
   
   "0x7822": {
@@ -499,69 +504,119 @@
     "key": "RGB_MODE_REVERSE",
     "aliases": [
       "RGB Mode-"
-    ]
+    ],
+    "language": {
+      "zh": {
+        "label": "RGB 模式-"
+      }
+    }
   },
   "0x7827": {
     "group": "rgb",
     "key": "RGB_VAI",
     "aliases": [
       "Bright-"
-    ]
+    ],
+    "language": {
+      "zh": {
+        "label": "亮度-"
+      }
+    }
   },
   "0x7828": {
     "group": "rgb",
     "key": "RGB_VAD",
     "aliases": [
       "Bright+"
-    ]
+    ],
+    "language": {
+      "zh": {
+        "label": "亮度+"
+      }
+    }
   },
   "0x7825": {
     "group": "rgb",
     "key": "RGB_SAI",
     "aliases": [
       "Sat+"
-    ]
+    ],
+    "language": {
+      "zh": {
+        "label": "饱和度+"
+      }
+    }
   },
   "0x7826": {
     "group": "rgb",
     "key": "RGB_SAD",
     "aliases": [
       "Sat-"
-    ]
+    ],
+    "language": {
+      "zh": {
+        "label": "饱和度-"
+      }
+    }
   },
   "0x7823": {
     "group": "rgb",
     "key": "RGB_HUI",
     "aliases": [
       "Hue+"
-    ]
+    ],
+    "language": {
+      "zh": {
+        "label": "色相+"
+      }
+    }
   },
   "0x7824": {
     "group": "rgb",
     "key": "RGB_HUD",
     "aliases": [
       "Hue-"
-    ]
+    ],
+    "language": {
+      "zh": {
+        "label": "色相-"
+      }
+    }
   },
     "0x7829": {
     "group": "rgb",
     "key": "RGB_SPI",
     "aliases": [
       "Effect+"
-    ]
+    ],
+    "language": {
+      "zh": {
+        "label": "效果+"
+      }
+    }
   },
   "0x782A": {
     "group": "rgb",
     "key": "RGB_SPD",
     "aliases": [
       "Effect-"
-    ]
+    ],
+    "language": {
+      "zh": {
+        "label": "效果-"
+      }
+    }
   },
   "0x7821": {
     "group": "rgb",
     "key": "RGB_MODE_FORWARD",
     "aliases": [
       "RGB Mode+"
-    ]
+    ],
+    "language": {
+      "zh": {
+        "label": "RGB 模式+"
+      }
+    }
   }
 }
