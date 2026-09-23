@@ -213,7 +213,8 @@
     },
     "dialog": {
       "eraseCustom": "清空所有自定义设置？",
-      "eraseQuantum": "清空所有 QMK 设置？"
+      "eraseQuantum": "清空所有 QMK 设置？",
+      "clearBonds": "清除蓝牙配对？清除后需要重新配对。"
     },
     "toolbar": {
       "load": "加载",
@@ -231,7 +232,8 @@
       "batterySingle": "电量 {level}%，当前层 {layer}",
       "downloadSettings": "下载设置",
       "uploadSettings": "上传设置",
-      "resetKeyboard": "重启键盘"
+      "resetKeyboard": "重启键盘",
+      "clearBonds": "清除配对"
     },
     "languageNames": {
       "US": "US",
@@ -452,7 +454,8 @@
     },
     "dialog": {
       "eraseCustom": "Erase all custom settings?",
-      "eraseQuantum": "Erase all quantum settings?"
+      "eraseQuantum": "Erase all quantum settings?",
+      "clearBonds": "Clear Bluetooth pairing? You need to pair the keyboard again."
     },
     "toolbar": {
       "load": "Load",
@@ -470,7 +473,8 @@
       "batterySingle": "Battery {level}%, layer {layer}",
       "downloadSettings": "Download settings",
       "uploadSettings": "Upload settings",
-      "resetKeyboard": "Reset"
+      "resetKeyboard": "Reset",
+      "clearBonds": "BondBT"
     },
     "languageNames": {
       "US": "US",

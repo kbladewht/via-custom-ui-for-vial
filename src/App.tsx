@@ -38,6 +38,7 @@ function App() {
     loading,
     setLoading,
     customEraseDialogOpen,
+    clearBondsDialogOpen,
     quantumEraseDialogOpen,
     setQuantumEraseDialogOpen,
     vialFileInputRef,
@@ -64,6 +65,9 @@ function App() {
     onVialUploadJsonClick,
     onDfuClick,
     onResetClick,
+    onClearBondsClick,
+    onClearBondsDialogClose,
+    onClearBondsDialogOkClick,
     onVialJsonUploaded,
     onQuantumSaveClick,
     onCustomSaveClick,
@@ -133,6 +137,7 @@ function App() {
             shortcutHelp={shortcutHelp}
             onDfu={onDfuClick}
             onReset={onResetClick}
+            onClearBonds={onClearBondsClick}
             batteryLevel={batteryLevel}
             batteryLevels={batteryLevels}
             onRefreshBattery={() => {
@@ -235,6 +240,17 @@ function App() {
             }}
           >
             OK
+          </Button>
+        </DialogActions>
+      </Dialog>
+      <Dialog open={clearBondsDialogOpen} onClose={onClearBondsDialogClose}>
+        <DialogContent>{quantumTranslations[uiLanguage].dialog.clearBonds}</DialogContent>
+        <DialogActions>
+          <Button color="error" onClick={onClearBondsDialogClose}>
+            {quantumTranslations[uiLanguage].common.cancel}
+          </Button>
+          <Button color="primary" onClick={onClearBondsDialogOkClick}>
+            {quantumTranslations[uiLanguage].common.ok}
           </Button>
         </DialogActions>
       </Dialog>

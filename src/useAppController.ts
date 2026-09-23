@@ -53,6 +53,7 @@ export function useAppController() {
   const [kbName, setKbName] = useState("");
   const [quantumEraseDialogOpen, setQuantumEraseDialogOpen] = useState(false);
   const [customEraseDialogOpen, setCustomEraseDialogOpen] = useState(false);
+  const [clearBondsDialogOpen, setClearBondsDialogOpen] = useState(false);
   const [quantumValues, setQuantumValues] = useState<{ [id: string]: number }>({});
   const [deviceList, setDeviceList] = useState<
     { name: string; index: number; connection: ConnectionType; opened: boolean }[]
@@ -316,6 +317,22 @@ export function useAppController() {
       setLoading(false);
     }
   };
+  const onClearBondsClick = () => setClearBondsDialogOpen(true);
+  const onClearBondsDialogClose = () => setClearBondsDialogOpen(false);
+  const onClearBondsDialogOkClick = async () => {
+    setClearBondsDialogOpen(false);
+    try {
+      setLoading(true);
+      await via.ClearBonds();
+    } catch (error) {
+      console.error("Failed to clear the Bluetooth pairing:", error);
+      alert(
+        `Failed to clear the Bluetooth pairing: ${error instanceof Error ? error.message : String(error)}`,
+      );
+    } finally {
+      setLoading(false);
+    }
+  };
   const onVialJsonUploaded = async (json: string) => {
     try {
       if (!vialJson) return;
@@ -398,6 +415,7 @@ export function useAppController() {
     kbName,
     customEraseDialogOpen,
     setCustomEraseDialogOpen,
+    clearBondsDialogOpen,
     quantumEraseDialogOpen,
     setQuantumEraseDialogOpen,
     vialFileInputRef,
@@ -425,6 +443,9 @@ export function useAppController() {
     onVialUploadJsonClick,
     onDfuClick,
     onResetClick,
+    onClearBondsClick,
+    onClearBondsDialogClose,
+    onClearBondsDialogOkClick,
     onVialJsonUploaded,
     onQuantumSaveClick,
     onCustomSaveClick,

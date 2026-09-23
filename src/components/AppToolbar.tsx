@@ -45,6 +45,7 @@ type AppToolbarProps = {
   shortcutHelp: Array<{ name: string; label: string; shortcut: string }>;
   onDfu: () => void;
   onReset: () => void;
+  onClearBonds: () => void;
   batteryLevel: number | null;
   batteryLevels?: [number | null, number | null] | null;
   onRefreshBattery: () => void;
@@ -243,6 +244,16 @@ export function AppToolbar(props: AppToolbarProps) {
           sx={{ minWidth: 46, px: 1, py: 0.35, fontSize: "11px", whiteSpace: "nowrap" }}
         >
           {t.resetKeyboard}
+        </Button>
+        <Button
+          className="vial-action-button"
+          size="small"
+          variant="contained"
+          aria-label={t.clearBonds}
+          onClick={props.onClearBonds}
+          sx={{ minWidth: 46, px: 1, py: 0.35, fontSize: "11px", whiteSpace: "nowrap" }}
+        >
+          {t.clearBonds}
         </Button>
         <Popover
           open={props.shortcutHelpAnchor !== null}

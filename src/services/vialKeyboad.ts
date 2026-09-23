@@ -65,6 +65,7 @@ enum via_command_id {
   id_battery = 0xbb,
   id_current_layer = 0xbc,
   id_reboot = 0xbd,
+  id_clear_bonds = 0xbe,
   id_vial = 0xfe,
   id_unhandled = 0xff,
 }
@@ -924,13 +925,12 @@ class VialKeyboard {
   }
 
   /**
-   * 请求键盘重启（0xbd，设备端执行 sys_reboot(SYS_REBOOT_WARM)）。
-   * 设备收到后会立刻重启，不会返回任何响应，所以这里的超时属于正常现象；
-   * 其它错误（例如写入失败）仍然向上抛出。
+   * 发送"不会返回响应"的命令：设备收到后会立刻重启或断开蓝牙连接，
+   * 因此 "via command timeout" 属于正常现象；其它错误（例如写入失败）仍然向上抛出。
    */
-  async RebootKeyboard(): Promise<void> {
+  private async CommandWithoutResponse(commandId: number): Promise<void> {
     const packet = new Uint8Array(32);
-    packet[0] = via_command_id.id_reboot;
+    packet[0] = commandId;
     try {
       await this.Command(packet);
     } catch (error) {
@@ -938,6 +938,16 @@ class VialKeyboard {
         throw error;
       }
     }
+  }
+
+  /** 请求键盘重启（0xbd，设备端执行 sys_reboot(SYS_REBOOT_WARM)）。 */
+  async RebootKeyboard(): Promise<void> {
+    await this.CommandWithoutResponse(via_command_id.id_reboot);
+  }
+
+  /** 清除存储的蓝牙配对信息（0xbe，设备端执行 remove_all_bonds()）。 */
+  async ClearBonds(): Promise<void> {
+    await this.CommandWithoutResponse(via_command_id.id_clear_bonds);
   }
 
   GetHidName() {
