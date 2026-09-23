@@ -65,13 +65,13 @@ export function AppToolbar(props: AppToolbarProps) {
   const t = quantumTranslations[props.language ?? "en"].toolbar;
   const batteryLabel = splitBattery
     ? t.batteryBoth
-        .replace("{left}", String(props.batteryLevels?.[0] ?? "--"))
-        .replace("{right}", String(props.batteryLevels?.[1] ?? "--"))
+      .replace("{left}", String(props.batteryLevels?.[0] ?? "--"))
+      .replace("{right}", String(props.batteryLevels?.[1] ?? "--"))
     : singleBatteryLevel === null
       ? t.batteryLoading
       : t.batterySingle
-          .replace("{level}", String(singleBatteryLevel))
-          .replace("{layer}", String(props.currentLayer ?? "--"));
+        .replace("{level}", String(singleBatteryLevel))
+        .replace("{layer}", String(props.currentLayer ?? "--"));
 
   return (
     <Box
@@ -151,9 +151,7 @@ export function AppToolbar(props: AppToolbarProps) {
         title={t.refreshCurrentLayer}
       >
         <span style={{ opacity: 0.68 }}>{t.currentLayer}</span>
-        <span style={{ color: "#86efac", fontWeight: 700 }}>
-          L{props.currentLayer ?? "--"}
-        </span>
+        <span style={{ color: "#86efac", fontWeight: 700 }}>L{props.currentLayer ?? "--"}</span>
       </Typography>
       <Box
         sx={{
@@ -199,10 +197,18 @@ export function AppToolbar(props: AppToolbarProps) {
             },
           }}
         >
-          <MenuItem value="classic" sx={{ fontSize: "11px" }}>{t.styleDefault}</MenuItem>
-          <MenuItem value="mx" sx={{ fontSize: "11px" }}>MX</MenuItem>
-          <MenuItem value="sculpted" sx={{ fontSize: "11px" }}>{t.styleSculpted}</MenuItem>
-          <MenuItem value="matrix-tester" sx={{ fontSize: "11px" }}>{t.styleMatrixTester}</MenuItem>
+          <MenuItem value="classic" sx={{ fontSize: "11px" }}>
+            {t.styleDefault}
+          </MenuItem>
+          <MenuItem value="mx" sx={{ fontSize: "11px" }}>
+            MX
+          </MenuItem>
+          <MenuItem value="sculpted" sx={{ fontSize: "11px" }}>
+            {t.styleSculpted}
+          </MenuItem>
+          <MenuItem value="matrix-tester" sx={{ fontSize: "11px" }}>
+            {t.styleMatrixTester}
+          </MenuItem>
         </Select>
         <Tooltip title={props.lightTheme ? t.themeToDark : t.themeToLight}>
           <IconButton
@@ -212,7 +218,11 @@ export function AppToolbar(props: AppToolbarProps) {
             onClick={props.onThemeToggle}
             sx={{ p: 0.5 }}
           >
-            {props.lightTheme ? <DarkModeIcon sx={{ fontSize: 18 }} /> : <LightModeIcon sx={{ fontSize: 18 }} />}
+            {props.lightTheme ? (
+              <DarkModeIcon sx={{ fontSize: 18 }} />
+            ) : (
+              <LightModeIcon sx={{ fontSize: 18 }} />
+            )}
           </IconButton>
         </Tooltip>
         <Tooltip title={t.bleShortcuts}>
@@ -267,9 +277,7 @@ export function AppToolbar(props: AppToolbarProps) {
               {t.bleShortcuts}
             </Typography>
             {props.shortcutHelp.length === 0 ? (
-              <Typography sx={{ fontSize: "11px", color: "#94a3b8" }}>
-                {t.noShortcuts}
-              </Typography>
+              <Typography sx={{ fontSize: "11px", color: "#94a3b8" }}>{t.noShortcuts}</Typography>
             ) : (
               props.shortcutHelp.map((item) => (
                 <Typography key={item.name} sx={{ fontSize: "11px", color: "#cbd5e1" }}>
@@ -285,19 +293,28 @@ export function AppToolbar(props: AppToolbarProps) {
             size="small"
             aria-label={batteryLabel}
             onClick={props.onRefreshBattery}
-            sx={{ display: "inline-flex", alignItems: "center", gap: splitBattery ? 0.5 : 0.25, p: 0.5 }}
+            sx={{
+              display: "inline-flex",
+              alignItems: "center",
+              gap: splitBattery ? 0.5 : 0.25,
+              p: 0.5,
+            }}
           >
             {splitBattery ? (
               <Box sx={{ display: "flex", alignItems: "center", gap: 0.5 }}>
                 {props.batteryLevels?.map((level, index) => (
                   <Box key={index} sx={{ display: "inline-flex", alignItems: "center", gap: 0.25 }}>
                     <Box
-                      className={level === null ? "battery-meter battery-waiting-icon" : "battery-meter"}
+                      className={
+                        level === null ? "battery-meter battery-waiting-icon" : "battery-meter"
+                      }
                       aria-hidden="true"
                     >
                       <Box
                         className="battery-meter-fill"
-                        sx={{ width: `${level === null ? 35 : Math.max(0, Math.min(100, level))}%` }}
+                        sx={{
+                          width: `${level === null ? 35 : Math.max(0, Math.min(100, level))}%`,
+                        }}
                       />
                     </Box>
                     <Typography sx={{ fontSize: "10px", color: "inherit" }}>
@@ -309,12 +326,18 @@ export function AppToolbar(props: AppToolbarProps) {
             ) : (
               <Box sx={{ display: "inline-flex", alignItems: "center", gap: 0.25 }}>
                 <Box
-                  className={singleBatteryLevel === null ? "battery-meter battery-waiting-icon" : "battery-meter"}
+                  className={
+                    singleBatteryLevel === null
+                      ? "battery-meter battery-waiting-icon"
+                      : "battery-meter"
+                  }
                   aria-hidden="true"
                 >
                   <Box
                     className="battery-meter-fill"
-                    sx={{ width: `${singleBatteryLevel === null ? 35 : Math.max(0, Math.min(100, singleBatteryLevel))}%` }}
+                    sx={{
+                      width: `${singleBatteryLevel === null ? 35 : Math.max(0, Math.min(100, singleBatteryLevel))}%`,
+                    }}
                   />
                 </Box>
                 <Typography sx={{ ml: 0.25, fontSize: "10px", color: "inherit" }}>
@@ -330,7 +353,10 @@ export function AppToolbar(props: AppToolbarProps) {
           language={props.language}
           onChange={props.onLanguageChange}
         />
-        <Box sx={{ display: "flex", flexDirection: "row", flexWrap: "nowrap", gap: 1 }} hidden={!props.connectedSettingsVisible}>
+        <Box
+          sx={{ display: "flex", flexDirection: "row", flexWrap: "nowrap", gap: 1 }}
+          hidden={!props.connectedSettingsVisible}
+        >
           <Tooltip title={t.downloadSettings}>
             <IconButton
               className="vial-action-button"
