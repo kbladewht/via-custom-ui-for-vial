@@ -485,5 +485,83 @@
         "label": "鼠标速度2"
       }
     }
+  },
+  "0x7820": {
+    "group": "rgb",
+    "key": "RGB_TOG",
+    "aliases": [
+      "RGB_Toggle"
+    ]
+  },
+  
+  "0x7822": {
+    "group": "rgb",
+    "key": "RGB_MODE_REVERSE",
+    "aliases": [
+      "RGB Mode-"
+    ]
+  },
+  "0x7827": {
+    "group": "rgb",
+    "key": "RGB_VAI",
+    "aliases": [
+      "Bright-"
+    ]
+  },
+  "0x7828": {
+    "group": "rgb",
+    "key": "RGB_VAD",
+    "aliases": [
+      "Bright+"
+    ]
+  },
+  "0x7825": {
+    "group": "rgb",
+    "key": "RGB_SAI",
+    "aliases": [
+      "Sat+"
+    ]
+  },
+  "0x7826": {
+    "group": "rgb",
+    "key": "RGB_SAD",
+    "aliases": [
+      "Sat-"
+    ]
+  },
+  "0x7823": {
+    "group": "rgb",
+    "key": "RGB_HUI",
+    "aliases": [
+      "Hue+"
+    ]
+  },
+  "0x7824": {
+    "group": "rgb",
+    "key": "RGB_HUD",
+    "aliases": [
+      "Hue-"
+    ]
+  },
+    "0x7829": {
+    "group": "rgb",
+    "key": "RGB_SPI",
+    "aliases": [
+      "Effect+"
+    ]
+  },
+  "0x782A": {
+    "group": "rgb",
+    "key": "RGB_SPD",
+    "aliases": [
+      "Effect-"
+    ]
+  },
+  "0x7821": {
+    "group": "rgb",
+    "key": "RGB_MODE_FORWARD",
+    "aliases": [
+      "RGB Mode+"
+    ]
   }
 }
