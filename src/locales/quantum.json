@@ -233,7 +233,10 @@
       "downloadSettings": "下载设置",
       "uploadSettings": "上传设置",
       "resetKeyboard": "重启键盘",
-      "clearBonds": "清除配对"
+      "clearBonds": "清除配对",
+      "deviceType": "Device",
+      "deviceMaster": "Master",
+      "deviceSlave": "Slave"
     },
     "languageNames": {
       "US": "US",
@@ -474,7 +477,10 @@
       "downloadSettings": "Download settings",
       "uploadSettings": "Upload settings",
       "resetKeyboard": "Reset",
-      "clearBonds": "Clear Settings"
+      "clearBonds": "Clear Settings",
+      "deviceType": "Device",
+      "deviceMaster": "Master",
+      "deviceSlave": "Slave"
     },
     "languageNames": {
       "US": "US",

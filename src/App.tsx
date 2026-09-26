@@ -15,6 +15,7 @@ import {
 } from "./components/KeymapEditor";
 import { QuantumSettingsEditor } from "./components/QuantumSettingsEditor";
 import { ViaMenuItem } from "./components/ViaMenuItem";
+import { isSlaveDeviceType } from "./services/vialKeyboad";
 import { useAppController, via } from "./useAppController";
 
 function App() {
@@ -78,6 +79,8 @@ function App() {
     setQuantumValues,
     setActiveMenu,
   } = useAppController();
+
+  const isSlaveDevice = isSlaveDeviceType(vialJson?.deviceType);
 
   return (
     <>
@@ -170,40 +173,45 @@ function App() {
             onUploadSettings={onVialUploadJsonClick}
             vialFileInputRef={vialFileInputRef}
             onFileChange={(event) => handleFileChange(event, onVialJsonUploaded)}
+            deviceType={vialJson?.deviceType}
           />
-          {match(activeMenu)
-            .with(undefined, () => <></>)
-            .with({ menuType: "customMenu" }, (menu) => (
-              <ViaMenuItem
-                {...menu.menu}
-                customValues={customValues}
-                onChange={async (id, value) => {
-                  setCustomValues({ ...customValues, [id[0]]: value });
-                  await via.SetCustomValue(id.slice(1) as number[], value);
-                }}
-              ></ViaMenuItem>
-            ))
-            .with({ menuType: "quantum" }, () => (
-              <QuantumSettingsEditor
-                via={via}
-                language={uiLanguage}
-                onLanguageChange={setUiLanguage}
-                macroCount={dynamicEntryCount.macro}
-                customKeycodes={vialJson?.customKeycodes}
-                keymap={vialJson}
-                dynamicEntryCount={dynamicEntryCount}
-                keymapLanguage={keymapLanguage}
-                onSave={onQuantumSaveClick}
-                onErase={() => setQuantumEraseDialogOpen(true)}
-                customMenus={customMenus}
-                onCustomSave={onCustomSaveClick}
-                onCustomErase={onCustomEraseClick}
-                onChange={setQuantumValues}
-              />
-            ))
-            .with(P._, () => <></>)
-            .exhaustive()}
-          {vialJson === undefined && <p></p>}
+          {!isSlaveDevice && (
+            <>
+              {match(activeMenu)
+                .with(undefined, () => <></>)
+                .with({ menuType: "customMenu" }, (menu) => (
+                  <ViaMenuItem
+                    {...menu.menu}
+                    customValues={customValues}
+                    onChange={async (id, value) => {
+                      setCustomValues({ ...customValues, [id[0]]: value });
+                      await via.SetCustomValue(id.slice(1) as number[], value);
+                    }}
+                  ></ViaMenuItem>
+                ))
+                .with({ menuType: "quantum" }, () => (
+                  <QuantumSettingsEditor
+                    via={via}
+                    language={uiLanguage}
+                    onLanguageChange={setUiLanguage}
+                    macroCount={dynamicEntryCount.macro}
+                    customKeycodes={vialJson?.customKeycodes}
+                    keymap={vialJson}
+                    dynamicEntryCount={dynamicEntryCount}
+                    keymapLanguage={keymapLanguage}
+                    onSave={onQuantumSaveClick}
+                    onErase={() => setQuantumEraseDialogOpen(true)}
+                    customMenus={customMenus}
+                    onCustomSave={onCustomSaveClick}
+                    onCustomErase={onCustomEraseClick}
+                    onChange={setQuantumValues}
+                  />
+                ))
+                .with(P._, () => <></>)
+                .exhaustive()}
+              {vialJson === undefined && <p></p>}
+            </>
+          )}
         </Grid>
       </Grid>
       <Dialog open={customEraseDialogOpen} onClose={onDialogClose}>

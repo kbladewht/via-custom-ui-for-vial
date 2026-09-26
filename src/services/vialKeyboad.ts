@@ -4,12 +4,18 @@ import { WebUsbComInterface } from "./webUsbComInterface";
 
 export interface VialDefinition {
   name: string;
+  deviceType?: DeviceType;
   matrix: { rows: number; cols: number };
   layouts: { keymap: string[][] };
   customKeycodes: { name: string; title: string; shortName: string }[];
   menus: MenuDefinition[];
   lighting?: "qmk_rgblight" | "qmk_backlight" | "qmk_backlight_rgblight" | "vialrgb";
 }
+
+export type DeviceType = "master" | "slave";
+
+export const isSlaveDeviceType = (deviceType?: string): boolean =>
+  deviceType?.trim().toLowerCase() === "slave";
 
 export interface MenuItemDefiniton {
   type: string;
