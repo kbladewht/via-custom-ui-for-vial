@@ -234,9 +234,8 @@
       "uploadSettings": "上传设置",
       "resetKeyboard": "重启键盘",
       "clearBonds": "清除配对",
-      "deviceType": "Device",
-      "deviceMaster": "Master",
-      "deviceSlave": "Slave"
+      "deviceType": "设备",
+      "deviceSlave": "从设备"
     },
     "languageNames": {
       "US": "US",
@@ -479,7 +478,6 @@
       "resetKeyboard": "Reset",
       "clearBonds": "Clear Settings",
       "deviceType": "Device",
-      "deviceMaster": "Master",
       "deviceSlave": "Slave"
     },
     "languageNames": {

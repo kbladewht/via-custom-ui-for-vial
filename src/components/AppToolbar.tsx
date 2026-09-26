@@ -65,16 +65,7 @@ export function AppToolbar(props: AppToolbarProps) {
   const splitBattery = Array.isArray(props.batteryLevels) && props.batteryLevels.length === 2;
   const singleBatteryLevel = props.batteryLevel;
   const t = quantumTranslations[props.language ?? "en"].toolbar;
-  const deviceType = props.deviceType?.trim();
-  const isSlaveDevice = isSlaveDeviceType(deviceType);
-  const deviceTypeLabel =
-    deviceType === undefined || deviceType === ""
-      ? undefined
-      : isSlaveDevice
-        ? t.deviceSlave
-        : deviceType.toLowerCase() === "master"
-          ? t.deviceMaster
-          : deviceType;
+  const isSlaveDevice = isSlaveDeviceType(props.deviceType);
   const batteryLabel = splitBattery
     ? t.batteryBoth
       .replace("{left}", String(props.batteryLevels?.[0] ?? "--"))
@@ -137,10 +128,10 @@ export function AppToolbar(props: AppToolbarProps) {
             {t.load}
           </Button>
         )}
-        {deviceTypeLabel !== undefined && (
+        {isSlaveDevice && (
           <Typography
             className="device-type-label"
-            title={deviceTypeLabel}
+            title={`${t.deviceType}: ${t.deviceSlave}`}
             sx={{
               display: "inline-flex",
               alignItems: "center",
@@ -149,9 +140,7 @@ export function AppToolbar(props: AppToolbarProps) {
               px: 1,
               py: 0.25,
               borderRadius: 1.5,
-              border: isSlaveDevice
-                ? "1px solid rgba(74, 222, 128, 0.45)"
-                : "1px solid rgba(148, 163, 184, 0.28)",
+              border: "1px solid rgba(74, 222, 128, 0.45)",
               background: "rgba(30, 41, 59, 0.72)",
               fontSize: "11px",
               lineHeight: 1.6,
@@ -160,14 +149,7 @@ export function AppToolbar(props: AppToolbarProps) {
             }}
           >
             <span style={{ opacity: 0.68 }}>{t.deviceType}:</span>
-            <span
-              style={{
-                color: isSlaveDevice ? "#4ade80" : "#93c5fd",
-                fontWeight: isSlaveDevice ? 700 : 500,
-              }}
-            >
-              {deviceTypeLabel}
-            </span>
+            <span style={{ color: "#4ade80", fontWeight: 700 }}>{t.deviceSlave}</span>
           </Typography>
         )}
       </Box>
