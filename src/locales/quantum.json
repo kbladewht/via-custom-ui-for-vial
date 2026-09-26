@@ -235,7 +235,7 @@
       "resetKeyboard": "重启键盘",
       "clearBonds": "清除配对",
       "deviceType": "设备",
-      "deviceSlave": "从设备"
+      "deviceSlave": "从机(Slave)"
     },
     "languageNames": {
       "US": "US",
