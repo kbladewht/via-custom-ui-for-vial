@@ -902,3 +902,14 @@ body.theme-light .MuiTab-root.keycode-catalog-tab.Mui-selected {
 .app-shell.theme-light .app-toolbar .device-type-label > span:last-child {
   color: #26845d !important;
 }
+
+/* The "connection status" chip sits next to the battery readout. */
+.app-shell.theme-light .app-toolbar .connection-status-chip {
+  color: #26845d !important;
+  border-color: rgba(38, 132, 93, 0.4) !important;
+  background: #eef7f2 !important;
+}
+
+.app-shell.theme-light .app-toolbar .connection-status-chip .MuiSvgIcon-root {
+  color: #26845d !important;
+}

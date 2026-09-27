@@ -2,6 +2,7 @@ import DownloadIcon from "@mui/icons-material/Download";
 import DarkModeIcon from "@mui/icons-material/DarkMode";
 import HelpOutlineIcon from "@mui/icons-material/HelpOutline";
 import LightModeIcon from "@mui/icons-material/LightMode";
+import LinkIcon from "@mui/icons-material/Link";
 import UploadIcon from "@mui/icons-material/Upload";
 import {
   Box,
@@ -75,6 +76,15 @@ export function AppToolbar(props: AppToolbarProps) {
       : t.batterySingle
         .replace("{level}", String(singleBatteryLevel))
         .replace("{layer}", String(props.currentLayer ?? "--"));
+  const leftBatteryLevel = splitBattery ? (props.batteryLevels?.[0] ?? null) : singleBatteryLevel;
+  const rightBatteryLevel = splitBattery ? (props.batteryLevels?.[1] ?? null) : null;
+  const rightBatteryOnly = rightBatteryLevel !== null && leftBatteryLevel === null;
+  const showConnectionStatus =
+    props.connected && !isSlaveDevice && (leftBatteryLevel !== null || rightBatteryLevel !== null);
+  const connectionLabel = rightBatteryOnly ? t.connectedRight : t.connected;
+  const batterySummary = splitBattery
+    ? `${leftBatteryLevel ?? "--"}% / ${rightBatteryLevel ?? "--"}%`
+    : `${singleBatteryLevel ?? "--"}%`;
 
   return (
     <Box
@@ -323,6 +333,30 @@ export function AppToolbar(props: AppToolbarProps) {
         </Popover>
         {!isSlaveDevice && (
           <>
+            {showConnectionStatus && (
+              <Typography
+                className="connection-status-chip"
+                title={`${connectionLabel} · ${batterySummary}`}
+                sx={{
+                  display: "inline-flex",
+                  alignItems: "center",
+                  gap: 0.5,
+                  px: 1,
+                  py: 0.25,
+                  borderRadius: 1.5,
+                  border: "1px solid rgba(74, 222, 128, 0.45)",
+                  background: "rgba(30, 41, 59, 0.72)",
+                  color: "#4ade80",
+                  fontSize: "11px",
+                  lineHeight: 1.6,
+                  whiteSpace: "nowrap",
+                  flexShrink: 0,
+                }}
+              >
+                <LinkIcon sx={{ fontSize: 13 }} />
+                <span style={{ fontWeight: 700 }}>{connectionLabel}</span>
+              </Typography>
+            )}
             <Tooltip title={batteryLabel}>
               <IconButton
                 className="battery-status-button"
