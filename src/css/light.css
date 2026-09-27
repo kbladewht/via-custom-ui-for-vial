@@ -880,22 +880,25 @@ body.theme-light .MuiTab-root.keycode-catalog-tab.Mui-selected {
   color: #48667e !important;
 }
 
-/* The "current layer" pill. */
-.app-shell.theme-light .app-toolbar > .MuiTypography-root {
+/* The "current layer" pill and the "device type" label share the same chip look. */
+.app-shell.theme-light .app-toolbar .current-layer-pill,
+.app-shell.theme-light .app-toolbar .device-type-label {
   color: #48667e !important;
   border-color: #b8c7d3 !important;
   background: #eef3f7 !important;
 }
 
-.app-shell.theme-light .app-toolbar > .MuiTypography-root:hover {
+.app-shell.theme-light .app-toolbar .current-layer-pill:hover {
   border-color: #6f8ea6 !important;
   background: #e1ebf3 !important;
 }
 
-.app-shell.theme-light .app-toolbar > .MuiTypography-root > span:first-child {
+.app-shell.theme-light .app-toolbar .current-layer-pill > span:first-child,
+.app-shell.theme-light .app-toolbar .device-type-label > span:first-child {
   color: #48667e !important;
 }
 
-.app-shell.theme-light .app-toolbar > .MuiTypography-root > span:last-child {
+.app-shell.theme-light .app-toolbar .current-layer-pill > span:last-child,
+.app-shell.theme-light .app-toolbar .device-type-label > span:last-child {
   color: #26845d !important;
 }
