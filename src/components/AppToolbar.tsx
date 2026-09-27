@@ -20,6 +20,23 @@ import { isSlaveDeviceType } from "../services/vialKeyboad";
 import { KeyboardSelector } from "./KeyboardSelector";
 import { LanguageSelector } from "./LanguageSelector";
 
+/**
+ * 解析固件上报的电量字节。
+ * 分体键盘的双电量响应里，没在工作/没上报数据的那一半通常是 0，个别固件用 0xff（>100）；
+ * 这些值都不是真实电量，统一按“无数据”处理（返回 null），
+ * 界面才能区分“这一半有数据”和“这一半没有数据”（例如只有右半边有数据 → R 已连接）。
+ */
+const parseBatteryLevel = (
+  value: number | null | undefined,
+  zeroMeansUnknown: boolean,
+): number | null => {
+  if (typeof value !== "number" || !Number.isFinite(value)) return null;
+  const level = Math.round(value);
+  if (level < 0 || level > 100) return null;
+  if (zeroMeansUnknown && level === 0) return null;
+  return level;
+};
+
 export type KeymapStyle =
   | "classic"
   | "mx"
@@ -63,27 +80,35 @@ type AppToolbarProps = {
 };
 
 export function AppToolbar(props: AppToolbarProps) {
-  const splitBattery = Array.isArray(props.batteryLevels) && props.batteryLevels.length === 2;
-  const singleBatteryLevel = props.batteryLevel;
+  const splitBatteryLevels: [number | null, number | null] | null =
+    Array.isArray(props.batteryLevels) && props.batteryLevels.length === 2
+      ? [
+          parseBatteryLevel(props.batteryLevels?.[0], true),
+          parseBatteryLevel(props.batteryLevels?.[1], true),
+        ]
+      : null;
   const t = quantumTranslations[props.language ?? "en"].toolbar;
   const isSlaveDevice = isSlaveDeviceType(props.deviceType);
-  const batteryLabel = splitBattery
+  // 整机只有一个电量值时，0% 是合法读数；只有分体键盘的“半边”才把 0 当成未上报。
+  const singleBatteryLevel = parseBatteryLevel(props.batteryLevel, false);
+  const leftBatteryLevel = splitBatteryLevels ? splitBatteryLevels[0] : singleBatteryLevel;
+  const rightBatteryLevel = splitBatteryLevels ? splitBatteryLevels[1] : null;
+  // 左半区没有数据、右半区有数据 → 说明当前工作/连上的是右半边（右手侧）。
+  const rightBatteryOnly = rightBatteryLevel !== null && leftBatteryLevel === null;
+  const batteryLabel = splitBatteryLevels
     ? t.batteryBoth
-      .replace("{left}", String(props.batteryLevels?.[0] ?? "--"))
-      .replace("{right}", String(props.batteryLevels?.[1] ?? "--"))
+      .replace("{left}", String(leftBatteryLevel ?? "--"))
+      .replace("{right}", String(rightBatteryLevel ?? "--"))
     : singleBatteryLevel === null
       ? t.batteryLoading
       : t.batterySingle
         .replace("{level}", String(singleBatteryLevel))
         .replace("{layer}", String(props.currentLayer ?? "--"));
-  const leftBatteryLevel = splitBattery ? (props.batteryLevels?.[0] ?? null) : singleBatteryLevel;
-  const rightBatteryLevel = splitBattery ? (props.batteryLevels?.[1] ?? null) : null;
-  const rightBatteryOnly = rightBatteryLevel !== null && leftBatteryLevel === null;
   const showConnectionStatus =
     props.connected && !isSlaveDevice && (leftBatteryLevel !== null || rightBatteryLevel !== null);
   const connectionLabel = rightBatteryOnly ? t.connectedRight : t.connected;
-  const batterySummary = splitBattery
-    ? `${leftBatteryLevel ?? "--"}% / ${rightBatteryLevel ?? "--"}%`
+  const batterySummary = splitBatteryLevels
+    ? `L ${leftBatteryLevel ?? "--"}% / R ${rightBatteryLevel ?? "--"}%`
     : `${singleBatteryLevel ?? "--"}%`;
 
   return (
@@ -366,17 +391,29 @@ export function AppToolbar(props: AppToolbarProps) {
                 sx={{
                   display: "inline-flex",
                   alignItems: "center",
-                  gap: splitBattery ? 0.5 : 0.25,
+                  gap: splitBatteryLevels ? 0.5 : 0.25,
                   p: 0.5,
                 }}
               >
-                {splitBattery ? (
+                {splitBatteryLevels ? (
                   <Box sx={{ display: "flex", alignItems: "center", gap: 0.5 }}>
-                    {props.batteryLevels?.map((level, index) => (
+                    {splitBatteryLevels.map((level, index) => (
                       <Box
-                        key={index}
+                        key={index === 0 ? "left" : "right"}
+                        title={index === 0 ? t.batteryLeft : t.batteryRight}
                         sx={{ display: "inline-flex", alignItems: "center", gap: 0.25 }}
                       >
+                        <Typography
+                          sx={{
+                            fontSize: "9px",
+                            fontWeight: 700,
+                            lineHeight: 1,
+                            opacity: 0.72,
+                            color: "inherit",
+                          }}
+                        >
+                          {index === 0 ? "L" : "R"}
+                        </Typography>
                         <Box
                           className={
                             level === null ? "battery-meter battery-waiting-icon" : "battery-meter"
