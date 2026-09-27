@@ -107,27 +107,25 @@ export function AppToolbar(props: AppToolbarProps) {
           onChange={props.onDeviceChange}
           onOpen={props.onDeviceSelectorOpen}
         />
-        {!isSlaveDevice && (
-          <Button
-            className="vial-action-button"
-            data-keymap-load="true"
-            variant="contained"
-            size="small"
-            disabled={props.deviceIndex === undefined || props.loading}
-            onClick={props.onLoad}
-            sx={{
-              ml: 1,
-              my: 0,
-              alignSelf: "center",
-              minWidth: 46,
-              px: 1,
-              py: 0.35,
-              fontSize: "11px",
-            }}
-          >
-            {t.load}
-          </Button>
-        )}
+        <Button
+          className="vial-action-button"
+          data-keymap-load="true"
+          variant="contained"
+          size="small"
+          disabled={props.deviceIndex === undefined || props.loading}
+          onClick={props.onLoad}
+          sx={{
+            ml: 1,
+            my: 0,
+            alignSelf: "center",
+            minWidth: 46,
+            px: 1,
+            py: 0.35,
+            fontSize: "11px",
+          }}
+        >
+          {t.load}
+        </Button>
         {isSlaveDevice && (
           <Typography
             className="device-type-label"
