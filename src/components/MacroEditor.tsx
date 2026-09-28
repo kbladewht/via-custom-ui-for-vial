@@ -6,6 +6,7 @@ import quantumTranslations from "../locales/quantum.json";
 import { DefaultQmkKeycode, KeycodeConverter } from "./keycodes/keycodeConverter";
 import { EditableKey, KeymapKeyPopUp } from "./KeymapEditor";
 
+
 export function MacroEditor(props: {
   via: ViaKeyboard;
   keycodeConverter: KeycodeConverter;
