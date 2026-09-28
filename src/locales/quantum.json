@@ -488,6 +488,7 @@
       "deviceType": "Device",
       "deviceSlave": "Slave"
     },
+    
     "languageNames": {
       "US": "US",
       "zh": "中文"
