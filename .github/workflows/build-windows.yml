@@ -22,7 +22,7 @@ jobs:
       - uses: dtolnay/rust-toolchain@stable
       - run: npm install
       - run: npx tauri build --no-bundle
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v6
         with:
           name: via-custom-ui-for-vial-exe
           path: src-tauri/target/release/via-custom-ui-for-vial.exe
