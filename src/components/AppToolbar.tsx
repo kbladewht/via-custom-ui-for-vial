@@ -3,6 +3,7 @@ import DarkModeIcon from "@mui/icons-material/DarkMode";
 import HelpOutlineIcon from "@mui/icons-material/HelpOutline";
 import LightModeIcon from "@mui/icons-material/LightMode";
 import LinkIcon from "@mui/icons-material/Link";
+import RefreshIcon from "@mui/icons-material/Refresh";
 import UploadIcon from "@mui/icons-material/Upload";
 import {
   Box,
@@ -56,6 +57,7 @@ type AppToolbarProps = {
   connected: boolean;
   loadedDeviceIndex: number | undefined;
   onLoad: () => void;
+  onAppRefresh: () => void;
   currentLayer: number | null;
   onRefreshLayer: () => void;
   shortcutHelpAnchor: HTMLElement | null;
@@ -161,6 +163,17 @@ export function AppToolbar(props: AppToolbarProps) {
         >
           {t.load}
         </Button>
+        <Tooltip title={t.refreshApp}>
+          <IconButton
+            className="vial-action-button"
+            size="small"
+            aria-label={t.refreshApp}
+            onClick={props.onAppRefresh}
+            sx={{ ml: 0.5, p: 0.5 }}
+          >
+            <RefreshIcon sx={{ fontSize: 18 }} />
+          </IconButton>
+        </Tooltip>
         {isSlaveDevice && (
           <Typography
             className="device-type-label"

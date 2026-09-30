@@ -218,6 +218,7 @@
     },
     "toolbar": {
       "load": "加载",
+      "refreshApp": "刷新应用",
       "currentLayer": "当前层",
       "refreshCurrentLayer": "刷新当前层",
       "styleDefault": "默认",
@@ -465,6 +466,7 @@
     },
     "toolbar": {
       "load": "Load",
+      "refreshApp": "Refresh app",
       "currentLayer": "Current Layer",
       "refreshCurrentLayer": "Refresh current layer",
       "styleDefault": "Default",

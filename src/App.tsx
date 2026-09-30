@@ -121,6 +121,7 @@ function App() {
               }
             }}
             currentLayer={currentLayer}
+            onAppRefresh={() => window.location.reload()}
             onRefreshLayer={() => {
               void via
                 .GetCurrentLayer()
