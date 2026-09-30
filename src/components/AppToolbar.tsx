@@ -82,6 +82,7 @@ type AppToolbarProps = {
 };
 
 export function AppToolbar(props: AppToolbarProps) {
+  const { vialFileInputRef, onFileChange } = props;
   const splitBatteryLevels: [number | null, number | null] | null =
     Array.isArray(props.batteryLevels) && props.batteryLevels.length === 2
       ? [
@@ -511,9 +512,9 @@ export function AppToolbar(props: AppToolbarProps) {
       <input
         type="file"
         accept=".json"
-        ref={props.vialFileInputRef}
+        ref={vialFileInputRef}
         style={{ display: "none" }}
-        onChange={props.onFileChange}
+        onChange={onFileChange}
       />
     </Box>
   );
