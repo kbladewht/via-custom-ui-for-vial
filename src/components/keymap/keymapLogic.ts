@@ -1,6 +1,11 @@
 import { match, P } from "ts-pattern";
 import { KeycodeConverter } from "../keycodes/keycodeConverter";
-import { KeymapKeyProperties, KeymapProperties } from "./keymapTypes";
+import {
+  KEY_GAP,
+  KeymapKeyProperties,
+  KeymapProperties,
+  WIDTH_1U,
+} from "./keymapTypes";
 
 export function convertToKeymapKeys(
   props: KeymapProperties,
@@ -21,6 +26,8 @@ export function convertToKeymapKeys(
     w: 1,
     h: 1,
   };
+  let clusterX = 0;
+  let clusterY = 0;
 
   const keys: KeymapKeyProperties[] = [];
   for (const row of props.layouts.keymap) {
@@ -53,6 +60,8 @@ export function convertToKeymapKeys(
             );
             keys.push({
               ...current,
+              offsetx: current.r ? current.x - current.rx : 0,
+              offsety: current.r ? current.y - current.ry : 0,
               matrix: keyPos,
               layout: [],
               keycode,
@@ -69,23 +78,101 @@ export function convertToKeymapKeys(
           }
         })
         .with(P._, (col) => {
+          if (col.r !== undefined) current.r = col.r;
+          if (col.rx !== undefined) {
+            current.rx = clusterX = col.rx;
+            current.x = clusterX;
+            current.y = clusterY;
+          }
+          if (col.ry !== undefined) {
+            current.ry = clusterY = col.ry;
+            current.x = clusterX;
+            current.y = clusterY;
+          }
           current = {
             ...current,
             ...col,
-            x: current.x + (col.r ? 0 : (col.x ?? 0)),
-            y: current.y + (col.r ? 0 : (col.y ?? 0)),
-            offsetx: col.r ? (col.x ?? 0) : 0,
-            offsety: col.r ? (col.y ?? 0) : 0,
+            x: current.x + (col.x ?? 0),
+            y: current.y + (col.y ?? 0),
           };
         });
     }
-    current.x = 0;
     current.y += 1;
-    current.y = current.r ? 0 : current.y;
+    current.x = current.rx;
     current.w = 1;
     current.h = 1;
   }
   return keys;
+}
+
+export function normalizeKeymapKeys(keys: KeymapKeyProperties[]) {
+  const unit = WIDTH_1U + KEY_GAP;
+  const bounds = keys.reduce(
+    (result, key) => {
+      const width = key.w * WIDTH_1U - 4 + (key.w - 1) * KEY_GAP;
+      const height = key.h * WIDTH_1U - 4;
+
+      if (key.r === 0) {
+        result.minX = Math.min(result.minX, key.x * unit);
+        result.minY = Math.min(result.minY, key.y * unit);
+        result.maxX = Math.max(result.maxX, key.x * unit + width);
+        result.maxY = Math.max(result.maxY, key.y * unit + height);
+        return result;
+      }
+
+      const radians = key.r * Math.PI / 180;
+      const cosine = Math.cos(radians);
+      const sine = Math.sin(radians);
+      const pivotX = key.rx * unit;
+      const pivotY = key.ry * unit;
+      const left = key.offsetx * unit;
+      const top = key.offsety * unit;
+      const corners = [
+        [left, top],
+        [left + width, top],
+        [left, top + height],
+        [left + width, top + height],
+      ];
+
+      for (const [x, y] of corners) {
+        const rotatedX = pivotX + x * cosine - y * sine;
+        const rotatedY = pivotY + x * sine + y * cosine;
+        result.minX = Math.min(result.minX, rotatedX);
+        result.minY = Math.min(result.minY, rotatedY);
+        result.maxX = Math.max(result.maxX, rotatedX);
+        result.maxY = Math.max(result.maxY, rotatedY);
+      }
+      return result;
+    },
+    {
+      minX: Infinity,
+      minY: Infinity,
+      maxX: -Infinity,
+      maxY: -Infinity,
+    },
+  );
+
+  if (keys.length === 0) {
+    return { keys, width: 0, height: 0 };
+  }
+
+  return {
+    keys: keys.map((key) =>
+      key.r === 0
+        ? {
+            ...key,
+            x: key.x - bounds.minX / unit,
+            y: key.y - bounds.minY / unit,
+          }
+        : {
+            ...key,
+            rx: key.rx - bounds.minX / unit,
+            ry: key.ry - bounds.minY / unit,
+          },
+    ),
+    width: bounds.maxX - bounds.minX,
+    height: bounds.maxY - bounds.minY,
+  };
 }
 
 export function buildBluetoothShortcuts(

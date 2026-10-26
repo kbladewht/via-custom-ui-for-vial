@@ -1,7 +1,7 @@
 import { Box } from "@mui/material";
 import { useContext, useEffect, useRef, useState } from "react";
 import { playKeycapLandingSound } from "../keycapAudio";
-import { convertToKeymapKeys } from "./keymapLogic";
+import { convertToKeymapKeys, normalizeKeymapKeys } from "./keymapLogic";
 import { KeySettingHint } from "../KeySettingHint";
 import { KeySettingHintAreaContext, useKeySettingHint } from "../useKeySettingHint";
 import { KeymapKey } from "./KeymapItem";
@@ -12,10 +12,8 @@ import {
 } from "../keycodes/keycodeConverter";
 import {
   FocusedKeyContext,
-  KEY_GAP,
   KeymapKeyProperties,
   KeymapProperties,
-  WIDTH_1U,
 } from "./keymapTypes";
 
 export function KeymapLayer(props: {
@@ -45,23 +43,7 @@ export function KeymapLayer(props: {
     props.keycodeconverter,
     props.shortcutByKeycode,
   );
-  const topmostPos = layoutKeys.length === 0 ? 0 : Math.min(
-    ...layoutKeys.map((key) => {
-      if (key.r === 0) return key.y;
-      const radians = key.r * Math.PI / 180;
-      const sine = Math.sin(radians);
-      const cosine = Math.cos(radians);
-      const width = (key.w * WIDTH_1U - 4 + (key.w - 1) * KEY_GAP) / (WIDTH_1U + KEY_GAP);
-      const height = (key.h * WIDTH_1U - 4) / (WIDTH_1U + KEY_GAP);
-      return key.ry + key.offsetx * sine + key.offsety * cosine
-        + Math.min(0, width * sine) + Math.min(0, height * cosine);
-    }),
-  );
-  const keymapkeys = layoutKeys.map((key) => ({
-    ...key,
-    y: key.y - topmostPos,
-    ry: key.ry - topmostPos,
-  }));
+  const { keys: keymapkeys, width, height } = normalizeKeymapKeys(layoutKeys);
 
   useEffect(() => {
     if (!props.keymapReady || keycapSoundPlayed.current) return;
@@ -80,22 +62,6 @@ export function KeymapLayer(props: {
 
   const keymapkeysRef = useRef(keymapkeys);
   keymapkeysRef.current = keymapkeys;
-
-  const rightmostPos =
-    Math.max(...keymapkeys.map((key) => key.x + key.w)) * (WIDTH_1U + KEY_GAP) + WIDTH_1U;
-  const bottommostPos = Math.max(
-    0,
-    ...keymapkeys.map((key) => {
-      const height = (key.h * WIDTH_1U - 4) / (WIDTH_1U + KEY_GAP);
-      if (key.r === 0) return key.y + height;
-      const radians = key.r * Math.PI / 180;
-      const sine = Math.sin(radians);
-      const cosine = Math.cos(radians);
-      const width = (key.w * WIDTH_1U - 4 + (key.w - 1) * KEY_GAP) / (WIDTH_1U + KEY_GAP);
-      return key.ry + key.offsetx * sine + key.offsety * cosine
-        + Math.max(0, width * sine) + Math.max(0, height * cosine);
-    }),
-  );
 
   const focusNextKeyAfter = (current: KeymapKeyProperties) => {
     const nextIdx = parseInt(current.reactKey, 10) + 1;
@@ -148,8 +114,8 @@ export function KeymapLayer(props: {
         sx={{
           position: "relative",
           mt: 1,
-          height: `${Math.ceil(bottommostPos * (WIDTH_1U + KEY_GAP)) + 8}px`,
-          width: `${rightmostPos}px`,
+          height: `${Math.ceil(height) + 8}px`,
+          width: `${Math.ceil(width) + 8}px`,
           minWidth: "100%",
         }}
         onClick={(event) => {

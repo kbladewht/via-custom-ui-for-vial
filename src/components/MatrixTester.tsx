@@ -3,7 +3,7 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { DynamicEntryCount, ViaKeyboard } from "../services/vialKeyboad";
 import { playKeycapLandingSound } from "./keycapAudio";
 import { DefaultQmkKeycode, KeycodeConverter } from "./keycodes/keycodeConverter";
-import { convertToKeymapKeys } from "./keymap/keymapLogic";
+import { convertToKeymapKeys, normalizeKeymapKeys } from "./keymap/keymapLogic";
 import { KEY_GAP, KeymapKeyProperties, KeymapProperties, WIDTH_1U } from "./keymap/keymapTypes";
 
 export function MatrixTester(props: {
@@ -69,7 +69,7 @@ export function MatrixTester(props: {
   }, []);
 
   // Compute key positions with layer 0 keycodes
-  const keys: KeymapKeyProperties[] = useMemo(() => {
+  const layoutKeys: KeymapKeyProperties[] = useMemo(() => {
     return convertToKeymapKeys(
       props.keymap,
       layoutOption,
@@ -80,16 +80,12 @@ export function MatrixTester(props: {
     );
   }, [props.keymap, layoutOption, layer0Keys, keycodeConverter, dummyConverter]);
 
-  // Calculate layout bounds
-  const rightmostPos = useMemo(() => {
-    if (keys.length === 0) return 600;
-    return Math.max(...keys.map((key) => key.x + key.w)) * (WIDTH_1U + KEY_GAP) + WIDTH_1U;
-  }, [keys]);
-
-  const maxRowHeight = useMemo(() => {
-    if (keys.length === 0) return 200;
-    return (Math.max(...keys.map((k) => k.y)) + 1.5) * (WIDTH_1U + KEY_GAP);
-  }, [keys]);
+  const { keys, width: layoutWidth, height: layoutHeight } = useMemo(
+    () => normalizeKeymapKeys(layoutKeys),
+    [layoutKeys],
+  );
+  const rightmostPos = layoutWidth || 600;
+  const maxRowHeight = layoutHeight || 200;
 
   // Polling loop for switch matrix state - only runs when active
   useEffect(() => {
