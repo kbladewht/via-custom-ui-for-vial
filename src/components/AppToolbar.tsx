@@ -4,6 +4,7 @@ import HelpOutlineIcon from "@mui/icons-material/HelpOutline";
 import LightModeIcon from "@mui/icons-material/LightMode";
 import LinkIcon from "@mui/icons-material/Link";
 import RefreshIcon from "@mui/icons-material/Refresh";
+import SpeedIcon from "@mui/icons-material/Speed";
 import UploadIcon from "@mui/icons-material/Upload";
 import {
   Box,
@@ -70,6 +71,8 @@ type AppToolbarProps = {
   batteryLevel: number | null;
   batteryLevels?: [number | null, number | null] | null;
   onRefreshBattery: () => void;
+  reportRate: 1 | 4 | 8 | null;
+  onRefreshReportRate: () => void;
   keymapLanguage: string;
   onLanguageChange: (language: string) => void;
   language?: "zh" | "en";
@@ -113,6 +116,10 @@ export function AppToolbar(props: AppToolbarProps) {
   const batterySummary = splitBatteryLevels
     ? `L ${leftBatteryLevel ?? "--"}% / R ${rightBatteryLevel ?? "--"}%`
     : `${singleBatteryLevel ?? "--"}%`;
+  const reportRateLabel =
+    props.reportRate === null
+      ? ""
+      : t.reportRate.replace("{rate}", String(props.reportRate));
 
   return (
     <Box
@@ -395,6 +402,22 @@ export function AppToolbar(props: AppToolbarProps) {
                 <LinkIcon sx={{ fontSize: 13 }} />
                 <span style={{ fontWeight: 700 }}>{connectionLabel}</span>
               </Typography>
+            )}
+            {props.connected && props.reportRate !== null && (
+              <Tooltip title={reportRateLabel}>
+                <IconButton
+                  className="report-rate-button"
+                  size="small"
+                  aria-label={reportRateLabel}
+                  onClick={props.onRefreshReportRate}
+                  sx={{ display: "inline-flex", alignItems: "center", gap: 0.25, p: 0.5 }}
+                >
+                  <SpeedIcon sx={{ fontSize: 14 }} />
+                  <Typography sx={{ fontSize: "10px", fontWeight: 700, color: "inherit" }}>
+                    {props.reportRate}K
+                  </Typography>
+                </IconButton>
+              </Tooltip>
             )}
             <Tooltip title={batteryLabel}>
               <IconButton

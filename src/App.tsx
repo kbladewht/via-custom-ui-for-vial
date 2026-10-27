@@ -55,6 +55,8 @@ function App() {
     setBatteryLevel,
     batteryLevels,
     setBatteryLevels,
+    reportRate,
+    setReportRate,
     currentLayer,
     setCurrentLayer,
     shortcutHelpAnchor,
@@ -144,6 +146,15 @@ function App() {
             onClearBonds={onClearBondsClick}
             batteryLevel={batteryLevel}
             batteryLevels={batteryLevels}
+            reportRate={reportRate}
+            onRefreshReportRate={() => {
+              void via
+                .GetReportRate()
+                .then(setReportRate)
+                .catch((error) => {
+                  console.warn("Could not read keyboard report rate", error);
+                });
+            }}
             onRefreshBattery={() => {
               void via
                 .GetBatteryLevel()

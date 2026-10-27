@@ -973,6 +973,15 @@ class VialKeyboard {
     return null;
   }
 
+  async GetReportRate(): Promise<1 | 4 | 8 | null> {
+    const packet = new Uint8Array(32);
+    packet[0] = 0xb8;
+    const res = await this.Command(packet);
+    if (res.length < 3 || res[0] !== 0xb8 || res[1] !== 0xaa) return null;
+    if (res[2] === 1 || res[2] === 4 || res[2] === 8) return res[2];
+    return null;
+  }
+
   async GetCurrentLayer(): Promise<number | null> {
     const packet = new Uint8Array(32);
     packet[0] = via_command_id.id_current_layer;

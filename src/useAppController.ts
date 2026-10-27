@@ -63,6 +63,7 @@ export function useAppController() {
   const [uiLanguage, setUiLanguage] = useState<"zh" | "en">("zh");
   const [batteryLevel, setBatteryLevel] = useState<number | null>(null);
   const [batteryLevels, setBatteryLevels] = useState<[number | null, number | null] | null>(null);
+  const [reportRate, setReportRate] = useState<1 | 4 | 8 | null>(null);
   const [currentLayer, setCurrentLayer] = useState<number | null>(null);
   const [shortcutHelpAnchor, setShortcutHelpAnchor] = useState<HTMLElement | null>(null);
   const [shortcutHelp, setShortcutHelp] = useState<
@@ -99,6 +100,7 @@ export function useAppController() {
     setCustomMenus([]);
     setActiveMenu(undefined);
     setCustomValues({});
+    setReportRate(null);
     setKbName("");
     if (!isBle) await via.Close();
 
@@ -112,6 +114,7 @@ export function useAppController() {
           setCustomMenus([]);
           setActiveMenu(undefined);
           setCustomValues({});
+          setReportRate(null);
           setConnected(false);
           setLoadedDeviceIndex(undefined);
           setLoading(false);
@@ -233,6 +236,9 @@ export function useAppController() {
   useEffect(() => {
     if (!connected) return;
     let cancelled = false;
+    const supportsReportRate = ["KEY_RATE_1K", "KEY_RATE_4K", "KEY_RATE_8K"].every((name) =>
+      vialJson?.customKeycodes?.some((keycode) => keycode.name === name) ?? false,
+    );
     const refreshDeviceStatus = async () => {
       let level: number | [number, number] | null = null;
       try {
@@ -248,6 +254,14 @@ export function useAppController() {
           console.warn("Could not read Tauri battery level", error);
         }
       }
+      let rate: 1 | 4 | 8 | null = null;
+      if (supportsReportRate) {
+        try {
+          rate = await via.GetReportRate();
+        } catch (error) {
+          console.warn("Could not read keyboard report rate", error);
+        }
+      }
       if (!cancelled) {
         if (Array.isArray(level)) {
           setBatteryLevels(level);
@@ -256,6 +270,7 @@ export function useAppController() {
           setBatteryLevels(null);
           setBatteryLevel(level);
         }
+        setReportRate(rate);
       }
       try {
         const layer = await via.GetCurrentLayer();
@@ -270,7 +285,7 @@ export function useAppController() {
       cancelled = true;
       window.clearInterval(timer);
     };
-  }, [connected, deviceIndex, deviceList]);
+  }, [connected, deviceIndex, deviceList, vialJson]);
 
   const downloadData = (data: string, name: string) => {
     const link = document.createElement("a");
@@ -432,6 +447,8 @@ export function useAppController() {
     setBatteryLevel,
     batteryLevels,
     setBatteryLevels,
+    reportRate,
+    setReportRate,
     currentLayer,
     setCurrentLayer,
     shortcutHelpAnchor,
