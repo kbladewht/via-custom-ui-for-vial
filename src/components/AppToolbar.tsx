@@ -4,7 +4,6 @@ import HelpOutlineIcon from "@mui/icons-material/HelpOutline";
 import LightModeIcon from "@mui/icons-material/LightMode";
 import LinkIcon from "@mui/icons-material/Link";
 import RefreshIcon from "@mui/icons-material/Refresh";
-import SpeedIcon from "@mui/icons-material/Speed";
 import UploadIcon from "@mui/icons-material/Upload";
 import {
   Box,
@@ -120,6 +119,27 @@ export function AppToolbar(props: AppToolbarProps) {
     props.reportRate === null
       ? ""
       : t.reportRate.replace("{rate}", String(props.reportRate));
+  const statusPillSx = {
+    display: "inline-flex",
+    alignItems: "center",
+    gap: 0.75,
+    minWidth: 0,
+    overflow: "hidden",
+    fontSize: "11px",
+    color: "rgba(203, 213, 225, 0.9)",
+    whiteSpace: "nowrap",
+    cursor: "pointer",
+    px: 1,
+    py: 0.45,
+    border: "1px solid rgba(148, 163, 184, 0.28)",
+    borderRadius: 1.5,
+    background: "rgba(30, 41, 59, 0.72)",
+    transition: "border-color 160ms ease, background 160ms ease",
+    "&:hover": {
+      borderColor: "rgba(134, 239, 172, 0.65)",
+      background: "rgba(30, 64, 52, 0.78)",
+    },
+  };
 
   return (
     <Box
@@ -207,36 +227,34 @@ export function AppToolbar(props: AppToolbarProps) {
           </Typography>
         )}
         {!isSlaveDevice && (
-          <Typography
-            className="current-layer-pill"
-            sx={{
-              display: "inline-flex",
-              alignItems: "center",
-              gap: 0.75,
-              ml: 1,
-              minWidth: 0,
-              overflow: "hidden",
-              fontSize: "11px",
-              color: "rgba(203, 213, 225, 0.9)",
-              whiteSpace: "nowrap",
-              cursor: "pointer",
-              px: 1,
-              py: 0.45,
-              border: "1px solid rgba(148, 163, 184, 0.28)",
-              borderRadius: 1.5,
-              background: "rgba(30, 41, 59, 0.72)",
-              transition: "border-color 160ms ease, background 160ms ease",
-              "&:hover": {
-                borderColor: "rgba(134, 239, 172, 0.65)",
-                background: "rgba(30, 64, 52, 0.78)",
-              },
-            }}
-            onClick={props.onRefreshLayer}
-            title={t.refreshCurrentLayer}
-          >
-            <span style={{ opacity: 0.68 }}>{t.currentLayer}</span>
-            <span style={{ color: "#86efac", fontWeight: 700 }}>L{props.currentLayer ?? "--"}</span>
-          </Typography>
+          <>
+            <Typography
+              className="current-layer-pill"
+              sx={{ ...statusPillSx, ml: 1 }}
+              onClick={props.onRefreshLayer}
+              title={t.refreshCurrentLayer}
+            >
+              <span style={{ opacity: 0.68 }}>{t.currentLayer}</span>
+              <span style={{ color: "#86efac", fontWeight: 700 }}>L{props.currentLayer ?? "--"}</span>
+            </Typography>
+            {props.connected && props.reportRate !== null && (
+              <Tooltip title={reportRateLabel}>
+                <Typography
+                  className="current-layer-pill report-rate-pill"
+                  sx={{
+                    ...statusPillSx,
+                    ml: 0.75,
+                  }}
+                  onClick={props.onRefreshReportRate}
+                  title={reportRateLabel}
+                  aria-label={reportRateLabel}
+                >
+                  <span style={{ opacity: 0.68 }}>{t.reportRateShort}</span>
+                  <span style={{ color: "#86efac", fontWeight: 700 }}>{props.reportRate}K</span>
+                </Typography>
+              </Tooltip>
+            )}
+          </>
         )}
       </Box>
       <Box
@@ -402,22 +420,6 @@ export function AppToolbar(props: AppToolbarProps) {
                 <LinkIcon sx={{ fontSize: 13 }} />
                 <span style={{ fontWeight: 700 }}>{connectionLabel}</span>
               </Typography>
-            )}
-            {props.connected && props.reportRate !== null && (
-              <Tooltip title={reportRateLabel}>
-                <IconButton
-                  className="report-rate-button"
-                  size="small"
-                  aria-label={reportRateLabel}
-                  onClick={props.onRefreshReportRate}
-                  sx={{ display: "inline-flex", alignItems: "center", gap: 0.25, p: 0.5 }}
-                >
-                  <SpeedIcon sx={{ fontSize: 14 }} />
-                  <Typography sx={{ fontSize: "10px", fontWeight: 700, color: "inherit" }}>
-                    {props.reportRate}K
-                  </Typography>
-                </IconButton>
-              </Tooltip>
             )}
             <Tooltip title={batteryLabel}>
               <IconButton
