@@ -1,0 +1,29 @@
+name: Build macOS application
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: macos-build-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  build-macos:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 24
+      - uses: dtolnay/rust-toolchain@stable
+      - run: npm install --global yarn@1.22.22
+      - run: yarn install --frozen-lockfile
+      - run: npx tauri build
+      - uses: actions/upload-artifact@v6
+        with:
+          name: via-custom-ui-for-vial-macos
+          path: src-tauri/target/release/bundle/
+          if-no-files-found: error
