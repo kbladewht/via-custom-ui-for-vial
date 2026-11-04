@@ -196,6 +196,7 @@ fn hid_battery_probe(
 }
 
 #[tauri::command]
+#[cfg(target_os = "windows")]
 async fn battery_get_level(device_name: String) -> Result<Option<u8>, String> {
     let requested_name = device_name.trim().to_ascii_lowercase();
     println!("battery: enumerating Windows Bluetooth LE devices for {:?}", device_name);
@@ -232,6 +233,12 @@ async fn battery_get_level(device_name: String) -> Result<Option<u8>, String> {
 
     println!("battery: no matching Windows Bluetooth LE device found");
     Ok(None)
+}
+
+#[tauri::command]
+#[cfg(not(target_os = "windows"))]
+async fn battery_get_level(_device_name: String) -> Result<Option<u8>, String> {
+    Err("Battery level detection is only supported on Windows".to_string())
 }
 
 fn new_hidapi() -> HidApi {
